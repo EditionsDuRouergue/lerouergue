@@ -128,3 +128,11 @@ function _profile_get_settings() {
 	return $settings;
 }
 
+/**
+	* Implements hook_update_N().
+ * Enable feature Theme.
+ */
+function rouergue_update_7101() {
+	module_enable(array('feature_theme'));
+}
+
