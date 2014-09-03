@@ -61,5 +61,8 @@ dependencies[] = views
 
 ; Features.
 dependencies[] = feature_theme
+dependencies[] = feature_core
+dependencies[] = feature_seo
+dependencies[] = feature_pages
 
 ; Custom modules.
