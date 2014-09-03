@@ -1,0 +1,130 @@
+<?php
+/**
+ * @file
+* Install, update and uninstall functions for the rouergue installation profile.
+*/
+
+/**
+ * Implements hook_install().
+*
+* Perform actions to set up the site for this profile.
+*
+* @see system_install()
+*/
+function rouergue_install() {
+	// Administrators only can create user acccounts.
+	variable_set('user_register', USER_REGISTER_ADMINISTRATORS_ONLY);
+
+	// Enable default permissions for system roles.
+	user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+	user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function rouergue_install_tasks(&$install_state) {
+	$tasks = array();
+
+	$tasks['rouergue_install_theme'] = array(
+			'display_name' => st('Rouergue install theme'),
+			'display' => TRUE,
+			'type' => 'normal',
+			'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+			'function' => '_rouergue_install_theme',
+	);
+
+	$tasks['rouergue_install_locale'] = array(
+			'display_name' => st('Rouergue install locale'),
+			'display' => TRUE,
+			'type' => 'batch',
+			'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+			'function' => '_rouergue_install_locale',
+	);
+
+	return $tasks;
+}
+
+/**
+ * Install task callback.
+ */
+function _rouergue_install_theme() {
+	
+	$settings = _profile_get_settings();
+
+	// Set default theme.
+	$default_theme = $settings['default_theme'];
+	$admin_theme = $settings['admin_theme'];
+	theme_disable(array('bartik', 'garland', 'seven', 'stark'));
+	theme_enable(array($default_theme, $admin_theme));
+	variable_set('theme_default', $default_theme);
+	variable_set('admin_theme', $admin_theme);
+	variable_set('node_admin_theme', TRUE);
+
+	// Disable all blocks by default except system-main. Use context to enable them.
+	db_update('block')
+	->fields(array('region' => -1))
+	->condition(
+	db_or()
+	->condition('delta', 'main', '!=')
+	->condition('module', 'system', '!=')
+	)
+	->execute();
+}
+
+/**
+ * Install task callback.
+ */
+function _rouergue_install_locale(&$install_state) {
+	include_once DRUPAL_ROOT . '/includes/locale.inc';
+	$install_locale = $install_state['parameters']['locale'];
+	$enabled_langs = locale_language_list();
+
+	// Disable previously default English language.
+	if (array_key_exists('en', $enabled_langs)) {
+		db_update('languages')
+		->fields(array(
+		'enabled' => '0',
+		))
+		->condition('language', 'en')
+		->execute();
+	}
+	// Enable language FR on if no language has been selected.
+	if ($install_locale == 'en' && !array_key_exists('fr', $enabled_langs)) {
+		locale_add_language('fr', 'French', 'Français', LANGUAGE_LTR, '', 'fr', TRUE, TRUE);
+	}
+
+	// Build batch with l10n_update module.
+	// Second pass will only update translations of freshly installed modules.
+	// We force each step to refresh its cache, as modules may have been
+	// installed since last call.
+	$history = l10n_update_get_history(TRUE);
+	module_load_include('check.inc', 'l10n_update');
+	// This variable forces l10n_update to rebuild its projects list.
+	variable_set('l10n_update_rebuild_projects', 1);
+	$available = l10n_update_available_releases(TRUE);
+	$updates = l10n_update_build_updates($history, $available);
+
+	module_load_include('batch.inc', 'l10n_update');
+	$updates = _l10n_update_prepare_updates($updates, NULL, array());
+	// Overwrite previous translations, as the downloaded ones are the most recent, and valid.
+	$batch = l10n_update_batch_multiple($updates, LOCALE_IMPORT_OVERWRITE);
+
+	return $batch;
+}
+
+/**
+ * Get settings from the profile's info file.
+ *
+ * @return array
+ *   The settings array.
+ */
+function _profile_get_settings() {
+	$settings = &drupal_static(__FUNCTION__, NULL);
+	if (empty($settings)) {
+		$data = drupal_parse_info_file(str_replace('.install', '.info', __FILE__));
+		$settings = $data['settings'];
+	}
+	return $settings;
+}
+
