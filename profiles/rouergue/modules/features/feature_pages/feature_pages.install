@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+* Install, update and uninstall functions for the Pages feature.
+*/
+
+/**
+ * Implements hook_install().
+ */
+function feature_pages_install() {
+	// Insert default pre-defined Basic Page type into the database.	
+	$basic_page_type = array(
+	  'type' => 'page',
+	  'name' => t('Basic page'),
+	  'base' => 'node_content',
+	  'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+	  'custom' => 1,
+	  'modified' => 1,
+	  'locked' => 0,
+	);
+
+	$type = node_type_set_defaults($basic_page_type);
+	node_type_save($type);
+	node_add_body_field($type);
+
+	// Default "Basic page" to not be promoted and have comments disabled.
+	variable_set('node_options_page', array('status'));
+	variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+	// Don't display date and author information for "Basic page" nodes by default.
+	variable_set('node_submitted_page', FALSE);
+}
