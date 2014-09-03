@@ -12,6 +12,5 @@ dependencies[] = views_bootstrap
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[variable][] = node_admin_theme
-features[variable][] = theme_default
 features[variable][] = theme_rouergue_bootstrap_settings
 project path = profiles/rouergue/modules/features

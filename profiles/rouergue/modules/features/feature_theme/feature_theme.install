@@ -7,4 +7,5 @@
 function feature_theme_install() {
 	theme_enable(array('rouergue_bootstrap'));
 	theme_disable(array('bartik'));
+	variable_set('theme_default', 'rouergue_bootstrap');
 }
