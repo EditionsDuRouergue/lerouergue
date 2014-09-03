@@ -62,5 +62,6 @@ dependencies[] = uuid_features
 dependencies[] = views
 
 ; Features.
+dependencies[] = feature_theme
 
 ; Custom modules.
