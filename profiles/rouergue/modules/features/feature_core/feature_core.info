@@ -19,7 +19,6 @@ features[user_role][] = redactor
 features[user_role][] = webmaster
 features[variable][] = cron_safe_threshold
 features[variable][] = date_default_timezone
-features[variable][] = language_default
 features[variable][] = site_403
 features[variable][] = site_404
 features[variable][] = site_default_country
