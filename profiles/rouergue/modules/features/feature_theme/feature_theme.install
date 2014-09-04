@@ -5,7 +5,10 @@
  * Perform actions to set up the Rouergue theme.
  */
 function feature_theme_install() {
-	theme_enable(array('rouergue_bootstrap'));
-	theme_disable(array('bartik'));
-	variable_set('theme_default', 'rouergue_bootstrap');
+	include_once drupal_get_path('profile','rouergue') . '/rouergue.install';
+	$settings = _profile_get_settings();
+	
+	$default_theme = $settings['default_theme'];;
+	theme_enable(array($default_theme));
+	variable_set('theme_default', $default_theme);
 }

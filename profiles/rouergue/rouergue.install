@@ -52,12 +52,10 @@ function _rouergue_install_theme() {
 	
 	$settings = _profile_get_settings();
 
-	// Set default theme.
-	$default_theme = $settings['default_theme'];
+	// Set admin theme.
 	$admin_theme = $settings['admin_theme'];
 	theme_disable(array('bartik', 'garland', 'seven', 'stark'));
-	theme_enable(array($default_theme, $admin_theme));
-	variable_set('theme_default', $default_theme);
+	theme_enable(array($admin_theme));
 	variable_set('admin_theme', $admin_theme);
 	variable_set('node_admin_theme', TRUE);
 
