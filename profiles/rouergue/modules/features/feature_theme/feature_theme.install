@@ -5,10 +5,7 @@
  * Perform actions to set up the Rouergue theme.
  */
 function feature_theme_install() {
-	include_once drupal_get_path('profile','rouergue') . '/rouergue.install';
-	$settings = _profile_get_settings();
-	
-	$default_theme = $settings['default_theme'];;
+	$default_theme = 'rouergue_bootstrap';
 	theme_enable(array($default_theme));
 	variable_set('theme_default', $default_theme);
 }
