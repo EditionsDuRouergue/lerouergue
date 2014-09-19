@@ -1,0 +1,23 @@
+<?php
+/**
+ * Implements hook_requirements().
+ *
+ * Ensure that mistral cover images directory can be created.
+ */
+function migrate_mistral_requirements($phase) {
+	$requirements = array();
+	if ($phase == 'install') {
+		$t = get_t();
+		// The Migrate Mistral module needs to create a directory to store imported cover image files.
+		$cover_images_path = 'public://catalog/cover-images';
+		if (!file_prepare_directory($cover_images_path, FILE_CREATE_DIRECTORY)) {
+			$desc = $t('The Migrate Mistral directory %path1 could not be created. Please ensure that the webserver has permission to create directory.', array('%path1' => file_uri_target($cover_images_path)));
+			$requirements['migrate_mistral_directory'] = array(
+					'description' => $desc,
+					'severity' => REQUIREMENT_ERROR,
+			);
+		}
+	}
+
+	return $requirements;
+}
