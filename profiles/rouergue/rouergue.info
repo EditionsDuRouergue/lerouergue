@@ -64,5 +64,6 @@ dependencies[] = feature_theme
 dependencies[] = feature_core
 dependencies[] = feature_seo
 dependencies[] = feature_pages
+dependencies[] = feature_catalog
 
 ; Custom modules.
