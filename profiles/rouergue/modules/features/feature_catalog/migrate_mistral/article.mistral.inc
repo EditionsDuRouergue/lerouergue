@@ -116,11 +116,16 @@ class ReadershipMigration extends Migration {
  *
  * The mysql query to run is :
  *
- * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, rp.price, f.name as format, fp.finalnbpage as nbpage, 
+ * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, 
+ * c.name as collection, sc.name as subcollection, s.name as series, 
+ * rp.price, f.name as format, fp.finalnbpage as nbpage, 
  * GROUP_CONCAT(bt.themeid) as theme_list, GROUP_CONCAT(DISTINCT br.readershipid) as readership_list, 
  * CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01') as pubdate
  * FROM `article` a
  * JOIN book b ON b.bookid=a.bookid
+ * LEFT JOIN collection c ON c.collectionid=b.collectionid
+ * LEFT JOIN subcollection sc ON sc.subcollectionid=b.subcollectionid
+ * LEFT JOIN series s ON s.seriesid=b.seriesid
  * JOIN commercialplan cp ON cp.articleid=a.articleid
  * JOIN fabricationplan fp ON fp.articleid=a.articleid
  * JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
@@ -144,6 +149,9 @@ class ArticleMigration extends Migration {
 		// SOURCE
 		$query = Database::getConnection('default', 'mistral')->select('article','a');
 		$query->join('book', 'b', 'b.bookid = a.bookid');
+		$query->leftJoin('collection', 'c', 'c.collectionid=b.collectionid');
+		$query->leftJoin('subcollection', 'sc', 'sc.subcollectionid=b.subcollectionid');
+		$query->leftJoin('series', 's', 's.seriesid=b.seriesid');
 		$query->join('commercialplan','cp','cp.articleid=a.articleid');
 		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
 		$query->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
@@ -158,6 +166,9 @@ class ArticleMigration extends Migration {
 		->fields('rp', array('price'));
     $query->addField('f','name','format');
     $query->addField('fp','finalnbpage','nbpage');
+    $query->addField('c','name','collection');
+    $query->addField('sc','name','subcollection');
+    $query->addField('s','name','series');
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
