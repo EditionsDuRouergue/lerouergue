@@ -4,6 +4,24 @@
  * Migrates articles, themes from Mistral.
  */
 
+/**
+ * Migration class for themes.
+ *
+ * We retrieve only themes linked to a importable article.
+ * The mysql query to run is :
+ *
+ * SELECT DISTINCT t.themeid, t.name FROM theme t
+ * JOIN booktheme bt ON bt.themeid=t.themeid
+ * WHERE bt.bookid IN (
+ *   SELECT a.bookid
+ *   FROM `article` a
+ *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
+ *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
+ *   JOIN fabricationplan fp ON fp.articleid=a.articleid 
+ *   JOIN format f ON f.formatid=fp.finalformatid
+ *   GROUP BY a.articleid
+ * )
+ */
 class ThemeMigration extends Migration {
 	public function __construct() {
 		parent::__construct();
@@ -12,8 +30,18 @@ class ThemeMigration extends Migration {
 		$this->description = t('Migrate themes from mistral source database to Drupal Themes vocabulary');
 
 		// SOURCE
-		$query = Database::getConnection('default', 'mistral')->select('theme');
-		$query->fields('theme', array('themeid','name'));
+		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
+		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
+		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+		$subquery->join('format','f','f.formatid=fp.finalformatid');
+		$subquery->fields('a', array('bookid'));
+		
+		$query = Database::getConnection('default', 'mistral')->select('theme','t');
+		$query->join('booktheme','bt','t.themeid=bt.themeid');
+		$query->fields('t', array('themeid','name'));
+		$query->condition('bt.bookid', $subquery, 'IN');
+		$query->distinct();
 
 		$this->source = new MigrateSourceSQL($query);
 
@@ -29,6 +57,7 @@ class ThemeMigration extends Migration {
 								'unsigned' => TRUE,
 								'not null' => TRUE,
 								'description' => 'Mistral theme ID',
+								'alias' => 't'
 						)
 				),
 				MigrateDestinationTerm::getKeySchema()
@@ -39,6 +68,14 @@ class ThemeMigration extends Migration {
 	}
 }
 
+/**
+ * Migration class for readerships.
+ *
+ * The mysql query to run is :
+ *
+ * SELECT readershipid, name 
+ * FROM readership
+ */
 class ReadershipMigration extends Migration {
 	public function __construct() {
 		parent::__construct();
@@ -77,14 +114,22 @@ class ReadershipMigration extends Migration {
 /**
  * Migration class for articles.
  *
- * The mysql query is as follows :
+ * The mysql query to run is :
  *
- * SELECT c.contributorid, c.name, c.firstname, c.pseudoname, c.pseudofirstname, c.biography
- * FROM contributor c
- * JOIN bookcontributor bc ON bc.contributorid=c.contributorid
- * JOIN book b ON b.bookid=bc.bookid
- * JOIN article a ON a.bookid=b.bookid
- * WHERE a.isbn is not null
+ * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, rp.price, f.name as format, fp.finalnbpage as nbpage, 
+ * GROUP_CONCAT(bt.themeid) as theme_list, GROUP_CONCAT(DISTINCT br.readershipid) as readership_list, 
+ * CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01') as pubdate
+ * FROM `article` a
+ * JOIN book b ON b.bookid=a.bookid
+ * JOIN commercialplan cp ON cp.articleid=a.articleid
+ * JOIN fabricationplan fp ON fp.articleid=a.articleid
+ * JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
+ * JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
+ * LEFT JOIN booktheme bt ON bt.bookid=a.bookid
+ * LEFT JOIN bookreadership br ON br.bookid=b.bookid
+ * JOIN format f ON f.formatid=fp.finalformatid
+ * GROUP BY a.articleid
+ * ORDER BY a.articleid ASC
  */
 class ArticleMigration extends Migration {
   public function __construct(array $arguments) {
@@ -99,25 +144,26 @@ class ArticleMigration extends Migration {
 		// SOURCE
 		$query = Database::getConnection('default', 'mistral')->select('article','a');
 		$query->join('book', 'b', 'b.bookid = a.bookid');
-		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
-		$query->join('format','f','f.formatid=fp.finalformatid');
-		$query->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
 		$query->join('commercialplan','cp','cp.articleid=a.articleid');
-		$query->Join('booktheme','bt','bt.bookid=b.bookid');
-		$query->Join('bookreadership','br','br.bookid=b.bookid');
+		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
+		$query->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+		$query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
+		$query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
+		$query->leftJoin('bookreadership','br','br.bookid=b.bookid');
+		$query->join('format','f','f.formatid=fp.finalformatid');
 				
 		$query
-		->fields('a', array('articleid','bookid','isbn','gencod'))
+		->fields('a', array('articleid','bookid','isbn13','gencod'))
 		->fields('b', array('title','subtitle','resume','backcover'))
-		->fields('r', array('price'));
+		->fields('rp', array('price'));
     $query->addField('f','name','format');
     $query->addField('fp','finalnbpage','nbpage');
-				
-		//$query->isNotNull('isbn');
-		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
+		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
+		
 		$query->groupBy('a.articleid');
+		$query->orderBy('a.articleid', 'ASC');
 		
 		$this->source = new MigrateSourceSQL($query);
 		

@@ -4,6 +4,25 @@
  * Migrates Article-Contributor-Function Relationships.
  */
 
+/**
+ * Migration class for book-contributor-role associations.
+ *
+ * We retrieve only associations linked to a importable article.
+ * The mysql query to run is :
+ *
+ * SELECT a.articleid, bc.contributorid, bc.functionid
+ * FROM bookcontributor bc
+ * JOIN article a ON a.bookid=bc.bookid
+ * WHERE bc.bookid IN (
+ * SELECT a.bookid
+ * FROM `article` a
+ *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
+ *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
+ *   JOIN fabricationplan fp ON fp.articleid=a.articleid
+ *   JOIN format f ON f.formatid=fp.finalformatid
+ *   GROUP BY a.articleid
+ * )
+ */
 class ArticleContributorsMigration extends Migration {
 	public function __construct() {
 		parent::__construct();
@@ -12,21 +31,17 @@ class ArticleContributorsMigration extends Migration {
 		$this->description = t("Migrate contributor/function relationships from mistral source database to Drupal Article's Contributors field (Field Collection)");
 		
 		// SOURCE
-// 		$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
-// 		$query->join('article','a','a.bookid=bc.bookid');
+		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
+		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
+		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+		$subquery->join('format','f','f.formatid=fp.finalformatid');
+		$subquery->fields('a', array('bookid'));
 
-		$query = Database::getConnection('default', 'mistral')->select('article','a');
-		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
-		$query->join('format','f','f.formatid=fp.finalformatid');
-		$query->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
-		$query->join('commercialplan','cp','cp.articleid=a.articleid');
-		$query->Join('booktheme','bt','bt.bookid=a.bookid');
-		$query->Join('bookreadership','br','br.bookid=a.bookid');
-		$query->Join('bookcontributor','bc','bc.bookid=a.bookid');
-		
-		$query
-			->fields('a', array('articleid'))
-			->fields('bc', array('contributorid','functionid'));
+		$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
+		$query->Join('article','a','a.bookid=bc.bookid');
+		$query->fields('a', array('articleid'))->fields('bc', array('contributorid','functionid'));
+		$query->condition('bc.bookid', $subquery, 'IN');
 		
 		$this->source = new MigrateSourceSQL($query);
 		
@@ -60,8 +75,5 @@ class ArticleContributorsMigration extends Migration {
 		// Link the Function (taxonomy term) to the Term Reference field in the field collection
 		$this->addFieldMapping('field_contributor_function', 'functionid')->sourceMigration('Function');
 		$this->addFieldMapping('field_contributor_function:source_type')->defaultValue('tid');
-		
-		
-		
 	}
 }

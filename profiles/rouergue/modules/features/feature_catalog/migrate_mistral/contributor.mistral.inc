@@ -4,6 +4,10 @@
  * Migrates contributors and functions from Mistral.
  */
 
+/**
+ * Migration class for functions.
+ * 
+ */
 class FunctionMigration extends Migration {
 	public function __construct() {
 		parent::__construct();
@@ -11,7 +15,7 @@ class FunctionMigration extends Migration {
 		// DESCRIPTION
 		$this->description = t('Migrate functions from mistral source database to Drupal Functions vocabulary');
 
-		// SOURCE
+		// SOURCE		
 		$query = Database::getConnection('default', 'mistral')->select('function');
 		$query->fields('function', array('functionid','printname','name'));
 
@@ -42,14 +46,21 @@ class FunctionMigration extends Migration {
 /**
  * Migration class for contributors.
  * 
- * The mysql query is as follows :
+ * We retrieve only contributors linked to a importable article.
+ * The mysql query to run is :
  * 
- * SELECT c.contributorid, c.name, c.firstname, c.pseudoname, c.pseudofirstname, c.biography
+ * SELECT DISTINCT c.name, c.firstname, c.pseudoname, c.pseudofirstname, c.biography
  * FROM contributor c
  * JOIN bookcontributor bc ON bc.contributorid=c.contributorid
- * JOIN book b ON b.bookid=bc.bookid
- * JOIN article a ON a.bookid=b.bookid
- * WHERE a.isbn is not null
+ * WHERE bc.bookid IN (
+ *   SELECT a.bookid
+ *   FROM `article` a
+ *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
+ *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
+ *   JOIN fabricationplan fp ON fp.articleid=a.articleid 
+ *   JOIN format f ON f.formatid=fp.finalformatid
+ *   GROUP BY a.articleid
+ * )
  */
 class ContributorMigration extends Migration {
 	public function __construct() {
@@ -59,17 +70,18 @@ class ContributorMigration extends Migration {
 		$this->description = t('Migrate contributors from mistral source database to Drupal Contributor nodes');
 		
 		// SOURCE
+		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
+		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
+		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+		$subquery->join('format','f','f.formatid=fp.finalformatid');
+		$subquery->fields('a', array('bookid'));
+		
 		$query = Database::getConnection('default', 'mistral')->select('contributor','c');
 		$query->join('bookcontributor','bc','bc.contributorid=c.contributorid');
-		$query->join('book','b','b.bookid=bc.bookid');
-		$query->join('article','a','a.bookid=b.bookid');
-		$query->join('commercialplan','cp','cp.articleid=a.articleid');
-		$query->Join('booktheme','bt','bt.bookid=b.bookid');
-		$query->Join('bookreadership','br','br.bookid=b.bookid');
-		
 		$query->fields('c', array('contributorid','name','firstname','pseudoname','pseudofirstname','biography'));
-		
-		//$query->isNotNull('a.isbn');
+		$query->condition('bc.bookid', $subquery, 'IN');
+		$query->distinct();
 		
 		$this->source = new MigrateSourceSQL($query);
 		
