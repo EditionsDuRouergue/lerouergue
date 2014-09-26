@@ -118,9 +118,10 @@ class ReadershipMigration extends Migration {
  *
  * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, 
  * c.name as collection, sc.name as subcollection, s.name as series, 
- * rp.price, f.name as format, fp.finalnbpage as nbpage, 
+ * rp.price, fp.finalnbpage as nbpage, 
  * GROUP_CONCAT(bt.themeid) as theme_list, GROUP_CONCAT(DISTINCT br.readershipid) as readership_list, 
- * CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01') as pubdate
+ * CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01') as pubdate,
+ * CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END AS format
  * FROM `article` a
  * JOIN book b ON b.bookid=a.bookid
  * LEFT JOIN collection c ON c.collectionid=b.collectionid
@@ -132,9 +133,11 @@ class ReadershipMigration extends Migration {
  * JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
  * LEFT JOIN booktheme bt ON bt.bookid=a.bookid
  * LEFT JOIN bookreadership br ON br.bookid=b.bookid
- * JOIN format f ON f.formatid=fp.finalformatid
+ * JOIN format f1 ON f1.formatid=b.formatid
+ * LEFT JOIN format f2 ON f2.formatid=fp.finalformatid
  * GROUP BY a.articleid
  * ORDER BY a.articleid ASC
+
  */
 class ArticleMigration extends Migration {
 	// Universes <-> Collections/Subcollections/Series mapping data
@@ -161,13 +164,13 @@ class ArticleMigration extends Migration {
 		$query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
 		$query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 		$query->leftJoin('bookreadership','br','br.bookid=b.bookid');
-		$query->join('format','f','f.formatid=fp.finalformatid');
+		$query->join('format','f1','f1.formatid=b.formatid');
+		$query->leftJoin('format','f2','f2.formatid=fp.finalformatid');
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod'))
 		->fields('b', array('title','subtitle','resume','backcover','projecttype'))
 		->fields('rp', array('price'));
-    $query->addField('f','name','format');
     $query->addField('fp','finalnbpage','nbpage');
     $query->addField('c','name','collection');
     $query->addField('sc','name','subcollection');
@@ -175,7 +178,7 @@ class ArticleMigration extends Migration {
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
-		
+		$query->addExpression("CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END",'format');
 		$query->groupBy('a.articleid');
 		$query->orderBy('a.articleid', 'ASC');
 		
@@ -289,7 +292,7 @@ class ArticleMigration extends Migration {
 			//-------------------- Graphisme &  Illustrations --------------------
 			// TODO : Collection Essai jeunesse ?
 			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique'] = key(taxonomy_get_term_by_name('Romans graphiques'));
-			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['touzazimute'] = key(taxonomy_get_term_by_name('Toutazimute'));
+			//$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['touzazimute'] = key(taxonomy_get_term_by_name('Toutazimute'));
 
 			//-------------------- EPUB ? --------------------
 			$this->univ_coll_mapping['NUM'] = key(taxonomy_get_term_by_name('Numérique'));
