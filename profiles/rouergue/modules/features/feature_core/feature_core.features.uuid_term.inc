@@ -23,7 +23,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => '12 x 12',
+    'name' => '12x12',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -107,7 +107,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'doado noir',
+    'name' => 'Doado noir',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -167,7 +167,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Graphisme illustration',
+    'name' => 'Graphisme &  Illustrations',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -413,7 +413,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'doado',
+    'name' => 'Doado',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -494,7 +494,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'dacodac',
+    'name' => 'dacOdac',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
