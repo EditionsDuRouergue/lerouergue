@@ -14,12 +14,13 @@
  * FROM bookcontributor bc
  * JOIN article a ON a.bookid=bc.bookid
  * WHERE bc.bookid IN (
- * SELECT a.bookid
- * FROM `article` a
+ *   SELECT a.bookid
+ *   FROM `article` a
+ *   JOIN book b ON b.bookid=a.bookid
  *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
  *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
- *   JOIN fabricationplan fp ON fp.articleid=a.articleid
- *   JOIN format f ON f.formatid=fp.finalformatid
+ *   JOIN fabricationplan fp ON fp.articleid=a.articleid 
+ *   JOIN format f ON f.formatid=b.formatid
  *   GROUP BY a.articleid
  * )
  */
@@ -32,10 +33,11 @@ class ArticleContributorsMigration extends Migration {
 		
 		// SOURCE
 		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
+		$subquery->join('book','b','b.bookid=a.bookid');
 		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
 		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
 		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
-		$subquery->join('format','f','f.formatid=fp.finalformatid');
+		$subquery->join('format','f','f.formatid=b.formatid');
 		$subquery->fields('a', array('bookid'));
 
 		$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
