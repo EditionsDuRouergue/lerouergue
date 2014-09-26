@@ -137,6 +137,9 @@ class ReadershipMigration extends Migration {
  * ORDER BY a.articleid ASC
  */
 class ArticleMigration extends Migration {
+	// Universes <-> Collections/Subcollections/Series mapping data
+	protected $univ_coll_mapping = array();
+	
   public function __construct(array $arguments) {
     $this->arguments = $arguments;
     parent::__construct();
@@ -162,7 +165,7 @@ class ArticleMigration extends Migration {
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod'))
-		->fields('b', array('title','subtitle','resume','backcover'))
+		->fields('b', array('title','subtitle','resume','backcover','projecttype'))
 		->fields('rp', array('price'));
     $query->addField('f','name','format');
     $query->addField('fp','finalnbpage','nbpage');
@@ -218,8 +221,81 @@ class ArticleMigration extends Migration {
 			->sourceMigration('Readership')
 			->separator(',');
 		$this->addFieldMapping('field_readership:source_type')->defaultValue('tid');
+		
+		$this->addFieldMapping('field_universe', 'collection');
+		$this->addFieldMapping('field_universe:source_type')->defaultValue('tid');
+		
+		// COLLECTIONS---UNIVERSE MAPPING
+		if (empty($this->univ_coll_mapping)) {
+			//-------------------- Littérature --------------------
+			$this->univ_coll_mapping['Rouergue Littérature']['La Brune'] = key(taxonomy_get_term_by_name('La Brune (littérature)'));
+			$this->univ_coll_mapping['Rouergue Littérature']['Polar'] = key(taxonomy_get_term_by_name('Rouergue Noir'));
+			// Two 'Romans de société' terms exist in 'Univers' vocabulary, here we need the first one.
+			$tids = array_keys(taxonomy_get_term_by_name('Romans de société'));
+			$this->univ_coll_mapping['Rouergue Littérature']['Roman de société'] = $tids[0];
+			// TODO : Objet litéraire
+
+			//-------------------- Art & Histoire --------------------
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Société'] = key(taxonomy_get_term_by_name('Société'));
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire'] = key(taxonomy_get_term_by_name('Histoire'));
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Art'] = key(taxonomy_get_term_by_name('Art'));
+
+			//-------------------- Régions --------------------
+// 			$this->univ_coll_mapping['collection']['subcollection']['Région'] = key(taxonomy_get_term_by_name('Régions de France'));
+			// TODO : bouton manuel (drupal) Aveyron
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyage'] = key(taxonomy_get_term_by_name('Voyages'));
+			// TODO : comment répartir entre 'Rouergue en poche' et 'Grand format' ?
+
+			//-------------------- Nature & Jardins --------------------
+			// TODO : série Nature
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Bx Livres Nature'] = key(taxonomy_get_term_by_name('Nature'));
+// 			$this->univ_coll_mapping['collection']['subcollection']['Natures Humaines'] = key(taxonomy_get_term_by_name('Nature'));
+// 			$this->univ_coll_mapping['collection']['subcollection']['Bâti'] = key(taxonomy_get_term_by_name('Bâti'));
+// 			$this->univ_coll_mapping['collection']['subcollection']['Ecologie'] = key(taxonomy_get_term_by_name('Ecologie'));
+// 			$this->univ_coll_mapping['collection']['subcollection']['Botanique'] = key(taxonomy_get_term_by_name('Botanique'));
+// 			$this->univ_coll_mapping['collection']['subcollection']['Jardins'] = key(taxonomy_get_term_by_name('Jardins'));
+
+			//-------------------- Gastronomie --------------------
+			$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie'] = key(taxonomy_get_term_by_name('Grands chefs'));
+			$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine'] = key(taxonomy_get_term_by_name('Cuisine'));
+// 			$this->univ_coll_mapping['collection']['Vins'] = key(taxonomy_get_term_by_name('Vins'));
+// 			$this->univ_coll_mapping['collection']['Santé'] = key(taxonomy_get_term_by_name('Santé'));
+
+			//-------------------- Epik SF/Fantasy --------------------
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Epik'] = key(taxonomy_get_term_by_name('Epik SF/Fantasy'));
+
+			//-------------------- Romans jeunesse --------------------
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tic tac'] = key(taxonomy_get_term_by_name('tic tac'));
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Boomerang'] = key(taxonomy_get_term_by_name('Boomerang'));
+			// Two 'A la petite semaine' terms exist in 'Univers' vocabulary, here we need the second one.
+			$tids = array_keys(taxonomy_get_term_by_name('A la petite semaine'));
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['A la petite semaine'] = $tids[1];
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Zig Zag'] = key(taxonomy_get_term_by_name('zig zag'));
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['dacOdac'] = key(taxonomy_get_term_by_name('dacOdac'));
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo'] = key(taxonomy_get_term_by_name('DoAdo'));
+			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo noir'] = key(taxonomy_get_term_by_name('DoAdo noir'));
+
+			//-------------------- Albums jeunesse --------------------
+			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['12x12'] = key(taxonomy_get_term_by_name('12x12'));
+			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Comptines en continu'] = key(taxonomy_get_term_by_name('Comptines en continu'));
+			// TODO : lectorat 2 ans
+			// TODO : lectorat 4ans
+			// Two 'A la petite semaine' terms exist in 'Univers' vocabulary, here we get the first one.
+			$tids = array_keys(taxonomy_get_term_by_name('A la petite semaine'));
+			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['A la petite semaine'] = key(taxonomy_get_term_by_name('A la petite semaine'));
+			// TODO : lectorat 6 ans
+			// TODO : Jeunesse
+
+			//-------------------- Graphisme &  Illustrations --------------------
+			// TODO : Collection Essai jeunesse ?
+			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique'] = key(taxonomy_get_term_by_name('Romans graphiques'));
+			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['touzazimute'] = key(taxonomy_get_term_by_name('Toutazimute'));
+
+			//-------------------- EPUB ? --------------------
+			$this->univ_coll_mapping['NUM'] = key(taxonomy_get_term_by_name('Numérique'));
+		}
 	}
-	
+
 	/**
 	 * Data handling before mapping.
 	 */	
@@ -228,6 +304,9 @@ class ArticleMigration extends Migration {
 		
 		// Backcover text cleaning.
 		$row->backcover = html_entity_decode(strip_tags($row->backcover));
+		
+		// Rouergue web site universe
+		$row->collection = $this->rouergue_get_universe_term_id($row->projecttype, $row->collection, $row->subcollection, $row->series);
 	}
 	
 	/**
@@ -235,13 +314,58 @@ class ArticleMigration extends Migration {
 	 */
 	function prepare($node, stdClass $row) {
 		// Cover image
-		$image_filename = 'syndrome-indigo-test-image.jpg'; // 	A REMPLACER PAR : $image_filename = $row->gencod . 'jpg';
+		$image_filename = 'test-cover.jpg'; // 	A REMPLACER PAR : $image_filename = $row->gencod . 'jpg';
 		$host = 'http://www.korora.fr/'; // A REMPLACER PAR :	$host = 'http://www.lerouergue.fr/...';
 		$url = $host . $image_filename;
 	
 		$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_RENAME); // A REMPLACER PAR :	...FILE_EXISTS_REPLACE);
 		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
-// 		dpm($file);
-// 		dpm($node);
 	}
+	
+	/**
+	 * Helper function handling matching between Mistral collection, subcollection, series classification
+	 * and Rouergue web site Univers vocabulary.
+	 *
+	 * @param string $collection
+	 *   The collection the imported book belongs to.
+	 * @param string $subcollection
+	 *   The subcollection the imported book belongs to.
+	 * @param string $series
+	 *   The series the imported book belongs to.
+	 *
+	 * @return
+	 *   the tid of the Univers term the book has to be linked to.
+	 */
+	function rouergue_get_universe_term_id($collection, $subcollection, $series) {
+		if (isset($series)) {
+			return $this->univ_coll_mapping[$collection][$subcollection][$series];
+		}
+	
+		return $this->univ_coll_mapping[$collection][$subcollection];
+	}
+}
+
+/**
+ * Helper function handling matching between Mistral collection, subcollection, series classification
+ * and Rouergue web site Univers vocabulary.
+ * 
+ * @param string $collection
+ *   The collection the imported book belongs to.
+ * @param string $subcollection 
+ *   The subcollection the imported book belongs to.
+ * @param string $series  
+ *   The series the imported book belongs to.
+ * 
+ * @return
+ *   the tid of the Univers term the book has to be linked to.
+ */
+function rouergue_get_universe_term_id($projecttype, $collection, $subcollection, $series) {
+	if ($projecttype == 'NUM') {
+		return $this->univ_coll_mapping[$projecttype];
+	}
+	if (isset($series)) {
+		return $this->univ_coll_mapping[$collection][$subcollection][$series];
+	}
+	
+	return $this->univ_coll_mapping[$collection][$subcollection];
 }
