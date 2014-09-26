@@ -158,16 +158,16 @@ function feature_catalog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '20',
+          'weight' => '21',
         ),
         'title' => array(
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '19',
+          'weight' => '20',
         ),
         'redirect' => array(
-          'weight' => '18',
+          'weight' => '19',
         ),
       ),
       'display' => array(),
