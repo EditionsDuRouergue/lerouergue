@@ -40,6 +40,26 @@ function feature_catalog_ds_field_settings_info() {
   );
   $export['node|article|list'] = $ds_fieldsetting;
 
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|contributor|on_article_page';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'contributor';
+  $ds_fieldsetting->view_mode = 'on_article_page';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'node_link' => array(
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|contributor|on_article_page'] = $ds_fieldsetting;
+
   return $export;
 }
 
