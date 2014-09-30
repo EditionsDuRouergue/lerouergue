@@ -7,6 +7,7 @@ project = feature_seo
 dependencies[] = globalredirect
 dependencies[] = googleanalytics
 dependencies[] = metatag
+dependencies[] = page_title
 dependencies[] = pathauto
 dependencies[] = redirect
 dependencies[] = transliteration
