@@ -88,7 +88,9 @@ function feature_editors_ckeditor_profile_defaults() {
           ),
         ),
       ),
-      'input_formats' => array(),
+      'input_formats' => array(
+        'filtered_html' => 'Filtered HTML',
+      ),
     ),
     'CKEditor Global Profile' => array(
       'name' => 'CKEditor Global Profile',
@@ -188,7 +190,9 @@ function feature_editors_ckeditor_profile_defaults() {
           ),
         ),
       ),
-      'input_formats' => array(),
+      'input_formats' => array(
+        'full_html' => 'Full HTML',
+      ),
     ),
   );
   return $data;
