@@ -38,6 +38,7 @@ features[ds_layout_settings][] = node|contributor|full
 features[ds_layout_settings][] = node|contributor|on_article_page
 features[ds_layout_settings][] = node|contributor|on_book_list
 features[ds_view_modes][] = on_article_page
+features[ds_view_modes][] = on_book_list
 features[features_api][] = api:2
 features[features_date_format][] = date_format_36
 features[features_date_type][] = date_type_release_date
