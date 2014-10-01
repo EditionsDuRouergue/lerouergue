@@ -17,6 +17,7 @@ dependencies[] = image
 dependencies[] = link
 dependencies[] = list
 dependencies[] = menu
+dependencies[] = migrate_mistral
 dependencies[] = node
 dependencies[] = number
 dependencies[] = options
