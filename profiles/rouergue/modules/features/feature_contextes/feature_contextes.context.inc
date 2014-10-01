@@ -32,6 +32,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'navigation',
           'weight' => '-10',
         ),
+        'menu-menu-footer-menu' => array(
+          'module' => 'menu',
+          'delta' => 'menu-footer-menu',
+          'region' => 'footer',
+          'weight' => '-10',
+        ),
       ),
     ),
   );
