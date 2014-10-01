@@ -169,13 +169,6 @@ function feature_catalog_views_default_views() {
       'separator' => '',
     ),
   );
-  /* Pied de page: Global : Zone de texte */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '[nothing_2]';
-  $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
   /* Champ: Field collection item : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
@@ -222,7 +215,6 @@ function feature_catalog_views_default_views() {
     t('Trier par'),
     t('Asc'),
     t('Desc'),
-    t('[nothing_2]'),
     t('Tout'),
     t('Auteur livre'),
   );

@@ -1,6 +1,8 @@
 name = Feature Catalog
 core = 7.x
 package = App
+version = 7.x-0.1
+project = feature_catalog
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
