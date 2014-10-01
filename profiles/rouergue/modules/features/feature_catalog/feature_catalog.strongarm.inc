@@ -214,6 +214,9 @@ function feature_catalog_strongarm() {
       'on_article_page' => array(
         'custom_settings' => TRUE,
       ),
+      'on_book_list' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

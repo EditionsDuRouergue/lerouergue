@@ -17,6 +17,13 @@ function feature_catalog_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function feature_catalog_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_features_date_format_default().
  */
 function feature_catalog_features_date_format_default() {
