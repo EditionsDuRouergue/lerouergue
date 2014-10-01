@@ -10,14 +10,17 @@
 function feature_core_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu_home:<front>
-  $menu_links['main-menu_home:<front>'] = array(
+  // Exported menu link: main-menu_accueil:<front>
+  $menu_links['main-menu_accueil:<front>'] = array(
     'menu_name' => 'main-menu',
     'link_path' => '<front>',
     'router_path' => '',
-    'link_title' => 'Home',
+    'link_title' => 'Accueil',
     'options' => array(
-      'identifier' => 'main-menu_home:<front>',
+      'identifier' => 'main-menu_accueil:<front>',
+      'attributes' => array(
+        'title' => '',
+      ),
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -25,11 +28,11 @@ function feature_core_menu_default_menu_links() {
     'has_children' => 0,
     'expanded' => 0,
     'weight' => 0,
-    'customized' => 0,
+    'customized' => 1,
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Home');
+  t('Accueil');
 
 
   return $menu_links;
