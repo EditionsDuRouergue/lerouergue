@@ -7,6 +7,7 @@ project = feature_contextes
 dependencies[] = context
 dependencies[] = ctools
 dependencies[] = custom_search_blocks
+dependencies[] = feature_core
 dependencies[] = menu
 features[context][] = all
 features[context][] = front

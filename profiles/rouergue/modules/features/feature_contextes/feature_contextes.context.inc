@@ -38,6 +38,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'footer',
           'weight' => '-10',
         ),
+        'feature_core-rouergue_copyright' => array(
+          'module' => 'feature_core',
+          'delta' => 'rouergue_copyright',
+          'region' => 'footer',
+          'weight' => '-9',
+        ),
       ),
     ),
   );
