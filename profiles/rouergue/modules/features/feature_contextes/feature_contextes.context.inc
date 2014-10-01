@@ -23,7 +23,18 @@ function feature_contextes_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array();
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'custom_search_blocks-1' => array(
+          'module' => 'custom_search_blocks',
+          'delta' => '1',
+          'region' => 'navigation',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
   $context->condition_mode = 0;
 
   // Translatables

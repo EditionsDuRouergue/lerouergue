@@ -6,6 +6,7 @@ version = 7.x-1.0
 project = feature_contextes
 dependencies[] = context
 dependencies[] = ctools
+dependencies[] = custom_search_blocks
 features[context][] = all
 features[context][] = front
 features[context][] = not-front
