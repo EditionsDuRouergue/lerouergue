@@ -24,6 +24,7 @@ features[ctools][] = strongarm:strongarm:1
 features[ds_view_modes][] = block
 features[ds_view_modes][] = list
 features[fe_block_settings][] = custom_search_blocks-1
+features[fe_block_settings][] = menu-menu-footer-menu
 features[features_api][] = api:2
 features[field_base][] = body
 features[field_base][] = field_subtitle

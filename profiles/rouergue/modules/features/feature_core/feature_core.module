@@ -5,3 +5,43 @@
  */
 
 include_once 'feature_core.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function feature_core_block_info() {
+	$blocks = array();
+
+	$blocks['rouergue_copyright'] = array(
+			'info' => t('Rouergue Copyright'),
+			'cache' => DRUPAL_NO_CACHE,
+	);
+
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function feature_core_block_view($delta = '') {
+	switch ($delta) {
+		case 'rouergue_copyright':
+			$block['subject'] = '';
+			$variables['copyright-text'] = 'Les Editions du Rouergue';
+			$block['content'] = theme('rouergue_copyright', $variables);
+			return $block;
+			break;
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feature_core_theme() {
+	return array(
+			'rouergue_copyright' => array(
+					'variables' => array('copyright-text' => NULL),
+					'file' => 'feature_core.theme.inc',
+			),
+	);
+}
