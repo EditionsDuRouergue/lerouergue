@@ -60,8 +60,22 @@ class ArticleContributorsMigration extends Migration {
 								'type' => 'int',
 								'unsigned' => TRUE,
 								'not null' => true,
-								'alias' => 'a',
+								//'alias' => 'a',
 								'description' => 'Mistral article id.'
+						),
+						'contributorid' => array(
+								'type' => 'int',
+								'unsigned' => TRUE,
+								'not null' => true,
+								//'alias' => 'c',
+								'description' => 'Mistral contributor id.'
+						),
+						'functionid' => array(
+								'type' => 'int',
+								'unsigned' => TRUE,
+								'not null' => true,
+								//'alias' => 'f',
+								'description' => 'Mistral function id.'
 						),
 				),
 				MigrateDestinationFieldCollection::getKeySchema()
