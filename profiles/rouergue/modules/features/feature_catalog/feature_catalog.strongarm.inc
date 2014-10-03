@@ -326,5 +326,110 @@ function feature_catalog_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_contributor'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_display_descendants_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_display_descendants_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_display_num_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_display_num_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_end_all_universe';
+  $strongarm->value = FALSE;
+  $export['taxonomy_menu_end_all_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_expanded_universe';
+  $strongarm->value = 1;
+  $export['taxonomy_menu_expanded_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_flat_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_flat_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_hide_empty_terms_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_hide_empty_terms_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_path_universe';
+  $strongarm->value = 'taxonomy_menu_path_default';
+  $export['taxonomy_menu_path_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_rebuild_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_rebuild_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_sync_universe';
+  $strongarm->value = 1;
+  $export['taxonomy_menu_sync_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_term_item_description_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_term_item_description_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_vocab_menu_universe';
+  $strongarm->value = 'menu-universe';
+  $export['taxonomy_menu_vocab_menu_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_vocab_parent_universe';
+  $strongarm->value = '0';
+  $export['taxonomy_menu_vocab_parent_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_voc_item_description_universe';
+  $strongarm->value = 0;
+  $export['taxonomy_menu_voc_item_description_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_voc_item_universe';
+  $strongarm->value = FALSE;
+  $export['taxonomy_menu_voc_item_universe'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_voc_name_universe';
+  $strongarm->value = FALSE;
+  $export['taxonomy_menu_voc_name_universe'] = $strongarm;
+
   return $export;
 }
