@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * feature_core.features.taxonomy.inc
+ * bef_test_content.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function feature_core_taxonomy_default_vocabularies() {
+function bef_test_content_taxonomy_default_vocabularies() {
   return array(
-    'universe' => array(
-      'name' => 'Univers',
-      'machine_name' => 'universe',
+    'location' => array(
+      'name' => 'Location',
+      'machine_name' => 'location',
       'description' => '',
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => 0,
       'rdf_mapping' => array(
