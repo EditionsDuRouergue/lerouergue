@@ -90,7 +90,18 @@ function feature_contextes_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array();
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'menu-menu-universe' => array(
+          'module' => 'menu',
+          'delta' => 'menu-universe',
+          'region' => 'sidebar_first',
+          'weight' => '-7',
+        ),
+      ),
+    ),
+  );
   $context->condition_mode = 0;
 
   // Translatables
