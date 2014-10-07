@@ -1550,8 +1550,7 @@ function format_string($string, array $args = array()) {
  * Encodes special characters in a plain-text string for display as HTML.
  *
  * Also validates strings as UTF-8 to prevent cross site scripting attacks on
- * Internet Explorer 6. To avoid warning messages on PHP < 5.4, verify that the
- * text is valid UTF-8.
+ * Internet Explorer 6.
  *
  * @param $text
  *   The text to be checked or processed.
@@ -1564,15 +1563,6 @@ function format_string($string, array $args = array()) {
  * @ingroup sanitization
  */
 function check_plain($text) {
-  static $php_lt_54;
-  if (!isset($php_lt_54)) {
-    $php_lt_54 = version_compare(PHP_VERSION, '5.4', '<');
-  }
-
-  if ($php_lt_54 && !drupal_validate_utf8($text)) {
-    return '';
-  }
-
   return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 }
 
