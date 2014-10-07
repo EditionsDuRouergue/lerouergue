@@ -20,6 +20,55 @@ function feature_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_hint_text';
+  $strongarm->value = 'auteur, titre, isbn, thème...';
+  $export['custom_search_blocks_1_hint_text'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_image_path';
+  $strongarm->value = '';
+  $export['custom_search_blocks_1_image_path'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_label_visibility';
+  $strongarm->value = 0;
+  $export['custom_search_blocks_1_label_visibility'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_max_length';
+  $strongarm->value = '128';
+  $export['custom_search_blocks_1_max_length'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_size';
+  $strongarm->value = '15';
+  $export['custom_search_blocks_1_size'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_submit_text';
+  $strongarm->value = 'OK';
+  $export['custom_search_blocks_1_submit_text'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_blocks_1_text';
+  $strongarm->value = '';
+  $export['custom_search_blocks_1_text'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'custom_search_hint_text';
   $strongarm->value = 'titre, auteur, isbn, theme...';
   $export['custom_search_hint_text'] = $strongarm;
