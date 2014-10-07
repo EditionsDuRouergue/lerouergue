@@ -45,7 +45,7 @@ class ArticleContributorsMigration extends Migration {
 		$query->fields('a', array('articleid'))->fields('bc', array('contributorid','functionid'));
 		$query->condition('bc.bookid', $subquery, 'IN');
 		
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 		
 		// DESTINATION
 		$this->destination = new MigrateDestinationFieldCollection(

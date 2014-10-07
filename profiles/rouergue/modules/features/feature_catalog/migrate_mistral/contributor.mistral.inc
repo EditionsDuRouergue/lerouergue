@@ -19,7 +19,7 @@ class FunctionMigration extends Migration {
 		$query = Database::getConnection('default', 'mistral')->select('function');
 		$query->fields('function', array('functionid','printname','name'));
 
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 
 		// DESTINATION
 		$this->destination = new MigrateDestinationTerm('functions');
@@ -85,7 +85,7 @@ class ContributorMigration extends Migration {
 		$query->condition('bc.bookid', $subquery, 'IN');
 		$query->distinct();
 		
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 		
 		// DESTINATION
 		$this->destination = new MigrateDestinationNode('contributor');

@@ -43,7 +43,7 @@ class ThemeMigration extends Migration {
 		$query->condition('bt.bookid', $subquery, 'IN');
 		$query->distinct();
 
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 
 		// DESTINATION
 		$this->destination = new MigrateDestinationTerm('themes');
@@ -87,7 +87,7 @@ class ReadershipMigration extends Migration {
 		$query = Database::getConnection('default', 'mistral')->select('readership');
 		$query->fields('readership', array('readershipid','name'));
 
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 
 		// DESTINATION
 		$this->destination = new MigrateDestinationTerm('readership');
@@ -182,7 +182,7 @@ class ArticleMigration extends Migration {
 		$query->groupBy('a.articleid');
 		$query->orderBy('a.articleid', 'ASC');
 		
-		$this->source = new MigrateSourceSQL($query);
+		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 		
 		// DESTINATION
 		$this->destination = new MigrateDestinationNode('article');
