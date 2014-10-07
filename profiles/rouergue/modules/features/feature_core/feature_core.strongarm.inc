@@ -125,6 +125,40 @@ function feature_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'dhtml_menu_settings';
+  $strongarm->value = array(
+    'nav' => 'bullet',
+    'animation' => array(
+      'effects' => array(
+        'height' => 'height',
+        'opacity' => 'opacity',
+        'width' => 0,
+      ),
+      'speed' => '500',
+    ),
+    'effects' => array(
+      'siblings' => 'close-same-tree',
+      'children' => 'none',
+      'remember' => '0',
+    ),
+    'filter' => array(
+      'type' => 'whitelist',
+      'list' => array(
+        'menu-universe' => 'menu-universe',
+        'devel' => 0,
+        'main-menu' => 0,
+        'management' => 0,
+        'menu-footer-menu' => 0,
+        'navigation' => 0,
+        'user-menu' => 0,
+      ),
+    ),
+  );
+  $export['dhtml_menu_settings'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_403';
   $strongarm->value = '';
   $export['site_403'] = $strongarm;
@@ -163,6 +197,29 @@ function feature_core_strongarm() {
   $strongarm->name = 'user_admin_role';
   $strongarm->value = 30037204;
   $export['user_admin_role'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'uuid_features_entity_node';
+  $strongarm->value = array(
+    'page' => 'page',
+    'article' => 0,
+    'contributor' => 0,
+  );
+  $export['uuid_features_entity_node'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'uuid_features_entity_taxonomy_term';
+  $strongarm->value = array(
+    'universe' => 'universe',
+    'themes' => 0,
+    'readership' => 0,
+    'functions' => 0,
+  );
+  $export['uuid_features_entity_taxonomy_term'] = $strongarm;
 
   return $export;
 }
