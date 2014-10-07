@@ -339,36 +339,17 @@ class ArticleMigration extends Migration {
 	 * @return
 	 *   the tid of the Univers term the book has to be linked to.
 	 */
-	function rouergue_get_universe_term_id($collection, $subcollection, $series) {
-		if (isset($series)) {
-			return $this->univ_coll_mapping[$collection][$subcollection][$series];
+	function rouergue_get_universe_term_id($projecttype, $collection, $subcollection, $series) {
+		$term_id = 0;
+		if ($projecttype == 'NUM') {
+                	$term_id = $this->univ_coll_mapping[$projecttype];
+        	}
+		elseif (isset($series)) {
+			$term_id = $this->univ_coll_mapping[$collection][$subcollection][$series];
 		}
-	
-		return $this->univ_coll_mapping[$collection][$subcollection];
+		else {
+			$term_id = $this->univ_coll_mapping[$collection][$subcollection];
+		}
+		return $term_id;
 	}
-}
-
-/**
- * Helper function handling matching between Mistral collection, subcollection, series classification
- * and Rouergue web site Univers vocabulary.
- * 
- * @param string $collection
- *   The collection the imported book belongs to.
- * @param string $subcollection 
- *   The subcollection the imported book belongs to.
- * @param string $series  
- *   The series the imported book belongs to.
- * 
- * @return
- *   the tid of the Univers term the book has to be linked to.
- */
-function rouergue_get_universe_term_id($projecttype, $collection, $subcollection, $series) {
-	if ($projecttype == 'NUM') {
-		return $this->univ_coll_mapping[$projecttype];
-	}
-	if (isset($series)) {
-		return $this->univ_coll_mapping[$collection][$subcollection][$series];
-	}
-	
-	return $this->univ_coll_mapping[$collection][$subcollection];
 }
