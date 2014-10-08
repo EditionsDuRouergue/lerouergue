@@ -54,7 +54,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['field_cover_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_cover_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_cover_image']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'article-cover-min',
     'image_link' => 'content',
   );
   /* Champ: Contenu : Titre */
@@ -169,7 +169,7 @@ function feature_catalog_views_default_views() {
       'separator' => '',
     ),
   );
-  /* Champ: Field collection item : Contributor */
+  /* Champ: Élément Field collection : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
@@ -180,11 +180,11 @@ function feature_catalog_views_default_views() {
     'view_mode' => 'on_book_list',
     'links' => 0,
   );
-  /* Critère de tri: Field collection item : Identifiant de Field collection item */
+  /* Critère de tri: Élément Field collection : Identifiant de Élément field collection */
   $handler->display->display_options['sorts']['item_id']['id'] = 'item_id';
   $handler->display->display_options['sorts']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['sorts']['item_id']['field'] = 'item_id';
-  /* Filtre contextuel: Field collection item : Identifiant de Field collection item */
+  /* Filtre contextuel: Élément Field collection : Identifiant de Élément field collection */
   $handler->display->display_options['arguments']['item_id']['id'] = 'item_id';
   $handler->display->display_options['arguments']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['arguments']['item_id']['field'] = 'item_id';
@@ -195,12 +195,12 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['arguments']['item_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['item_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['item_id']['break_phrase'] = TRUE;
-  /* Critère de filtrage: Field collection item : Fonction (field_contributor_function) */
+  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    214 => '214',
+    175 => '175',
   );
   $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';

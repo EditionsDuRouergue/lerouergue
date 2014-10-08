@@ -1,6 +1,47 @@
 //
-// Variables
+// Variables LEROUERGUE THEME
 // --------------------------------------------------
+
+//== Custom font
+//
+
+@font-face {
+    font-family: 'interstateRegular';
+    src: url('../fonts/interstate_regular-webfont.eot');
+    src: url('../fonts/interstate_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_regular-webfont.woff2') format('woff2'),
+         url('../fonts/interstate_regular-webfont.woff') format('woff'),
+         url('../fonts/interstate_regular-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_regular-webfont.svg#interstateRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'interstateLight';
+    src: url('../fonts/interstate_light-webfont.eot');
+    src: url('../fonts/interstate_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_light-webfont.woff2') format('woff2'),
+         url('../fonts/interstate_light-webfont.woff') format('woff'),
+         url('../fonts/interstate_light-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_light-webfont.svg#interstateLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'interstateBold';
+    src: url('../fonts/interstate_bold-webfont.eot');
+    src: url('../fonts/interstate_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_bold-webfont.woff2') format('woff2'),
+         url('../fonts/interstate_bold-webfont.woff') format('woff'),
+         url('../fonts/interstate_bold-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_bold-webfont.svg#interstateBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 //== Colors
@@ -25,7 +66,7 @@
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-@body-bg:               #fff;
+@body-bg:               #eee;
 //** Global text color on `<body>`.
 @text-color:            @gray-dark;
 
@@ -39,7 +80,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "interstateRegular", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -73,7 +114,7 @@
 //## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
 
 //** Load fonts from this directory.
-@icon-font-path:          "../fonts/";
+@icon-font-path:          "../bootstrap/fonts/";
 //** File name for all font files.
 @icon-font-name:          "glyphicons-halflings-regular";
 //** Element ID within SVG icon file.
