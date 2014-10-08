@@ -105,7 +105,7 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'three_columns_book_page';
+  $ds_layout->layout = 'bootstrap_4_5_3';
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
@@ -118,7 +118,7 @@ function feature_catalog_ds_layout_settings_info() {
         6 => 'field_isbn',
         7 => 'field_gencod',
       ),
-      'middle' => array(
+      'central' => array(
         8 => 'body',
       ),
       'right' => array(
@@ -138,7 +138,7 @@ function feature_catalog_ds_layout_settings_info() {
       'field_format' => 'left',
       'field_isbn' => 'left',
       'field_gencod' => 'left',
-      'body' => 'middle',
+      'body' => 'central',
       'field_contributors' => 'right',
       'field_themes' => 'right',
       'field_readership' => 'right',
@@ -148,7 +148,7 @@ function feature_catalog_ds_layout_settings_info() {
     'classes' => array(),
     'wrappers' => array(
       'left' => 'div',
-      'middle' => 'div',
+      'central' => 'div',
       'right' => 'div',
     ),
     'layout_wrapper' => 'div',
