@@ -278,7 +278,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['field_contributors']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_contributors']['type'] = 'field_collection_views_view';
   $handler->display->display_options['fields']['field_contributors']['settings'] = array(
-    'name' => 'field_collection_view',
+    'name' => 'fc_contributors',
     'display_id' => 'author',
     'add' => 'Ajouter',
   );
