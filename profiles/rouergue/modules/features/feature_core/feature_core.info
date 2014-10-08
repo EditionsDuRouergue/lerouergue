@@ -113,6 +113,7 @@ features[variable][] = date_default_timezone
 features[variable][] = dhtml_menu_settings
 features[variable][] = pathauto_taxonomy_term_pattern
 features[variable][] = pathauto_taxonomy_term_universe_pattern
+features[variable][] = pathauto_transliterate
 features[variable][] = site_403
 features[variable][] = site_404
 features[variable][] = site_default_country
