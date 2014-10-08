@@ -169,7 +169,12 @@ function feature_catalog_views_default_views() {
       'separator' => '',
     ),
   );
-  /* Champ: Élément Field collection : Contributor */
+  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction du contributeur';
+  /* Champ: Field collection item : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
@@ -180,11 +185,11 @@ function feature_catalog_views_default_views() {
     'view_mode' => 'on_book_list',
     'links' => 0,
   );
-  /* Critère de tri: Élément Field collection : Identifiant de Élément field collection */
+  /* Critère de tri: Field collection item : Identifiant de Field collection item */
   $handler->display->display_options['sorts']['item_id']['id'] = 'item_id';
   $handler->display->display_options['sorts']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['sorts']['item_id']['field'] = 'item_id';
-  /* Filtre contextuel: Élément Field collection : Identifiant de Élément field collection */
+  /* Filtre contextuel: Field collection item : Identifiant de Field collection item */
   $handler->display->display_options['arguments']['item_id']['id'] = 'item_id';
   $handler->display->display_options['arguments']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['arguments']['item_id']['field'] = 'item_id';
@@ -195,15 +200,13 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['arguments']['item_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['item_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['item_id']['break_phrase'] = TRUE;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    175 => '175',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
 
   /* Display: Auteur livre */
   $handler = $view->new_display('block', 'Auteur livre', 'author');
@@ -215,6 +218,7 @@ function feature_catalog_views_default_views() {
     t('Trier par'),
     t('Asc'),
     t('Desc'),
+    t('Fonction du contributeur'),
     t('Tout'),
     t('Auteur livre'),
   );
