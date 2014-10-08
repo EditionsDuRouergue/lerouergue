@@ -317,7 +317,7 @@ class ArticleMigration extends Migration {
 	 */
 	function prepare($node, stdClass $row) {
 		// Cover image
-		$image_filename = 'test-cover.jpg'; // 	A REMPLACER PAR : $image_filename = $row->gencod . 'jpg';
+		$image_filename = 'test-cover-' . rand(1,4) . '.png'; // 	A REMPLACER PAR : $image_filename = $row->gencod . 'jpg';
 		$host = 'http://www.korora.fr/'; // A REMPLACER PAR :	$host = 'http://www.lerouergue.fr/...';
 		$url = $host . $image_filename;
 	
