@@ -22,8 +22,8 @@ function feature_theme_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'theme_rouergue_bootstrap_settings';
   $strongarm->value = array(
-    'toggle_logo' => 1,
-    'toggle_name' => 1,
+    'toggle_logo' => 0,
+    'toggle_name' => 0,
     'toggle_slogan' => 0,
     'toggle_node_user_picture' => 1,
     'toggle_comment_user_picture' => 1,
@@ -38,7 +38,7 @@ function feature_theme_strongarm() {
     'favicon_path' => '',
     'favicon_upload' => '',
     'general__active_tab' => 'edit-theme-settings',
-    'bootstrap__active_tab' => 'edit-components',
+    'bootstrap__active_tab' => 'edit-advanced',
     'bootstrap_breadcrumb' => '1',
     'bootstrap_breadcrumb_home' => 0,
     'bootstrap_breadcrumb_title' => 1,
