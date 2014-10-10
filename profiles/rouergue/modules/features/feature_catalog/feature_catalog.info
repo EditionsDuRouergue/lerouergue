@@ -142,6 +142,7 @@ features[variable][] = taxonomy_menu_vocab_menu_universe
 features[variable][] = taxonomy_menu_vocab_parent_universe
 features[views_view][] = catalog
 features[views_view][] = fc_contributors
+features[views_view][] = themes
 features[views_view][] = universes
 features_exclude[dependencies][views] = views
 features_exclude[dependencies][better_exposed_filters] = better_exposed_filters
