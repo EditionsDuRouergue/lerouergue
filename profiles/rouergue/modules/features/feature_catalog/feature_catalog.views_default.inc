@@ -144,6 +144,8 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'item_id' => 'item_id',
@@ -190,11 +192,11 @@ function feature_catalog_views_default_views() {
     'view_mode' => 'on_book_list',
     'links' => 0,
   );
-  /* Critère de tri: Contenu : Nom (field_lastname) */
-  $handler->display->display_options['sorts']['field_lastname_value']['id'] = 'field_lastname_value';
-  $handler->display->display_options['sorts']['field_lastname_value']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['sorts']['field_lastname_value']['field'] = 'field_lastname_value';
-  $handler->display->display_options['sorts']['field_lastname_value']['relationship'] = 'field_contributor_target_id';
+  /* Critère de tri: Contenu : Contributor ID (field_contributor_id) */
+  $handler->display->display_options['sorts']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
   /* Filtre contextuel: Field collection item : Identifiant de Field collection item */
   $handler->display->display_options['arguments']['item_id']['id'] = 'item_id';
   $handler->display->display_options['arguments']['item_id']['table'] = 'field_collection_item';
@@ -248,7 +250,6 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
@@ -278,6 +279,10 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
   $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Éléments par page';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Tout -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Décalage';
@@ -298,7 +303,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
   $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'FC Contributeurs';
-  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
+  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '0';
   /* Relation: Field collection item : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
