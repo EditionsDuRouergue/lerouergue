@@ -140,6 +140,7 @@ features[variable][] = taxonomy_menu_voc_item_universe
 features[variable][] = taxonomy_menu_voc_name_universe
 features[variable][] = taxonomy_menu_vocab_menu_universe
 features[variable][] = taxonomy_menu_vocab_parent_universe
+features[views_view][] = authors
 features[views_view][] = catalog
 features[views_view][] = fc_contributors
 features[views_view][] = themes
