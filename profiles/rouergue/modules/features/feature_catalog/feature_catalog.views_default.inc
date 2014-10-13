@@ -40,7 +40,8 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
     'field_firstname' => 'field_firstname',
@@ -69,17 +70,42 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
   $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
   $handler->display->display_options['fields']['field_firstname']['label'] = '';
-  $handler->display->display_options['fields']['field_firstname']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_firstname']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_firstname']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
   /* Champ: Contenu : Nom */
   $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
   $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
   $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
   $handler->display->display_options['fields']['field_lastname']['label'] = '';
-  $handler->display->display_options['fields']['field_lastname']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_lastname']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_lastname']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Photo */
+  $handler->display->display_options['fields']['field_picture']['id'] = 'field_picture';
+  $handler->display->display_options['fields']['field_picture']['table'] = 'field_data_field_picture';
+  $handler->display->display_options['fields']['field_picture']['field'] = 'field_picture';
+  $handler->display->display_options['fields']['field_picture']['label'] = '';
+  $handler->display->display_options['fields']['field_picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_picture']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_picture']['settings'] = array(
+    'image_style' => 'article-cover-min',
+    'image_link' => 'content',
+  );
+  /* Champ: Image field caption : Photo (caption) */
+  $handler->display->display_options['fields']['caption']['id'] = 'caption';
+  $handler->display->display_options['fields']['caption']['table'] = 'field_picture_field_image_field_caption';
+  $handler->display->display_options['fields']['caption']['field'] = 'caption';
+  $handler->display->display_options['fields']['caption']['label'] = '';
+  $handler->display->display_options['fields']['caption']['element_label_colon'] = FALSE;
+  /* Champ: Prénom Nom */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'Prénom Nom';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_firstname] [field_lastname]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Critère de tri: Contenu : Nom (field_lastname) */
   $handler->display->display_options['sorts']['field_lastname_value']['id'] = 'field_lastname_value';
   $handler->display->display_options['sorts']['field_lastname_value']['table'] = 'field_data_field_lastname';
@@ -126,6 +152,7 @@ function feature_catalog_views_default_views() {
     t('dernier »'),
     t('FC Contributeur'),
     t('Fonction'),
+    t('[field_firstname] [field_lastname]'),
     t('Auteurs'),
   );
   $export['authors'] = $view;
