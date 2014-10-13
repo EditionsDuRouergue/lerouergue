@@ -201,19 +201,19 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_lastname',
-        1 => 'field_firstname',
-        2 => 'field_pseudonyme',
-        3 => 'field_picture',
+        0 => 'field_picture',
+        1 => 'field_lastname',
+        2 => 'field_firstname',
+        3 => 'field_pseudonyme',
         4 => 'body',
         5 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
+      'field_picture' => 'ds_content',
       'field_lastname' => 'ds_content',
       'field_firstname' => 'ds_content',
       'field_pseudonyme' => 'ds_content',
-      'field_picture' => 'ds_content',
       'body' => 'ds_content',
       'field_contributor_url' => 'ds_content',
     ),
