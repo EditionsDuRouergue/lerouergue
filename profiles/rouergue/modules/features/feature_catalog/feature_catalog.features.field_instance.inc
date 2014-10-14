@@ -204,15 +204,13 @@ function feature_catalog_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'field_collection',
+        'module' => 'field_collection_views',
         'settings' => array(
           'add' => '',
-          'delete' => '',
-          'description' => 0,
-          'edit' => '',
-          'view_mode' => 'on_article_page',
+          'display_id' => 'book_contributors',
+          'name' => 'fc_contributors',
         ),
-        'type' => 'field_collection_view',
+        'type' => 'field_collection_views_view',
         'weight' => 9,
       ),
       'list' => array(

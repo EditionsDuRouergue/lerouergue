@@ -392,34 +392,10 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'item_id' => 'item_id',
-    'field_resume_job_title' => 'field_resume_job_title',
-    'field_resume_time_period' => 'field_resume_time_period',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'item_id' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_resume_job_title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_resume_time_period' => array(
-      'align' => '',
-      'separator' => '',
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
   /* Relation: Field collection item : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
@@ -465,8 +441,92 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name']['value'] = 'auteur';
   $handler->display->display_options['filters']['name']['group'] = 1;
 
-  /* Display: Auteur livre */
-  $handler = $view->new_display('block', 'Auteur livre', 'author');
+  /* Display: Auteur liste livres */
+  $handler = $view->new_display('block', 'Auteur liste livres', 'author');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Field collection item : Contributor */
+  $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
+  $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
+  $handler->display->display_options['fields']['field_contributor']['label'] = '';
+  $handler->display->display_options['fields']['field_contributor']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_contributor']['type'] = 'entityreference_entity_view';
+  $handler->display->display_options['fields']['field_contributor']['settings'] = array(
+    'view_mode' => 'on_book_list',
+    'links' => 0,
+  );
+
+  /* Display: Contributeurs fiche livre */
+  $handler = $view->new_display('block', 'Contributeurs fiche livre', 'book_contributors');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_contributor_function',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'field_firstname' => 'field_firstname',
+    'field_lastname' => 'field_lastname',
+  );
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Champ: Field collection item : Fonction */
+  $handler->display->display_options['fields']['field_contributor_function']['id'] = 'field_contributor_function';
+  $handler->display->display_options['fields']['field_contributor_function']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['fields']['field_contributor_function']['field'] = 'field_contributor_function';
+  $handler->display->display_options['fields']['field_contributor_function']['label'] = '';
+  $handler->display->display_options['fields']['field_contributor_function']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_contributor_function']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_contributor_function']['type'] = 'taxonomy_term_reference_plain';
+  /* Champ: Contenu : Prénom */
+  $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_firstname']['label'] = '';
+  $handler->display->display_options['fields']['field_firstname']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Nom */
+  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_lastname']['label'] = '';
+  $handler->display->display_options['fields']['field_lastname']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
+  /* Champ: Prénom Nom */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'Prénom Nom';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_firstname] [field_lastname]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
   $translatables['fc_contributors'] = array(
     t('Master'),
     t('plus'),
@@ -478,7 +538,9 @@ return $query->execute()->fetchField();';
     t('Fonction du contributeur'),
     t('Contributeur'),
     t('Tout'),
-    t('Auteur livre'),
+    t('Auteur liste livres'),
+    t('Contributeurs fiche livre'),
+    t('[field_firstname] [field_lastname]'),
   );
   $export['fc_contributors'] = $view;
 
