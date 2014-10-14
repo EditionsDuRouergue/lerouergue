@@ -51,11 +51,11 @@ function feature_catalog_ds_field_settings_info() {
       'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
-    ),
-    'node_link' => array(
-      'weight' => '2',
-      'label' => 'hidden',
-      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => '',
+        'class' => '',
+      ),
     ),
   );
   $export['node|contributor|on_article_page'] = $ds_fieldsetting;
@@ -240,14 +240,10 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'title',
-        1 => 'body',
-        2 => 'node_link',
       ),
     ),
     'fields' => array(
       'title' => 'ds_content',
-      'body' => 'ds_content',
-      'node_link' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

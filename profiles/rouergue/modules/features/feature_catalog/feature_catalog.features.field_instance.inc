@@ -1186,11 +1186,8 @@ function feature_catalog_field_default_field_instances() {
       ),
       'on_article_page' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 100,
-        ),
-        'type' => 'text_trimmed',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'on_book_list' => array(
