@@ -359,6 +359,10 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Comportement en l'absence de résultats: Global : Messages */
+  $handler->display->display_options['empty']['messages']['id'] = 'messages';
+  $handler->display->display_options['empty']['messages']['table'] = 'views';
+  $handler->display->display_options['empty']['messages']['field'] = 'messages';
   /* Relation: Contenu : Termes de taxonomie du nœud */
   $handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
   $handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
@@ -422,6 +426,12 @@ function feature_catalog_views_default_views() {
 
   /* Display: Catalogue */
   $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_1');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Entête: Global : Résumé des résultats */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = '@total titres';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Critère de tri: Contenu : Date de parution (field_release_date) */
@@ -540,6 +550,326 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name']['field'] = 'name';
   $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name']['value'] = 'auteur';
+
+  /* Display: Classement avancé */
+  $handler = $view->new_display('page_with_page_title', 'Classement avancé', 'catalog_multi');
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'allow_secondary' => 0,
+      'secondary_label' => 'Options avancées',
+    ),
+    'sort' => array(
+      'bef_format' => 'default',
+      'advanced' => array(
+        'collapsible' => 0,
+        'collapsible_label' => 'Sort options',
+        'combine' => 0,
+        'combine_rewrite' => '',
+        'reset' => 0,
+        'reset_label' => '',
+        'is_secondary' => 0,
+      ),
+    ),
+    'field_universe_tid' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_select_all_none_nested' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_release_date_value_1' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_release_date_value' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_themes_tid' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_readership_tid' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => 0,
+        'bef_select_all_none_nested' => 0,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Entête: Global : Résumé des résultats */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = '@total titres';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Contenu : Contributeurs (field_contributors) */
+  $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
+  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '0';
+  /* Relation: Entity Reference : Referenced Entity */
+  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Couverture */
+  $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['table'] = 'field_data_field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['field'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['label'] = '';
+  $handler->display->display_options['fields']['field_cover_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_cover_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_cover_image']['settings'] = array(
+    'image_style' => 'article-cover-min',
+    'image_link' => 'content',
+  );
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Champ: Contenu : Contributeurs */
+  $handler->display->display_options['fields']['field_contributors']['id'] = 'field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['field'] = 'field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['label'] = '';
+  $handler->display->display_options['fields']['field_contributors']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_contributors']['type'] = 'field_collection_views_view';
+  $handler->display->display_options['fields']['field_contributors']['settings'] = array(
+    'name' => 'fc_contributors',
+    'display_id' => 'author',
+    'add' => 'Ajouter',
+  );
+  $handler->display->display_options['fields']['field_contributors']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['sorts']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['sorts']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_release_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_release_date_value']['expose']['label'] = 'Date de parution';
+  /* Critère de tri: Contenu : Titre */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['title']['expose']['label'] = 'Titre';
+  /* Critère de tri: Contenu : Nom (field_lastname) */
+  $handler->display->display_options['sorts']['field_lastname_value']['id'] = 'field_lastname_value';
+  $handler->display->display_options['sorts']['field_lastname_value']['table'] = 'field_data_field_lastname';
+  $handler->display->display_options['sorts']['field_lastname_value']['field'] = 'field_lastname_value';
+  $handler->display->display_options['sorts']['field_lastname_value']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['sorts']['field_lastname_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_lastname_value']['expose']['label'] = 'Auteur';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Contenu : Univers (field_universe) */
+  $handler->display->display_options['filters']['field_universe_tid']['id'] = 'field_universe_tid';
+  $handler->display->display_options['filters']['field_universe_tid']['table'] = 'field_data_field_universe';
+  $handler->display->display_options['filters']['field_universe_tid']['field'] = 'field_universe_tid';
+  $handler->display->display_options['filters']['field_universe_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_universe_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_universe_tid']['expose']['operator_id'] = 'field_universe_tid_op';
+  $handler->display->display_options['filters']['field_universe_tid']['expose']['label'] = 'Univers';
+  $handler->display->display_options['filters']['field_universe_tid']['expose']['operator'] = 'field_universe_tid_op';
+  $handler->display->display_options['filters']['field_universe_tid']['expose']['identifier'] = 'field_universe_tid';
+  $handler->display->display_options['filters']['field_universe_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['field_universe_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_universe_tid']['vocabulary'] = 'universe';
+  $handler->display->display_options['filters']['field_universe_tid']['hierarchy'] = 1;
+  /* Critère de filtrage: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['filters']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_release_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_release_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['operator_id'] = 'field_release_date_value_op';
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['label'] = 'à partir de';
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['description'] = '(mm/aaaa)';
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['operator'] = 'field_release_date_value_op';
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['identifier'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['field_release_date_value']['group_info']['label'] = 'Date de parution (field_release_date)';
+  $handler->display->display_options['filters']['field_release_date_value']['group_info']['identifier'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['field_release_date_value']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  $handler->display->display_options['filters']['field_release_date_value']['granularity'] = 'month';
+  $handler->display->display_options['filters']['field_release_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_release_date_value']['year_range'] = '-10:+1';
+  /* Critère de filtrage: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['filters']['field_release_date_value_1']['id'] = 'field_release_date_value_1';
+  $handler->display->display_options['filters']['field_release_date_value_1']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['filters']['field_release_date_value_1']['field'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_release_date_value_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_release_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['operator_id'] = 'field_release_date_value_1_op';
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['label'] = 'jusqu\'à';
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['description'] = '(format : mm/aaaa)';
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['operator'] = 'field_release_date_value_1_op';
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['identifier'] = 'field_release_date_value_1';
+  $handler->display->display_options['filters']['field_release_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['field_release_date_value_1']['granularity'] = 'month';
+  $handler->display->display_options['filters']['field_release_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_release_date_value_1']['year_range'] = '-10:+1';
+  /* Critère de filtrage: Contenu : Thèmes (field_themes) */
+  $handler->display->display_options['filters']['field_themes_tid']['id'] = 'field_themes_tid';
+  $handler->display->display_options['filters']['field_themes_tid']['table'] = 'field_data_field_themes';
+  $handler->display->display_options['filters']['field_themes_tid']['field'] = 'field_themes_tid';
+  $handler->display->display_options['filters']['field_themes_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_themes_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_themes_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['operator_id'] = 'field_themes_tid_op';
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['label'] = 'Thème';
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['description'] = 'Saisir les premières lettre du terme recherché';
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['operator'] = 'field_themes_tid_op';
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['identifier'] = 'field_themes_tid';
+  $handler->display->display_options['filters']['field_themes_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['field_themes_tid']['vocabulary'] = 'themes';
+  /* Critère de filtrage: Contenu : Lectorat (field_readership) */
+  $handler->display->display_options['filters']['field_readership_tid']['id'] = 'field_readership_tid';
+  $handler->display->display_options['filters']['field_readership_tid']['table'] = 'field_data_field_readership';
+  $handler->display->display_options['filters']['field_readership_tid']['field'] = 'field_readership_tid';
+  $handler->display->display_options['filters']['field_readership_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_readership_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['operator_id'] = 'field_readership_tid_op';
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['label'] = 'Lectorat';
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['description'] = 'Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.';
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['operator'] = 'field_readership_tid_op';
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['identifier'] = 'field_readership_tid';
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_readership_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['field_readership_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_readership_tid']['vocabulary'] = 'readership';
+  $handler->display->display_options['filters']['field_readership_tid']['hierarchy'] = 1;
+  $handler->display->display_options['path'] = 'catalogue/multi-criteres';
   $translatables['catalog'] = array(
     t('Master'),
     t('plus'),
@@ -557,11 +887,28 @@ return $query->execute()->fetchField();';
     t('dernier »'),
     t('terme'),
     t('Catalogue'),
+    t('@total titres'),
     t('Livres auteur'),
     t('Contributeurs'),
     t('Contributor'),
     t('Fonction'),
     t('Tout'),
+    t('Classement avancé'),
+    t('Select any filter and click on Apply to see results'),
+    t('Contributeur'),
+    t('Date de parution'),
+    t('Titre'),
+    t('Auteur'),
+    t('Univers'),
+    t('à partir de'),
+    t('(mm/aaaa)'),
+    t('Date de parution (field_release_date)'),
+    t('jusqu\'à'),
+    t('(format : mm/aaaa)'),
+    t('Thème'),
+    t('Saisir les premières lettre du terme recherché'),
+    t('Lectorat'),
+    t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
   );
   $export['catalog'] = $view;
 
@@ -1026,6 +1373,7 @@ return $query->execute()->fetchField();';
 
   /* Display: Liste livres */
   $handler = $view->new_display('page', 'Liste livres', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';

@@ -5,3 +5,53 @@
  */
 
 include_once 'feature_catalog.features.inc';
+
+
+/**
+ * Implements hook_block_info().
+ */
+function feature_catalog_block_info() {
+	$blocks = array();
+
+	$blocks['rouergue_catalog_links'] = array(
+			'info' => t('Rouergue catalog links'),
+			'cache' => DRUPAL_NO_CACHE,
+	);
+
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function feature_catalog_block_view($delta = '') {
+	switch ($delta) {
+		case 'rouergue_catalog_links':
+			$block['subject'] = '';
+			$link_path = '/catalogue/multi-criteres';
+			$link_text = 'Multi-critères';
+			if (current_path() == 'catalogue/multi-criteres') {
+				$link_path = '/catalogue';
+				$link_text = 'Retour au catalogue';
+			}
+			$variables['catalog_links'] = array(
+				'link_path' => $link_path,
+				'link_text' => $link_text,
+			);
+			$block['content'] = theme('rouergue_catalog_links', $variables);
+			return $block;
+			break;
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feature_catalog_theme() {
+	return array(
+			'rouergue_catalog_links' => array(
+					'variables' => array('catalog_links' => NULL),
+					'file' => 'feature_catalog.theme.inc',
+			),
+	);
+}
