@@ -32,6 +32,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'navigation',
           'weight' => '-10',
         ),
+        'system-help' => array(
+          'module' => 'system',
+          'delta' => 'help',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'menu-menu-footer-menu' => array(
           'module' => 'menu',
           'delta' => 'menu-footer-menu',
@@ -87,6 +93,7 @@ function feature_contextes_context_default_contexts() {
     'path' => array(
       'values' => array(
         '~<front>' => '~<front>',
+        '~catalogue/multi-criteres' => '~catalogue/multi-criteres',
       ),
     ),
   );
