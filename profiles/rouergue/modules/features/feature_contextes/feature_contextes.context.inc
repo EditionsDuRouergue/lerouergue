@@ -83,6 +83,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
+        'boxes-front_page_message' => array(
+          'module' => 'boxes',
+          'delta' => 'front_page_message',
+          'region' => 'content',
+          'weight' => '-9',
+        ),
       ),
     ),
   );
