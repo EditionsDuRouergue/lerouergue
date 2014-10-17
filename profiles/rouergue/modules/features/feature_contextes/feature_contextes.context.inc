@@ -74,7 +74,18 @@ function feature_contextes_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array();
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-first_level_universes-block' => array(
+          'module' => 'views',
+          'delta' => 'first_level_universes-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
   $context->condition_mode = 0;
 
   // Translatables

@@ -1137,7 +1137,6 @@ return $query->execute()->fetchField();';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Univers premier niveau';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -1181,7 +1180,6 @@ return $query->execute()->fetchField();';
   $handler = $view->new_display('block', 'Block', 'block');
   $translatables['first_level_universes'] = array(
     t('Master'),
-    t('Univers premier niveau'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),

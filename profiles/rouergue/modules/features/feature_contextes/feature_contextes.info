@@ -9,6 +9,7 @@ dependencies[] = ctools
 dependencies[] = custom_search_blocks
 dependencies[] = feature_core
 dependencies[] = menu
+dependencies[] = views
 features[context][] = all
 features[context][] = front
 features[context][] = not-front

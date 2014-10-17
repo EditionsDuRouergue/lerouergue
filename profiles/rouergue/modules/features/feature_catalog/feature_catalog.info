@@ -4,6 +4,7 @@ package = App
 version = 7.x-0.1
 project = feature_catalog
 dependencies[] = context
+dependencies[] = ds
 dependencies[] = entityreference
 dependencies[] = feature_core
 dependencies[] = features_date_formats
