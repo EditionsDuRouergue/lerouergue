@@ -154,6 +154,12 @@ function feature_catalog_strongarm() {
       'on_article_page' => array(
         'custom_settings' => FALSE,
       ),
+      'on_book_list' => array(
+        'custom_settings' => FALSE,
+      ),
+      'author_books' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -170,7 +176,37 @@ function feature_catalog_strongarm() {
           'weight' => '19',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'publication_status' => array(
+          'full' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
+          'author_books' => NULL,
+        ),
+        'field_publication_status' => array(
+          'full' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '99',
+            'visible' => TRUE,
+          ),
+          'list' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'block' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'author_books' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__article'] = $strongarm;

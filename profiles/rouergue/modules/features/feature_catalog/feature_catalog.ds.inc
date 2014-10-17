@@ -12,15 +12,40 @@ function feature_catalog_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|article|author_books';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'article';
+  $ds_fieldsetting->view_mode = 'author_books';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => '',
+        'class' => '',
+      ),
+    ),
+  );
+  $export['node|article|author_books'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|article|block';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'block';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => '',
+        'class' => '',
+      ),
     ),
   );
   $export['node|article|block'] = $ds_fieldsetting;
@@ -36,6 +61,11 @@ function feature_catalog_ds_field_settings_info() {
       'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => '',
+        'class' => '',
+      ),
     ),
   );
   $export['node|article|list'] = $ds_fieldsetting;
@@ -71,6 +101,38 @@ function feature_catalog_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|article|author_books';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'article';
+  $ds_layout->view_mode = 'author_books';
+  $ds_layout->layout = 'bootstrap_12';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'central' => array(
+        0 => 'field_cover_image',
+        1 => 'field_publication_status',
+        2 => 'title',
+      ),
+    ),
+    'fields' => array(
+      'field_cover_image' => 'central',
+      'field_publication_status' => 'central',
+      'title' => 'central',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'central' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|article|author_books'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|article|block';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
@@ -80,12 +142,16 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'field_cover_image',
-        1 => 'title',
+        1 => 'field_publication_status',
+        2 => 'title',
+        3 => 'field_contributors',
       ),
     ),
     'fields' => array(
       'field_cover_image' => 'ds_content',
+      'field_publication_status' => 'ds_content',
       'title' => 'ds_content',
+      'field_contributors' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -111,27 +177,29 @@ function feature_catalog_ds_layout_settings_info() {
       'left' => array(
         0 => 'field_subtitle',
         1 => 'field_cover_image',
-        2 => 'field_release_date',
-        3 => 'field_number_pages',
-        4 => 'field_price',
-        5 => 'field_format',
-        6 => 'field_isbn',
-        7 => 'field_gencod',
+        2 => 'field_publication_status',
+        3 => 'field_release_date',
+        4 => 'field_number_pages',
+        5 => 'field_price',
+        6 => 'field_format',
+        7 => 'field_isbn',
+        8 => 'field_gencod',
       ),
       'central' => array(
-        8 => 'body',
+        9 => 'body',
       ),
       'right' => array(
-        9 => 'field_contributors',
-        10 => 'field_themes',
-        11 => 'field_readership',
-        12 => 'field_inner_pages',
-        13 => 'field_num_version_link',
+        10 => 'field_contributors',
+        11 => 'field_themes',
+        12 => 'field_readership',
+        13 => 'field_inner_pages',
+        14 => 'field_num_version_link',
       ),
     ),
     'fields' => array(
       'field_subtitle' => 'left',
       'field_cover_image' => 'left',
+      'field_publication_status' => 'left',
       'field_release_date' => 'left',
       'field_number_pages' => 'left',
       'field_price' => 'left',
@@ -170,14 +238,16 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'field_cover_image',
-        1 => 'field_new',
+        1 => 'field_publication_status',
         2 => 'title',
+        3 => 'field_contributors',
       ),
     ),
     'fields' => array(
       'field_cover_image' => 'ds_content',
-      'field_new' => 'ds_content',
+      'field_publication_status' => 'ds_content',
       'title' => 'ds_content',
+      'field_contributors' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -295,6 +365,15 @@ function feature_catalog_ds_layout_settings_info() {
  */
 function feature_catalog_ds_view_modes_info() {
   $export = array();
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'author_books';
+  $ds_view_mode->label = 'Livres auteur';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['author_books'] = $ds_view_mode;
 
   $ds_view_mode = new stdClass();
   $ds_view_mode->api_version = 1;

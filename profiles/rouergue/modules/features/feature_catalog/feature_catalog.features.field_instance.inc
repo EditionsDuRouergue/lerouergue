@@ -119,11 +119,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'block' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'above',
@@ -137,13 +143,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -183,11 +189,22 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
-      'block' => array(
-        'label' => 'above',
+      'author_books' => array(
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
+      ),
+      'block' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection_views',
+        'settings' => array(
+          'add' => '',
+          'display_id' => 'author',
+          'name' => 'fc_contributors',
+        ),
+        'type' => 'field_collection_views_view',
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'above',
@@ -211,13 +228,18 @@ function feature_catalog_field_default_field_instances() {
           'name' => 'fc_contributors',
         ),
         'type' => 'field_collection_views_view',
-        'weight' => 9,
+        'weight' => 11,
       ),
       'list' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'field_collection_views',
+        'settings' => array(
+          'add' => '',
+          'display_id' => 'author',
+          'name' => 'fc_contributors',
+        ),
+        'type' => 'field_collection_views_view',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -242,12 +264,22 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'article-cover-min',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
       'block' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'image_link' => 'content',
+          'image_style' => 'article-cover-min',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -273,11 +305,11 @@ function feature_catalog_field_default_field_instances() {
         'weight' => 1,
       ),
       'list' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'image_link' => 'content',
+          'image_style' => 'article-cover-min',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -318,11 +350,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 19,
       ),
       'default' => array(
         'label' => 'inline',
@@ -336,13 +374,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'node',
@@ -371,11 +409,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
@@ -389,13 +433,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -423,11 +467,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 24,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -445,13 +495,13 @@ function feature_catalog_field_default_field_instances() {
           'width' => '100px',
         ),
         'type' => 'pdf_default',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -483,11 +533,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 22,
       ),
       'default' => array(
         'label' => 'inline',
@@ -501,13 +557,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'node',
@@ -536,11 +592,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Champ articleid Mistral',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'inline',
@@ -552,13 +614,13 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 25,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 24,
       ),
     ),
     'entity_type' => 'node',
@@ -588,11 +650,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Champ bookid Mistral',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 16,
       ),
       'default' => array(
         'label' => 'inline',
@@ -604,13 +672,13 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 26,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 25,
       ),
     ),
     'entity_type' => 'node',
@@ -644,11 +712,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 17,
       ),
       'default' => array(
         'label' => 'inline',
@@ -661,14 +735,13 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 27,
       ),
       'list' => array(
         'label' => 'hidden',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -696,11 +769,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 25,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -714,13 +793,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'node',
@@ -763,11 +842,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 20,
       ),
       'default' => array(
         'label' => 'inline',
@@ -791,13 +876,13 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 20,
       ),
     ),
     'entity_type' => 'node',
@@ -827,11 +912,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 21,
       ),
       'default' => array(
         'label' => 'inline',
@@ -855,13 +946,13 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_decimal',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 21,
       ),
     ),
     'entity_type' => 'node',
@@ -891,11 +982,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'above',
@@ -909,13 +1006,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -940,11 +1037,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 23,
       ),
       'default' => array(
         'label' => 'inline',
@@ -970,13 +1073,13 @@ function feature_catalog_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -996,7 +1099,7 @@ function feature_catalog_field_default_field_instances() {
       'settings' => array(
         'increment' => 15,
         'input_format' => 'custom',
-        'input_format_custom' => 'mm/yyyy',
+        'input_format_custom' => 'm/Y',
         'label_position' => 'above',
         'text_parts' => array(),
         'year_range' => '-3:+3',
@@ -1013,11 +1116,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 18,
       ),
       'default' => array(
         'label' => 'inline',
@@ -1037,7 +1146,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'node',
@@ -1066,11 +1175,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'above',
@@ -1084,13 +1199,13 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -1116,11 +1231,17 @@ function feature_catalog_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 25,
+      ),
       'block' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'above',
@@ -1133,13 +1254,13 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 24,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',

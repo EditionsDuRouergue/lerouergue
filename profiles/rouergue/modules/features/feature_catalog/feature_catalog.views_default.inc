@@ -426,6 +426,21 @@ function feature_catalog_views_default_views() {
 
   /* Display: Catalogue */
   $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'field_data_field_release_date|field_release_date_value';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Entête: Global : Résumé des résultats */
   $handler->display->display_options['header']['result']['id'] = 'result';
@@ -471,7 +486,15 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = '4';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'author_books';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'author_books';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relation: Contenu : Contributeurs (field_contributors) */
@@ -665,6 +688,21 @@ return $query->execute()->fetchField();';
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'field_data_field_release_date|field_release_date_value';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Entête: Global : Résumé des résultats */
@@ -1373,6 +1411,21 @@ return $query->execute()->fetchField();';
 
   /* Display: Liste livres */
   $handler = $view->new_display('page', 'Liste livres', 'page');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|title';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
@@ -1429,6 +1482,42 @@ return $query->execute()->fetchField();';
   /* Display: Liste livres (backup) */
   $handler = $view->new_display('page', 'Liste livres (backup)', 'page_1');
   $handler->display->display_options['path'] = 'taxonomy/term/%';
+
+  /* Display: Liste livres (copie) */
+  $handler = $view->new_display('page', 'Liste livres (copie)', 'page_2');
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Couverture */
+  $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['table'] = 'field_data_field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['field'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['label'] = '';
+  $handler->display->display_options['fields']['field_cover_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_cover_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_cover_image']['settings'] = array(
+    'image_style' => 'medium',
+    'image_link' => 'content',
+  );
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Contributeurs */
+  $handler->display->display_options['fields']['field_contributors']['id'] = 'field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['field'] = 'field_contributors';
+  $handler->display->display_options['fields']['field_contributors']['label'] = '';
+  $handler->display->display_options['fields']['field_contributors']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_contributors']['type'] = 'field_collection_views_view';
+  $handler->display->display_options['fields']['field_contributors']['settings'] = array(
+    'name' => 'fc_contributors',
+    'display_id' => 'author',
+    'add' => 'Ajouter',
+  );
+  $handler->display->display_options['fields']['field_contributors']['delta_offset'] = '0';
+  $handler->display->display_options['path'] = 'taxonomy/term/%';
   $translatables['universes'] = array(
     t('Master'),
     t('plus'),
@@ -1458,6 +1547,7 @@ return $query->execute()->fetchField();';
     t('Liste livres'),
     t('Feed'),
     t('Liste livres (backup)'),
+    t('Liste livres (copie)'),
   );
   $export['universes'] = $view;
 
