@@ -908,6 +908,167 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_readership_tid']['vocabulary'] = 'readership';
   $handler->display->display_options['filters']['field_readership_tid']['hierarchy'] = 1;
   $handler->display->display_options['path'] = 'catalogue/multi-criteres';
+
+  /* Display: Liste nouveautés */
+  $handler = $view->new_display('page_with_page_title', 'Liste nouveautés', 'catalog_new_books_page');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Entête: Global : Résumé des résultats */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = '@total titres';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Contenu : Contributeurs (field_contributors) */
+  $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
+  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
+  /* Relation: Entity Reference : Referenced Entity */
+  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Couverture */
+  $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['table'] = 'field_data_field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['field'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['label'] = '';
+  $handler->display->display_options['fields']['field_cover_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_cover_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_cover_image']['settings'] = array(
+    'image_style' => 'article-cover-min',
+    'image_link' => 'content',
+  );
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Champ: Contenu : Prénom */
+  $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_firstname']['label'] = '';
+  $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Nom */
+  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_lastname']['label'] = '';
+  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
+  /* Champ: Nodequeue : Add/remove links */
+  $handler->display->display_options['fields']['nodequeue_links']['id'] = 'nodequeue_links';
+  $handler->display->display_options['fields']['nodequeue_links']['table'] = 'node';
+  $handler->display->display_options['fields']['nodequeue_links']['field'] = 'nodequeue_links';
+  $handler->display->display_options['fields']['nodequeue_links']['label'] = '';
+  $handler->display->display_options['fields']['nodequeue_links']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['sorts']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['sorts']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['filters']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '3 months ago';
+  $handler->display->display_options['path'] = 'catalogue/liste-nouveautes';
+
+  /* Display: Bloc nouveautés */
+  $handler = $view->new_display('block', 'Bloc nouveautés', 'catalog_new_books_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Nouveautés';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
+  $handler->display->display_options['style_options']['interval'] = 'false';
+  $handler->display->display_options['style_options']['navigation'] = 1;
+  $handler->display->display_options['style_options']['indicators'] = 1;
+  $handler->display->display_options['style_options']['pause'] = 0;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Nodequeue : Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['label'] = 'Bloc nouveautés';
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
+  $handler->display->display_options['relationships']['nodequeue_rel']['queues'] = array(
+    'new_books' => 'new_books',
+  );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Contenu : Date de publication */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Critère de tri: Nodequeue : Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Nodequeue : In queue */
+  $handler->display->display_options['filters']['in_queue']['id'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['in_queue']['value'] = '1';
   $translatables['catalog'] = array(
     t('Master'),
     t('plus'),
@@ -947,6 +1108,9 @@ return $query->execute()->fetchField();';
     t('Saisir les premières lettre du terme recherché'),
     t('Lectorat'),
     t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
+    t('Liste nouveautés'),
+    t('Bloc nouveautés'),
+    t('Nouveautés'),
   );
   $export['catalog'] = $view;
 

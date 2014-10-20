@@ -27,6 +27,38 @@ function feature_catalog_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_fe_nodequeue_export_fields().
+ */
+function feature_catalog_fe_nodequeue_export_fields() {
+  $nodequeues = array();
+
+  // Exported nodequeues: new_books
+  $nodequeues['new_books'] = array(
+    'name' => 'new_books',
+    'title' => 'Nouveautés',
+    'subqueue_title' => '',
+    'size' => 0,
+    'link' => 'Ajouter au bloc Nouveautés',
+    'link_remove' => 'Supprimer du bloc Nouveautés',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 1,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 0,
+    'new' => FALSE,
+    'types' => array(
+      0 => 'article',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  return $nodequeues;
+}
+
+/**
  * Implements hook_features_date_format_default().
  */
 function feature_catalog_features_date_format_default() {
