@@ -1,0 +1,83 @@
+diff --git a/fe_nodequeue.module b/fe_nodequeue.module
+index f20e3c9..a6767ff 100644
+--- a/fe_nodequeue.module
++++ b/fe_nodequeue.module
+@@ -104,9 +104,7 @@ function fe_nodequeue_features_export_render($module_name = '', $data) {
+ 
+       // We don't care how many subqueues are in here since they get created
+       // automatically.
+-      if (module_exists('smartqueue')) {
+-        unset($nodequeue->subqueues);
+-      }
++      unset($nodequeue->subqueues);
+ 
+       $nodequeue_export = features_var_export($nodequeue, '  ');
+ 
+@@ -137,14 +135,22 @@ function fe_nodequeue_features_revert($module) {
+       continue;
+     }
+ 
+-    // Assign the existing qid if a nodequeue with the same name already exists.
+-    $map = _fe_nodequeue_get_qid_map();
+-    if (isset($map[$object['name']])) {
+-      $object['qid'] = $map[$object['name']];
++    if (function_exists('nodequeue_load_queue_by_name')) {
++      // Assign the existing qid if a nodequeue with the same name already exists.
++      $map = _fe_nodequeue_get_qid_map();
++      if (isset($map[$object['name']])) {
++        $object['qid'] = $map[$object['name']];
++      }
++      // Clear the qid if it is a new nodequeue.
++      else {
++        unset($object['qid']);
++      }
+     }
+-    // Clear the qid if it is a new nodequeue.
+     else {
+-      unset($object['qid']);
++      // If it does not exist, flag it as new.
++      if (!nodequeue_load($object['name'])) {
++        $object['new'] = TRUE;
++      }
+     }
+     $result = _fe_nodequeue_save_queue((array) $object);
+   }
+@@ -254,13 +260,19 @@ function _fe_nodequeue_get_qid_map() {
+  *   given machine name.
+  */
+ function _fe_nodequeue_load_queue_by_name($name, $bypass_cache = FALSE) {
+-  $map = _fe_nodequeue_get_qid_map();
+-  if (isset($map[$name])) {
+-    $queues = nodequeue_load_queues(array($map[$name]), $bypass_cache);
+-    if ($queues) {
+-      return current($queues);
++  // Backward compatibility with nodequeue 2.x.
++  if (function_exists('nodequeue_load_queue_by_name')) {
++    $map = _fe_nodequeue_get_qid_map();
++    if (isset($map[$name])) {
++      $name = $map[$name];
++    }
++    else {
++      $name = NULL;
+     }
+   }
++  if ($name && $queues = nodequeue_load_queues(array($name), $bypass_cache)) {
++    return current($queues);
++  }
+ 
+   return array();
+-}
++}
+\ No newline at end of file
+diff --git a/tests/features_extra_test.features.inc b/tests/features_extra_test.features.inc
+index 4ae80d0..0798474 100644
+--- a/tests/features_extra_test.features.inc
++++ b/tests/features_extra_test.features.inc
+@@ -25,7 +25,6 @@ function features_extra_test_fe_nodequeue_export_fields() {
+     'reference' => '0',
+     'reverse' => '0',
+     'i18n' => '0',
+-    'subqueues' => '1',
+     'types' => array(
+       0 => 'article',
+     ),

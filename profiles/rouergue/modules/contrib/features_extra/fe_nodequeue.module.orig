@@ -104,7 +104,9 @@ function fe_nodequeue_features_export_render($module_name = '', $data) {
 
       // We don't care how many subqueues are in here since they get created
       // automatically.
-      unset($nodequeue->subqueues);
+      if (module_exists('smartqueue')) {
+        unset($nodequeue->subqueues);
+      }
 
       $nodequeue_export = features_var_export($nodequeue, '  ');
 
@@ -132,22 +134,14 @@ function fe_nodequeue_features_revert($module) {
       continue;
     }
 
-    if (function_exists('nodequeue_load_queue_by_name')) {
-      // Assign the existing qid if a nodequeue with the same name already exists.
-      $map = _fe_nodequeue_get_qid_map();
-      if (isset($map[$object['name']])) {
-        $object['qid'] = $map[$object['name']];
-      }
-      // Clear the qid if it is a new nodequeue.
-      else {
-        unset($object['qid']);
-      }
+    // Assign the existing qid if a nodequeue with the same name already exists.
+    $map = _fe_nodequeue_get_qid_map();
+    if (isset($map[$object['name']])) {
+      $object['qid'] = $map[$object['name']];
     }
+    // Clear the qid if it is a new nodequeue.
     else {
-      // If it does not exist, flag it as new.
-      if (!nodequeue_load($object['name'])) {
-        $object['new'] = TRUE;
-      }
+      unset($object['qid']);
     }
     $result = _fe_nodequeue_save_queue((array) $object);
   }
@@ -257,18 +251,12 @@ function _fe_nodequeue_get_qid_map() {
  *   given machine name.
  */
 function _fe_nodequeue_load_queue_by_name($name, $bypass_cache = FALSE) {
-  // Backward compatibility with nodequeue 2.x.
-  if (function_exists('nodequeue_load_queue_by_name')) {
-    $map = _fe_nodequeue_get_qid_map();
-    if (isset($map[$name])) {
-      $name = $map[$name];
+  $map = _fe_nodequeue_get_qid_map();
+  if (isset($map[$name])) {
+    $queues = nodequeue_load_queues(array($map[$name]), $bypass_cache);
+    if ($queues) {
+      return current($queues);
     }
-    else {
-      $name = NULL;
-    }
-  }
-  if ($name && $queues = nodequeue_load_queues(array($name), $bypass_cache)) {
-    return current($queues);
   }
 
   return array();
