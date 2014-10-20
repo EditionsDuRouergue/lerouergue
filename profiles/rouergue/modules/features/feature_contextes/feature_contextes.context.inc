@@ -89,6 +89,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'content',
           'weight' => '-9',
         ),
+        'views-catalog-catalog_new_books_block' => array(
+          'module' => 'views',
+          'delta' => 'catalog-catalog_new_books_block',
+          'region' => 'content',
+          'weight' => '-8',
+        ),
       ),
     ),
   );
