@@ -77,23 +77,29 @@ function feature_contextes_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-news-news_block' => array(
+          'module' => 'views',
+          'delta' => 'news-news_block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views-first_level_universes-block' => array(
           'module' => 'views',
           'delta' => 'first_level_universes-block',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
         'boxes-front_page_message' => array(
           'module' => 'boxes',
           'delta' => 'front_page_message',
           'region' => 'content',
-          'weight' => '-9',
+          'weight' => '-8',
         ),
         'views-catalog-catalog_new_books_block' => array(
           'module' => 'views',
           'delta' => 'catalog-catalog_new_books_block',
           'region' => 'content',
-          'weight' => '-8',
+          'weight' => '-7',
         ),
       ),
     ),

@@ -15,6 +15,7 @@ dependencies[] = custom_search
 dependencies[] = custom_search_blocks
 dependencies[] = date
 dependencies[] = dhtml_menu
+dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = fe_block
 dependencies[] = fe_nodequeue
