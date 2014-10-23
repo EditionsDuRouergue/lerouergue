@@ -22,7 +22,7 @@ function feature_news_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Actualités';
+  $handler->display->display_options['title'] = 'Tri des actualités';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -58,7 +58,7 @@ function feature_news_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Biographie */
+  /* Champ: Contenu : Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -102,7 +102,7 @@ function feature_news_views_default_views() {
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
 
   /* Display: Page de tri */
-  $handler = $view->new_display('page', 'Page de tri', 'page_1');
+  $handler = $view->new_display('page', 'Page de tri', 'news_sort_page');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -184,7 +184,7 @@ function feature_news_views_default_views() {
   $handler->display->display_options['path'] = 'tri-actualites';
   $translatables['news'] = array(
     t('Master'),
-    t('Actualités'),
+    t('Tri des actualités'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),
