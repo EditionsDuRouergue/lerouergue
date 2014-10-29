@@ -14,7 +14,7 @@ function feature_news_default_fe_block_settings() {
 
   $export['views-news-news_block'] = array(
     'cache' => -1,
-    'css_class' => 'col-sm-9',
+    'css_class' => '',
     'custom' => 0,
     'delta' => 'news-news_block',
     'module' => 'views',

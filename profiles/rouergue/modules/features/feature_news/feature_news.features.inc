@@ -41,8 +41,8 @@ function feature_news_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 850,
-          'height' => 425,
+          'width' => 1140,
+          'height' => 430,
         ),
         'weight' => 1,
       ),
