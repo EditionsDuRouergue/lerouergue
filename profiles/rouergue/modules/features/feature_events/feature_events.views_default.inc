@@ -252,6 +252,57 @@ function feature_events_views_default_views() {
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'Lire la suite';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+
+  /* Display: Bloc pages auteur */
+  $handler = $view->new_display('block', 'Bloc pages auteur', 'agenda_author_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Agenda de l\'auteur';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Entity Reference : Referenced Entity */
+  $handler->display->display_options['relationships']['field_event_author_target_id']['id'] = 'field_event_author_target_id';
+  $handler->display->display_options['relationships']['field_event_author_target_id']['table'] = 'field_data_field_event_author';
+  $handler->display->display_options['relationships']['field_event_author_target_id']['field'] = 'field_event_author_target_id';
+  $handler->display->display_options['relationships']['field_event_author_target_id']['label'] = 'Auteur(s)';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Champ: Contenu : Dates */
+  $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
+  $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
+  $handler->display->display_options['fields']['field_dates']['field'] = 'field_dates';
+  $handler->display->display_options['fields']['field_dates']['label'] = '';
+  $handler->display->display_options['fields']['field_dates']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_dates']['settings'] = array(
+    'format_type' => 'event_date',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Champ: Contenu : Adresse - Locality (i.e. City) */
+  $handler->display->display_options['fields']['field_adresse_locality']['id'] = 'field_adresse_locality';
+  $handler->display->display_options['fields']['field_adresse_locality']['table'] = 'field_data_field_adresse';
+  $handler->display->display_options['fields']['field_adresse_locality']['field'] = 'field_adresse_locality';
+  $handler->display->display_options['fields']['field_adresse_locality']['label'] = '';
+  $handler->display->display_options['fields']['field_adresse_locality']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Filtre contextuel: Contenu : Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_event_author_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $translatables['events'] = array(
     t('Master'),
     t('Agenda'),
@@ -277,6 +328,9 @@ function feature_events_views_default_views() {
     t('Bloc accueil'),
     t('Evénements'),
     t('Lire la suite'),
+    t('Bloc pages auteur'),
+    t('Agenda de l\'auteur'),
+    t('Auteur(s)'),
   );
   $export['events'] = $view;
 
