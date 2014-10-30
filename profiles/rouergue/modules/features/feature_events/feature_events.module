@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Events feature.
+ */
+
+include_once 'feature_events.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function feature_events_block_info() {
+	$blocks = array();
+
+	$blocks['rouergue_agenda_nav'] = array(
+			'info' => t('Rouergue agenda navigation'),
+			'cache' => DRUPAL_NO_CACHE,
+	);
+
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function feature_events_block_view($delta = '') {
+	switch ($delta) {
+		case 'rouergue_agenda_nav':
+			$block['subject'] = '';
+			$variables['agenda_nav_links'] = rouergue_get_nav_data();
+			$block['content'] = theme('rouergue_agenda_nav', $variables);
+			return $block;
+			break;
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feature_events_theme() {
+	return array(
+			'rouergue_agenda_nav' => array(
+					'variables' => array('agenda_nav_links' => NULL),
+					'file' => 'feature_events.theme.inc',
+			),
+	);
+}
+
+/**
+ * Helper functions
+ * 
+ */
+function rouergue_get_nav_data($number_of_months=3) {
+	$data = array();
+	$year = date('Y');
+	$month = date('m');
+	$count = 1;
+
+	while($count <= $number_of_months) {
+		$timestamp = mktime(0, 0, 0, $month, 1, $year);
+		$data[format_date($timestamp, 'custom', 'F')] = format_date($timestamp, 'custom', 'Y-m');
+
+		if ($month == 12) {
+			$month = 1;
+			$year = $year + 1;
+		}
+		else {
+			$month = $month + 1;
+		}
+		$count++;
+	}
+	return $data;
+}
