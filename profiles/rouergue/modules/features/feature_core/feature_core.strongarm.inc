@@ -467,8 +467,10 @@ function feature_core_strongarm() {
   $strongarm->name = 'uuid_features_entity_node';
   $strongarm->value = array(
     'page' => 'page',
+    'news' => 0,
     'article' => 0,
     'contributor' => 0,
+    'event' => 0,
   );
   $export['uuid_features_entity_node'] = $strongarm;
 
@@ -478,6 +480,7 @@ function feature_core_strongarm() {
   $strongarm->name = 'uuid_features_entity_taxonomy_term';
   $strongarm->value = array(
     'universe' => 'universe',
+    'event_types' => 'event_types',
     'themes' => 0,
     'readership' => 0,
     'functions' => 0,

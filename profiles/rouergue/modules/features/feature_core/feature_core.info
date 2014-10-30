@@ -32,6 +32,7 @@ dependencies[] = text
 dependencies[] = uuid
 dependencies[] = uuid_features
 dependencies[] = uuid_features_menu
+dependencies[] = views_block_area
 features[box][] = front_page_message
 features[ctools][] = boxes:box:1
 features[ctools][] = ds:ds:1

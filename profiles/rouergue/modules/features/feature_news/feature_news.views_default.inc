@@ -93,6 +93,7 @@ function feature_news_views_default_views() {
 
   /* Display: Bloc Actualités */
   $handler = $view->new_display('block', 'Bloc Actualités', 'news_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Critère de tri: Draggableviews : Poids */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
