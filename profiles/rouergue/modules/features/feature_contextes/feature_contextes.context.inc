@@ -95,6 +95,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'content',
           'weight' => '-20',
         ),
+        'views-events-agenda_front_block' => array(
+          'module' => 'views',
+          'delta' => 'events-agenda_front_block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
       ),
     ),
   );
