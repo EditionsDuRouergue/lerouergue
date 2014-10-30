@@ -267,29 +267,25 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'contributor';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'bootstrap_12';
   $ds_layout->settings = array(
     'regions' => array(
-      'ds_content' => array(
+      'central' => array(
         0 => 'field_picture',
-        1 => 'field_lastname',
-        2 => 'field_firstname',
-        3 => 'field_pseudonyme',
-        4 => 'body',
-        5 => 'field_contributor_url',
+        1 => 'field_pseudonyme',
+        2 => 'body',
+        3 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
-      'field_picture' => 'ds_content',
-      'field_lastname' => 'ds_content',
-      'field_firstname' => 'ds_content',
-      'field_pseudonyme' => 'ds_content',
-      'body' => 'ds_content',
-      'field_contributor_url' => 'ds_content',
+      'field_picture' => 'central',
+      'field_pseudonyme' => 'central',
+      'body' => 'central',
+      'field_contributor_url' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(
-      'ds_content' => 'div',
+      'central' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',

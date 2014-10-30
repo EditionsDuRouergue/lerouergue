@@ -481,6 +481,8 @@ function feature_catalog_views_default_views() {
 
   /* Display: Livres auteur */
   $handler = $view->new_display('block', 'Livres auteur', 'author_books');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Bibliographie';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
@@ -1088,6 +1090,7 @@ return $query->execute()->fetchField();';
     t('Catalogue'),
     t('@total titres'),
     t('Livres auteur'),
+    t('Bibliographie'),
     t('Contributeurs'),
     t('Contributor'),
     t('Fonction'),
