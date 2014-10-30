@@ -184,7 +184,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
 
   /* Display: Bloc accueil */
-  $handler = $view->new_display('block', 'Bloc accueil', 'block_1');
+  $handler = $view->new_display('block', 'Bloc accueil', 'agenda_front_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Evénements';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;

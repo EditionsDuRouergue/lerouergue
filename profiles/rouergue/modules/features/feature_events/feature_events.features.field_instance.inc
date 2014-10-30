@@ -82,7 +82,7 @@ function feature_events_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -130,7 +130,7 @@ function feature_events_field_default_field_instances() {
           'use_widget_handlers' => 1,
         ),
         'type' => 'addressfield_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -169,7 +169,7 @@ function feature_events_field_default_field_instances() {
         ),
       ),
       'type' => 'addressfield_standard',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -265,6 +265,70 @@ function feature_events_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event-field_event_author'
+  $field_instances['node-event-field_event_author'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 8,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 4,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'map_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_event_author',
+    'label' => 'Auteur(s)',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-event-field_event_image'
   $field_instances['node-event-field_event_image'] = array(
     'bundle' => 'event',
@@ -338,7 +402,7 @@ function feature_events_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 3,
     ),
   );
 
@@ -425,7 +489,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'above',
@@ -522,7 +586,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'list' => array(
         'label' => 'inline',
@@ -584,7 +648,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'inline',
@@ -635,6 +699,7 @@ function feature_events_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Adresse');
+  t('Auteur(s)');
   t('Dates');
   t('Description');
   t('Localisation');
