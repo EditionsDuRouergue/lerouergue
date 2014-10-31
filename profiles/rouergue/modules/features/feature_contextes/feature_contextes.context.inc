@@ -101,6 +101,12 @@ function feature_contextes_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
+        'views-workshops-workshops_front_block' => array(
+          'module' => 'views',
+          'delta' => 'workshops-workshops_front_block',
+          'region' => 'content',
+          'weight' => '-9',
+        ),
       ),
     ),
   );
