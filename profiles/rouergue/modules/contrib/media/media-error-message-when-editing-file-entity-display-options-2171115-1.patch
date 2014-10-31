@@ -1,0 +1,32 @@
+From 5c22adcbb43721af662eaf7d1a131d19102f1f74 Mon Sep 17 00:00:00 2001
+From: "Attila Cs.Nagy" <cs.nagy.attila@gmail.com>
+Date: Fri, 10 Jan 2014 17:02:12 +0100
+Subject: [PATCH] Issue #2171115 by hairqles: Fixed error message that was
+ displaying on file entity display options edit form
+
+---
+ file_entity/file_entity.module |    8 ++------
+ 1 files changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/file_entity/file_entity.module b/file_entity/file_entity.module
+index 66d4ff8..22b7676 100644
+--- a/file_entity/file_entity.module
++++ b/file_entity/file_entity.module
+@@ -420,12 +420,8 @@ function file_entity_file_formatter_file_field_settings($form, &$form_state, $se
+     if (isset($field_formatter_info['module']) && ($function = ($field_formatter_info['module'] . '_field_formatter_settings_form')) && function_exists($function)) {
+       $field = NULL;
+       $mock_instance['display'][$view_mode] = array(
+-        'display' => array(
+-          $view_mode => array(
+-            'type' => $field_formatter_type,
+-            'settings' => $settings,
+-          ),
+-        ),
++        'type' => $field_formatter_type,
++        'settings' => $settings,
+         'entity_type' => 'file',
+         'bundle' => $file_type,
+       );
+-- 
+1.7.7.4
+
