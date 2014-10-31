@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Workshops feature.
+ */
+
+include_once 'feature_workshops.features.inc';
