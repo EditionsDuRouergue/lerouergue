@@ -109,10 +109,9 @@ th {
     > td,
     > th {
       background-color: @table-bg-accent;
+    } 
     }
-  }
 }
-
 
 // Hover effect
 //
@@ -127,6 +126,14 @@ th {
   }
 }
 
+.active >.table-hover {
+  > tbody > tr:hover {
+    > td,
+    > th {
+      background-color: @gray-lighter;
+    }
+  }
+}
 
 // Table cell sizing
 //
@@ -155,11 +162,11 @@ table {
 // inheritance to nested tables.
 
 // Generate the contextual variants
-.table-row-variant(active; @table-bg-active);
-.table-row-variant(success; @state-success-bg);
-.table-row-variant(info; @state-info-bg);
-.table-row-variant(warning; @state-warning-bg);
-.table-row-variant(danger; @state-danger-bg);
+.table-row-variant(active; @table-bg-active; @black);
+.table-row-variant(success; @body-bg; @brand-success);
+.table-row-variant(info; @body-bg; @brand-info);
+.table-row-variant(warning; @body-bg; @brand-warning);
+.table-row-variant(danger; @body-bg; @brand-danger);
 
 
 // Responsive tables

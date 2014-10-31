@@ -17,7 +17,7 @@
   border: 1px solid @popover-fallback-border-color;
   border: 1px solid @popover-border-color;
   border-radius: @border-radius-large;
-  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  .box-shadow(none);
 
   // Overrides for proper insertion
   white-space: normal;
@@ -36,7 +36,7 @@
   font-weight: normal;
   line-height: 18px;
   background-color: @popover-title-bg;
-  border-bottom: 1px solid darken(@popover-title-bg, 5%);
+  border-bottom: 1px solid @black;
   border-radius: (@border-radius-large - 1) (@border-radius-large - 1) 0 0;
 }
 

@@ -1,4 +1,7 @@
-# [Bootstrap](http://getbootstrap.com)
+#minimalBootstrap 1.0
+minimalBootstrap is a custom version of Bootstrap 3.2.0 by [Adrien Revel](http://www.abrege.net/).
+
+#[Bootstrap](http://getbootstrap.com)
 [![Bower version](https://badge.fury.io/bo/bootstrap.svg)](http://badge.fury.io/bo/bootstrap)
 [![NPM version](https://badge.fury.io/js/bootstrap.svg)](http://badge.fury.io/js/bootstrap)
 [![Build Status](https://secure.travis-ci.org/twbs/bootstrap.svg?branch=master)](http://travis-ci.org/twbs/bootstrap)
