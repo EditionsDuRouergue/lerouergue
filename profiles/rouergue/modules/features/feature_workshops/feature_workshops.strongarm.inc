@@ -107,6 +107,9 @@ function feature_workshops_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'pdf_viewer' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

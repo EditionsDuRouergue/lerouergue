@@ -61,13 +61,11 @@ function feature_workshops_ds_layout_settings_info() {
       'central' => array(
         0 => 'field_video',
         1 => 'field_sound',
-        2 => 'field_inner_pages',
       ),
     ),
     'fields' => array(
       'field_video' => 'central',
       'field_sound' => 'central',
-      'field_inner_pages' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -129,6 +127,8 @@ function feature_workshops_ds_layout_settings_info() {
         1 => 'body',
         2 => 'field_gallery',
         3 => 'field_event_author',
+        4 => 'field_inner_pages',
+        5 => 'group_pdf_viewer',
       ),
     ),
     'fields' => array(
@@ -136,6 +136,8 @@ function feature_workshops_ds_layout_settings_info() {
       'body' => 'central',
       'field_gallery' => 'central',
       'field_event_author' => 'central',
+      'field_inner_pages' => 'central',
+      'group_pdf_viewer' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(

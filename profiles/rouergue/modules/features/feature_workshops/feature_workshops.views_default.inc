@@ -110,16 +110,45 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = '1';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'ds';
-  $handler->display->display_options['row_options']['view_mode'] = 'block';
-  $handler->display->display_options['row_options']['load_comments'] = 0;
-  $handler->display->display_options['row_options']['alternating'] = 0;
-  $handler->display->display_options['row_options']['grouping'] = 0;
-  $handler->display->display_options['row_options']['advanced'] = 0;
-  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
-  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
-  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'block';
+  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Pied de page: Global : Zone de texte */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['content'] = '<button type="button" data-toggle="modal" data-target="#workshop-pdf">Feuilleter</button>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Video */
+  $handler->display->display_options['fields']['field_video']['id'] = 'field_video';
+  $handler->display->display_options['fields']['field_video']['table'] = 'field_data_field_video';
+  $handler->display->display_options['fields']['field_video']['field'] = 'field_video';
+  $handler->display->display_options['fields']['field_video']['label'] = '';
+  $handler->display->display_options['fields']['field_video']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_video']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_video']['type'] = 'media';
+  $handler->display->display_options['fields']['field_video']['settings'] = array(
+    'file_view_mode' => 'media_preview',
+  );
+  /* Champ: Contenu : Son */
+  $handler->display->display_options['fields']['field_sound']['id'] = 'field_sound';
+  $handler->display->display_options['fields']['field_sound']['table'] = 'field_data_field_sound';
+  $handler->display->display_options['fields']['field_sound']['field'] = 'field_sound';
+  $handler->display->display_options['fields']['field_sound']['label'] = '';
+  $handler->display->display_options['fields']['field_sound']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_sound']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_sound']['type'] = 'media';
+  $handler->display->display_options['fields']['field_sound']['settings'] = array(
+    'file_view_mode' => 'default',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Filtre contextuel: Contenu : Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -247,6 +276,7 @@ function feature_workshops_views_default_views() {
     t('Bloc media workshop'),
     t('Média'),
     t('Contient les champs video, son, liseuse pdf et lien vers le livre.'),
+    t('<button type="button" data-toggle="modal" data-target="#workshop-pdf">Feuilleter</button>'),
     t('Tout'),
     t('Bloc livre lié'),
     t('Livre lié'),
