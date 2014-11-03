@@ -304,9 +304,9 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'pdf',
         'settings' => array(
-          'height' => '700px',
+          'height' => '550px',
           'keep_pdfjs' => 1,
-          'width' => '80%',
+          'width' => '100%',
         ),
         'type' => 'pdf_default',
         'weight' => 4,
