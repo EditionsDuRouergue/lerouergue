@@ -206,6 +206,12 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
         ),
+        'field_bs_button_browse_pdf' => array(
+          'full' => array(
+            'weight' => '14',
+            'visible' => TRUE,
+          ),
+        ),
       ),
     ),
   );

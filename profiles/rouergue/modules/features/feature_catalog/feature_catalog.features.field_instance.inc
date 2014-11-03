@@ -143,7 +143,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -490,12 +490,12 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'module' => 'pdf',
         'settings' => array(
-          'height' => '600px',
+          'height' => '550px',
           'keep_pdfjs' => 1,
-          'width' => '100px',
+          'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 14,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'above',
