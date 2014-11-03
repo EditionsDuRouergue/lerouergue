@@ -18,27 +18,6 @@ if (!drupal_is_front_page()) {
 }
 
 function rouergue_bootstrap_field__field_inner_pages($variables) {
-	//dpm($variables);
-	
-
-	/*
-  // Render the label, if it's not hidden.
-  if (!$variables['label_hidden']) {
-    $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
-  }
-
-  // Render the items.
-  $output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
-  foreach ($variables['items'] as $delta => $item) {
-    $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
-    $output .= '<div class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
-  }
-  $output .= '</div>';
-
-  // Render the top-level DIV.	
-  $output = '<div class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</div>';
-  */
-
 	$output .= '<div class="modal fade modal-lg" id="rouergue-pdf-viewer" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">';
 		$output .= '<div class="modal-dialog">';
 			$output .= '<div class="modal-content">';
