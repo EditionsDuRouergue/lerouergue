@@ -47,12 +47,12 @@ function feature_catalog_views_default_views() {
     'field_firstname' => 'field_firstname',
     'field_lastname' => 'field_lastname',
   );
-  /* Relation: Entity Reference : Referencing entity */
+  /* Relation: Entity Reference : Entité référante */
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['id'] = 'reverse_field_contributor_field_collection_item';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['field'] = 'reverse_field_contributor_field_collection_item';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['label'] = 'FC Contributeur';
-  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
@@ -148,13 +148,13 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relation: Entity Reference : Referencing entity */
+  /* Relation: Entity Reference : Entité référante */
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['id'] = 'reverse_field_contributor_field_collection_item';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['field'] = 'reverse_field_contributor_field_collection_item';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['label'] = 'FC Contributeur';
   $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['required'] = TRUE;
-  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
@@ -505,13 +505,13 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
   $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
-  /* Relation: Entity Reference : Referenced Entity */
+  /* Relation: Entity Reference : Entité référencée */
   $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributor';
-  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
@@ -719,7 +719,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
   $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '0';
-  /* Relation: Entity Reference : Referenced Entity */
+  /* Relation: Entity Reference : Entité référencée */
   $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
@@ -933,7 +933,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
   $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
-  /* Relation: Entity Reference : Referenced Entity */
+  /* Relation: Entity Reference : Entité référencée */
   $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
@@ -1096,7 +1096,7 @@ return $query->execute()->fetchField();';
     t('Fonction'),
     t('Tout'),
     t('Classement avancé'),
-    t('Select any filter and click on Apply to see results'),
+    t('Sélectionnez n\'importe quel filtre et cliquez sur Appliquer pour voir les résultats'),
     t('Contributeur'),
     t('Date de parution'),
     t('Titre'),
@@ -1144,17 +1144,17 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction du contributeur';
-  /* Relation: Entity Reference : Referenced Entity */
+  /* Relation: Entity Reference : Entité référencée */
   $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
-  /* Champ: Field collection item : Contributor */
+  /* Champ: Élément Field collection : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
@@ -1170,7 +1170,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
   $handler->display->display_options['sorts']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
   $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
-  /* Filtre contextuel: Field collection item : Identifiant de Field collection item */
+  /* Filtre contextuel: Élément Field collection : Identifiant de Élément field collection */
   $handler->display->display_options['arguments']['item_id']['id'] = 'item_id';
   $handler->display->display_options['arguments']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['arguments']['item_id']['field'] = 'item_id';
@@ -1196,7 +1196,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Field collection item : Contributor */
+  /* Champ: Élément Field collection : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
@@ -1239,7 +1239,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Champ: Field collection item : Fonction */
+  /* Champ: Élément Field collection : Fonction */
   $handler->display->display_options['fields']['field_contributor_function']['id'] = 'field_contributor_function';
   $handler->display->display_options['fields']['field_contributor_function']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['fields']['field_contributor_function']['field'] = 'field_contributor_function';
@@ -1507,13 +1507,13 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'FC Contributeurs';
   $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '0';
-  /* Relation: Field collection item : Fonction (field_contributor_function) */
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction';
-  /* Relation: Entity Reference : Referenced Entity */
+  /* Relation: Entity Reference : Entité référencée */
   $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
@@ -1559,7 +1559,7 @@ return $query->execute()->fetchField();';
     'view_mode' => 'full',
   );
   $handler->display->display_options['fields']['field_contributors_1']['delta_offset'] = '0';
-  /* Champ: Field collection item : Contributor */
+  /* Champ: Élément Field collection : Contributor */
   $handler->display->display_options['fields']['field_contributor']['id'] = 'field_contributor';
   $handler->display->display_options['fields']['field_contributor']['table'] = 'field_data_field_contributor';
   $handler->display->display_options['fields']['field_contributor']['field'] = 'field_contributor';
@@ -1569,7 +1569,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['field_contributor']['settings'] = array(
     'link' => 0,
   );
-  /* Champ: Field collection item : Fonction */
+  /* Champ: Élément Field collection : Fonction */
   $handler->display->display_options['fields']['field_contributor_function']['id'] = 'field_contributor_function';
   $handler->display->display_options['fields']['field_contributor_function']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['fields']['field_contributor_function']['field'] = 'field_contributor_function';
@@ -1761,7 +1761,7 @@ return $query->execute()->fetchField();';
     t('Trier par'),
     t('Ascendant'),
     t('Descendant'),
-    t('Select any filter and click on Apply to see results'),
+    t('Sélectionnez n\'importe quel filtre et cliquez sur Appliquer pour voir les résultats'),
     t('Éléments par page'),
     t('- Tout -'),
     t('Décalage'),
