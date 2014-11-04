@@ -422,6 +422,84 @@ function feature_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_displays';
+  $strongarm->value = array(
+    'facebook_share' => 1,
+    'twitter_widget' => 0,
+    'facebook_like' => 0,
+    'google_plus_one' => 0,
+    'linkedin_share_button' => 0,
+    'pinterest_button' => 0,
+  );
+  $export['service_links_displays'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_fs_type';
+  $strongarm->value = 'button';
+  $export['service_links_fs_type'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_new_window';
+  $strongarm->value = '1';
+  $export['service_links_new_window'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_node_types';
+  $strongarm->value = array(
+    'article' => 'article',
+    'news' => 0,
+    'page' => 0,
+    'contributor' => 0,
+    'event' => 0,
+    'workshops' => 0,
+  );
+  $export['service_links_node_types'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_node_view_modes';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 0,
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'token' => 0,
+    'author_books' => 0,
+    'block' => 0,
+    'list' => 0,
+    'map_block' => 0,
+    'on_article_page' => 0,
+    'on_book_list' => 0,
+    'revision' => 0,
+  );
+  $export['service_links_node_view_modes'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'service_links_show';
+  $strongarm->value = array(
+    'facebook_share' => 1,
+    'twitter_widget' => 0,
+    'facebook_like' => 0,
+    'google_plus_one' => 0,
+    'linkedin_share_button' => 0,
+    'pinterest_button' => 0,
+  );
+  $export['service_links_show'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_403';
   $strongarm->value = '';
   $export['site_403'] = $strongarm;
