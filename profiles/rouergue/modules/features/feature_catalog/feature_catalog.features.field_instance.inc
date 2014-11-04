@@ -143,7 +143,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -178,7 +178,68 @@ function feature_catalog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 12,
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_barcode'
+  $field_instances['node-article-field_barcode'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'barcode',
+        'settings' => array(),
+        'type' => 'barcode_default',
+        'weight' => 19,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'barcode',
+        'settings' => array(),
+        'type' => 'barcode_default',
+        'weight' => 9,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_barcode',
+    'label' => 'Code barre',
+    'required' => 0,
+    'settings' => array(
+      'barcode_barcolor' => '#000000',
+      'barcode_bgcolor' => '#FFFFFF',
+      'barcode_height' => 10,
+      'barcode_image_format' => 'png',
+      'barcode_scale' => 0.5,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'barcode',
+      'settings' => array(),
+      'type' => 'barcode_textfield',
+      'weight' => 11,
     ),
   );
 
@@ -228,7 +289,7 @@ function feature_catalog_field_default_field_instances() {
           'name' => 'fc_contributors',
         ),
         'type' => 'field_collection_views_view',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -254,7 +315,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -339,7 +400,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -495,7 +556,7 @@ function feature_catalog_field_default_field_instances() {
           'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'list' => array(
         'label' => 'above',
@@ -522,7 +583,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -614,7 +675,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 29,
       ),
       'list' => array(
         'label' => 'above',
@@ -672,7 +733,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 30,
       ),
       'list' => array(
         'label' => 'above',
@@ -735,7 +796,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 31,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -793,7 +854,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 16,
+        'weight' => 18,
       ),
       'list' => array(
         'label' => 'above',
@@ -831,7 +892,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -902,6 +963,65 @@ function feature_catalog_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_press_quotes'
+  $field_instances['node-article-field_press_quotes'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_press_quotes',
+    'label' => 'Citations presse',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 20,
     ),
   );
 
@@ -1006,7 +1126,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'list' => array(
         'label' => 'above',
@@ -1027,7 +1147,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1105,7 +1225,7 @@ function feature_catalog_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -1199,7 +1319,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'list' => array(
         'label' => 'above',
@@ -1220,7 +1340,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -1254,7 +1374,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 28,
       ),
       'list' => array(
         'label' => 'above',
@@ -1713,6 +1833,8 @@ function feature_catalog_field_default_field_instances() {
   t('Book ID');
   t('Champ articleid Mistral');
   t('Champ bookid Mistral');
+  t('Citations presse');
+  t('Code barre');
   t('Contributeurs');
   t('Contributor');
   t('Contributor ID');

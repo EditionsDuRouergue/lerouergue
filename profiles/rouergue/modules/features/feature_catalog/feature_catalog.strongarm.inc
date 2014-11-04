@@ -164,16 +164,16 @@ function feature_catalog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '21',
+          'weight' => '23',
         ),
         'title' => array(
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '20',
+          'weight' => '22',
         ),
         'redirect' => array(
-          'weight' => '19',
+          'weight' => '21',
         ),
       ),
       'display' => array(
@@ -208,7 +208,7 @@ function feature_catalog_strongarm() {
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
-            'weight' => '15',
+            'weight' => '17',
             'visible' => TRUE,
           ),
         ),

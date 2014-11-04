@@ -10,6 +10,25 @@
 function feature_catalog_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_barcode'
+  $field_bases['field_barcode'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_barcode',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'barcode',
+    'settings' => array(
+      'dbsize' => 255,
+      'encoding' => 'ISBN',
+    ),
+    'translatable' => 0,
+    'type' => 'barcode_field',
+  );
+
   // Exported field_base: 'field_contributor'
   $field_bases['field_contributor'] = array(
     'active' => 1,
@@ -494,6 +513,33 @@ function feature_catalog_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
+  );
+
+  // Exported field_base: 'field_press_quotes'
+  $field_bases['field_press_quotes'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_press_quotes',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_price'
