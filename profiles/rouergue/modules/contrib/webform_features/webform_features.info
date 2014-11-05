@@ -1,0 +1,14 @@
+name = Webform Features
+description = This module allows to export Webforms into Features.
+core = 7.x
+package = Webform
+
+dependencies[] = features
+dependencies[] = webform
+
+; Information added by drupal.org packaging script on 2013-10-09
+version = "7.x-4.0-unstable1"
+core = "7.x"
+project = "webform_features"
+datestamp = "1381308192"
+
