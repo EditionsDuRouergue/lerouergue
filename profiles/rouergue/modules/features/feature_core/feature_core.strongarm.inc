@@ -545,10 +545,12 @@ function feature_core_strongarm() {
   $strongarm->name = 'uuid_features_entity_node';
   $strongarm->value = array(
     'page' => 'page',
+    'book' => 'book',
     'news' => 0,
     'article' => 0,
     'contributor' => 0,
     'event' => 0,
+    'workshops' => 0,
   );
   $export['uuid_features_entity_node'] = $strongarm;
 
