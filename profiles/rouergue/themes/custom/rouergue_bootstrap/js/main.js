@@ -2,7 +2,8 @@
 	Drupal.behaviors.main =  {
 		attach: function(context, settings) {
 			$('.field-name-title').hide();
-			$('.field-name-field-contributors').hide();
+			$('.view-catalog .field-name-field-contributors').hide();
+      $('.view-universes .field-name-field-contributors').hide();
 
 			$('.field-name-field-cover-image').hide();
 			$('.field-name-field-cover-image').fadeIn('slow');
