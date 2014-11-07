@@ -112,6 +112,104 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_contributors-field_iscommunicable'
+  $field_instances['field_collection_item-field_contributors-field_iscommunicable'] = array(
+    'bundle' => 'field_contributors',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+      'on_article_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_book_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_iscommunicable',
+    'label' => 'Communicable',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_contributors-field_ismain'
+  $field_instances['field_collection_item-field_contributors-field_ismain'] = array(
+    'bundle' => 'field_contributors',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+      'on_article_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_book_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_ismain',
+    'label' => 'Auteur principal',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'node-article-body'
   $field_instances['node-article-body'] = array(
     'bundle' => 'article',
@@ -1829,12 +1927,14 @@ function feature_catalog_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Article ID');
+  t('Auteur principal');
   t('Biographie');
   t('Book ID');
   t('Champ articleid Mistral');
   t('Champ bookid Mistral');
   t('Citations presse');
   t('Code barre');
+  t('Communicable');
   t('Contributeurs');
   t('Contributor');
   t('Contributor ID');

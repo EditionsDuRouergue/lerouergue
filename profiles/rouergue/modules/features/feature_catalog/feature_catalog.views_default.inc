@@ -1071,6 +1071,121 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
   $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
   $handler->display->display_options['filters']['in_queue']['value'] = '1';
+
+  /* Display: Livres du même auteur */
+  $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Autres titres du même auteur';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'author_books';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'author_books';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Contenu : Contributeurs (field_contributors) */
+  $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
+  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
+  /* Relation: Entity Reference : Entité référencée */
+  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributor';
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Couverture */
+  $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['table'] = 'field_data_field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['field'] = 'field_cover_image';
+  $handler->display->display_options['fields']['field_cover_image']['label'] = '';
+  $handler->display->display_options['fields']['field_cover_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_cover_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_cover_image']['settings'] = array(
+    'image_style' => 'article-cover-min',
+    'image_link' => 'content',
+  );
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Filtre contextuel: Contenu : Contributor ID (field_contributor_id) */
+  $handler->display->display_options['arguments']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_argument_options']['code'] = '$query = db_select(\'field_data_field_contributors\', \'fcs\');
+$query->join(\'field_data_field_contributor\',\'fc\', \'fc.entity_id=fcs.field_contributors_value\');
+$query->join(\'field_data_field_ismain\',\'fi\', \'fi.entity_id=fcs.field_contributors_value\');
+$query->join(\'field_data_field_contributor_id\',\'fci\', \'fci.entity_id=fc.field_contributor_target_id\');
+$query->addField(\'fci\', \'field_contributor_id_value\');
+$query->condition(\'fcs.entity_id\', arg(1));
+$query->condition(\'fi.field_ismain_value\', 1);
+return $query->execute()->fetchField();';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary_options']['items_per_page'] = '25';
+  /* Filtre contextuel: Contenu : Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
   $translatables['catalog'] = array(
     t('Master'),
     t('plus'),
@@ -1114,6 +1229,8 @@ return $query->execute()->fetchField();';
     t('Liste nouveautés'),
     t('Bloc nouveautés'),
     t('Nouveautés'),
+    t('Livres du même auteur'),
+    t('Autres titres du même auteur'),
   );
   $export['catalog'] = $view;
 
