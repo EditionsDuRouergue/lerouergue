@@ -35,6 +35,12 @@ function feature_catalog_context_default_contexts() {
           'region' => 'content',
           'weight' => '1',
         ),
+        'views-catalog-same_universe_books' => array(
+          'module' => 'views',
+          'delta' => 'catalog-same_universe_books',
+          'region' => 'content',
+          'weight' => '2',
+        ),
       ),
     ),
   );

@@ -146,7 +146,7 @@ function feature_catalog_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_iscommunicable',
     'label' => 'Communicable',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -195,7 +195,7 @@ function feature_catalog_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_ismain',
     'label' => 'Auteur principal',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1327,6 +1327,67 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_same_universe_articles'
+  $field_instances['node-article-field_same_universe_articles'] = array(
+    'bundle' => 'article',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 22,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_same_universe_articles',
+    'label' => 'Titres du même univers',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference_view_widget',
+      'settings' => array(
+        'allow_duplicates' => 0,
+        'close_modal' => 1,
+        'pass_argument' => 1,
+        'view' => 'catalog|entityreference_view_widget_1',
+      ),
+      'type' => 'entityreference_view_widget',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_subtitle'
   $field_instances['node-article-field_subtitle'] = array(
     'bundle' => 'article',
@@ -1493,16 +1554,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'taxonomy',
       'settings' => array(
         'autocomplete_path' => 'taxonomy/autocomplete',
-        'cascading_selection' => 0,
-        'filter_view' => '',
-        'leaves_only' => 0,
-        'max_depth' => '',
-        'parent_term_id' => '',
-        'select_parents' => 0,
         'size' => 60,
-        'start_minimized' => 0,
-        'token_display' => '',
-        'track_list' => 0,
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 5,
@@ -1956,6 +2008,7 @@ function feature_catalog_field_default_field_instances() {
   t('Pseudonyme');
   t('Sous-titre');
   t('Thèmes');
+  t('Titres du même univers');
   t('Univers');
   t('Url');
   t('Version numérique');
