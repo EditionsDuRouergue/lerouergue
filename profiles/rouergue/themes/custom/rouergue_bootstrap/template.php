@@ -18,7 +18,7 @@ if (!drupal_is_front_page()) {
 }
 
 function rouergue_bootstrap_field__field_inner_pages($variables) {
-	$output .= '<div class="modal fade modal-lg" id="rouergue-pdf-viewer" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">';
+	$output = '<div class="modal fade modal-lg" id="rouergue-pdf-viewer" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">';
 		$output .= '<div class="modal-dialog">';
 			$output .= '<div class="modal-content">';
 				$output .= '<div class="modal-header">';
