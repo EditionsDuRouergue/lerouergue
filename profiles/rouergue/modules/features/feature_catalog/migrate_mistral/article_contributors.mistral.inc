@@ -10,7 +10,7 @@
  * We retrieve only associations linked to a importable article.
  * The mysql query to run is :
  *
- * SELECT a.articleid, bc.contributorid, bc.functionid
+ * SELECT a.articleid, bc.contributorid, bc.functionid, bc.ismain, bc.iscommunicable
  * FROM bookcontributor bc
  * JOIN article a ON a.bookid=bc.bookid
  * WHERE bc.bookid IN (
@@ -42,7 +42,7 @@ class ArticleContributorsMigration extends Migration {
 
 		$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
 		$query->Join('article','a','a.bookid=bc.bookid');
-		$query->fields('a', array('articleid'))->fields('bc', array('contributorid','functionid'));
+		$query->fields('a', array('articleid'))->fields('bc', array('contributorid','functionid','ismain','iscommunicable'));
 		$query->condition('bc.bookid', $subquery, 'IN');
 		
 		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
@@ -84,6 +84,8 @@ class ArticleContributorsMigration extends Migration {
 		// FIELDS MAPPING
 		// Link the field collection to its article
 		$this->addFieldMapping('host_entity_id', 'articleid')->sourceMigration('Article');
+		$this->addFieldMapping(field_ismain, 'ismain');
+		$this->addFieldMapping(field_iscommunicable, 'iscommunicable');
 		
 		// Link the Contributor (node) to the Entity Reference field in the field collection
 		$this->addFieldMapping('field_contributor', 'contributorid')->sourceMigration('Contributor');
