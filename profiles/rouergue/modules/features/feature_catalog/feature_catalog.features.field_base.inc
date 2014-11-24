@@ -612,6 +612,32 @@ function feature_catalog_field_default_field_bases() {
     'type' => 'number_float',
   );
 
+  // Exported field_base: 'field_price_validated'
+  $field_bases['field_price_validated'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_price_validated',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'oui',
+        0 => 'non',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_pseudonyme'
   $field_bases['field_pseudonyme'] = array(
     'active' => 1,

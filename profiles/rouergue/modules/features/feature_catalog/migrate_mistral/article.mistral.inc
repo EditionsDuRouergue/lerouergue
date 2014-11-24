@@ -118,7 +118,8 @@ class ReadershipMigration extends Migration {
  *
  * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, 
  * c.name as collection, sc.name as subcollection, s.name as series, 
- * rp.price, fp.finalnbpage as nbpage, 
+ * rp.price, fp.finalnbpage as nbpage,
+ * pt.isvalidated as price_validated,
  * GROUP_CONCAT(bt.themeid) as theme_list, GROUP_CONCAT(DISTINCT br.readershipid) as readership_list, 
  * CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01') as pubdate,
  * CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END AS format
@@ -129,7 +130,7 @@ class ReadershipMigration extends Migration {
  * LEFT JOIN series s ON s.seriesid=b.seriesid
  * JOIN commercialplan cp ON cp.articleid=a.articleid
  * JOIN fabricationplan fp ON fp.articleid=a.articleid
- * JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
+ * JOIN priceandtirage pt ON pt.articleid=a.articleid
  * JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
  * LEFT JOIN booktheme bt ON bt.bookid=a.bookid
  * LEFT JOIN bookreadership br ON br.bookid=b.bookid
@@ -160,7 +161,7 @@ class ArticleMigration extends Migration {
 		$query->leftJoin('series', 's', 's.seriesid=b.seriesid');
 		$query->join('commercialplan','cp','cp.articleid=a.articleid');
 		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
-		$query->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+		$query->join('priceandtirage','pt','pt.articleid=a.articleid');
 		$query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
 		$query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 		$query->leftJoin('bookreadership','br','br.bookid=b.bookid');
@@ -175,6 +176,7 @@ class ArticleMigration extends Migration {
     $query->addField('c','name','collection');
     $query->addField('sc','name','subcollection');
     $query->addField('s','name','series');
+    $query->addField('pt','isvalidated','price_validated');
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
@@ -210,6 +212,7 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_format', 'format');
 		$this->addFieldMapping('field_number_pages', 'nbpage');
 		$this->addFieldMapping('field_price', 'price');
+		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn');
 		$this->addFieldMapping('field_gencod', 'gencod');
 		$this->addFieldMapping('field_release_date', 'pubdate');
@@ -310,6 +313,10 @@ class ArticleMigration extends Migration {
 		
 		// Rouergue web site universe
 		$row->collection = $this->rouergue_get_universe_term_id($row->projecttype, $row->collection, $row->subcollection, $row->series);
+		
+		if (empty($row->price_validated)) {
+			$row->price_validated = 0;
+		}
 	}
 	
 	/**

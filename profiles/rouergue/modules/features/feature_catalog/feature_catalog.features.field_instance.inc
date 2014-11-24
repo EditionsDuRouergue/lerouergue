@@ -276,7 +276,7 @@ function feature_catalog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -337,7 +337,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'barcode',
       'settings' => array(),
       'type' => 'barcode_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -413,7 +413,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -498,7 +498,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -616,7 +616,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -681,7 +681,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -740,7 +740,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -990,7 +990,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -1119,7 +1119,7 @@ function feature_catalog_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1181,7 +1181,7 @@ function feature_catalog_field_default_field_instances() {
       'max' => '',
       'min' => '',
       'prefix' => '',
-      'suffix' => '€',
+      'suffix' => ' €',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1190,6 +1190,65 @@ function feature_catalog_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_price_validated'
+  $field_instances['node-article-field_price_validated'] = array(
+    'bundle' => 'article',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_price_validated',
+    'label' => 'Prix validé',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
     ),
   );
 
@@ -1245,7 +1304,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1323,7 +1382,7 @@ function feature_catalog_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -1499,7 +1558,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -2004,6 +2063,7 @@ function feature_catalog_field_default_field_instances() {
   t('Petite phrase');
   t('Photo');
   t('Prix');
+  t('Prix validé');
   t('Prénom');
   t('Pseudonyme');
   t('Sous-titre');
