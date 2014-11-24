@@ -128,4 +128,9 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 		$markup .= '</div>';
 		$node->content['field_bs_button_browse_pdf']['#markup'] = $markup;
 	}
+	
+	// Price display handling
+	if ($view_mode == 'full' && $node->field_price_validated['und'][0]['value'] == 0) {
+		$node->content['field_price'][0]['#markup'] = 'environ ' . $node->field_price['und'][0]['value'] . ' €';
+	}
 }
