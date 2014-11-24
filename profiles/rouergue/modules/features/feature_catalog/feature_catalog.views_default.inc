@@ -2031,6 +2031,31 @@ return $query->execute()->fetchField();';
     'add' => 'Ajouter',
   );
   $handler->display->display_options['fields']['field_contributors']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié ou admin */
+  $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['table'] = 'node';
+  $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['group'] = 1;
+  $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
   $handler->display->display_options['path'] = 'taxonomy/term/%';
 
   /* Display: Feed */
