@@ -11,15 +11,15 @@ function feature_core_uuid_features_default_terms() {
   $terms = array();
 
   $terms[] = array(
-    'name' => 'Rouergue Noir',
+    'name' => 'Rouergue noir',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 2,
+    'weight' => 1,
     'uuid' => '0007e2ce-750f-4ef6-a648-3b465add8036',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
     'parent' => array(
-      0 => 'bff581ca-2883-4ec8-9e83-917be1285f49',
+      0 => '63ed8920-edfe-4b4e-ae83-6cafb9fd9673',
     ),
   );
   $terms[] = array(
@@ -35,10 +35,10 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Romans jeunesse',
+    'name' => 'Romans Jeunesse',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 2,
+    'weight' => 56,
     'uuid' => '02919f7b-735d-4f1a-acc6-0854803e8b56',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -59,16 +59,16 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'La Brune',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 9,
+    'weight' => 63,
     'uuid' => '1cc5d1ae-4297-4a31-bc83-ec57da26f285',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Albums jeunesse',
+    'name' => 'Albums Jeunesse',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 1,
+    'weight' => 55,
     'uuid' => '21b526e8-954a-4878-a43a-7fcdc8955938',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -101,13 +101,13 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Régions',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 5,
+    'weight' => 59,
     'uuid' => '28a7aacd-6429-4630-abe0-9f8fa916748e',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Doado noir',
+    'name' => 'DoAdo noir',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -131,7 +131,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'à la petite semaine',
+    'name' => 'A la petite semaine',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -167,10 +167,10 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Graphisme &  Illustrations',
+    'name' => 'Graphisme & Illustrations',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 3,
+    'weight' => 57,
     'uuid' => '4509ebf0-0dac-496e-b968-96e7f4b9d248',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -191,7 +191,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Essais',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 2,
+    'weight' => 3,
     'uuid' => '53c9815b-ac19-4b74-8abb-a727270582bd',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -239,7 +239,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Epik SF/Fantasy',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 8,
+    'weight' => 62,
     'uuid' => '5ea55aec-1f9b-4ff9-a577-2ff4e9076370',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -254,6 +254,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => '02919f7b-735d-4f1a-acc6-0854803e8b56',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'Polars',
+    'description' => '',
+    'format' => 'full_html',
+    'weight' => 2,
+    'uuid' => '63ed8920-edfe-4b4e-ae83-6cafb9fd9673',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'bff581ca-2883-4ec8-9e83-917be1285f49',
     ),
   );
   $terms[] = array(
@@ -413,7 +425,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Doado',
+    'name' => 'DoAdo',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -452,7 +464,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Art & Histoire',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 6,
+    'weight' => 60,
     'uuid' => 'a82a3692-1790-4ef9-a0bb-15bb01fa5029',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -470,7 +482,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'La Brune (littérature)',
+    'name' => 'La Brune',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -509,7 +521,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Littérature',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 0,
+    'weight' => 54,
     'uuid' => 'bff581ca-2883-4ec8-9e83-917be1285f49',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -554,7 +566,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Numérique',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 10,
+    'weight' => 64,
     'uuid' => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -563,7 +575,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Romans graphiques',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 1,
+    'weight' => 2,
     'uuid' => 'e0e69acb-e53c-41af-bcbb-085df9bd1cf9',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -572,7 +584,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'boomerang',
+    'name' => 'Boomerang',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -599,7 +611,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Gastronomie',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 4,
+    'weight' => 58,
     'uuid' => 'f39ea2eb-3cae-4b3b-92b4-3ddb6f326b4c',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
@@ -620,7 +632,7 @@ function feature_core_uuid_features_default_terms() {
     'name' => 'Nature & Jardins',
     'description' => '',
     'format' => 'plain_text',
-    'weight' => 7,
+    'weight' => 61,
     'uuid' => 'fe160545-8a24-4647-9d4a-f3717dec5ef4',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
