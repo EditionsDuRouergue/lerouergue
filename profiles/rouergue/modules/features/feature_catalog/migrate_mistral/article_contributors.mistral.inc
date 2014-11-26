@@ -84,8 +84,8 @@ class ArticleContributorsMigration extends Migration {
 		// FIELDS MAPPING
 		// Link the field collection to its article
 		$this->addFieldMapping('host_entity_id', 'articleid')->sourceMigration('Article');
-		$this->addFieldMapping(field_ismain, 'ismain');
-		$this->addFieldMapping(field_iscommunicable, 'iscommunicable');
+		$this->addFieldMapping('field_ismain', 'ismain');
+		$this->addFieldMapping('field_iscommunicable', 'iscommunicable');
 		
 		// Link the Contributor (node) to the Entity Reference field in the field collection
 		$this->addFieldMapping('field_contributor', 'contributorid')->sourceMigration('Contributor');

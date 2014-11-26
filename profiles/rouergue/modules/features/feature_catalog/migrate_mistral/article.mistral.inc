@@ -144,6 +144,8 @@ class ArticleMigration extends Migration {
 	// Universes <-> Collections/Subcollections/Series mapping data
 	protected $univ_coll_mapping = array();
 	
+	protected $univ_tids = array();
+	
   public function __construct(array $arguments) {
     $this->arguments = $arguments;
     parent::__construct();
@@ -170,7 +172,7 @@ class ArticleMigration extends Migration {
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod'))
-		->fields('b', array('title','subtitle','resume','backcover','projecttype'))
+		->fields('b', array('title','subtitle','resume','backcover'))
 		->fields('rp', array('price'));
     $query->addField('fp','finalnbpage','nbpage');
     $query->addField('c','name','collection');
@@ -231,74 +233,14 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_universe', 'collection');
 		$this->addFieldMapping('field_universe:source_type')->defaultValue('tid');
 		
-		// COLLECTIONS---UNIVERSE MAPPING
+		// UNIVERSE TERMS IDS FETCHING
+		if (empty($this->univ_tids)) {
+			$this->rouergue_fetch_universe_terms_ids();
+		}
+		
+		// COLLECTIONS---UNIVERSES MAPPING
 		if (empty($this->univ_coll_mapping)) {
-			//-------------------- Littérature --------------------
-			$this->univ_coll_mapping['Rouergue Littérature']['La Brune'] = key(taxonomy_get_term_by_name('La Brune (littérature)'));
-			$this->univ_coll_mapping['Rouergue Littérature']['Polar'] = key(taxonomy_get_term_by_name('Rouergue Noir'));
-			// Two 'Romans de société' terms exist in 'Univers' vocabulary, here we need the first one.
-			$tids = array_keys(taxonomy_get_term_by_name('Romans de société'));
-			$this->univ_coll_mapping['Rouergue Littérature']['Roman de société'] = $tids[0];
-			// TODO : Objet litéraire
-
-			//-------------------- Art & Histoire --------------------
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Société'] = key(taxonomy_get_term_by_name('Société'));
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire'] = key(taxonomy_get_term_by_name('Histoire'));
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Art'] = key(taxonomy_get_term_by_name('Art'));
-
-			//-------------------- Régions --------------------
-// 			$this->univ_coll_mapping['collection']['subcollection']['Région'] = key(taxonomy_get_term_by_name('Régions de France'));
-			// TODO : bouton manuel (drupal) Aveyron
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyage'] = key(taxonomy_get_term_by_name('Voyages'));
-			// TODO : comment répartir entre 'Rouergue en poche' et 'Grand format' ?
-
-			//-------------------- Nature & Jardins --------------------
-			// TODO : série Nature
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Bx Livres Nature'] = key(taxonomy_get_term_by_name('Nature'));
-// 			$this->univ_coll_mapping['collection']['subcollection']['Natures Humaines'] = key(taxonomy_get_term_by_name('Nature'));
-// 			$this->univ_coll_mapping['collection']['subcollection']['Bâti'] = key(taxonomy_get_term_by_name('Bâti'));
-// 			$this->univ_coll_mapping['collection']['subcollection']['Ecologie'] = key(taxonomy_get_term_by_name('Ecologie'));
-// 			$this->univ_coll_mapping['collection']['subcollection']['Botanique'] = key(taxonomy_get_term_by_name('Botanique'));
-// 			$this->univ_coll_mapping['collection']['subcollection']['Jardins'] = key(taxonomy_get_term_by_name('Jardins'));
-
-			//-------------------- Gastronomie --------------------
-			$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie'] = key(taxonomy_get_term_by_name('Grands chefs'));
-			$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine'] = key(taxonomy_get_term_by_name('Cuisine'));
-// 			$this->univ_coll_mapping['collection']['Vins'] = key(taxonomy_get_term_by_name('Vins'));
-// 			$this->univ_coll_mapping['collection']['Santé'] = key(taxonomy_get_term_by_name('Santé'));
-
-			//-------------------- Epik SF/Fantasy --------------------
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Epik'] = key(taxonomy_get_term_by_name('Epik SF/Fantasy'));
-
-			//-------------------- Romans jeunesse --------------------
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tic tac'] = key(taxonomy_get_term_by_name('tic tac'));
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Boomerang'] = key(taxonomy_get_term_by_name('Boomerang'));
-			// Two 'A la petite semaine' terms exist in 'Univers' vocabulary, here we need the second one.
-			$tids = array_keys(taxonomy_get_term_by_name('A la petite semaine'));
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['A la petite semaine'] = $tids[1];
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Zig Zag'] = key(taxonomy_get_term_by_name('zig zag'));
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['dacOdac'] = key(taxonomy_get_term_by_name('dacOdac'));
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo'] = key(taxonomy_get_term_by_name('DoAdo'));
-			$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo noir'] = key(taxonomy_get_term_by_name('DoAdo noir'));
-
-			//-------------------- Albums jeunesse --------------------
-			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['12x12'] = key(taxonomy_get_term_by_name('12x12'));
-			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Comptines en continu'] = key(taxonomy_get_term_by_name('Comptines en continu'));
-			// TODO : lectorat 2 ans
-			// TODO : lectorat 4ans
-			// Two 'A la petite semaine' terms exist in 'Univers' vocabulary, here we get the first one.
-			$tids = array_keys(taxonomy_get_term_by_name('A la petite semaine'));
-			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['A la petite semaine'] = key(taxonomy_get_term_by_name('A la petite semaine'));
-			// TODO : lectorat 6 ans
-			// TODO : Jeunesse
-
-			//-------------------- Graphisme &  Illustrations --------------------
-			// TODO : Collection Essai jeunesse ?
-			$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique'] = key(taxonomy_get_term_by_name('Romans graphiques'));
-			//$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['touzazimute'] = key(taxonomy_get_term_by_name('Toutazimute'));
-
-			//-------------------- EPUB ? --------------------
-			$this->univ_coll_mapping['NUM'] = key(taxonomy_get_term_by_name('Numérique'));
+			$this->rouergue_set_mapping();			
 		}
 	}
 
@@ -311,8 +253,8 @@ class ArticleMigration extends Migration {
 		// Backcover text cleaning.
 		$row->backcover = html_entity_decode(strip_tags($row->backcover));
 		
-		// Rouergue web site universe
-		$row->collection = $this->rouergue_get_universe_term_id($row->projecttype, $row->collection, $row->subcollection, $row->series);
+		// Rouergue universe granting based on Drupal universes/Mistral collections mapping.
+		$row->collection = $this->rouergue_get_universe_term_id($row->collection, $row->subcollection, $row->series);
 		
 		if (empty($row->price_validated)) {
 			$row->price_validated = 0;
@@ -333,8 +275,211 @@ class ArticleMigration extends Migration {
 	}
 	
 	/**
-	 * Helper function handling matching between Mistral collection, subcollection, series classification
-	 * and Rouergue web site Univers vocabulary.
+	 * HELPER FUNCTIONS
+	 */
+	
+	/**
+	 * Builds the universe terms ids array, stored in $this->universe_tids.
+	 */
+	function rouergue_fetch_universe_terms_ids() {
+		$voc = taxonomy_vocabulary_machine_name_load('universe');
+		$tree = taxonomy_get_tree($voc->vid);
+			
+		$parents = array();
+		$previous_depth = 0;
+		foreach ($tree as $term) {
+			if ($term->depth == 0) {
+				$this->univ_tids[$term->name]['tid'] = $term->tid;
+				$parents = array();
+			}
+			else {
+				if($term->depth > $previous_depth) {
+					array_push($parents, $previous_term);
+				}
+				elseif ($term->depth < $previous_depth) {
+					array_pop($parents);
+				}
+				$this->rouergue_universes_insert($this->univ_tids, $parents, $term->name, $term->tid);
+			}
+			$previous_depth = $term->depth;
+			$previous_term = $term->name;
+		}
+	}
+	
+	/**
+	 * Inserts a term id in array $this->universe_tids.
+	 * Used by previous function rouergue_fetch_universe_terms_ids().
+	 * 
+	 * @param array $array
+	 *   The array storing terms ids.
+	 * @param array $keys
+	 *   An array containing the parent term names (from root to leaf).
+	 * @param string $term
+	 *   The term name whose tid is being stored.
+	 * @param int $tid
+	 *   The tid to store.
+	 */
+	function rouergue_universes_insert(&$array, $keys, $term, $tid) {
+		foreach($keys as $key) {
+			if(!array_key_exists($key, $array) || array_key_exists($key, $array) && !is_array($array[$key])) {
+				$array[$key] = array();
+			}
+			$array = &$array[$key];
+		}
+		$array[$term]['tid'] = $tid;
+	}
+	
+	/**
+	 * Stores mapping between Mistral Collection/Subcollection/Series and Drupal Universes terms
+	 * in array $this->univ_coll_mapping.
+	 */
+	function rouergue_set_mapping() {		
+		//-------------------- Numérique --------------------
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['dacOdac'] = $this->univ_tids['Numérique']['dacOdac'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['DoAdo'] = $this->univ_tids['Numérique']['DoAdo'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['DoAdo noir'] = $this->univ_tids['Numérique']['DoAdo noir'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['Epik'] = $this->univ_tids['Numérique']['Epik'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['La Brune'] = $this->univ_tids['Numérique']['La Brune'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['Roman de société'] = $this->univ_tids['Numérique']['Romans de société'];
+		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['Polar'] = $this->univ_tids['Numérique']['Polar'];
+			
+		//-------------------- Beaux Livres --------------------
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['tid'] = $this->univ_tids['Art & Histoire']['Art']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['Art']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['Cuisine']['tid'] = $this->univ_tids['Art & Histoire']['Art'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['Nature']['tid'] = $this->univ_tids['Art & Histoire']['Art']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art']['Société']['tid'] = $this->univ_tids['Art & Histoire']['Art']['tid'];
+			
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Aveyron']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Aveyron']['Cuisine']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+			
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Botanique']['tid'] = $this->univ_tids['Nature & Jardins']['Botanique']['tid'];
+			
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Grand chef']['tid'] = $this->univ_tids['Gastronomie']['Grands chefs']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Vins']['tid'] = $this->univ_tids['Gastronomie']['Vins']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Jardins']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Région']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Vins']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Voyages']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Aveyron']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Bâti']['tid'] = $this->univ_tids['Nature & Jardins']['Bâti']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Cuisine']['tid'] = $this->univ_tids['Nature & Jardins']['Nature']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Jardins']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Région']['tid'] = $this->univ_tids['Nature & Jardins']['Nature']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['Voyages']['tid'] = $this->univ_tids['Régions']['Voyages']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature']['tid'] = $this->univ_tids['Nature & Jardins']['Nature']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Objet littéraire']['tid'] = $this->univ_tids['Littérature']['Objets littéraires']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Objet littéraire']['Art']['tid'] = $this->univ_tids['Littérature']['Objets littéraires']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Polar']['Voyages']['tid'] = $this->univ_tids['Régions']['Voyages']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['tid'] = $this->univ_tids['Régions']['Régions de France']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Bâti']['tid'] = $this->univ_tids['Nature & Jardins']['Bâti']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Grand chef']['tid'] = $this->univ_tids['Gastronomie']['Grands chefs']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Santé']['tid'] =	$this->univ_tids['Gastronomie']['Santé']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['tid'] =	$this->univ_tids['Art & Histoire']['Société']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Aveyron']['tid'] =	$this->univ_tids['Art & Histoire']['Société']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Cuisine']['tid'] =	$this->univ_tids['Art & Histoire']['Société']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Histoire']['tid'] =	$this->univ_tids['Art & Histoire']['Histoire']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Région']['tid'] =	$this->univ_tids['Art & Histoire']['Société']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['tid'] =	$this->univ_tids['Régions']['Voyages']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['Cuisine']['tid'] =	$this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['Jardins']['tid'] =	$this->univ_tids['Nature & Jardins']['Jardins']['tid'];
+			
+		//-------------------- Littérature --------------------
+		$this->univ_coll_mapping['Rouergue Littérature']['Aveyron']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+		$this->univ_coll_mapping['Rouergue Littérature']['Aveyron']['Cuisine']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['Ecologie']['Cuisine']['tid'] = $this->univ_tids['Nature & Jardins']['Ecologie']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['La Brune']['tid'] = $this->univ_tids['Littérature']['La Brune']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['Objet littéraire']['tid'] = $this->univ_tids['Littérature']['Objets littéraires']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['Polar']['Assassins sans visage']['tid'] = $this->univ_tids['Littérature']['Polars']['Assassins sans visage']['tid'];
+		$this->univ_coll_mapping['Rouergue Littérature']['Polar']['Rouergue noir']['tid'] = $this->univ_tids['Littérature']['Polars']['Rouergue noir']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['tid'] = $this->univ_tids['Littérature']['Romans de société']['tid'];
+		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['Témoignage']['tid'] = $this->univ_tids['Littérature']['Romans de société']['Témoignage']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Littérature']['Rouergue en Poche']['tid'] = $this->univ_tids['Littérature']['Romans de société']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Littérature']['Témoignage']['Aveyron']['tid'] = $this->univ_tids['Littérature']['Romans de société']['Témoignage']['tid'];
+		$this->univ_coll_mapping['Rouergue Littérature']['Témoignage']['Jardins']['tid'] = $this->univ_tids['Littérature']['Romans de société']['Témoignage']['tid'];
+		
+		//-------------------- Livres pratiques --------------------
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Aveyron']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Aveyron']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Aveyron']['tid'] = $this->univ_tids['Nature & Jardins']['Botanique']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Jardins']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Région']['tid'] = $this->univ_tids['Nature & Jardins']['Botanique']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['tid'] = $this->univ_tids['Nature & Jardins']['Botanique']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Jardins']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Vins']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie']['Bâti']['tid'] = $this->univ_tids['Nature & Jardins']['Bâti']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Ecologie']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie']['tid'] = $this->univ_tids['Nature & Jardins']['Ecologie']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Gastronomie']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Gastronomie']['Grand chef']['tid'] = $this->univ_tids['Gastronomie']['Grands chefs']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Jardins']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature']['Région']['tid'] = $this->univ_tids['Nature & Jardins']['Nature']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature']['tid'] = $this->univ_tids['Nature & Jardins']['Nature']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Région']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Santé']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		
+		//-------------------- Albums Jeunesse --------------------
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['12x12']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 2 ans']['12x12']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['A la petite semaine']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 6 ans']['A la petite semaine']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']["catalogue d'exposition"]['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['essais']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 6 ans']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['Comptines en continu']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 2 ans']['Comptines en continu']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['Roman graphique']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Romans graphiques']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['Touzazimute']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Toutazimute']['tid'];
+		
+		//-------------------- Essais Jeunesse --------------------
+		$this->univ_coll_mapping['Rouergue Essai Jeunesse']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Essais']['tid'];	
+		
+		//-------------------- Romans Jeunesse --------------------
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Boomerang']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 7 ans']['Boomerang']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['dacOdac']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 9 ans']['dacOdac']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans ados']['DoAdo']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['DoAdo noir']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans ados']['DoAdo noir']['tid'];
+
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Epik']['tid'] = $this->univ_tids['Epik SF/Fantasy']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tic tac']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 6 ans']['tic tac']['tid'];
+		
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['zig zag']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 8 ans']['zig zag']['tid'];
+	}
+	
+	/**
+	 * Returns universe term id that matches the Mistral's collection, subcollection, series values of row being imported.
 	 *
 	 * @param string $collection
 	 *   The collection the imported book belongs to.
@@ -346,17 +491,15 @@ class ArticleMigration extends Migration {
 	 * @return
 	 *   the tid of the Univers term the book has to be linked to.
 	 */
-	function rouergue_get_universe_term_id($projecttype, $collection, $subcollection, $series) {
+	function rouergue_get_universe_term_id($collection, $subcollection, $series) {
 		$term_id = 0;
-		if ($projecttype == 'NUM') {
-                	$term_id = $this->univ_coll_mapping[$projecttype];
-        	}
-		elseif (isset($series)) {
-			$term_id = $this->univ_coll_mapping[$collection][$subcollection][$series];
+		if (isset($series)) {
+			$term_id = $this->univ_coll_mapping[$collection][$subcollection][$series]['tid'];
 		}
 		else {
-			$term_id = $this->univ_coll_mapping[$collection][$subcollection];
+			$term_id = $this->univ_coll_mapping[$collection][$subcollection]['tid'];
 		}
 		return $term_id;
 	}
 }
+
