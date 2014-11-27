@@ -17,6 +17,7 @@ dependencies[] = date
 dependencies[] = dhtml_menu
 dependencies[] = draggableviews
 dependencies[] = ds
+dependencies[] = entity_token
 dependencies[] = fe_block
 dependencies[] = fe_nodequeue
 dependencies[] = features
