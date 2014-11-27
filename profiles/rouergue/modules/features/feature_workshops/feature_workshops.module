@@ -38,3 +38,14 @@ function feature_workshops_block_view($delta = '') {
 			break;
 	}
 }
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function feature_workshops_block_view_alter(&$data, $block) {
+	if ($block->delta == 'workshops-workshop_media_block') {
+		if (!strstr($data['content']['#markup'], 'views-field-field-video') && !strstr($data['content']['#markup'], 'views-field-field-sound')) {
+			$data['subject'] = '';
+		}
+	}
+}

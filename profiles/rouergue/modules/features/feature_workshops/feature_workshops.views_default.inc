@@ -121,12 +121,14 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nid']['hide_empty'] = TRUE;
   /* Champ: Contenu : Video */
   $handler->display->display_options['fields']['field_video']['id'] = 'field_video';
   $handler->display->display_options['fields']['field_video']['table'] = 'field_data_field_video';
   $handler->display->display_options['fields']['field_video']['field'] = 'field_video';
   $handler->display->display_options['fields']['field_video']['label'] = '';
   $handler->display->display_options['fields']['field_video']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_video']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_video']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_video']['type'] = 'media';
   $handler->display->display_options['fields']['field_video']['settings'] = array(
@@ -138,6 +140,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['field_sound']['field'] = 'field_sound';
   $handler->display->display_options['fields']['field_sound']['label'] = '';
   $handler->display->display_options['fields']['field_sound']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_sound']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_sound']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_sound']['type'] = 'media';
   $handler->display->display_options['fields']['field_sound']['settings'] = array(
