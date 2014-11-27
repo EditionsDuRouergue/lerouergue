@@ -113,12 +113,6 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Pied de page: Global : Zone de texte */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -276,7 +270,6 @@ function feature_workshops_views_default_views() {
     t('Bloc media workshop'),
     t('Média'),
     t('Contient les champs video, son, liseuse pdf et lien vers le livre.'),
-    t('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>'),
     t('Tout'),
     t('Bloc livre lié'),
     t('Livre lié'),
