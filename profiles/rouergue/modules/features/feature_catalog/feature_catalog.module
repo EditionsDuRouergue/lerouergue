@@ -122,10 +122,16 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 		$node->content['field_publication_status']['#markup'] = '<div class="' . $classes . '"></div>';
 	}
 	
-	if (!empty($extrafields_settings['field_bs_button_browse_pdf']['visible']) && $extrafields_settings['field_bs_button_browse_pdf']['visible']) {
-		$markup = '<div class="field field-name-field_bs_button field-type-button clearfix">';
-		$markup .= '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
-		$markup .= '</div>';
+	// Browse button handling
+	if (!empty($extrafields_settings['field_bs_button_browse_pdf']['visible']) 
+			&& $extrafields_settings['field_bs_button_browse_pdf']['visible']
+			&& $view_mode == 'full') {
+		$markup = '';
+		if (!empty($node->field_inner_pages)) {
+			$markup = '<div class="field field-name-field_bs_button field-type-button clearfix">';
+			$markup .= '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
+			$markup .= '</div>';
+		}
 		$node->content['field_bs_button_browse_pdf']['#markup'] = $markup;
 	}
 	
