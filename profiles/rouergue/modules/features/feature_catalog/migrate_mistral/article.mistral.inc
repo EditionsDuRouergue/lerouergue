@@ -251,8 +251,14 @@ class ArticleMigration extends Migration {
 	function prepareRow($row) {
 		parent::prepareRow($row);
 		
-		// Backcover text cleaning.
-		$row->backcover = html_entity_decode(strip_tags($row->backcover));
+		// backcover or resume database field choice
+		if (isset($row->backcover) && strlen($row->backcover) > 0) {
+			$text = $row->backcover;
+		}
+		else {
+			$text = $row->resume;
+		}
+		$row->backcover = html_entity_decode(strip_tags($text));
 		
 		// Rouergue universe granting based on Drupal universes/Mistral collections mapping.
 		$row->collection = $this->rouergue_get_universe_term_id($row->collection, $row->subcollection, $row->series);
