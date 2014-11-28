@@ -23,5 +23,16 @@ function feature_core_user_default_permissions() {
     'module' => 'custom_search',
   );
 
+  // Exported permission: 'use custom search blocks'.
+  $permissions['use custom search blocks'] = array(
+    'name' => 'use custom search blocks',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'custom_search_blocks',
+  );
+
   return $permissions;
 }

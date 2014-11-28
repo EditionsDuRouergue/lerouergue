@@ -93,6 +93,7 @@ features[menu_custom][] = main-menu
 features[menu_custom][] = menu-footer-menu
 features[taxonomy][] = universe
 features[user_permission][] = use custom search
+features[user_permission][] = use custom search blocks
 features[user_role][] = administrator
 features[user_role][] = redactor
 features[user_role][] = webmaster
