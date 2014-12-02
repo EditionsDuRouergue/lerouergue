@@ -145,17 +145,6 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['field_dates_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_dates_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_dates_value']['summary_options']['items_per_page'] = '25';
-  /* Filtre contextuel: Contenu : Dates - date de fin (field_dates:value2) */
-  $handler->display->display_options['arguments']['field_dates_value2']['id'] = 'field_dates_value2';
-  $handler->display->display_options['arguments']['field_dates_value2']['table'] = 'field_data_field_dates';
-  $handler->display->display_options['arguments']['field_dates_value2']['field'] = 'field_dates_value2';
-  $handler->display->display_options['arguments']['field_dates_value2']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_dates_value2']['exception']['title'] = 'Tout';
-  $handler->display->display_options['arguments']['field_dates_value2']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_dates_value2']['default_argument_options']['code'] = 'return date(\'Y-m\');';
-  $handler->display->display_options['arguments']['field_dates_value2']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_dates_value2']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_dates_value2']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -218,7 +207,7 @@ function feature_events_views_default_views() {
   $handler = $view->new_display('block', 'Bloc pages agenda', 'agenda_block');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
@@ -237,11 +226,26 @@ function feature_events_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Filtre contextuel: Contenu : Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
 
   /* Display: Bloc accueil */
   $handler = $view->new_display('block', 'Bloc accueil', 'agenda_front_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Evénements';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';

@@ -75,9 +75,9 @@ function rouergue_get_nav_data($number_of_months=3) {
 /**
  * Implements hook_views_query_alter().
  */
-function feature_events_views_query_alter(&$view, &$query) {
-	// Make the following view display support OR condition for contextual filters.
-	if ($view->current_display == 'events_list_page') {
-		$query->where[0]['type'] = 'OR';
-	}
-}
+// function feature_events_views_query_alter(&$view, &$query) {
+// 	// Make the following view display support OR condition for contextual filters.
+// 	if ($view->current_display == 'events_list_page') {
+// 		$query->where[0]['type'] = 'OR';
+// 	}
+// }
