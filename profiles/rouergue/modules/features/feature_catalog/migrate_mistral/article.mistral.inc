@@ -368,10 +368,13 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Aveyron']['Cuisine']['tid'] = $this->univ_tids['Régions']['Aveyron']['tid'];
 			
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Botanique']['tid'] = $this->univ_tids['Nature & Jardins']['Botanique']['tid'];
+		
+		//$this->univ_coll_mapping['Rouergue Beaux Livres']['Divers']['tid'] = $this->univ_tids['']['']['tid'];
 			
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Grand chef']['tid'] = $this->univ_tids['Gastronomie']['Grands chefs']['tid'];
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Vins']['tid'] = $this->univ_tids['Gastronomie']['Vins']['tid'];
+		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie']['Vins']['tid'] = $this->univ_tids['Gastronomie']['tid'];
 		
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
 		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['Histoire']['tid'];
@@ -418,10 +421,13 @@ class ArticleMigration extends Migration {
 		
 		$this->univ_coll_mapping['Rouergue Littérature']['La Brune']['tid'] = $this->univ_tids['Littérature']['La Brune']['tid'];
 		
+		$this->univ_coll_mapping['Rouergue Littérature']['Divers']['tid'] = $this->univ_tids['Littérature']['Divers']['tid'];
+		
 		$this->univ_coll_mapping['Rouergue Littérature']['Objet littéraire']['tid'] = $this->univ_tids['Littérature']['Objets littéraires']['tid'];
 		
 		$this->univ_coll_mapping['Rouergue Littérature']['Polar']['Assassins sans visage']['tid'] = $this->univ_tids['Littérature']['Polars']['Assassins sans visage']['tid'];
 		$this->univ_coll_mapping['Rouergue Littérature']['Polar']['Rouergue noir']['tid'] = $this->univ_tids['Littérature']['Polars']['Rouergue noir']['tid'];
+		$this->univ_coll_mapping['Rouergue Littérature']['Polar']['tid'] = $this->univ_tids['Littérature']['Polars']['tid'];
 		
 		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['tid'] = $this->univ_tids['Littérature']['Romans de société']['tid'];
 		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['Témoignage']['tid'] = $this->univ_tids['Littérature']['Romans de société']['Témoignage']['tid'];
@@ -442,6 +448,7 @@ class ArticleMigration extends Migration {
 		
 		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Jardins']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
 		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Vins']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
+		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['Cuisine']['tid'];
 
 		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie']['Bâti']['tid'] = $this->univ_tids['Nature & Jardins']['Bâti']['tid'];
 		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['Ecologie']['tid'];
@@ -463,14 +470,15 @@ class ArticleMigration extends Migration {
 		
 		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['A la petite semaine']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 6 ans']['A la petite semaine']['tid'];
 		
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Albums']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
 		
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']["catalogue d'exposition"]['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['essais']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 6 ans']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['album']['Comptines en continu']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 2 ans']['Comptines en continu']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Albums']["catalogue d'exposition"]['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Albums']['essais']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 6 ans']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Albums']['Comptines en continu']['tid'] = $this->univ_tids['Albums Jeunesse']['Albums dès 2 ans']['Comptines en continu']['tid'];
 		
 		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['Roman graphique']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Romans graphiques']['tid'];
 		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['Livre graphique']['Touzazimute']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Toutazimute']['tid'];
+		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
 		
 		//-------------------- Essais Jeunesse --------------------
 		$this->univ_coll_mapping['Rouergue Essai Jeunesse']['tid'] = $this->univ_tids['Graphisme & Illustrations']['Essais']['tid'];	
@@ -488,7 +496,7 @@ class ArticleMigration extends Migration {
 		
 		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tic tac']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 6 ans']['tic tac']['tid'];
 		
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['zig zag']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 8 ans']['zig zag']['tid'];
+		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['Zig Zag']['tid'] = $this->univ_tids['Romans Jeunesse']['Romans dès 8 ans']['zig zag']['tid'];
 	}
 	
 	/**
