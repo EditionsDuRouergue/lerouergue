@@ -32,18 +32,18 @@ class ArticleContributorsMigration extends Migration {
 		$this->description = t("Migrate contributor/function relationships from mistral source database to Drupal Article's Contributors field (Field Collection)");
 		
 		// SOURCE
-		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
-		$subquery->join('book','b','b.bookid=a.bookid');
-		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
-		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
-		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
-		$subquery->join('format','f','f.formatid=b.formatid');
-		$subquery->fields('a', array('bookid'));
+// 		$subquery = Database::getConnection('default', 'mistral')->select('article','a');
+// 		$subquery->join('book','b','b.bookid=a.bookid');
+// 		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
+// 		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
+// 		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+// 		$subquery->join('format','f','f.formatid=b.formatid');
+// 		$subquery->fields('a', array('bookid'));
 
 		$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
 		$query->Join('article','a','a.bookid=bc.bookid');
 		$query->fields('a', array('articleid'))->fields('bc', array('contributorid','functionid','ismain','iscommunicable'));
-		$query->condition('bc.bookid', $subquery, 'IN');
+		//$query->condition('bc.bookid', $subquery, 'IN');
 		
 		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 		
