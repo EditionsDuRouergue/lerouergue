@@ -9,7 +9,7 @@ function rouergue_mistral_settings_form() {
 			'#title' => t('Cover images URL'),
 			'#description' => t('Type in the URL which the book cover images are available from.'),
 			'#size' => 100,
-			'#default_value' => variable_get('cover_images_url', 'http://www.korora.fr/mistral-cover-images/'),
+			'#default_value' => variable_get('cover_images_url', 'http://rouergue.abrege.net/util/couv_rouergue/'),
 	);
 	$form['rouergue_mistral_settings']['default_cover_image_name'] = array(
 			'#type' => 'textfield',

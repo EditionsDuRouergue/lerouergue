@@ -276,11 +276,12 @@ class ArticleMigration extends Migration {
 		//$image_filename = 'test-cover-' . rand(1,4) . '.png'; // 	A REMPLACER PAR : $image_filename = $row->gencod . 'jpg';
 		$image_filename = $row->gencod . '.jpg';
 		//$host = 'http://www.korora.fr/'; // A REMPLACER PAR :	$host = 'http://www.lerouergue.fr/...';
-		$host = 'http://rouergue.abrege.net/util/couv_rouergue/';
+		//$host = 'http://rouergue.abrege.net/util/couv_rouergue/';
+		$host = variable_get('cover_images_url','http://rouergue.abrege.net/util/couv_rouergue/');
 		$url = $host . $image_filename;
 	
 		if(!$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_REPLACE)) { // A REMPLACER PAR :	...FILE_EXISTS_REPLACE);
-			$image_filename = 'article-cover-400x600.png';
+			$image_filename = variable_get('default_cover_image_name','article-cover-400x600.png');
 			$url = $host . $image_filename;
 			$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_RENAME);
 		}
