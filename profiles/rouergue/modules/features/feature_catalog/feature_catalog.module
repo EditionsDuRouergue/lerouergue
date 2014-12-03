@@ -4,6 +4,25 @@
  * Code for the Feature Catalog feature.
  */
 
+/**
+ * Implements hook_menu().
+ */
+function feature_catalog_menu() {
+	$items = array();
+
+	$items['admin/config/mistral'] = array(
+			'title' => t('Mistral'),
+			'description' => 'Mistral import settings',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('rouergue_mistral_settings_form'),
+			'access arguments' => array('administer Catalog'),
+			'file' => 'feature_catalog.mistral.admin.inc',
+			'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+}
+
 include_once 'feature_catalog.features.inc';
 
 
