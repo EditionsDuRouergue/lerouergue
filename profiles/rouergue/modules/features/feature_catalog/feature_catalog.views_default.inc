@@ -1563,8 +1563,8 @@ return $query->execute()->fetchField();';
     1 => '1',
   );
 
-  /* Display: Contributeurs fiche livre (auteur) */
-  $handler = $view->new_display('block', 'Contributeurs fiche livre (auteur)', 'book_contributors');
+  /* Display: Auteurs fiche livre */
+  $handler = $view->new_display('block', 'Auteurs fiche livre', 'book_contributors');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1635,13 +1635,20 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
   $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    214 => '214',
+    1035 => '1035',
   );
   $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
+  $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['field'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
+    1 => '1',
+  );
 
-  /* Display: Contributeurs fiche livre (les autres) */
-  $handler = $view->new_display('attachment', 'Contributeurs fiche livre (les autres)', 'book_contributors_non_author');
+  /* Display: Les autres fiche livre */
+  $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_non_author');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -1743,9 +1750,9 @@ return $query->execute()->fetchField();';
     t('Contributeur'),
     t('Tout'),
     t('Auteur liste livres'),
-    t('Contributeurs fiche livre (auteur)'),
+    t('Auteurs fiche livre'),
     t('[field_firstname] [field_lastname]'),
-    t('Contributeurs fiche livre (les autres)'),
+    t('Les autres fiche livre'),
   );
   $export['fc_contributors'] = $view;
 
