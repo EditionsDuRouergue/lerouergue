@@ -14,6 +14,7 @@ dependencies[] = custom_breadcrumbs_taxonomy
 dependencies[] = custom_search
 dependencies[] = custom_search_blocks
 dependencies[] = date
+dependencies[] = date_views
 dependencies[] = dhtml_menu
 dependencies[] = draggableviews
 dependencies[] = ds
