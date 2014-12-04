@@ -286,6 +286,10 @@ class ArticleMigration extends Migration {
 			$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_RENAME);
 		}
 		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
+		
+		if(!isset($row->collection) || $row->collection == 0) {
+			watchdog('mistral', 'bookid = ' . $row->bookid . ', tid = ' . $row->collection);
+		}
 	}
 	
 	/**
