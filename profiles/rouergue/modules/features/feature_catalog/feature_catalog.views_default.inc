@@ -1630,20 +1630,18 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    1035 => '1035',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
-  /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
-  $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
-  $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
-  $handler->display->display_options['filters']['field_iscommunicable_value']['field'] = 'field_iscommunicable_value';
-  $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
     1 => '1',
   );
 
