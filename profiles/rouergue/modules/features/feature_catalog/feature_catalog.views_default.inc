@@ -939,6 +939,11 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
@@ -1007,6 +1012,20 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
   $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '3 months ago';
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'auteur';
+  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'catalogue/liste-nouveautes';
 
   /* Display: Bloc nouveautés */
@@ -1445,6 +1464,7 @@ return $query->execute()->fetchField();';
     t('Lectorat'),
     t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
     t('Liste nouveautés'),
+    t('terme à partir de field_contributor_function'),
     t('Bloc nouveautés'),
     t('Nouveautés'),
     t('Livres du même auteur'),
