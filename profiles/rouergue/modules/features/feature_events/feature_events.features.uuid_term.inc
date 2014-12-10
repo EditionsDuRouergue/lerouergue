@@ -37,5 +37,14 @@ function feature_events_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'event_types',
     'metatags' => array(),
   );
+  $terms[] = array(
+    'name' => 'Exposition',
+    'description' => '',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => 'ddcc9376-dcdd-477d-9d00-54ee8285fa21',
+    'vocabulary_machine_name' => 'event_types',
+    'metatags' => array(),
+  );
   return $terms;
 }

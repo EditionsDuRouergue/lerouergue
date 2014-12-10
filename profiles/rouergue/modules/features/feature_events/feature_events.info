@@ -67,6 +67,7 @@ features[uuid_features_menu][] = 7ace2244-3a37-4448-95dc-05d162182be0
 features[uuid_term][] = 8c9ae363-be21-4cdf-a8ca-9882444cb008
 features[uuid_term][] = 96293ffc-91ae-4f78-af55-495fabedace9
 features[uuid_term][] = a7fc62b5-3466-441e-86e7-86ee3db1d7a4
+features[uuid_term][] = ddcc9376-dcdd-477d-9d00-54ee8285fa21
 features[variable][] = comment_anonymous_event
 features[variable][] = comment_default_mode_event
 features[variable][] = comment_default_per_page_event
