@@ -1,6 +1,7 @@
 (function ($) {
 	Drupal.behaviors.main =  {
 		attach: function(context, settings) {
+
 			$('.infosWrapper').hide();
 
 			$('.couvWrapper').mouseenter(function() {
@@ -8,7 +9,7 @@
 			});
 
 			$('.couvWrapper').mouseleave(function() {
-				$(this).parent().children('.infosWrapper').slideUp('fast')
+				$(this).parent().children('.infosWrapper').slideUp('slow')
 			});
 
 

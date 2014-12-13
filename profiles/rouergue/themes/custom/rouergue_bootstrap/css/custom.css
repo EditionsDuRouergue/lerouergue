@@ -4,9 +4,6 @@
 GLOBAL STYLES
 ==============================================================================================
 */
-
-
-
 .field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
   display: inline;
 }
@@ -42,5 +39,4 @@ margin-bottom: 10px;
 
 .couvWrapper {
 margin-bottom: 20px;
-
 }
