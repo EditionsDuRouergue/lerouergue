@@ -174,34 +174,38 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->layout = 'bootstrap_4_5_3';
   $ds_layout->settings = array(
     'regions' => array(
+      'top' => array(
+        0 => 'title',
+        1 => 'field_subtitle',
+      ),
       'left' => array(
-        0 => 'field_subtitle',
-        1 => 'field_cover_image',
-        2 => 'field_publication_status',
-        3 => 'field_release_date',
-        4 => 'field_number_pages',
-        5 => 'field_price',
-        6 => 'field_format',
-        7 => 'field_isbn',
-        8 => 'field_gencod',
-        9 => 'field_barcode',
+        2 => 'field_cover_image',
+        3 => 'field_publication_status',
+        4 => 'field_release_date',
+        5 => 'field_number_pages',
+        6 => 'field_price',
+        7 => 'field_format',
+        8 => 'field_isbn',
+        9 => 'field_gencod',
+        10 => 'field_barcode',
       ),
       'central' => array(
-        10 => 'body',
-        11 => 'field_press_quotes',
-        12 => 'service_links_displays_group',
-        13 => 'field_inner_pages',
+        11 => 'body',
+        12 => 'field_press_quotes',
+        13 => 'service_links_displays_group',
+        14 => 'field_inner_pages',
       ),
       'right' => array(
-        14 => 'field_contributors',
-        15 => 'field_themes',
-        16 => 'field_readership',
-        17 => 'field_bs_button_browse_pdf',
-        18 => 'field_num_version_link',
+        15 => 'field_contributors',
+        16 => 'field_themes',
+        17 => 'field_readership',
+        18 => 'field_bs_button_browse_pdf',
+        19 => 'field_num_version_link',
       ),
     ),
     'fields' => array(
-      'field_subtitle' => 'left',
+      'title' => 'top',
+      'field_subtitle' => 'top',
       'field_cover_image' => 'left',
       'field_publication_status' => 'left',
       'field_release_date' => 'left',
@@ -223,6 +227,7 @@ function feature_catalog_ds_layout_settings_info() {
     ),
     'classes' => array(),
     'wrappers' => array(
+      'top' => 'div',
       'left' => 'div',
       'central' => 'div',
       'right' => 'div',
@@ -232,6 +237,8 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'hide_page_title' => '1',
+    'page_option_title' => '',
   );
   $export['node|article|full'] = $ds_layout;
 

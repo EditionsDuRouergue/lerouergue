@@ -11,6 +11,10 @@
     <?php print render($title_suffix['contextual_links']); ?>
   <?php endif; ?>
   <div class="row">
+          <<?php print $top_wrapper; ?> class="col-sm-12 <?php print $top_classes; ?>">
+        <?php print $top; ?>
+      </<?php print $top_wrapper; ?>>
+      
     <<?php print $left_wrapper; ?> class="col-sm-4 <?php print $left_classes; ?>">
       <?php print $left; ?>
     </<?php print $left_wrapper; ?>>

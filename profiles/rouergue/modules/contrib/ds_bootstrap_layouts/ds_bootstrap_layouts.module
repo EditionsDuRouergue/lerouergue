@@ -239,6 +239,7 @@ function ds_bootstrap_layouts_ds_layout_info() {
     'label' => t('Bootstrap Three Columns: 4-5-3'),
     'path' => $threecol . '/bootstrap_4_5_3',
     'regions' => array(
+      'top' => t('Top'),    
       'left' => t('Left'),
       'central' => t('Middle'),
       'right' => t('Right'),

@@ -241,7 +241,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -311,7 +311,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'barcode',
         'settings' => array(),
         'type' => 'barcode_default',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'above',
@@ -387,7 +387,7 @@ function feature_catalog_field_default_field_instances() {
           'name' => 'fc_contributors',
         ),
         'type' => 'field_collection_views_view',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -461,7 +461,7 @@ function feature_catalog_field_default_field_instances() {
           'image_style' => 'article-cover',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -533,7 +533,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
@@ -592,7 +592,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'list' => array(
         'label' => 'above',
@@ -654,7 +654,7 @@ function feature_catalog_field_default_field_instances() {
           'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'list' => array(
         'label' => 'above',
@@ -716,7 +716,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'above',
@@ -773,7 +773,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 31,
       ),
       'list' => array(
         'label' => 'above',
@@ -831,7 +831,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 32,
       ),
       'list' => array(
         'label' => 'above',
@@ -894,7 +894,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 33,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -952,7 +952,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'list' => array(
         'label' => 'above',
@@ -1035,7 +1035,7 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'above',
@@ -1095,7 +1095,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'list' => array(
         'label' => 'above',
@@ -1164,7 +1164,7 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_decimal',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'list' => array(
         'label' => 'above',
@@ -1227,7 +1227,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 28,
       ),
       'list' => array(
         'label' => 'above',
@@ -1283,7 +1283,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'list' => array(
         'label' => 'above',
@@ -1350,7 +1350,7 @@ function feature_catalog_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'list' => array(
         'label' => 'above',
@@ -1417,7 +1417,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 29,
       ),
       'list' => array(
         'label' => 'above',
@@ -1477,8 +1477,8 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'type' => 'text_plain',
+        'weight' => 1,
       ),
       'list' => array(
         'label' => 'above',
@@ -1537,7 +1537,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'list' => array(
         'label' => 'above',
@@ -1592,7 +1592,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 30,
       ),
       'list' => array(
         'label' => 'above',
