@@ -241,7 +241,7 @@ function feature_events_views_default_views() {
   /* Display: Bloc accueil */
   $handler = $view->new_display('block', 'Bloc accueil', 'agenda_front_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Evénements';
+  $handler->display->display_options['title'] = 'agenda';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
@@ -386,7 +386,7 @@ function feature_events_views_default_views() {
     t('Bloc carto'),
     t('Bloc pages agenda'),
     t('Bloc accueil'),
-    t('Evénements'),
+    t('agenda'),
     t('Lire la suite'),
     t('Bloc pages auteur'),
     t('Agenda de l\'auteur'),
