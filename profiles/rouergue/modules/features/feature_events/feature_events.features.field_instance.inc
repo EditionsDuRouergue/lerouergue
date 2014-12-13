@@ -19,12 +19,9 @@ function feature_events_field_default_field_instances() {
     'display' => array(
       'block' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 100,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 3,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -106,7 +103,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 17,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -136,7 +133,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 17,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -191,7 +188,7 @@ function feature_events_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -277,7 +274,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'above',
@@ -301,7 +298,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'map_block' => array(
         'label' => 'above',
@@ -340,7 +337,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 13,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -419,7 +416,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -475,7 +472,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'above',
@@ -496,7 +493,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -573,7 +570,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'inline',
@@ -593,7 +590,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 15,
       ),
       'map_block' => array(
         'label' => 'inline',
@@ -635,7 +632,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 16,
       ),
       'default' => array(
         'label' => 'inline',
@@ -655,7 +652,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 16,
       ),
       'map_block' => array(
         'label' => 'inline',

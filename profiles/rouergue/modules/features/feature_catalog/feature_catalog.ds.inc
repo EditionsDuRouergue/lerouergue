@@ -88,7 +88,7 @@ function feature_catalog_ds_field_settings_info() {
       'format' => 'default',
       'formatter_settings' => array(
         'link' => '1',
-        'wrapper' => '',
+        'wrapper' => 'h4',
         'class' => '',
       ),
     ),

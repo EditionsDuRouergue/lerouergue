@@ -38,17 +38,7 @@ function feature_workshops_ds_field_settings_info() {
       'format' => 'default',
       'formatter_settings' => array(
         'link' => '1',
-        'wrapper' => 'h2',
-        'class' => '',
-      ),
-    ),
-    'node_link' => array(
-      'weight' => '3',
-      'label' => 'hidden',
-      'format' => 'default',
-      'formatter_settings' => array(
-        'link text' => 'Lire la suite',
-        'wrapper' => '',
+        'wrapper' => 'h4',
         'class' => '',
       ),
     ),
@@ -216,15 +206,11 @@ function feature_workshops_ds_layout_settings_info() {
       'central' => array(
         0 => 'field_gallery',
         1 => 'title',
-        2 => 'body',
-        3 => 'node_link',
       ),
     ),
     'fields' => array(
       'field_gallery' => 'central',
       'title' => 'central',
-      'body' => 'central',
-      'node_link' => 'central',
     ),
     'limit' => array(
       'field_gallery' => '1',

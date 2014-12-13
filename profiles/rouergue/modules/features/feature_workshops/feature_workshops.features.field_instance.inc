@@ -45,11 +45,8 @@ function feature_workshops_field_default_field_instances() {
       ),
       'list' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 300,
-        ),
-        'type' => 'text_summary_or_trimmed',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'pdf_viewer' => array(
@@ -124,7 +121,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'pdf_viewer' => array(
         'label' => 'above',
@@ -197,7 +194,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'pdf_viewer' => array(
         'label' => 'hidden',
@@ -352,7 +349,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'pdf_viewer' => array(
         'label' => 'hidden',
@@ -425,7 +422,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 11,
       ),
       'pdf_viewer' => array(
         'label' => 'hidden',
@@ -490,7 +487,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'pdf_viewer' => array(
         'label' => 'above',
@@ -566,7 +563,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'pdf_viewer' => array(
         'label' => 'above',

@@ -211,6 +211,10 @@ function feature_catalog_strongarm() {
             'weight' => '18',
             'visible' => TRUE,
           ),
+          'list' => array(
+            'weight' => '101',
+            'visible' => FALSE,
+          ),
         ),
       ),
     ),
