@@ -204,6 +204,7 @@ features[variable][] = custom_search_size
 features[variable][] = custom_search_submit_text
 features[variable][] = date_default_timezone
 features[variable][] = dhtml_menu_settings
+features[variable][] = ds_extras_hide_page_title
 features[variable][] = jquery_update_compression_type
 features[variable][] = jquery_update_jquery_admin_version
 features[variable][] = jquery_update_jquery_cdn
