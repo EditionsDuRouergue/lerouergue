@@ -175,9 +175,6 @@ function feature_workshops_ds_layout_settings_info() {
       'field_event_author' => 'central',
       'field_inner_pages' => 'central',
     ),
-    'limit' => array(
-      'field_gallery' => '1',
-    ),
     'classes' => array(),
     'wrappers' => array(
       'central' => 'div',
