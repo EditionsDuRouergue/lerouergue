@@ -344,18 +344,8 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Éléments par page';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Tout -';
-  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Décalage';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« premier';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -939,11 +929,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
   $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
-  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
@@ -1010,22 +995,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_release_date_value']['id'] = 'field_release_date_value';
   $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
   $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
-  $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '3 months ago';
-  /* Critère de filtrage: Terme de taxonomie : Nom */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name']['value'] = 'auteur';
-  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
-  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
-  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
-  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
-    1 => '1',
-  );
   $handler->display->display_options['path'] = 'catalogue/liste-nouveautes';
 
   /* Display: Bloc nouveautés */
@@ -1094,10 +1063,13 @@ return $query->execute()->fetchField();';
   /* Display: Livres du même auteur */
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Autres titres du même auteur';
+  $handler->display->display_options['title'] = 'Du même auteur…';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
+  $handler->display->display_options['style_options']['interval'] = '0';
+  $handler->display->display_options['style_options']['navigation'] = 1;
+  $handler->display->display_options['style_options']['indicators'] = 1;
+  $handler->display->display_options['style_options']['pause'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'ds';
@@ -1431,13 +1403,6 @@ return $query->execute()->fetchField();';
     t('Trier par'),
     t('Asc'),
     t('Desc'),
-    t('Éléments par page'),
-    t('- Tout -'),
-    t('Décalage'),
-    t('« premier'),
-    t('‹ précédent'),
-    t('suivant ›'),
-    t('dernier »'),
     t('terme'),
     t('Catalogue'),
     t('@total titres'),
@@ -1464,12 +1429,18 @@ return $query->execute()->fetchField();';
     t('Lectorat'),
     t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
     t('Liste nouveautés'),
-    t('terme à partir de field_contributor_function'),
     t('Bloc nouveautés'),
     t('Nouveautés'),
     t('Livres du même auteur'),
-    t('Autres titres du même auteur'),
+    t('Du même auteur…'),
     t('Modal "Livres même univers"'),
+    t('Éléments par page'),
+    t('- Tout -'),
+    t('Décalage'),
+    t('« premier'),
+    t('‹ précédent'),
+    t('suivant ›'),
+    t('dernier »'),
     t('Bloc "Livres même univers"'),
     t('Titres du même univers'),
   );
