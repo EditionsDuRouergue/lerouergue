@@ -52,6 +52,31 @@ function feature_catalog_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|article|full';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'article';
+  $ds_fieldsetting->view_mode = 'full';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '0',
+        'wrapper' => 'h1',
+        'class' => '',
+      ),
+    ),
+    'service_links_displays_group' => array(
+      'weight' => '13',
+      'label' => 'hidden',
+      'format' => 'sld_group_image_and_text',
+    ),
+  );
+  $export['node|article|full'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|article|list';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'article';
