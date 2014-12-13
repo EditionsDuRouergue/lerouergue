@@ -1,0 +1,46 @@
+
+/*
+==============================================================================================
+GLOBAL STYLES
+==============================================================================================
+*/
+
+
+
+.field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
+  display: inline;
+}
+
+.field-name-field-firstname:after {
+  content: " ";
+}
+
+
+
+/*
+==============================================================================================
+INFO WRAPPER STYLES
+==============================================================================================
+*/
+
+.infosWrapper {
+  display: none;
+  background-color:  rgba(0, 0, 0, 0.6);
+  position: absolute;
+  z-index: 1000;
+  border-radius: 20px;
+}
+
+.infosWrapper .field-name-field-contributors {
+margin-bottom: 10px;
+
+}
+
+.infosWrapper a,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
+  color: #fff;
+}
+
+.couvWrapper {
+margin-bottom: 20px;
+
+}

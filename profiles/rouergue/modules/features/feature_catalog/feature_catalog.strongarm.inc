@@ -194,7 +194,7 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
           'list' => array(
-            'weight' => '1',
+            'weight' => '0',
             'visible' => TRUE,
           ),
           'block' => array(
@@ -202,7 +202,7 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
           'author_books' => array(
-            'weight' => '1',
+            'weight' => '0',
             'visible' => TRUE,
           ),
         ),
@@ -212,7 +212,11 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
           'list' => array(
-            'weight' => '101',
+            'weight' => '32',
+            'visible' => FALSE,
+          ),
+          'author_books' => array(
+            'weight' => '33',
             'visible' => FALSE,
           ),
         ),
