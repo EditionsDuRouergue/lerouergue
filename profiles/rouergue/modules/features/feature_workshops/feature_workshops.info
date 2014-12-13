@@ -32,6 +32,7 @@ features[ctools][] = ds:ds:1
 features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
+features[ds_field_settings][] = node|workshops|carousel
 features[ds_field_settings][] = node|workshops|list
 features[ds_layout_settings][] = node|workshops|block
 features[ds_layout_settings][] = node|workshops|carousel
