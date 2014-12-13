@@ -81,6 +81,44 @@ function feature_workshops_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|workshops|carousel';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'workshops';
+  $ds_layout->view_mode = 'carousel';
+  $ds_layout->layout = 'bootstrap_6_6';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'title',
+        1 => 'field_event_author',
+      ),
+      'right' => array(
+        2 => 'field_gallery',
+      ),
+    ),
+    'fields' => array(
+      'title' => 'left',
+      'field_event_author' => 'left',
+      'field_gallery' => 'right',
+    ),
+    'limit' => array(
+      'field_gallery' => '1',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'left' => 'div',
+      'right' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|workshops|carousel'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|workshops|default';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'workshops';
