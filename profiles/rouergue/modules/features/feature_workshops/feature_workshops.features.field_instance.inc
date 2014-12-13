@@ -23,6 +23,12 @@ function feature_workshops_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'carousel' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -96,6 +102,12 @@ function feature_workshops_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'carousel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -153,6 +165,15 @@ function feature_workshops_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 14,
+      ),
+      'carousel' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'above',
@@ -216,6 +237,16 @@ function feature_workshops_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 13,
+      ),
+      'carousel' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'workshop-carousel',
+        ),
+        'type' => 'image',
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -294,6 +325,12 @@ function feature_workshops_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'carousel' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -364,6 +401,12 @@ function feature_workshops_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'carousel' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -424,6 +467,12 @@ function feature_workshops_field_default_field_instances() {
         ),
         'type' => 'media',
         'weight' => 1,
+      ),
+      'carousel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'above',
@@ -494,6 +543,12 @@ function feature_workshops_field_default_field_instances() {
         ),
         'type' => 'media',
         'weight' => 0,
+      ),
+      'carousel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'above',

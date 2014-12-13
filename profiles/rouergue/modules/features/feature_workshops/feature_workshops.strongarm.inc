@@ -110,6 +110,12 @@ function feature_workshops_strongarm() {
       'pdf_viewer' => array(
         'custom_settings' => TRUE,
       ),
+      'carousel' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

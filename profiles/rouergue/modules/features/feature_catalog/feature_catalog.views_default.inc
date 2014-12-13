@@ -1000,7 +1000,6 @@ return $query->execute()->fetchField();';
   /* Display: Bloc nouveautés */
   $handler = $view->new_display('block', 'Bloc nouveautés', 'catalog_new_books_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Nouveautés';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1430,7 +1429,6 @@ return $query->execute()->fetchField();';
     t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
     t('Liste nouveautés'),
     t('Bloc nouveautés'),
-    t('Nouveautés'),
     t('Livres du même auteur'),
     t('Du même auteur…'),
     t('Modal "Livres même univers"'),
@@ -1757,7 +1755,6 @@ return $query->execute()->fetchField();';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Univers';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -1768,8 +1765,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relation: Terme de taxonomie : Terme parent */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
@@ -1801,7 +1797,6 @@ return $query->execute()->fetchField();';
   $handler = $view->new_display('block', 'Block', 'block');
   $translatables['first_level_universes'] = array(
     t('Master'),
-    t('Univers'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),

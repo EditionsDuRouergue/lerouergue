@@ -53,6 +53,7 @@ features[field_instance][] = node-workshops-field_planned_release_date
 features[field_instance][] = node-workshops-field_sound
 features[field_instance][] = node-workshops-field_video
 features[image][] = workshop-block
+features[image][] = workshop-carousel
 features[image][] = workshop-list
 features[node][] = workshops
 features[uuid_features_menu][] = 23dfce5b-3d30-4e34-8c1f-2beb2a83da6b
