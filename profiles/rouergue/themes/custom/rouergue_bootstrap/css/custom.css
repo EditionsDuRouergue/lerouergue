@@ -4,16 +4,160 @@
 GLOBAL STYLES
 ==============================================================================================
 */
+
+
+h1.page-header {
+  margin-top: 0;
+  border-bottom: none;
+}
+
+h2.block-title {
+  font-size: 24px;
+}
+
+h4, h5, h6, p {
+  font-family: "interstateRegular";
+}
+
 .field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
   display: inline;
+}
+
+.field .field-label {
+  font-weight: normal;
 }
 
 .field-name-field-firstname:after {
   content: " ";
 }
 
+.breadcrumb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.well {
+  padding: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+/*
+==============================================================================================
+BLOCS STYLES
+==============================================================================================
+*/
+#block-views-first-level-universes-block {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+
+}
 
 
+#block-views-first-level-universes-block .views-field {
+  margin-bottom: 10px;
+}
+
+
+
+/*
+==============================================================================================
+MENUS STYLES
+==============================================================================================
+*/
+
+.menu.navbar-nav {
+
+    font-family: "interstateRegular";
+}
+
+.navbar-brand {
+  padding-top: 50px;
+  font-size: 36px;
+
+}
+
+/*
+UNIVERSE MENU
+*/
+
+#block-menu-menu-universe {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#block-menu-menu-universe .nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+#block-menu-menu-universe a.active-trail {
+  color: #666666;
+  background-color: #cccccc;
+
+}
+
+#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
+font-family: "interstateRegular";
+color: #ffffff;
+background-color: #ff6633;
+}
+
+
+#block-menu-menu-universe .dhtml-menu-icon {
+  display: none;
+}
+/* second level */
+#block-menu-menu-universe .dhtml-folder .leaf a, #block-menu-menu-universe .dhtml-folder .dhtml-folder a , #block-menu-menu-universe .dhtml-folder .dhtml-folder a{
+padding-left: 30px;
+}
+
+/* third level */
+ #block-menu-menu-universe .dhtml-folder .dhtml-folder .leaf a{
+padding-left: 50px;
+}
+
+
+/*
+==============================================================================================
+NODES STYLES
+==============================================================================================
+*/
+
+/*
+ARTICLE NODE
+*/
+
+.node-type-article h1 {
+  margin-top: 0;
+  margin-bottom: 0
+
+}
+
+.node-type-article .view-fc-contributors  h3 {
+  margin-top: 0;
+  margin-bottom: 10px
+}
+
+.node-type-article  .view-fc-contributors .attachment h3 {
+  margin-top: 20px;
+  margin-bottom: 10px
+}
+.node-type-article .field-name-field-subtitle {
+  font-size: 36px;
+    margin-bottom: 20px
+ }
+
+.node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
+  font-size: 24px;
+  line-height: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px
+
+   
+  }
 /*
 ==============================================================================================
 INFO WRAPPER STYLES
@@ -33,7 +177,7 @@ margin-bottom: 10px;
 
 }
 
-.infosWrapper a,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
+.infosWrapper h4,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
   color: #fff;
 }
 

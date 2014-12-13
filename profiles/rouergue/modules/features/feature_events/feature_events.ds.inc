@@ -38,7 +38,7 @@ function feature_events_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'list';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '2',
+      'weight' => '3',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -102,20 +102,24 @@ function feature_events_ds_layout_settings_info() {
     'regions' => array(
       'central' => array(
         0 => 'field_event_image',
-        1 => 'field_event_type',
-        2 => 'title',
-        3 => 'field_dates',
+        1 => 'field_dates',
+        2 => 'field_event_type',
+        3 => 'title',
         4 => 'body',
       ),
     ),
     'fields' => array(
       'field_event_image' => 'central',
+      'field_dates' => 'central',
       'field_event_type' => 'central',
       'title' => 'central',
-      'field_dates' => 'central',
       'body' => 'central',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
     'wrappers' => array(
       'central' => 'div',
     ),

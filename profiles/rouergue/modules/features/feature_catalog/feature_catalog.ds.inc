@@ -22,7 +22,7 @@ function feature_catalog_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
-        'link' => '1',
+        'link' => '0',
         'wrapper' => 'h4',
         'class' => '',
       ),
@@ -87,7 +87,7 @@ function feature_catalog_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
-        'link' => '1',
+        'link' => '0',
         'wrapper' => 'h4',
         'class' => '',
       ),

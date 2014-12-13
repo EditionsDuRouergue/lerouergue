@@ -30,7 +30,7 @@
     font-style: normal;
 }
 
-
+/*
 @font-face {
     font-family: 'interstateBold';
     src: url('../fonts/interstate_bold-webfont.eot');
@@ -42,7 +42,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
+*/
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
@@ -57,7 +57,7 @@
 @gray-light:             #cccccc;
 @gray-lighter:           #f2f2f2;
 
-@brand-primary:         @gray-light;
+@brand-primary:         #009de1;
 @brand-success:         #4e9a06;
 @brand-info:            #204a87;
 @brand-warning:         #ce5c00;
@@ -83,7 +83,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@custom-font:             "interstateRegular";
+@custom-font:             "interstateLight";
 @font-family-sans-serif:  "Helvetica", sans-serif;
 @font-family-serif:       "Times", serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
@@ -91,18 +91,18 @@
 @font-family-base:        @custom-font;
 
 @font-size-base:          14px;
-@font-size-large:         23px; 
-@font-size-small:         9px;
+@font-size-large:         24px; 
+@font-size-small:         10px;
 
-@font-size-h1:            59px;
+@font-size-h1:            60px;
 @font-size-h2:            36px;
-@font-size-h3:            23px;
+@font-size-h3:            24px;
 @font-size-h4:            14px;
-@font-size-h5:            9px;
-@font-size-h6:            5px;
+@font-size-h5:            10px;
+@font-size-h6:            10px;
 
 //** Unit-less `line-height` for use in components like buttons.
-@line-height-base:        1.428571429; // 20/14
+@line-height-base:        1.4; 
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
@@ -401,9 +401,9 @@
 @navbar-default-link-disabled-bg:          @gray-lighter;
 
 // Navbar brand label
-@navbar-default-brand-color:               @navbar-default-link-color;
-@navbar-default-brand-hover-color:         @black;
-@navbar-default-brand-hover-bg:            @white;
+@navbar-default-brand-color:               @brand-primary;
+@navbar-default-brand-hover-color:         @brand-primary;
+@navbar-default-brand-hover-bg:            none;
 
 // Navbar toggle
 @navbar-default-toggle-hover-bg:           @white;
@@ -783,7 +783,7 @@
 //##
 
 @well-bg:                     @white;
-@well-border:                 @black;
+@well-border:                 none;
 
 
 //== Badges

@@ -194,12 +194,6 @@ function feature_catalog_views_default_views() {
     'image_style' => 'article-cover-min',
     'image_link' => 'content',
   );
-  /* Champ: Gestionnaire défectueux/manquant */
-  $handler->display->display_options['fields']['caption']['id'] = 'caption';
-  $handler->display->display_options['fields']['caption']['table'] = 'field_picture_field_image_field_caption';
-  $handler->display->display_options['fields']['caption']['field'] = 'caption';
-  $handler->display->display_options['fields']['caption']['label'] = '';
-  $handler->display->display_options['fields']['caption']['element_label_colon'] = FALSE;
   /* Champ: Prénom Nom */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -344,7 +338,8 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
@@ -1358,7 +1353,7 @@ return $query->execute()->fetchField();';
   /* Display: Bloc "Livres même univers" */
   $handler = $view->new_display('block', 'Bloc "Livres même univers"', 'same_universe_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Titres du même univers';
+  $handler->display->display_options['title'] = 'Dans la même série…';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Titres du même univers */
@@ -1447,7 +1442,7 @@ return $query->execute()->fetchField();';
     t('suivant ›'),
     t('dernier »'),
     t('Bloc "Livres même univers"'),
-    t('Titres du même univers'),
+    t('Dans la même série…'),
   );
   $export['catalog'] = $view;
 
@@ -1772,7 +1767,8 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
+  $handler->display->display_options['style_options']['columns'] = '6';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relation: Terme de taxonomie : Terme parent */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
