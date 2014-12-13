@@ -5,6 +5,7 @@ package = App
 version = 7.x-1.0
 project = feature_core
 dependencies[] = adaptive_image
+dependencies[] = auto_nodetitle
 dependencies[] = better_exposed_filters
 dependencies[] = boxes
 dependencies[] = ctools
