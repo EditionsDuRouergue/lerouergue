@@ -48,7 +48,7 @@ function feature_catalog_block_view($delta = '') {
 		case 'rouergue_catalog_links':
 			$block['subject'] = '';
 			$link_path = '/catalogue/multi-criteres';
-			$link_text = 'Multi-critères';
+			$link_text = 'Recherche multi-critères';
 			if (current_path() == 'catalogue/multi-criteres') {
 				$link_path = '/catalogue';
 				$link_text = 'Retour au catalogue';

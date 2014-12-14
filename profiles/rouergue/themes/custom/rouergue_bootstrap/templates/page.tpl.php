@@ -153,9 +153,8 @@
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
 
-
       <?php print render($page['content']); ?>
-      
+    
       <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
 
 
@@ -168,7 +167,12 @@
     <?php endif; ?>
 
   </div>
+
+  <div class="preFooter"></div>
+  
 </div>
-<footer class="footer container">
+<footer class="footer">
+  <div class="container">
   <?php print render($page['footer']); ?>
+</div>
 </footer>

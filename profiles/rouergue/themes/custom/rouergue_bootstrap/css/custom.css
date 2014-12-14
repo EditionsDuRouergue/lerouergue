@@ -36,11 +36,30 @@ h4, h5, h6, p {
   margin-bottom: 20px;
 }
 
+.views-exposed-form .views-exposed-widget .form-submit {
+margin-top: 24px;
+}
+
+
 /*
 ==============================================================================================
-BLOCS STYLES
+BLOCKS STYLES
 ==============================================================================================
 */
+
+#block-views-exp-universes-page {
+  display: inline-block;
+
+}
+
+#block-feature-catalog-rouergue-catalog-links{
+  display: inline-block;
+}
+
+#block-feature-catalog-rouergue-catalog-links a{
+  display: table;
+  margin-top: -33px;
+}
 
 #newbooksBanner img {
   margin-left: auto;
@@ -59,7 +78,17 @@ BLOCS STYLES
 
 #block-views-news-news-block {
   margin-top: 20px;
+}
 
+
+/*
+==============================================================================================
+VIEWS STYLES
+==============================================================================================
+*/
+.view-catalog .view-header, .view-universes .view-header {
+  margin-top: 20px;
+  padding-bottom: 10px;
 }
 
 /*
@@ -77,7 +106,7 @@ MAIN MENU
   margin-left: 30px;
 }
 
-.menu.navbar-nav .active, .menu.navbar-nav li > a:hover{
+.menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus{
   background-color: #ffffff;
   border-radius: 10px;
 }
@@ -218,4 +247,40 @@ margin-bottom: 10px;
 
 .couvWrapper {
 margin-bottom: 20px;
+}
+
+/*
+==============================================================================================
+FOOTER
+==============================================================================================
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.preFooter {
+margin-top: 100px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  margin-top: 60px;
+  color: #ffffff;
+}
+
+.footer .container {
+  padding-top: 10px;
+  height: 100%;
+  background-color: #666666;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
