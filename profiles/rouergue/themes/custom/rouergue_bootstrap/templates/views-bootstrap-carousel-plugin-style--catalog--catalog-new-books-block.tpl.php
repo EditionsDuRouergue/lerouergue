@@ -1,3 +1,13 @@
+<!-- CUSTOM BLOCK FOR HOMEPAGE -->
+<div id="newbooksBanner" class="col-sm-3">
+  <?php
+    $theme_path = drupal_get_path('theme', variable_get('theme_default', NULL));
+  ?>
+  <img src=<?php print $theme_path . "/img/newbooksBanner.png" ?>/ class="img-responsive" alt="Nouveautés">
+</div>
+<!-- END CUSTOM BLOCK FOR HOMEPAGE -->
+
+
 <div id="views-bootstrap-carousel-<?php print $id ?>" class="col-sm-9 <?php print $classes ?>" <?php print $attributes ?>>
   <!-- The array containing rows is splitted into X, X being the number of books we want per slide -->
   <?php $slides = array_chunk($rows, 4, true); ?>

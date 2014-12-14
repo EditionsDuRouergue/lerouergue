@@ -39,6 +39,7 @@ features[ds_layout_settings][] = node|contributor|on_book_list
 features[ds_view_modes][] = author_books
 features[ds_view_modes][] = on_article_page
 features[ds_view_modes][] = on_book_list
+features[fe_block_settings][] = menu-menu-universe
 features[fe_nodequeue][] = new_books
 features[features_api][] = api:2
 features[features_date_format][] = date_format_36

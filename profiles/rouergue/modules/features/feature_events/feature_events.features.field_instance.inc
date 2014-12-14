@@ -227,7 +227,7 @@ function feature_events_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 3,
+        'weight' => 1,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -437,7 +437,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'map_block' => array(
         'label' => 'hidden',

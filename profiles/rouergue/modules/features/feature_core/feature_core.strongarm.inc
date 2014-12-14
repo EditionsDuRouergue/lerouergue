@@ -277,7 +277,7 @@ function feature_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'custom_search_blocks_1_text';
-  $strongarm->value = '';
+  $strongarm->value = 'auteur, titre, isbn, thème...';
   $export['custom_search_blocks_1_text'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -345,8 +345,8 @@ function feature_core_strongarm() {
     'animation' => array(
       'effects' => array(
         'height' => 'height',
-        'opacity' => 'opacity',
-        'width' => 0,
+        'width' => 'width',
+        'opacity' => 0,
       ),
       'speed' => '500',
     ),
@@ -362,7 +362,6 @@ function feature_core_strongarm() {
         'devel' => 0,
         'main-menu' => 0,
         'management' => 0,
-        'menu-footer-menu' => 0,
         'navigation' => 0,
         'user-menu' => 0,
       ),

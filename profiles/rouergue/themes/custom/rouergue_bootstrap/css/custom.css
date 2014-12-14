@@ -1,0 +1,372 @@
+
+/*
+==============================================================================================
+GLOBAL STYLES
+==============================================================================================
+*/
+
+
+h1.page-header {
+  margin-top: 0;
+  border-bottom: none;
+}
+
+h2.block-title {
+  font-size: 24px;
+}
+
+h4, h5, h6, p {
+  font-family: "interstateRegular";
+}
+
+.field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
+  display: inline;
+}
+
+.field .field-label {
+  font-weight: normal;
+}
+
+.field-name-field-firstname:after {
+  content: " ";
+}
+
+.breadcrumb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.views-exposed-form .views-exposed-widget .form-submit {
+margin-top: 24px;
+}
+
+.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+font-size: 50px;
+}
+
+.carousel-control.left, .carousel-control.right{
+text-shadow: none;
+width: 40px;
+}
+
+/*
+==============================================================================================
+BLOCKS STYLES
+==============================================================================================
+*/
+
+#block-views-exp-universes-page {
+  display: inline-block;
+}
+
+#block-feature-catalog-rouergue-catalog-links{
+  display: inline-block;
+}
+
+#block-feature-catalog-rouergue-catalog-links a{
+  display: table;
+  margin-top: -33px;
+}
+
+#newbooksBanner img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#block-views-first-level-universes-block {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+#block-views-first-level-universes-block .views-field {
+  margin-bottom: 10px;
+}
+
+#block-views-news-news-block {
+  margin-top: 20px;
+}
+
+#block-views-catalog-catalog-new-books-block .carousel-inner{
+  min-height: 280px;
+}
+
+#block-views-catalog-catalog-new-books-block, #block-views-catalog-same-author-books {
+  margin-bottom: 20px;
+}
+
+#block-views-events-agenda-front-block h2.block-title {
+  font-size: 60px;
+  color: #666666;
+}
+
+#block-views-workshops-workshops-front-block h2.block-title {
+  text-align: right;
+  font-size: 60px;
+  color: #009de1;
+}
+
+/*
+NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
+*/
+
+
+.view-display-id-catalog_new_books_block .carousel-control,
+.view-display-id-same_author_books .carousel-control, 
+.view-display-id-workshops_front_block .carousel-control {
+  top: auto;
+  bottom: -20px;
+}
+
+.view-display-id-catalog_new_books_block .carousel-control.left,  .view-display-id-catalog_new_books_block .carousel-control.right,
+.view-display-id-same_author_books .carousel-control.left,  .view-display-id-same_author_books .carousel-control.right,
+.view-display-id-workshops_front_block .carousel-control.left,  .view-display-id-workshops_front_block .carousel-control.right
+  {
+width: 25px;
+height: 25px;
+border-radius: 30px;
+background-color: #ff6633;
+text-shadow: none;
+}
+
+.view-display-id-workshops_front_block .carousel-control.left,  .view-display-id-workshops_front_block  .carousel-control.right {
+background-color: #009de1;
+}
+
+.view-display-id-catalog_new_books_block .carousel-control .icon-prev, .view-display-id-catalog_new_books_block .carousel-control .icon-next, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-left, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-right,
+.view-display-id-same_author_books .carousel-control .icon-prev, .view-display-id-same_author_books .carousel-control .icon-next, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-left, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-right,
+.view-display-id-workshops_front_block .carousel-control .icon-prev, .view-display-id-workshops_front_block .carousel-control .icon-next, .view-display-id-workshops_front_block .carousel-control .glyphicon-chevron-left, .view-display-id-workshops_front_block .carousel-control .glyphicon-chevron-right {
+top: -12px;
+}
+
+
+.view-display-id-catalog_new_books_block .carousel-control.right{
+right: 0;
+left: auto;
+}
+.view-display-id-catalog_new_books_block .carousel-control.left{
+right: 75px;
+left: auto;
+}
+
+.view-display-id-same_author_books .carousel-control.left, 
+.view-display-id-workshops_front_block {
+left: 0;
+right: auto;
+}
+
+.view-display-id-same_author_books .carousel-control.right,
+.view-display-id-workshops_front_block .carousel-control.right {
+left: 75px;
+right: auto;
+
+}
+
+/*
+WORKSHOPS CAROUSEL
+*/
+
+
+/*
+==============================================================================================
+VIEWS STYLES
+==============================================================================================
+*/
+.view-catalog .view-header, .view-universes .view-header {
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+/*
+==============================================================================================
+MENUS STYLES
+==============================================================================================
+*/
+
+/*
+MAIN MENU
+*/
+.menu.navbar-nav {
+  font-family: "interstateRegular";
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+.menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus{
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.navbar-brand {
+  padding-top: 50px;
+  font-size: 36px;
+}
+
+/*
+SEARCH FORM
+*/
+.block-custom-search-blocks {
+  display: block;
+  padding-top: 5px;
+}
+
+.search-form .custom-search-box {
+  display: inline-block;
+  float: left;
+  margin-left: 60px;
+  width: 200px;
+  height: 30px;
+  border: none;
+  background-color: #ffffff;
+}
+.search-form .custom-search-box:focus {
+border: 1px solid #1a1a1a;
+}
+
+.search-form .btn{
+  height: 30px;
+  float: left;
+}
+
+/*
+UNIVERSE MENU
+*/
+#block-menu-menu-universe {
+  margin-top: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+
+}
+
+#block-menu-menu-universe .nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+#block-menu-menu-universe a.active-trail {
+  color: #666666;
+  background-color: #cccccc;
+
+}
+
+#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
+font-family: "interstateRegular";
+color: #ffffff;
+background-color: #ff6633;
+}
+
+
+#block-menu-menu-universe .dhtml-menu-icon {
+  display: none;
+}
+/* second level */
+#block-menu-menu-universe .dhtml-folder .leaf a, #block-menu-menu-universe .dhtml-folder .dhtml-folder a , #block-menu-menu-universe .dhtml-folder .dhtml-folder a{
+padding-left: 30px;
+}
+
+/* third level */
+ #block-menu-menu-universe .dhtml-folder .dhtml-folder .leaf a{
+padding-left: 50px;
+}
+
+
+/*
+==============================================================================================
+NODES STYLES
+==============================================================================================
+*/
+
+/*
+ARTICLE NODE
+*/
+.node-type-article h1 {
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+.node-type-article .view-fc-contributors  h3 {
+  margin-top: 0;
+  margin-bottom: 10px
+}
+
+.node-type-article  .view-fc-contributors .attachment h3 {
+  margin-top: 20px;
+  margin-bottom: 10px
+}
+.node-type-article .field-name-field-subtitle {
+  font-size: 36px;
+    margin-bottom: 20px
+ }
+
+.node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
+  font-size: 24px;
+  line-height: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px
+  }
+
+/*
+==============================================================================================
+INFO WRAPPER STYLES
+==============================================================================================
+*/
+.infosWrapper {
+  display: none;
+  background-color:  rgba(0, 0, 0, 0.6);
+  position: absolute;
+  z-index: 1000;
+  border-radius: 20px;
+}
+
+.infosWrapper .field-name-field-contributors {
+margin-bottom: 10px;
+
+}
+
+.infosWrapper h4,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
+  color: #fff;
+}
+
+.couvWrapper {
+margin-bottom: 20px;
+}
+
+/*
+==============================================================================================
+FOOTER
+==============================================================================================
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.preFooter {
+margin-top: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  margin-top: 60px;
+  color: #ffffff;
+}
+
+.footer .container {
+  padding-top: 10px;
+  height: 100%;
+  background-color: #666666;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
