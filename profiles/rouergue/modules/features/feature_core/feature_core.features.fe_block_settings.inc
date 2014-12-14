@@ -14,7 +14,7 @@ function feature_core_default_fe_block_settings() {
 
   $export['custom_search_blocks-1'] = array(
     'cache' => -1,
-    'css_class' => 'col-xs-12 col-sm-3',
+    'css_class' => '',
     'custom' => 0,
     'delta' => 1,
     'module' => 'custom_search_blocks',
