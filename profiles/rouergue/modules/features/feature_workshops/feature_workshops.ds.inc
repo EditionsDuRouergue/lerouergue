@@ -96,20 +96,26 @@ function feature_workshops_ds_layout_settings_info() {
       'left' => array(
         0 => 'title',
         1 => 'field_event_author',
+        2 => 'body',
       ),
       'right' => array(
-        2 => 'field_gallery',
+        3 => 'field_gallery',
       ),
     ),
     'fields' => array(
       'title' => 'left',
       'field_event_author' => 'left',
+      'body' => 'left',
       'field_gallery' => 'right',
     ),
     'limit' => array(
       'field_gallery' => '1',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
     'wrappers' => array(
       'left' => 'div',
       'right' => 'div',

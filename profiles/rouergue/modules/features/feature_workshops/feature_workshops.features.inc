@@ -81,7 +81,7 @@ function feature_workshops_image_default_styles() {
     'name' => 'workshop-carousel',
     'label' => 'workshop-carousel',
     'effects' => array(
-      2 => array(
+      5 => array(
         'label' => 'Mise à l’échelle et recadrage',
         'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
         'effect callback' => 'image_scale_and_crop_effect',
@@ -92,11 +92,11 @@ function feature_workshops_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 600,
-          'height' => 400,
+          'height' => 340,
         ),
         'weight' => -10,
       ),
-      1 => array(
+      6 => array(
         'label' => 'Adaptive',
         'help' => 'Adaptive image scale according to client resolution.',
         'effect callback' => 'image_scale_effect',

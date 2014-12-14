@@ -25,9 +25,12 @@ function feature_workshops_field_default_field_instances() {
       ),
       'carousel' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 300,
+        ),
+        'type' => 'text_trimmed',
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -243,7 +246,7 @@ function feature_workshops_field_default_field_instances() {
           'image_style' => 'workshop-carousel',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'hidden',
