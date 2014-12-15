@@ -76,6 +76,7 @@ features[field_base][] = field_release_date
 features[field_base][] = field_same_universe_articles
 features[field_base][] = field_themes
 features[field_base][] = field_universe
+features[field_group][] = group_couv_wrapper|node|article|full
 features[field_group][] = group_infos_article|node|article|full
 features[field_instance][] = field_collection_item-field_contributors-field_contributor
 features[field_instance][] = field_collection_item-field_contributors-field_contributor_function

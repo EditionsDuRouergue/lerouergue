@@ -3,7 +3,7 @@
 		attach: function(context, settings) {
 
 			$('.infosWrapper').hide();
-
+			
 			$('.couvWrapper').mouseenter(function() {
 				$(this).parent().children('.infosWrapper').slideDown('fast')
 			});

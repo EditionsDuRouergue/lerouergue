@@ -1,10 +1,12 @@
-
 /*
 ==============================================================================================
 GLOBAL STYLES
 ==============================================================================================
 */
 
+h1, h2, h3 {
+  color: #666666;
+}
 
 h1.page-header {
   margin-top: 0;
@@ -13,7 +15,9 @@ h1.page-header {
 
 h2.block-title {
   font-size: 24px;
+
 }
+
 
 h4, h5, h6, p {
   font-family: "interstateRegular";
@@ -25,6 +29,8 @@ h4, h5, h6, p {
 
 .field .field-label {
   font-weight: normal;
+    color: #666666;
+
 }
 
 .field-name-field-firstname:after {
@@ -316,10 +322,30 @@ INFO WRAPPER STYLES
 */
 .infosWrapper {
   display: none;
-  background-color:  rgba(0, 0, 0, 0.6);
   position: absolute;
   z-index: 1000;
+    width: 100%;
+
+  background-color:  rgba(0, 0, 0, 0.6);
+  color: #fff;
   border-radius: 20px;
+  padding: 10px;
+}
+
+.node-type-article .group-infos-article.infosWrapper {
+    bottom: -20px;
+}
+
+.node-type-article .group-infos-article.infosWrapper {
+    font-size: 12px;
+}
+
+.node-type-article .group-infos-article.infosWrapper .field-items {
+    font-family: "interstateRegular";
+}
+
+.node-type-article .group-infos-article.infosWrapper .field-label {
+    color: #cccccc;
 }
 
 .infosWrapper .field-name-field-contributors {
@@ -329,11 +355,17 @@ margin-bottom: 10px;
 
 .infosWrapper h4,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
   color: #fff;
+  margin-top: 0;
 }
 
 .couvWrapper {
 margin-bottom: 20px;
 }
+
+.node-type-article .group-couv-wrapper.couvWrapper {
+margin-bottom: 0;
+}
+
 
 /*
 ==============================================================================================

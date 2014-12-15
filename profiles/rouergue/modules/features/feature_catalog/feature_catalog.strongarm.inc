@@ -186,7 +186,7 @@ function feature_catalog_strongarm() {
         ),
         'field_publication_status' => array(
           'full' => array(
-            'weight' => '2',
+            'weight' => '3',
             'visible' => TRUE,
           ),
           'default' => array(
@@ -208,7 +208,7 @@ function feature_catalog_strongarm() {
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
-            'weight' => '13',
+            'weight' => '14',
             'visible' => TRUE,
           ),
           'list' => array(
