@@ -241,7 +241,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 6,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -311,7 +311,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'barcode',
         'settings' => array(),
         'type' => 'barcode_default',
-        'weight' => 10,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'above',
@@ -387,7 +387,7 @@ function feature_catalog_field_default_field_instances() {
           'name' => 'fc_contributors',
         ),
         'type' => 'field_collection_views_view',
-        'weight' => 15,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -461,7 +461,7 @@ function feature_catalog_field_default_field_instances() {
           'image_style' => 'article-cover',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -533,7 +533,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 9,
       ),
       'list' => array(
         'label' => 'above',
@@ -592,7 +592,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 11,
       ),
       'list' => array(
         'label' => 'above',
@@ -654,7 +654,7 @@ function feature_catalog_field_default_field_instances() {
           'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 14,
+        'weight' => 9,
       ),
       'list' => array(
         'label' => 'above',
@@ -716,7 +716,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'list' => array(
         'label' => 'above',
@@ -773,7 +773,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 26,
       ),
       'list' => array(
         'label' => 'above',
@@ -831,7 +831,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 32,
+        'weight' => 27,
       ),
       'list' => array(
         'label' => 'above',
@@ -894,7 +894,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 33,
+        'weight' => 28,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -952,7 +952,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 19,
+        'weight' => 14,
       ),
       'list' => array(
         'label' => 'above',
@@ -1035,7 +1035,7 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
@@ -1095,7 +1095,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
@@ -1164,7 +1164,7 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_decimal',
-        'weight' => 6,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'above',
@@ -1227,7 +1227,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 23,
       ),
       'list' => array(
         'label' => 'above',
@@ -1283,7 +1283,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 17,
+        'weight' => 12,
       ),
       'list' => array(
         'label' => 'above',
@@ -1350,7 +1350,7 @@ function feature_catalog_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'above',
@@ -1417,7 +1417,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 24,
       ),
       'list' => array(
         'label' => 'above',
@@ -1537,7 +1537,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 16,
+        'weight' => 11,
       ),
       'list' => array(
         'label' => 'above',
@@ -1592,7 +1592,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 25,
       ),
       'list' => array(
         'label' => 'above',
@@ -1960,10 +1960,9 @@ function feature_catalog_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 2048,
+      'default_image' => 5928,
       'file_directory' => 'catalog/pictures',
       'file_extensions' => 'png gif jpg jpeg',
-      'image_field_caption' => 1,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
