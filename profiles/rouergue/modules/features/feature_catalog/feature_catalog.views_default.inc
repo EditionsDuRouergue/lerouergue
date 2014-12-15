@@ -41,7 +41,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['style_options']['columns'] = '6';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
     'field_firstname' => 'field_firstname',
@@ -136,7 +136,7 @@ function feature_catalog_views_default_views() {
   $handler = $view->new_display('page_with_page_title', 'Auteurs', 'authors');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '24';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -2040,6 +2040,13 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['field_contributor_function']['label'] = '';
   $handler->display->display_options['fields']['field_contributor_function']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_contributor_function']['type'] = 'taxonomy_term_reference_plain';
+  /* Critère de tri: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['sorts']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['sorts']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_release_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_release_date_value']['expose']['label'] = 'Date de parution';
   /* Critère de tri: Contenu : Titre */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2053,13 +2060,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_lastname_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['sorts']['field_lastname_value']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['field_lastname_value']['expose']['label'] = 'Auteur';
-  /* Critère de tri: Contenu : Date de parution (field_release_date) */
-  $handler->display->display_options['sorts']['field_release_date_value']['id'] = 'field_release_date_value';
-  $handler->display->display_options['sorts']['field_release_date_value']['table'] = 'field_data_field_release_date';
-  $handler->display->display_options['sorts']['field_release_date_value']['field'] = 'field_release_date_value';
-  $handler->display->display_options['sorts']['field_release_date_value']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['field_release_date_value']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['field_release_date_value']['expose']['label'] = 'Date de parution';
   /* Filtre contextuel: Contenu : Possède l'identifiant de terme de taxonomie (avec profondeur) */
   $handler->display->display_options['arguments']['term_node_tid_depth']['id'] = 'term_node_tid_depth';
   $handler->display->display_options['arguments']['term_node_tid_depth']['table'] = 'node';
@@ -2262,9 +2262,9 @@ return $query->execute()->fetchField();';
     t('Fonction'),
     t('Contributeur'),
     t('Contributeurs'),
+    t('Date de parution'),
     t('Titre'),
     t('Auteur'),
-    t('Date de parution'),
     t('Tout'),
     t('%1'),
     t('Liste livres'),
