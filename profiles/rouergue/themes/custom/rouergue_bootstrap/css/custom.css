@@ -15,7 +15,6 @@ h1.page-header {
 
 h2.block-title {
   font-size: 24px;
-
 }
 
 
@@ -53,6 +52,10 @@ font-size: 50px;
 .carousel-control.left, .carousel-control.right{
 text-shadow: none;
 width: 40px;
+}
+
+.pagination {
+  float: right;
 }
 
 /*
@@ -183,7 +186,17 @@ VIEWS STYLES
   padding-bottom: 10px;
 }
 
+.view-display-id-events_list_page .nav-tabs {
+  float: right;
+}
+
+.view-display-id-events_list_page .nav-tabs .active, .view-display-id-events_list_page .nav-tabs li > a:hover , .view-display-id-events_list_page .nav-tabs li > a:focus{
+  background-color: #ffffff;
+  border-radius: 10px;
+}
 /*
+
+
 ==============================================================================================
 MENUS STYLES
 ==============================================================================================
