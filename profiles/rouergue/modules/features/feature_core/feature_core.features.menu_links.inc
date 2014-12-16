@@ -35,7 +35,7 @@ function feature_core_menu_default_menu_links() {
   $menu_links['management_rouergue-admin:<front>'] = array(
     'menu_name' => 'management',
     'link_path' => '<front>',
-    'router_path' => '',
+    'router_path' => '/',
     'link_title' => 'ROUERGUE ADMIN',
     'options' => array(
       'attributes' => array(
