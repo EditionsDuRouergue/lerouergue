@@ -392,11 +392,11 @@ function feature_catalog_views_default_views() {
     'add' => 'Ajouter',
   );
   $handler->display->display_options['fields']['field_contributors']['delta_offset'] = '0';
-  /* Critère de tri: Contenu : Date de publication */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Critère de tri: Contenu : Date de parution (field_release_date) */
+  $handler->display->display_options['sorts']['field_release_date_value']['id'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['table'] = 'field_data_field_release_date';
+  $handler->display->display_options['sorts']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['sorts']['field_release_date_value']['order'] = 'DESC';
   /* Critère de filtrage: Contenu : Publié */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1009,7 +1009,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
-  $handler->display->display_options['style_options']['interval'] = '5000';
+  $handler->display->display_options['style_options']['interval'] = 'false';
   $handler->display->display_options['style_options']['navigation'] = 1;
   $handler->display->display_options['style_options']['indicators'] = 0;
   $handler->display->display_options['style_options']['pause'] = 1;
