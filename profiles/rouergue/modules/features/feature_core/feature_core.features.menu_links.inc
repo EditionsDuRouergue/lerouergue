@@ -29,28 +29,7 @@ function feature_core_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -48,
     'customized' => 1,
-    'parent_identifier' => 'management_rouergue-admin:<front>',
-  );
-  // Exported menu link: management_rouergue-admin:<front>
-  $menu_links['management_rouergue-admin:<front>'] = array(
-    'menu_name' => 'management',
-    'link_path' => '<front>',
-    'router_path' => '/',
-    'link_title' => 'ROUERGUE ADMIN',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'management_rouergue-admin:<front>',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 1,
-    'has_children' => 1,
-    'expanded' => 0,
-    'weight' => -50,
-    'customized' => 1,
-    'parent_identifier' => 'management_administration:admin',
+    'parent_identifier' => 'management_rouergue-admin:user',
   );
   // Exported menu link: management_tri-des-actualits:tri-actualites
   $menu_links['management_tri-des-actualits:tri-actualites'] = array(
@@ -71,7 +50,7 @@ function feature_core_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -50,
     'customized' => 1,
-    'parent_identifier' => 'management_rouergue-admin:<front>',
+    'parent_identifier' => 'management_rouergue-admin:user',
   );
   // Exported menu link: management_tri-du-bloc-nouveauts:admin/structure/nodequeue/new_books/view/1
   $menu_links['management_tri-du-bloc-nouveauts:admin/structure/nodequeue/new_books/view/1'] = array(
@@ -92,12 +71,11 @@ function feature_core_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -49,
     'customized' => 1,
-    'parent_identifier' => 'management_rouergue-admin:<front>',
+    'parent_identifier' => 'management_rouergue-admin:user',
   );
   // Translatables
   // Included for use with string extractors like potx.
   t('Liste des nouveautés');
-  t('ROUERGUE ADMIN');
   t('Tri des actualités');
   t('Tri du bloc nouveautés');
 

@@ -99,7 +99,6 @@ features[menu_custom][] = main-menu
 features[menu_custom][] = management
 features[menu_custom][] = menu-footer-menu
 features[menu_links][] = management_liste-des-nouveauts:catalogue/liste-nouveautes
-features[menu_links][] = management_rouergue-admin:<front>
 features[menu_links][] = management_tri-des-actualits:tri-actualites
 features[menu_links][] = management_tri-du-bloc-nouveauts:admin/structure/nodequeue/new_books/view/1
 features[taxonomy][] = universe
