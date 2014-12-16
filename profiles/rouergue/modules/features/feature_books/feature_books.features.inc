@@ -26,7 +26,7 @@ function feature_books_node_info() {
       'base' => 'node_content',
       'description' => t('<em>Les livres</em> possèdent une navigation hiérarchique intégrée. Cela est utile pour des guides ou des tutoriels.'),
       'has_title' => '1',
-      'title_label' => t('Titre'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );

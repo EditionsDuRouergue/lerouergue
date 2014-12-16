@@ -173,7 +173,7 @@ function feature_events_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_dates'
   $field_instances['node-event-field_dates'] = array(
     'bundle' => 'event',
-    'default_value' => array(),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
