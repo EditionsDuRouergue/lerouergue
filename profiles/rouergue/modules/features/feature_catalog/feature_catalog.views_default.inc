@@ -420,6 +420,9 @@ function feature_catalog_views_default_views() {
 
   /* Display: Catalogue */
   $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
@@ -921,18 +924,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['header']['result']['field'] = 'result';
   $handler->display->display_options['header']['result']['content'] = '@total titres';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relation: Contenu : Contributeurs (field_contributors) */
-  $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
-  $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
-  $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
-  $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
-  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
-  /* Relation: Entity Reference : Entité référencée */
-  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
-  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
-  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
-  $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
-  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
@@ -952,20 +943,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Prénom */
-  $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['relationship'] = 'field_contributor_target_id';
-  $handler->display->display_options['fields']['field_firstname']['label'] = '';
-  $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Nom */
-  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['relationship'] = 'field_contributor_target_id';
-  $handler->display->display_options['fields']['field_lastname']['label'] = '';
-  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
   /* Champ: Nodequeue : Add/remove links */
   $handler->display->display_options['fields']['nodequeue_links']['id'] = 'nodequeue_links';
   $handler->display->display_options['fields']['nodequeue_links']['table'] = 'node';
@@ -999,6 +976,8 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_release_date_value']['id'] = 'field_release_date_value';
   $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
   $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
+  $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '3 months ago';
   $handler->display->display_options['path'] = 'catalogue/liste-nouveautes';
 
   /* Display: Bloc nouveautés */
