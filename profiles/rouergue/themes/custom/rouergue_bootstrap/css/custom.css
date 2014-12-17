@@ -211,6 +211,10 @@ MAIN MENU
   margin-left: 30px;
 }
 
+.menu.navbar-nav li > a {
+z-index: 1000;
+}
+
 .menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus{
   background-color: #ffffff;
   border-radius: 10px;
