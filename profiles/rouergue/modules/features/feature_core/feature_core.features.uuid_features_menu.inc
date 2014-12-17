@@ -10,7 +10,6 @@
 function feature_core_menu_default_uuid_features_menu() {
   $menu_uuid_links = array();
 
-
   // Exported menu link: 76c26dd7-e99d-468e-aedd-0062f069e214
   $menu_uuid_links['76c26dd7-e99d-468e-aedd-0062f069e214'] = array(
     'menu_name' => 'main-menu',
@@ -31,10 +30,10 @@ function feature_core_menu_default_uuid_features_menu() {
     'weight' => 0,
     'uuid' => '76c26dd7-e99d-468e-aedd-0062f069e214',
   );
-  
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Accueil');
-  
+
   return $menu_uuid_links;
 }
