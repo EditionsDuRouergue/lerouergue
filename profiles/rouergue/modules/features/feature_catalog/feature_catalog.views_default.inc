@@ -204,6 +204,14 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Pseudonyme */
+  $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['label'] = '';
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Filtre contextuel: Contenu : Nom (field_lastname) */
   $handler->display->display_options['arguments']['field_lastname_value']['id'] = 'field_lastname_value';
@@ -1741,6 +1749,15 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Pseudonyme */
+  $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_pseudonyme']['label'] = '';
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Critère de filtrage: Terme de taxonomie : Nom */
@@ -1816,6 +1833,13 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Pseudonyme */
+  $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_pseudonyme']['label'] = '';
+  $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Critère de tri: Élément Field collection : Fonction (field_contributor_function) */
   $handler->display->display_options['sorts']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';

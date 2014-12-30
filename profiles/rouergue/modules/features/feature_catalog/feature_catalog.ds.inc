@@ -346,13 +346,17 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'central' => array(
         0 => 'field_picture',
-        1 => 'field_pseudonyme',
-        2 => 'body',
-        3 => 'field_contributor_url',
+        1 => 'field_firstname',
+        2 => 'field_lastname',
+        3 => 'field_pseudonyme',
+        4 => 'body',
+        5 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
       'field_picture' => 'central',
+      'field_firstname' => 'central',
+      'field_lastname' => 'central',
       'field_pseudonyme' => 'central',
       'body' => 'central',
       'field_contributor_url' => 'central',
@@ -409,11 +413,13 @@ function feature_catalog_ds_layout_settings_info() {
       'ds_content' => array(
         0 => 'field_firstname',
         1 => 'field_lastname',
+        2 => 'field_pseudonyme',
       ),
     ),
     'fields' => array(
       'field_firstname' => 'ds_content',
       'field_lastname' => 'ds_content',
+      'field_pseudonyme' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
