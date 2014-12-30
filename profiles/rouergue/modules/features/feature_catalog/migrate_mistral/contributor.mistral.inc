@@ -121,6 +121,9 @@ class ContributorMigration extends Migration {
 	function prepareRow($row) {
 		parent::prepareRow($row);
 		
+		// Pseudo
+		$row->pseudoname = $row->pseudofirstname . ' ' . $row->pseudoname;
+		
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
 	}
@@ -131,7 +134,5 @@ class ContributorMigration extends Migration {
 	function prepare($node, stdClass $row) {
 		// Title
 		$node->title = $node->title . ' ' . $row->firstname;
-		// Pseudo
-		$node->field_pseudonyme[LANGUAGE_NONE]['0']['value'] = $node->field_pseudonyme[LANGUAGE_NONE]['0']['value'] . ' ' . $row->pseudofirstname;
 	}
 }
