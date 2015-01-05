@@ -180,3 +180,19 @@ function feature_catalog_views_pre_render(&$view) {
 		}
 	}
 }
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function feature_catalog_block_view_alter(&$data, $block) {
+	if ($block->delta == 'catalog-same_author_books') {
+		if (!strstr($data['content']['#markup'], 'view-content')) {
+			$data['subject'] = '';
+		}
+	}
+	if ($block->delta == 'catalog-same_universe_books') {
+		if (!strstr($data['content']['#markup'], 'about="/catalogue/')) {
+			$data['subject'] = '';
+		}
+	}
+}
