@@ -219,7 +219,7 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_number_pages', 'nbpage');
 		$this->addFieldMapping('field_price', 'price');
 		$this->addFieldMapping('field_price_validated', 'price_validated');
-		$this->addFieldMapping('field_isbn', 'isbn');
+		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');
 		$this->addFieldMapping('field_release_date', 'pubdate');
 		$this->addFieldMapping('body', 'backcover');
