@@ -1758,6 +1758,17 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['field_pseudonyme']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_pseudonyme']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['sorts']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['sorts']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['sorts']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['sorts']['field_ismain_value']['order'] = 'DESC';
+  /* Critère de tri: Contenu : Contributor ID (field_contributor_id) */
+  $handler->display->display_options['sorts']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Critère de filtrage: Terme de taxonomie : Nom */
@@ -1767,13 +1778,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name']['value'] = 'auteur';
   $handler->display->display_options['filters']['name']['group'] = 1;
-  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
-  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
-  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
-    1 => '1',
-  );
 
   /* Display: Les autres fiche livre */
   $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_non_author');
