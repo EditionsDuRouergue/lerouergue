@@ -136,6 +136,8 @@ class ReadershipMigration extends Migration {
  * LEFT JOIN bookreadership br ON br.bookid=b.bookid
  * JOIN format f1 ON f1.formatid=b.formatid
  * LEFT JOIN format f2 ON f2.formatid=fp.finalformatid
+ * WHERE a.statusid <> 1
+ * AND b.projecttype <> 'PLV'
  * GROUP BY a.articleid
  * ORDER BY a.articleid ASC
 
@@ -183,6 +185,7 @@ class ArticleMigration extends Migration {
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
 		$query->addExpression("CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END",'format');
+		$query->condition('a.statusid','1','<>');
 		$query->condition('b.projecttype','PLV','<>');
 		$query->groupBy('a.articleid');
 		$query->orderBy('a.articleid', 'ASC');
