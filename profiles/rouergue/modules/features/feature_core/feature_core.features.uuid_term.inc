@@ -11,7 +11,7 @@ function feature_core_uuid_features_default_terms() {
   $terms = array();
 
   $terms[] = array(
-    'name' => 'Rouergue noir',
+    'name' => 'rouergue noir',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -44,7 +44,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'A la petite semaine',
+    'name' => 'à la petite semaine',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -86,7 +86,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Bâti',
+    'name' => 'bâti',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -107,7 +107,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'DoAdo noir',
+    'name' => 'doado noir',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -119,7 +119,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Histoire',
+    'name' => 'histoire',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -131,7 +131,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'A la petite semaine',
+    'name' => 'à la petite semaine',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -143,7 +143,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Rouergue en poche',
+    'name' => 'rouergue en poche',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -155,7 +155,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Cuisine',
+    'name' => 'cuisine',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -176,7 +176,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Botanique',
+    'name' => 'botanique',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -188,7 +188,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Essais',
+    'name' => 'essais',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -200,7 +200,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Grands chefs',
+    'name' => 'grands chefs',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -212,7 +212,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Aveyron',
+    'name' => 'aveyron',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -224,7 +224,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Grand format',
+    'name' => 'grand format',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -236,7 +236,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Epik SF/Fantasy',
+    'name' => 'Epik (Fantasy)',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 63,
@@ -245,7 +245,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Romans dès 6 ans',
+    'name' => 'romans dès 6 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -257,7 +257,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Polars',
+    'name' => 'polars',
     'description' => '',
     'format' => 'full_html',
     'weight' => 2,
@@ -281,7 +281,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Romans de société',
+    'name' => 'romans de société',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -293,7 +293,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Albums dès 4 ans',
+    'name' => 'albums dès 4 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -305,7 +305,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Toutazimute',
+    'name' => 'toutazimute',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -317,7 +317,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Romans dès 7 ans',
+    'name' => 'romans dès 7 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -329,7 +329,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Jardins',
+    'name' => 'jardins',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -341,7 +341,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Albums dès 6 ans',
+    'name' => 'albums dès 6 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -353,7 +353,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Ecologie',
+    'name' => 'écologie',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 4,
@@ -365,7 +365,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Voyages',
+    'name' => 'voyages',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -377,7 +377,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Santé',
+    'name' => 'santé',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -389,7 +389,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Objets littéraires',
+    'name' => 'objets littéraires',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -401,7 +401,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Comptines en continu',
+    'name' => 'comptines en continu',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 1,
@@ -413,7 +413,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Régions de France',
+    'name' => 'régions de France',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -425,7 +425,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'DoAdo',
+    'name' => 'doado',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -437,7 +437,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Art',
+    'name' => 'art',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -449,7 +449,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Société',
+    'name' => 'société',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -470,7 +470,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Romans dès 9 ans',
+    'name' => 'romans dès 9 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -482,8 +482,8 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'La Brune',
-    'description' => '',
+    'name' => 'la brune',
+    'description' => 'Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Vivamus suscipit tortor eget felis porttitor volutpat. Donec rutrum congue leo eget malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus nibh.',
     'format' => 'plain_text',
     'weight' => 0,
     'uuid' => 'aba0e77d-4004-47d1-83aa-0dcc982091ba',
@@ -494,7 +494,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Nature',
+    'name' => 'nature',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -506,7 +506,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'dacOdac',
+    'name' => 'dacodac',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -527,7 +527,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Romans de société',
+    'name' => 'romans de société',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 3,
@@ -539,7 +539,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Albums dès 2 ans',
+    'name' => 'albums dès 2 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -551,7 +551,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Vins',
+    'name' => 'vins',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -572,7 +572,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Romans graphiques',
+    'name' => 'romans graphiques',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -584,7 +584,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Boomerang',
+    'name' => 'boomerang',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 0,
@@ -596,7 +596,7 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Romans dès 8 ans',
+    'name' => 'romans dès 8 ans',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 2,
@@ -617,7 +617,7 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'Romans ados',
+    'name' => 'romans ados',
     'description' => '',
     'format' => 'plain_text',
     'weight' => 4,
