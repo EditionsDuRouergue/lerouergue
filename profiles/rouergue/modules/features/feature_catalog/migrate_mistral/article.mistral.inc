@@ -125,9 +125,9 @@ class ReadershipMigration extends Migration {
  * CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END AS format
  * FROM `article` a
  * JOIN book b ON b.bookid=a.bookid
- * LEFT JOIN collection c ON c.collectionid=b.collectionid
- * LEFT JOIN subcollection sc ON sc.subcollectionid=b.subcollectionid
- * LEFT JOIN series s ON s.seriesid=b.seriesid
+ * ////// LEFT JOIN collection c ON c.collectionid=b.collectionid
+ * ////// LEFT JOIN subcollection sc ON sc.subcollectionid=b.subcollectionid
+ * ////// LEFT JOIN series s ON s.seriesid=b.seriesid
  * JOIN commercialplan cp ON cp.articleid=a.articleid
  * JOIN fabricationplan fp ON fp.articleid=a.articleid
  * JOIN priceandtirage pt ON pt.articleid=a.articleid
@@ -146,7 +146,7 @@ class ArticleMigration extends Migration {
 	// Universes <-> Collections/Subcollections/Series mapping data
 	protected $univ_coll_mapping = array();
 	
-	protected $univ_tids = array();
+	protected $univ_uuids_tids = array();
 	
   public function __construct(array $arguments) {
     $this->arguments = $arguments;
@@ -160,9 +160,9 @@ class ArticleMigration extends Migration {
 		// SOURCE
 		$query = Database::getConnection('default', 'mistral')->select('article','a');
 		$query->join('book', 'b', 'b.bookid = a.bookid');
-		$query->leftJoin('collection', 'c', 'c.collectionid=b.collectionid');
-		$query->leftJoin('subcollection', 'sc', 'sc.subcollectionid=b.subcollectionid');
-		$query->leftJoin('series', 's', 's.seriesid=b.seriesid');
+		// $query->leftJoin('collection', 'c', 'c.collectionid=b.collectionid');
+		// $query->leftJoin('subcollection', 'sc', 'sc.subcollectionid=b.subcollectionid');
+		// $query->leftJoin('series', 's', 's.seriesid=b.seriesid');
 		$query->join('commercialplan','cp','cp.articleid=a.articleid');
 		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
 		$query->join('priceandtirage','pt','pt.articleid=a.articleid');
@@ -174,12 +174,12 @@ class ArticleMigration extends Migration {
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod'))
-		->fields('b', array('title','subtitle','resume','backcover'))
+		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover'))
 		->fields('rp', array('price'));
     $query->addField('fp','finalnbpage','nbpage');
-    $query->addField('c','name','collection');
-    $query->addField('sc','name','subcollection');
-    $query->addField('s','name','series');
+    // $query->addField('c','name','collection');
+    // $query->addField('sc','name','subcollection');
+		// $query->addField('s','name','series');
     $query->addField('pt','isvalidated','price_validated');
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
@@ -237,14 +237,14 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_universe', 'collection');
 		$this->addFieldMapping('field_universe:source_type')->defaultValue('tid');
 		
-		// UNIVERSE TERMS IDS FETCHING
-		if (empty($this->univ_tids)) {
+		// UNIVERSE TERMS IDs FETCHING
+		if (empty($this->univ_uuids_tids)) {
 			$this->rouergue_fetch_universe_terms_ids();
 		}
 		
 		// COLLECTIONS---UNIVERSES MAPPING
 		if (empty($this->univ_coll_mapping)) {
-			$this->rouergue_set_mapping();			
+			$this->rouergue_set_mapping();
 		}
 	}
 
@@ -264,8 +264,7 @@ class ArticleMigration extends Migration {
 		$row->backcover = html_entity_decode(strip_tags($text));
 		
 		// Rouergue universe granting based on Drupal universes/Mistral collections mapping.
-		$row->collection = $this->rouergue_get_universe_term_id($row->collection, $row->subcollection, $row->series);
-		
+		$row->collection = $this->rouergue_get_universe_term_id($row->collectionid, $row->subcollectionid, $row->seriesid);
 		if (empty($row->price_validated)) {
 			$row->price_validated = 0;
 		}
@@ -291,7 +290,7 @@ class ArticleMigration extends Migration {
 		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
 		
 		if(!isset($row->collection) || $row->collection == 0) {
-			watchdog('mistral', 'bookid = ' . $row->bookid . ', tid = ' . $row->collection);
+			watchdog('mistral', 'bookid = ' . $row->bookid);
 		}
 	}
 	
@@ -304,32 +303,45 @@ class ArticleMigration extends Migration {
 	 */
 	function rouergue_fetch_universe_terms_ids() {
 		$voc = taxonomy_vocabulary_machine_name_load('universe');
-		$tree = taxonomy_get_tree($voc->vid);
-			
-		$parents = array();
-		$previous_depth = 0;
-		foreach ($tree as $term) {
-			if ($term->depth == 0) {
-				$this->univ_tids[$term->name]['tid'] = $term->tid;
-				$parents = array();
-			}
-			else {
-				if($term->depth > $previous_depth) {
-					array_push($parents, $previous_term);
-				}
-				elseif ($term->depth < $previous_depth) {
-					array_pop($parents);
-				}
-				$this->rouergue_universes_insert($this->univ_tids, $parents, $term->name, $term->tid);
-			}
-			$previous_depth = $term->depth;
-			$previous_term = $term->name;
+		
+///////  Obsolete code, previously used to build universe vocabulary tree of names (to be kept, in case of).
+// 		$tree = taxonomy_get_tree($voc->vid);
+// 		$parents = array();
+// 		$previous_depth = 0;
+// 		foreach ($tree as $term) {
+// 			if ($term->depth == 0) {
+// 				$this->univ_tids[$term->name]['tid'] = $term->tid;
+// 				$parents = array();
+// 			}
+// 			else {
+// 				if($term->depth > $previous_depth) {
+// 					array_push($parents, $previous_term);
+// 				}
+// 				elseif ($term->depth < $previous_depth) {
+// 					array_pop($parents);
+// 				}
+// 				$this->rouergue_universes_insert($this->univ_tids, $parents, $term->name, $term->tid);
+// 			}
+// 			$previous_depth = $term->depth;
+// 			$previous_term = $term->name;
+
+		$query = new EntityFieldQuery();
+		$query->entityCondition('entity_type', 'taxonomy_term');
+		$query->propertyCondition('vid',$voc->vid);
+		$result = $query->execute();
+		
+		$terms = entity_load('taxonomy_term', array_keys($result['taxonomy_term']));
+		
+		$terms_uuids_tids = array();
+		foreach ($terms as $term) {
+			$this->univ_uuids_tids[$term->uuid] = $term->tid;
 		}
 	}
 	
 	/**
 	 * Inserts a term id in array $this->universe_tids.
-	 * Used by previous function rouergue_fetch_universe_terms_ids().
+	 * Used by previous version of function rouergue_fetch_universe_terms_ids().
+	 * To be kept, in case of.
 	 * 
 	 * @param array $array
 	 *   The array storing terms ids.
@@ -340,162 +352,452 @@ class ArticleMigration extends Migration {
 	 * @param int $tid
 	 *   The tid to store.
 	 */
-	function rouergue_universes_insert(&$array, $keys, $term, $tid) {
-		foreach($keys as $key) {
-			if(!array_key_exists($key, $array) || array_key_exists($key, $array) && !is_array($array[$key])) {
-				$array[$key] = array();
-			}
-			$array = &$array[$key];
-		}
-		$array[$term]['tid'] = $tid;
-	}
+// 	function rouergue_universes_insert(&$array, $keys, $term, $tid) {
+// 		foreach($keys as $key) {
+// 			if(!array_key_exists($key, $array) || array_key_exists($key, $array) && !is_array($array[$key])) {
+// 				$array[$key] = array();
+// 			}
+// 			$array = &$array[$key];
+// 		}
+// 		$array[$term]['tid'] = $tid;
+// 	}
 	
 	/**
 	 * Stores mapping between Mistral Collection/Subcollection/Series and Drupal Universes terms
 	 * in array $this->univ_coll_mapping.
+	 * 
+	 * Mapping is based on uuid (Drupal side) and collectionid, subcollectionid, seriesid values instead of name values
+	 * to prevent any name change, in Drupal as well as in Mistral, to break the mapping system.
+	 * 
+	 * Univers terms uuid values are displayed by the view 'Utils (Taxo)', display 'UUID des univers'.
+	 * View url = /uuids-univers
+	 * 
+	 * And collectionid, subcollectionid, seriesid can be retrieved from mistral dump using the following sql query :
+	 * 
+	 * SELECT c.collectionid, c.name, sc.subcollectionid, sc.name, s.seriesid, s.name
+	 * FROM collection c
+	 * left join subcollection sc on sc.collectionid=c.collectionid
+	 * left join series s on s.subcollectionid=sc.subcollectionid
+	 * where c.name <> 'NE PAS UTILISER - ROUERGUE4'
+	 * and c.name <> 'PLV'
+	 * order by c.name asc, sc.name asc, s.name asc
 	 */
 	function rouergue_set_mapping() {
-		//-------------------- Numérique --------------------
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['dacOdac'] = $this->univ_tids['Numérique']['dacodac'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['dacOdac']['dacOdac illustrée'] = $this->univ_tids['Numérique']['dacodac'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['DoAdo'] = $this->univ_tids['Numérique']['doado'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['DoAdo noir'] = $this->univ_tids['Numérique']['doado noir'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE JEUNESSE']['Epik'] = $this->univ_tids['Numérique']['epik'];
+		//************************************************** Rouergue Albums Jeunesse ***********************************************************************
+		// Rouergue Albums Jeunesse - 496 | 12x12 - 522   ===>   Albums jeunesse > Albums dès 2 ans > 12 x 12 - 01014525-94b0-414e-acd9-7ccc6eda4dc7
+		$this->univ_coll_mapping['496']['522']['tid'] = $this->univ_uuids_tids['01014525-94b0-414e-acd9-7ccc6eda4dc7'];
 		
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['La Brune'] = $this->univ_tids['Numérique']['la brune'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['Polar'] = $this->univ_tids['Numérique']['polars'];
-		$this->univ_coll_mapping['ROUERGUE NUMERIQUE TEXTE']['Roman de société (NUM)'] = $this->univ_tids['Numérique']['romans de société'];
+		// Rouergue Albums Jeunesse - 496 | à la petite semaine - 571   ===>   Albums jeunesse > Albums dès 6 ans > à la petite semaine - 1875786a-6d12-4e8b-8786-a7dcc77cd95d
+		$this->univ_coll_mapping['496']['571']['tid'] = $this->univ_uuids_tids['1875786a-6d12-4e8b-8786-a7dcc77cd95d'];
 		
-		//-------------------- Beaux Livres --------------------
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['tid'] = $this->univ_tids['Art & Histoire']['art']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['art']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['Cuisine']['tid'] = $this->univ_tids['Art & Histoire']['art']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['Nature']['tid'] = $this->univ_tids['Art & Histoire']['art']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Art (Rouergue Bx Livres)']['Société']['tid'] = $this->univ_tids['Art & Histoire']['art']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Aveyron (Rouergue Bx Lvres)']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Aveyron (Rouergue Bx Lvres)']['Cuisine']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Botanique (Rouergue Bx Lvres)']['tid'] = $this->univ_tids['Nature & Jardins']['botanique']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie (Rouergue Bx Livres)']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie (Rouergue Bx Livres)']['Grand Chef']['tid'] = $this->univ_tids['Gastronomie']['grands chefs']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Gastronomie (Rouergue Bx Livres)']['Vins']['tid'] = $this->univ_tids['Gastronomie']['vins']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['jardins']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['Région']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['Vins']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Histoire (Rouergue Bx Livres)']['Voyages']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Aveyron']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Bati']['tid'] = $this->univ_tids['Nature & Jardins']['bâti']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Cuisine']['tid'] = $this->univ_tids['Nature & Jardins']['nature']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['jardins']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Région']['tid'] = $this->univ_tids['Nature & Jardins']['nature']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['Voyages']['tid'] = $this->univ_tids['Nature & Jardins']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Nature (Rouergue Bx Livres)']['tid'] = $this->univ_tids['Nature & Jardins']['nature']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Objet Littéraire']['Art']['tid'] = $this->univ_tids['Littérature']['objets littéraires']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Objet Littéraire']['Objet littéraire']['tid'] = $this->univ_tids['Littérature']['objets littéraires']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Polar']['tid'] = $this->univ_tids['Littérature']['polars']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Polar']['Voyages']['tid'] = $this->univ_tids['Littérature']['polars']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['tid'] = $this->univ_tids['Régions']['régions de France']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Bati']['tid'] = $this->univ_tids['Nature & Jardins']['bâti']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Grand Chef']['tid'] = $this->univ_tids['Gastronomie']['grands chefs']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Région']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Santé']['tid'] = $this->univ_tids['Gastronomie']['santé']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['tid'] = $this->univ_tids['Art & Histoire']['société']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Aveyron']['tid'] = $this->univ_tids['Art & Histoire']['société']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Cuisine']['tid'] = $this->univ_tids['Art & Histoire']['société']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Histoire']['tid'] = $this->univ_tids['Art & Histoire']['histoire']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Société']['Région']['tid'] = $this->univ_tids['Art & Histoire']['société']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['tid'] = $this->univ_tids['Régions']['voyages']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Beaux Livres']['Voyages']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['jardins']['tid'];
+		// Rouergue Albums Jeunesse - 496 | albums - 523 | album dès 2 ans - 154   ===>   Albums jeunesse > Albums dès 2 ans - c536a140-ecd1-4080-9e71-eb2977f5e55f
+		$this->univ_coll_mapping['496']['523']['154']['tid'] = $this->univ_uuids_tids['c536a140-ecd1-4080-9e71-eb2977f5e55f'];
 		
-		//-------------------- Littérature --------------------
-		$this->univ_coll_mapping['Rouergue Littérature']['Aveyron (Rouergue Litté)']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Aveyron (Rouergue Litté)']['Cuisine']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Ecologie (Rouergue Littérature)']['Cuisine']['tid'] = $this->univ_tids['Nature & Jardins']['écologie']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['La Brune']['tid'] = $this->univ_tids['Littérature']['la brune']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Divers']['tid'] = $this->univ_tids['Littérature']['divers']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Objet littéraire (Rouergue Litté)']['tid'] = $this->univ_tids['Littérature']['objets littéraires']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Polar (Rouergue Litté)']['Assassins sans visage']['tid'] = $this->univ_tids['Littérature']['polars']['assassins sans visage']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Polar (Rouergue Litté)']['rouergue noir']['tid'] = $this->univ_tids['Littérature']['polars']['rouergue noir']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['tid'] = $this->univ_tids['Littérature']['romans de société']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Roman de société']['Témoignage']['tid'] = $this->univ_tids['Littérature']['romans de société']['témoignage']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Rouergue en Poche']['tid'] = $this->univ_tids['Littérature']['romans de société']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Témoignage (Rouergue Littérature)']['Aveyron']['tid'] = $this->univ_tids['Littérature']['romans de société']['témoignage']['tid'];
-		$this->univ_coll_mapping['Rouergue Littérature']['Témoignage (Rouergue Littérature)']['Jardins']['tid'] = $this->univ_tids['Littérature']['romans de société']['témoignage']['tid'];
+		// Rouergue Albums Jeunesse - 496 | albums - 523 | album dès 4 ans - 155   ===>   Albums jeunesse > Albums dès 4 ans  - 6f0d710e-3dd0-466b-9eb8-661c179170a9
+		$this->univ_coll_mapping['496']['523']['155']['tid'] = $this->univ_uuids_tids['6f0d710e-3dd0-466b-9eb8-661c179170a9'];
 		
-		//-------------------- Livres pratiques --------------------
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Aveyron']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Aveyron']['tid'] = $this->univ_tids['Régions']['aveyron']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Aveyron']['tid'] = $this->univ_tids['Nature & Jardins']['botanique']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['jardins']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['Région']['tid'] = $this->univ_tids['Nature & Jardins']['botanique']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Botanique']['tid'] = $this->univ_tids['Nature & Jardins']['botanique']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Jardins']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Cuisine']['Vins']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie (Rouergue Pratique)']['Bati']['tid'] = $this->univ_tids['Nature & Jardins']['bâti']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie (Rouergue Pratique)']['Jardins']['tid'] = $this->univ_tids['Nature & Jardins']['écologie']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Ecologie (Rouergue Pratique)']['tid'] = $this->univ_tids['Nature & Jardins']['écologie']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Gastronomie (Rouergue Pratique)']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Gastronomie (Rouergue Pratique)']['Grand Chef']['tid'] = $this->univ_tids['Gastronomie']['grands chefs']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature (Rouergue Pratique)']['Jardins']['tid'] =  $this->univ_tids['Nature & Jardins']['jardins']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature (Rouergue Pratique)']['Région']['tid'] =  $this->univ_tids['Nature & Jardins']['nature']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Nature (Rouergue Pratique)']['tid'] =  $this->univ_tids['Nature & Jardins']['nature']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Région (Rouergue Pratique)']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
-		$this->univ_coll_mapping['Rouergue Livres Pratiques']['Santé (Rouergue Pratique)']['Cuisine']['tid'] = $this->univ_tids['Gastronomie']['cuisine']['tid'];
+		// Rouergue Albums Jeunesse - 496 | albums - 523 | album dès 6 ans - 156   ===>   Albums jeunesse > Albums dès 6 ans - 7f31083c-7346-459e-9ec5-f44936788c0e
+		$this->univ_coll_mapping['496']['523']['156']['tid'] = $this->univ_uuids_tids['7f31083c-7346-459e-9ec5-f44936788c0e'];
 		
-		//-------------------- Albums Jeunesse --------------------
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['12x12']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 2 ans']['12x12']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['à la petite semaine']['tid'] = $this->univ_tids['Romans Jeunesse']['romans dès 8 ans']['à la petite semaine']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']['album dès 2 ans']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 2 ans']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']['album dès 4 ans']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 4 ans']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']['album dès 6 ans']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 6 ans']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']["catalogue d'exposition"]['tid'] = $this->univ_tids['Albums Jeunesse']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['albums (rouergue)']['essais']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 6 ans']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['comptines en continu']['tid'] = $this->univ_tids['Albums Jeunesse']['albums dès 2 ans']['comptines en continu']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['livre graphique']['roman graphique']['tid'] = $this->univ_tids['Graphisme & Illustrations']['romans graphiques']['tid'];
-		$this->univ_coll_mapping['Rouergue Albums Jeunesse']['livre graphique']['touzazimute']['tid'] = $this->univ_tids['Graphisme & Illustrations']['toutazimute']['tid'];
+		// Rouergue Albums Jeunesse - 496 | albums - 523 | catalogue d'exposition - 131   ===>   Graphisme & Illustrations > Catalogues d'exposition - e2c94656-1a56-402b-a016-81e7455633d2
+		$this->univ_coll_mapping['496']['523']['131']['tid'] = $this->univ_uuids_tids['e2c94656-1a56-402b-a016-81e7455633d2'];
 		
-		//-------------------- Essais Jeunesse --------------------
-		$this->univ_coll_mapping['Rouergue Essai Jeunesse']['tid'] = $this->univ_tids['Graphisme & Illustrations']['essais']['tid'];
+		// Rouergue Albums Jeunesse - 496 | albums - 523 | essais - 132   ===>   Graphisme & Illustrations > Essais - 53c9815b-ac19-4b74-8abb-a727270582bd
+		$this->univ_coll_mapping['496']['523']['132']['tid'] = $this->univ_uuids_tids['53c9815b-ac19-4b74-8abb-a727270582bd'];
 		
-		//-------------------- Romans Jeunesse --------------------
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tid'] = $this->univ_tids['Romans Jeunesse']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['boomerang']['tid'] = $this->univ_tids['Romans Jeunesse']['romans dès 7 ans']['boomerang']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['dacodac']['tid'] = $this->univ_tids['Romans Jeunesse']['romans dès 9 ans']['dacodac']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['doado']['tid'] = $this->univ_tids['Romans Jeunesse']['romans ados']['doado']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['doado noir']['tid'] = $this->univ_tids['Romans Jeunesse']['romans ados']['doado noir']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['epik']['tid'] = $this->univ_tids['Epik (Fantasy)']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['tic tac']['tid'] = $this->univ_tids['Romans Jeunesse']['romans dès 6 ans']['tic tac']['tid'];
-		$this->univ_coll_mapping['Rouergue Romans Jeunesse']['zig zag']['tid'] = $this->univ_tids['Romans Jeunesse']['romans dès 8 ans']['zig zag']['tid'];
+		// Rouergue Albums Jeunesse - 496 | comptines en continu - 524   ===>   Albums jeunesse > Albums dès 2 ans > comptines en continu - 904edf51-1d02-40a7-bfc4-54004970a09a
+		$this->univ_coll_mapping['496']['524']['tid'] = $this->univ_uuids_tids['904edf51-1d02-40a7-bfc4-54004970a09a'];
+		
+		// Rouergue Albums Jeunesse - 496 | livre graphique - 525 | roman graphique - 133   ===>   Graphisme & Illustrations > Romans graphiques - e0e69acb-e53c-41af-bcbb-085df9bd1cf9
+		$this->univ_coll_mapping['496']['525']['133']['tid'] = $this->univ_uuids_tids['e0e69acb-e53c-41af-bcbb-085df9bd1cf9'];
+		
+		// Rouergue Albums Jeunesse - 496 | livre graphique - 525 | touzazimute - 134   ===>   Graphisme & Illustrations > Touzazimute - 75291089-f665-47fc-96c5-eba17480b851
+		$this->univ_coll_mapping['496']['525']['134']['tid'] = $this->univ_uuids_tids['75291089-f665-47fc-96c5-eba17480b851'];
+		
+		//************************************************** Rouergue Beaux Livres **************************************************************************
+		// Rouergue Beaux Livres  - 495 | Art - 512   ===>  Art & Histoire  > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		$this->univ_coll_mapping['495']['512']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		
+		// Rouergue Beaux Livres  - 495 | Art - 512 | Aveyron - 99  ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		// -------------------------------------------------------  ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['495']['512']['99']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		/* $this->univ_coll_mapping['495']['512']['99']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Art - 512 | Cuisine - 100  ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		// --------------------------------------------------------  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['512']['100']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		/* $this->univ_coll_mapping['495']['512']['100']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Art - 512 | Histoire - 101  ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		// ---------------------------------------------------------  ===>  Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		$this->univ_coll_mapping['495']['512']['101']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		/* $this->univ_coll_mapping['495']['512']['101']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Art - 512 | Nature - 102  ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		// -------------------------------------------------------  ===>   Nature & Jardins > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		$this->univ_coll_mapping['495']['512']['102']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		/* $this->univ_coll_mapping['495']['512']['102']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Art - 512 | Société - 103  ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		// --------------------------------------------------------  ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		$this->univ_coll_mapping['495']['512']['103']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a'];
+		/* $this->univ_coll_mapping['495']['512']['103']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Aveyron - 1130  ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['495']['1130']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		
+		// Rouergue Beaux Livres  - 495 | Aveyron - 1130 | Cuisine - 104  ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		// -------------------------------------------------------------  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['1130']['104']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		/* $this->univ_coll_mapping['495']['1130']['104']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Botanique - 1131   ===>  Nature & Jardins > Botanique - 48169487-b368-480b-83a4-46ddb4205188
+		$this->univ_coll_mapping['495']['1131']['tid'] = $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 513   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		$this->univ_coll_mapping['495']['513']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		
+		// Rouergue Beaux Livres  - 495 | Gastronomie - 515 | Cuisine - 105   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['515']['105']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+		
+		// Rouergue Beaux Livres  - 495 | Gastronomie - 515 | Grand Chef - 106   ===>   Gastronomie > Grands Chefs - 557341af-5bdc-4f6f-8a24-a368f78c524b
+		$this->univ_coll_mapping['495']['515']['106']['tid'] = $this->univ_uuids_tids['557341af-5bdc-4f6f-8a24-a368f78c524b'];
+		
+		// Rouergue Beaux Livres  - 495 | Gastronomie - 515 | Vins - 107   ===>   Gastronomie > Vins - c838c944-79ea-4767-be9b-f66f87756c86
+		$this->univ_coll_mapping['495']['515']['107']['tid'] = $this->univ_uuids_tids['c838c944-79ea-4767-be9b-f66f87756c86'];
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		$this->univ_coll_mapping['495']['1132']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132 | Aveyron - 108   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		// ---------------------------------------------------------------  ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['495']['1132']['108']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		/* $this->univ_coll_mapping['495']['1132']['108']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132 | Jardins - 109   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		// ---------------------------------------------------------------  ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['495']['1132']['109']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		/* $this->univ_coll_mapping['495']['1132']['109']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132 | Région - 110   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		// -------------------------------------------------------------   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['495']['1132']['110']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		/* $this->univ_coll_mapping['495']['1132']['110']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132 | Vins - 111   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		// -----------------------------------------------------------   ===>   Gastronomie > Vins - c838c944-79ea-4767-be9b-f66f87756c86
+		$this->univ_coll_mapping['495']['1132']['111']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		/* $this->univ_coll_mapping['495']['1132']['111']['tid'] = $this->univ_uuids_tids['c838c944-79ea-4767-be9b-f66f87756c86']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Histoire - 1132 | Voyages - 112   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		// --------------------------------------------------------------   ===>   Régions > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		$this->univ_coll_mapping['495']['1132']['112']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81'];
+		/* $this->univ_coll_mapping['495']['1132']['112']['tid'] = $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Aveyron - 113   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['495']['1133']['113']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['113']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Bati - 114   ===> Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ---------------------------------------------------------   ===>  Nature & Jardin > Bâti - 287736de-2aeb-48bd-a91d-5510b786ccaf
+		$this->univ_coll_mapping['495']['1133']['114']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['114']['tid'] = $this->univ_uuids_tids['287736de-2aeb-48bd-a91d-5510b786ccaf']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Cuisine - 115   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['1133']['115']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['115']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Jardins - 116   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['495']['1133']['116']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['116']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Région - 117   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ------------------------------------------------------------   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['495']['1133']['117']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['117']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Nature - 1133 | Voyages - 118   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		// ------------------------------------------------------------   ===>   Régions  > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		$this->univ_coll_mapping['495']['1133']['118']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['495']['1133']['118']['tid'] = $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
+		$this->univ_coll_mapping['495']['1134']['tid'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+			
+		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134 | Art - 119   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		// ------------------------------------------------------------------   ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
+		$this->univ_coll_mapping['495']['1134']['119']['tid'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
+		/* $this->univ_coll_mapping['495']['1134']['119']['tid'] = $this->univ_uuids_tids['9e65659d-3259-480c-a3f6-5fb69acef58a']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134 | Objet littéraire - 157    ===>   ??????????????????????????????????????????????????????????
+		// ?????
+		
+		// Rouergue Beaux Livres  - 495 | Polar - 1135   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		$this->univ_coll_mapping['495']['1135']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		
+		// Rouergue Beaux Livres  - 495 | Région - 1136   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['495']['1136']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
+		
+		// Rouergue Beaux Livres  - 495 | Région - 1136 | Bati - 121   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		// ---------------------------------------------------------   ===>   Nature & Jardin > Bâti - 287736de-2aeb-48bd-a91d-5510b786ccaf
+		$this->univ_coll_mapping['495']['1136']['121']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
+		/* $this->univ_coll_mapping['495']['1136']['121']['tid'] = $this->univ_uuids_tids['287736de-2aeb-48bd-a91d-5510b786ccaf']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Région - 1136 | Grand Chef - 122   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		// ---------------------------------------------------------------   ===>   Gastronomie > Grands Chefs - 557341af-5bdc-4f6f-8a24-a368f78c524b
+		$this->univ_coll_mapping['495']['1136']['122']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
+		/* $this->univ_coll_mapping['495']['1136']['122']['tid'] = $this->univ_uuids_tids['557341af-5bdc-4f6f-8a24-a368f78c524b']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Région - 1136 | Histoire - 123   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		// -------------------------------------------------------------   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		$this->univ_coll_mapping['495']['1136']['123']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
+		/* $this->univ_coll_mapping['495']['1136']['123']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Santé - 1137   ===>   Gastronomie > Santé - 85b490bb-bfae-46e2-9a1f-130057789068
+		$this->univ_coll_mapping['495']['1137']['tid'] = $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'];
+		
+		// Rouergue Beaux Livres  - 495 | Société - 517   ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		$this->univ_coll_mapping['495']['517']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481'];
+		
+		// Rouergue Beaux Livres  - 495 | Société - 517 | Aveyron - 124   ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		// ------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['495']['517']['124']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481'];
+		/* $this->univ_coll_mapping['495']['517']['124']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Société - 517 | Cuisine - 125   ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		// ------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['517']['125']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481'];
+		/* $this->univ_coll_mapping['495']['517']['125']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Société - 517 | Histoire - 126   ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		// -------------------------------------------------------------   ===>   Art & Histoire > Histoire - 2a9aceff-4613-4b1e-aa0b-f902a13b6f81
+		$this->univ_coll_mapping['495']['517']['126']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481'];
+		/* $this->univ_coll_mapping['495']['517']['126']['tid'] = $this->univ_uuids_tids['2a9aceff-4613-4b1e-aa0b-f902a13b6f81']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Société - 517 | Région - 127   ===>   Art & Histoire > Société - a34c3c50-a9d8-4c67-81d3-b64581938481
+		// -----------------------------------------------------------   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['495']['517']['127']['tid'] = $this->univ_uuids_tids['a34c3c50-a9d8-4c67-81d3-b64581938481'];
+		/* $this->univ_coll_mapping['495']['517']['127']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Voyages - 518  ===>   Régions > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		$this->univ_coll_mapping['495']['518']['tid'] = $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3'];
+		
+		// Rouergue Beaux Livres  - 495 | Voyages - 518 | Cuisine - 128   ===>   Régions > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		// ------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['495']['518']['128']['tid'] = $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3'];
+		/* $this->univ_coll_mapping['495']['518']['128']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Beaux Livres  - 495 | Voyages - 518 | Jardins - 130   ===>   Régions > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		// ------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['495']['518']['130']['tid'] = $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3'];
+		/* $this->univ_coll_mapping['495']['518']['130']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		//************************************************** Rouergue Essai Jeunesse ************************************************************************
+		// Rouergue Essai Jeunesse - 606   ===>   Graphisme & Illustrations > Essais - 53c9815b-ac19-4b74-8abb-a727270582bd
+		$this->univ_coll_mapping['606']['tid'] = $this->univ_uuids_tids['53c9815b-ac19-4b74-8abb-a727270582bd'];
+		
+		//************************************************** Rouergue Littérature ***************************************************************************
+		// Rouergue Littérature - 493 | Aveyron - 1139   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['493']['1139']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		
+		// Rouergue Littérature - 493 | Aveyron - 1139 | Cuisine - 135   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		// ------------------------------------------------------------  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['493']['1139']['135']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		/* $this->univ_coll_mapping['493']['1139']['135']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Littérature - 493 | Ecologie - 1149 | Cuisine - 135   ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+		// ------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['493']['1149']['135']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+		/* $this->univ_coll_mapping['493']['1149']['135']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Littérature - 493 | La Brune - 509   ===>   Littérature > La brune - aba0e77d-4004-47d1-83aa-0dcc982091ba
+		$this->univ_coll_mapping['493']['509']['tid'] = $this->univ_uuids_tids['aba0e77d-4004-47d1-83aa-0dcc982091ba'];
+		
+		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
+		$this->univ_coll_mapping['493']['1140']['tid'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+		
+		// Rouergue Littérature - 493 | Polar - 510   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		$this->univ_coll_mapping['493']['510']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		
+		// Rouergue Littérature - 493 | Polar - 510 | Assassins sans visage - 136   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		$this->univ_coll_mapping['493']['510']['136']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		
+		// Rouergue Littérature - 493 | Polar - 510 | rouergue noir - 137   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		$this->univ_coll_mapping['493']['510']['136']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		
+		// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		$this->univ_coll_mapping['493']['511']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		
+		// Rouergue Littérature - 493 | Roman de société - 511 | Témoignage - 138   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		$this->univ_coll_mapping['493']['511']['138']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		
+		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		$this->univ_coll_mapping['493']['943']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		
+		// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		// --------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['493']['1141']['139']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		/* $this->univ_coll_mapping['493']['1141']['139']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Littérature - 493 | Témoignage - 1141 | Jardins - 159   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		// --------------------------------------------------------------   ===>    Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['493']['1141']['139']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		/* $this->univ_coll_mapping['493']['1141']['139']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		//************************************************** Rouergue Livres Pratiques **********************************************************************
+		// Rouergue Livres Pratiques - 494 | Aveyron - 1142   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['494']['1142']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		
+		// Rouergue Livres Pratiques - 494 | Aveyron - 1142 | Cuisine - 140   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		// ----------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['494']['1142']['140']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+		/* $this->univ_coll_mapping['494']['1142']['140']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Botanique - 1143 | Aveyron - 141   ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
+		// ------------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		$this->univ_coll_mapping['494']['1143']['141']['tid'] = $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
+		/* $this->univ_coll_mapping['494']['1143']['141']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Botanique - 1143 | Jardins - 142   ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
+		// ------------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['494']['1143']['142']['tid'] = $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
+		/* $this->univ_coll_mapping['494']['1143']['142']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Botanique - 1143 | Région - 143   ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
+		// -----------------------------------------------------------------   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['494']['1143']['143']['tid'] = $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
+		/* $this->univ_coll_mapping['494']['1143']['143']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Cuisine - 1143 | Jardins - 144   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		// ----------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['494']['1143']['144']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+		/* $this->univ_coll_mapping['494']['1143']['144']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Cuisine - 1143 | Vins - 150   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		// -------------------------------------------------------------   ===>   Gastronomie > Vins - c838c944-79ea-4767-be9b-f66f87756c86
+		$this->univ_coll_mapping['494']['1143']['150']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+		/* $this->univ_coll_mapping['494']['1143']['150']['tid'] = $this->univ_uuids_tids['c838c944-79ea-4767-be9b-f66f87756c86']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Ecologie - 1144   ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+		$this->univ_coll_mapping['494']['1144']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+		
+		// Rouergue Livres Pratiques - 494 | Ecologie - 1144 | Bati - 145  ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+		// -------------------------------------------------------------   ===>   Nature & Jardin > Bâti - 287736de-2aeb-48bd-a91d-5510b786ccaf
+		$this->univ_coll_mapping['494']['1144']['145']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+		/* $this->univ_coll_mapping['494']['1144']['145']['tid'] = $this->univ_uuids_tids['287736de-2aeb-48bd-a91d-5510b786ccaf']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Ecologie - 1144 | Jardins - 146  ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+		// -------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['494']['1144']['146']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+		/* $this->univ_coll_mapping['494']['1144']['146']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Gastronomie - 1145 | Cuisine - 147  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['494']['1145']['147']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+		
+		// Rouergue Livres Pratiques - 494 | Gastronomie - 1145 | Grand Chef - 148  ===>   Gastronomie > Grands Chefs - 557341af-5bdc-4f6f-8a24-a368f78c524b
+		$this->univ_coll_mapping['494']['1145']['148']['tid'] = $this->univ_uuids_tids['557341af-5bdc-4f6f-8a24-a368f78c524b'];
+		
+		// Rouergue Livres Pratiques - 494 | Nature - 521  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		$this->univ_coll_mapping['494']['521']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		
+		// Rouergue Livres Pratiques - 494 | Nature - 521 | Jardins - 149  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		//---------------------------------------------------------------  ===>    Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['494']['521']['149']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['494']['521']['149']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Nature - 521 | Région - 151  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+		//--------------------------------------------------------------  ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		$this->univ_coll_mapping['494']['']['521']['151']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+		/* $this->univ_coll_mapping['494']['']['521']['151']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Région - 1146 | Cuisine - 152  ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
+		//----------------------------------------------------------------  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['494']['1146']['152']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
+		/* $this->univ_coll_mapping['494']['1146']['152']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Livres Pratiques - 494 | Santé - 1147 | Cuisine - 153  ===> Gastronomie > Santé - 85b490bb-bfae-46e2-9a1f-130057789068
+		//---------------------------------------------------------------  ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['494']['1147']['153']['tid'] = $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'];
+		/*$this->univ_coll_mapping['494']['1147']['153']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		//************************************************** ROUERGUE NUMÉRIQUE JEUNESSE *********************************************************************
+		// ROUERGUE NUMÉRIQUE JEUNESSE - 463 | dacodac - 995   ===>   Livres numériques > dacodac - 0af3c4aa-630d-48a0-98ca-51752eba0778
+		$this->univ_coll_mapping['463']['995']['tid'] = $this->univ_uuids_tids['0af3c4aa-630d-48a0-98ca-51752eba0778'];
+		
+		// ROUERGUE NUMÉRIQUE JEUNESSE - 463 | doado - 1009   ===>   Livres numériques > doado  - faaf7a44-b11c-478a-b05f-e2ca1892f5b7
+		$this->univ_coll_mapping['463']['1009']['tid'] = $this->univ_uuids_tids['faaf7a44-b11c-478a-b05f-e2ca1892f5b7'];
+		
+		// ROUERGUE NUMÉRIQUE JEUNESSE  - 463 | doado noir - 1010   ===>   Livres numériques > doado noir  - 4269d4f5-45c0-4629-abab-b5d15e824200
+		$this->univ_coll_mapping['463']['1010']['tid'] = $this->univ_uuids_tids['4269d4f5-45c0-4629-abab-b5d15e824200'];
+		
+		// ROUERGUE NUMÉRIQUE JEUNESSE  - 463 | epik - 1082   ===>   Livres numériques > epik - 8c1782e1-88a6-4aac-87d7-4d29ed483c9b
+		$this->univ_coll_mapping['463']['1082']['tid'] = $this->univ_uuids_tids['8c1782e1-88a6-4aac-87d7-4d29ed483c9b'];
+		
+		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | la brune - 1011   ===>   Livres numériques > la brune - ce61d6fc-faa2-47f8-a6e9-976257d809d8
+		$this->univ_coll_mapping['462']['1011']['tid'] = $this->univ_uuids_tids['ce61d6fc-faa2-47f8-a6e9-976257d809d8'];
+		
+		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Polars - 1013  ===>   Livres numériques > polar - 2796300b-4322-4e79-8dcf-f3d7447c31dd
+		$this->univ_coll_mapping['462']['1013']['tid'] = $this->univ_uuids_tids['2796300b-4322-4e79-8dcf-f3d7447c31dd'];
+		
+		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans de société - 1013  ===>   Livres numériques > roman de société - 13c26811-5ade-4018-b8bb-5642b42fc1da
+		$this->univ_coll_mapping['462']['1013']['tid'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
+		
+		//************************************************** Rouergue Romans Jeunesse **********************************************************************
+		// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
+		$this->univ_coll_mapping['497']['526']['tid'] = $this->univ_uuids_tids['e6aea4fd-4293-40c5-beab-f90ddae63def'];
+		
+		// Rouergue Romans Jeunesse - 497 | dacodac - 527  ===>   Romans jeunesse > Romans dès 9 ans > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
+		$this->univ_coll_mapping['497']['527']['tid'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
+		
+		// Rouergue Romans Jeunesse - 497 | doado - 528   ===>   Romans jeunesse > Romans ados > doado - 950d4168-1130-460f-902e-46a961b7ad69
+		$this->univ_coll_mapping['497']['528']['tid'] = $this->univ_uuids_tids['950d4168-1130-460f-902e-46a961b7ad69'];
+		
+		// Rouergue Romans Jeunesse - 497 | doado noir - 529   ===>   Romans jeunesse > Romans ados > doado noir - 2a73fe7d-1781-42b7-8127-dd7a268d6bdd
+		$this->univ_coll_mapping['497']['529']['tid'] = $this->univ_uuids_tids['2a73fe7d-1781-42b7-8127-dd7a268d6bdd'];
+		
+		// Rouergue Romans Jeunesse - 497 | epik - 1083   ===>   Épik SF - Fantasy - 5ea55aec-1f9b-4ff9-a577-2ff4e9076370
+		$this->univ_coll_mapping['497']['1083']['tid'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370'];
+		
+		// Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - 238c7664-3155-4a75-8d18-ee167c39fa2c
+		$this->univ_coll_mapping['497']['532']['tid'] = $this->univ_uuids_tids['238c7664-3155-4a75-8d18-ee167c39fa2c'];
+		
+		// Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans dès 8 ans > zig zag - 652fe62a-ec9a-43b9-8443-9c44f9ebb44d
+		$this->univ_coll_mapping['497']['530']['tid'] = $this->univ_uuids_tids['652fe62a-ec9a-43b9-8443-9c44f9ebb44d'];
+		
+/*
+$this->univ_coll_mapping[''] = $this->univ_uuids_tids[''];
+$this->univ_coll_mapping[''][''] = $this->univ_uuids_tids[''];
+$this->univ_coll_mapping[''][''][''] = $this->univ_uuids_tids[''];
+double classement non encore développé 
+*/
 	}
 	
 	/**
 	 * Returns universe term id that matches the Mistral's collection, subcollection, series values of row being imported.
 	 *
-	 * @param string $collection
+	 * @param string $collectionid
 	 *   The collection the imported book belongs to.
-	 * @param string $subcollection
+	 * @param string $subcollectionid
 	 *   The subcollection the imported book belongs to.
-	 * @param string $series
+	 * @param string $seriesid
 	 *   The series the imported book belongs to.
 	 *
 	 * @return
 	 *   the tid of the Univers term the book has to be linked to.
 	 */
-	function rouergue_get_universe_term_id($collection, $subcollection, $series) {
+	function rouergue_get_universe_term_id($collectionid, $subcollectionid, $seriesid) {
 		$term_id = 0;
-		if (isset($series)) {
-			$term_id = $this->univ_coll_mapping[$collection][$subcollection][$series]['tid'];
+		if (isset($seriesid) && $seriesid != 0) {
+			$term_id = $this->univ_coll_mapping[$collectionid][$subcollectionid][$seriesid]['tid'];
 		}
-		else if (isset($subcollection)) {
-			$term_id = $this->univ_coll_mapping[$collection][$subcollection]['tid'];
+		else if (isset($subcollectionid) && $subcollectionid != 0) {
+			$term_id = $this->univ_coll_mapping[$collectionid][$subcollectionid]['tid'];
 		}
 		else {
-			$term_id = $this->univ_coll_mapping[$collection]['tid'];
+			$term_id = $this->univ_coll_mapping[$collectionid]['tid'];
 		}
 		return $term_id;
 	}
