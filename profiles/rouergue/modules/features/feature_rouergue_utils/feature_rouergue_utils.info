@@ -1,0 +1,12 @@
+name = Feature Rouergue Utils
+core = 7.x
+package = App
+version = 7.x-1.0
+project = feature_rouergue_utils
+dependencies[] = views
+dependencies[] = views_tree
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = tests_taxo
+features_exclude[dependencies][ctools] = ctools
+project path = profiles/rouergue/modules/features
