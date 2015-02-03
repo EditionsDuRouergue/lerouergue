@@ -5,7 +5,6 @@ GLOBAL STYLES
 */
 
 h1, h2, h3 {
-  color: #666666;
 }
 
 h1.page-header {
@@ -19,7 +18,7 @@ h2.block-title {
 
 
 h4, h5, h6, p {
-  font-family: "interstateRegular";
+
 }
 
 .field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
@@ -105,15 +104,10 @@ BLOCKS STYLES
 }
 
 #block-views-events-agenda-front-block h2.block-title {
-  font-size: 60px;
-  color: #666666;
+
+
 }
 
-#block-views-workshops-workshops-front-block h2.block-title {
-  text-align: right;
-  font-size: 60px;
-  color: #009de1;
-}
 
 /*
 NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
@@ -134,13 +128,10 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
 width: 25px;
 height: 25px;
 border-radius: 30px;
-background-color: #ff6633;
+background-color: #f14a1f;
 text-shadow: none;
 }
 
-.view-display-id-workshops_front_block .carousel-control.left,  .view-display-id-workshops_front_block  .carousel-control.right {
-background-color: #009de1;
-}
 
 .view-display-id-catalog_new_books_block .carousel-control .icon-prev, .view-display-id-catalog_new_books_block .carousel-control .icon-next, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-left, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-right,
 .view-display-id-same_author_books .carousel-control .icon-prev, .view-display-id-same_author_books .carousel-control .icon-next, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-left, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-right,
@@ -206,23 +197,36 @@ MENUS STYLES
 MAIN MENU
 */
 .menu.navbar-nav {
-  font-family: "interstateRegular";
+  
   margin-top: 10px;
   margin-left: 30px;
+  text-transform: lowercase;
+  font-size: 13px;
 }
 
 .menu.navbar-nav li > a {
-z-index: 1000;
+z-index: 100;
 }
 
 .menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus{
-  background-color: #ffffff;
-  border-radius: 10px;
+  color: #f14a1f;
+
 }
 
 .navbar-brand {
-  padding-top: 50px;
-  font-size: 36px;
+  margin-top: 60px;
+  padding-left: 80px;
+  font-size: 20px;
+  background-color: #f14a1f;
+  border-radius: 5px;
+  height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+
+}
+.navbar-brand a {
+color: #f2f2f2;
 }
 
 /*
@@ -277,9 +281,9 @@ UNIVERSE MENU
 }
 
 #block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
-font-family: "interstateRegular";
+
 color: #ffffff;
-background-color: #ff6633;
+background-color: #f14a1f;
 }
 
 
@@ -358,7 +362,7 @@ INFO WRAPPER STYLES
 }
 
 .node-type-article .group-infos-article.infosWrapper .field-items {
-    font-family: "interstateRegular";
+    
 }
 
 .node-type-article .group-infos-article.infosWrapper .field-label {
