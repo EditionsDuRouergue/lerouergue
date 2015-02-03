@@ -94,15 +94,15 @@
 @font-family-light:       "corporateslight";
 
 @font-size-base:          14px;
-@font-size-large:         22px; 
+@font-size-large:         30px; 
 @font-size-small:         10px;
 
-@font-size-h1:            92px;
-@font-size-h2:            72px;
-@font-size-h3:            64px;
-@font-size-h4:            50px;
-@font-size-h5:            22px;
-@font-size-h6:            18px;
+@font-size-h1:            72px;
+@font-size-h2:            50px;
+@font-size-h3:            38px;
+@font-size-h4:            22px;
+@font-size-h5:            18px;
+@font-size-h6:            13px;
 
 //** Unit-less `line-height` for use in components like buttons.
 @line-height-base:        1.428571429; // 20/14
@@ -391,8 +391,8 @@
 @navbar-collapse-max-height:       340px;
 
 @navbar-default-color:             @black;
-@navbar-default-bg:                @gray-lighter;
-@navbar-default-border:            transparent;
+@navbar-default-bg:                transparent;
+@navbar-default-border:            none;
 
 // Navbar links
 @navbar-default-link-color:                @gray-dark;
@@ -404,7 +404,7 @@
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
-@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-color:               @white;
 @navbar-default-brand-hover-color:         @black;
 @navbar-default-brand-hover-bg:            @white;
 
@@ -454,13 +454,13 @@
 @nav-open-link-hover-color:                 @black;
 
 //== Tabs
-@nav-tabs-border-color:                     @black;
+@nav-tabs-border-color:                     none;
 
 @nav-tabs-link-hover-border-color:          @body-bg;
 
 @nav-tabs-active-link-hover-bg:             @body-bg;
 @nav-tabs-active-link-hover-color:          @black;
-@nav-tabs-active-link-hover-border-color:   @black;
+@nav-tabs-active-link-hover-border-color:   none;
 
 @nav-tabs-justified-link-border-color:            @black;
 @nav-tabs-justified-active-link-border-color:     @body-bg;
@@ -475,21 +475,21 @@
 //
 //##
 
-@pagination-color:                     @link-color;
-@pagination-bg:                        transparent;
-@pagination-border:                    transparent;
+@pagination-color:                     @white;
+@pagination-bg:                        @black;
+@pagination-border:                    @black;
 
-@pagination-hover-color:               @black;
-@pagination-hover-bg:                  @white;
-@pagination-hover-border:              transparent;
+@pagination-hover-color:               @gray-lighter;
+@pagination-hover-bg:                  @gray-darker;
+@pagination-hover-border:              @gray-darker;
 
-@pagination-active-color:              @black;
-@pagination-active-bg:                 @white;
-@pagination-active-border:             transparent;
+@pagination-active-color:              @gray-lighter;
+@pagination-active-bg:                 @gray-darker;
+@pagination-active-border:             @gray-darker;
 
 @pagination-disabled-color:            @gray;
-@pagination-disabled-bg:               transparent;
-@pagination-disabled-border:           transparent;
+@pagination-disabled-bg:               @black;
+@pagination-disabled-border:           @black;
 
 
 //== Pager
@@ -786,7 +786,7 @@
 //##
 
 @well-bg:                     @white;
-@well-border:                 @black;
+@well-border:                 none;
 
 
 //== Badges
