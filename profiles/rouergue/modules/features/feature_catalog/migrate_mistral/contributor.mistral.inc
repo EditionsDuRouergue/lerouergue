@@ -126,6 +126,18 @@ class ContributorMigration extends Migration {
 		
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
+		
+		// Picture file
+		$picture_filename = $row->bookcontributor . '.jpg';
+		$host = variable_get('contributor_pictures_url','http://rouergue.abrege.net/util/auteurs_rouergue/');
+		$url = $host . $picture_filename;
+		
+		if(!$file = system_retrieve_file($url, 'public://catalog/contributor-pictures/' . $picture_filename, TRUE, FILE_EXISTS_REPLACE)) {
+			$image_filename = variable_get('default_contributor_picture','contributor-pic-400x600.png');
+			$url = $host . $image_filename;
+			$file = system_retrieve_file($url, 'public://catalog/contributor-pictures/' . $image_filename, TRUE, FILE_EXISTS_RENAME);
+		}
+		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
 	}
 	
 	/**
