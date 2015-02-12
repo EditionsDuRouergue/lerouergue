@@ -451,8 +451,17 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['495']['1130']['104']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
 		/* $this->univ_coll_mapping['495']['1130']['104']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
 		
+		// Rouergue Beaux Livres  - 495 | Bâti - 1158   ===>  Nature & Jardin > Bâti - 287736de-2aeb-48bd-a91d-5510b786ccaf
+		$this->univ_coll_mapping['495']['1158']['tid'] = $this->univ_uuids_tids['287736de-2aeb-48bd-a91d-5510b786ccaf'];
+		
 		// Rouergue Beaux Livres  - 495 | Botanique - 1131   ===>  Nature & Jardins > Botanique - 48169487-b368-480b-83a4-46ddb4205188
 		$this->univ_coll_mapping['495']['1131']['tid'] = $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
+		
+		// Rouergue Beaux Livres  - 495 | Ecologie - 1157   ===> Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+		$this->univ_coll_mapping['495']['1157']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+		
+		// Rouergue Beaux Livres  - 495 | Jardin - 1156   ===> Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		$this->univ_coll_mapping['495']['1156']['tid'] = $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
 		
 		// Rouergue Beaux Livres  - 495 | Nature - 513   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 		$this->univ_coll_mapping['495']['513']['tid'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
@@ -538,6 +547,11 @@ class ArticleMigration extends Migration {
 		// Rouergue Beaux Livres  - 495 | Polar - 1135   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
 		$this->univ_coll_mapping['495']['1135']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
 		
+		// Rouergue Beaux Livres  - 495 | Polar - 1135 | Voyages - 160   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		// ----------------------------------------------------------    ===>   Régions > Voyages - 8148f50e-ef2e-497c-b285-efe2dd258ff3
+		$this->univ_coll_mapping['495']['1135']['160']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		/* $this->univ_coll_mapping['495']['1135']['160']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673']; double classement non encore développé */
+		
 		// Rouergue Beaux Livres  - 495 | Région - 1136   ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
 		$this->univ_coll_mapping['495']['1136']['tid'] = $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
 		
@@ -608,6 +622,12 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['493']['1139']['135']['tid'] = $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
 		/* $this->univ_coll_mapping['493']['1139']['135']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
 		
+		// Rouergue Littérature - 493 | Cuisine - 1152   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		// -------------------------------------------   ===>   Littérature > Objet littéraire - 88728848-477d-401c-8d67-287baaaad668
+		$this->univ_coll_mapping['493']['1152']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+		/* $this->univ_coll_mapping['493']['1152']['tid'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668']; double classement non encore développé */
+		
+		
 		// Rouergue Littérature - 493 | Ecologie - 1149 | Cuisine - 135   ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
 		// ------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
 		$this->univ_coll_mapping['493']['1149']['135']['tid'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
@@ -619,20 +639,25 @@ class ArticleMigration extends Migration {
 		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
 		$this->univ_coll_mapping['493']['1140']['tid'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
 		
-		// Rouergue Littérature - 493 | Polar - 510   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
+		// Rouergue Littérature - 493 | Objet littéraire - 1140 | Cuisine - 161   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		// --------------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+		$this->univ_coll_mapping['493']['1140']['161']['tid'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
+		/* $this->univ_coll_mapping['493']['1140']['161']['tid'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc']; double classement non encore développé */
+		
+		// Rouergue Littérature - 493 | Polars - 510   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
 		$this->univ_coll_mapping['493']['510']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
 		
-		// Rouergue Littérature - 493 | Polar - 510 | Assassins sans visage - 136   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
-		$this->univ_coll_mapping['493']['510']['136']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		// Rouergue Littérature - 493 | Polars - 510 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
+		$this->univ_coll_mapping['493']['510']['136']['tid'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
 		
-		// Rouergue Littérature - 493 | Polar - 510 | rouergue noir - 137   ===>   Littérature > Polars - 63ed8920-edfe-4b4e-ae83-6cafb9fd9673
-		$this->univ_coll_mapping['493']['510']['136']['tid'] = $this->univ_uuids_tids['63ed8920-edfe-4b4e-ae83-6cafb9fd9673'];
+		// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
+		$this->univ_coll_mapping['493']['510']['137']['tid'] = $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
 		
 		// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
 		$this->univ_coll_mapping['493']['511']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
 		
-		// Rouergue Littérature - 493 | Roman de société - 511 | Témoignage - 138   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
-		$this->univ_coll_mapping['493']['511']['138']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		// Rouergue Littérature - 493 | Roman de société - 511 | Témoignage - 138   ===>   Littérature > Romans de société > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
+		$this->univ_coll_mapping['493']['511']['138']['tid'] = $this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'];
 		
 		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
 		$this->univ_coll_mapping['493']['943']['tid'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
@@ -746,6 +771,9 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['462']['1013']['tid'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
 		
 		//************************************************** Rouergue Romans Jeunesse **********************************************************************
+		// Rouergue Romans Jeunesse - 497 | à la petite semaine - 1159   ===>   Romans jeunesse > Romans dès 8 ans > à la petite semaine - 3178b576-6073-4472-81ef-4c5c8edf9fb6
+		$this->univ_coll_mapping['497']['1159']['tid'] = $this->univ_uuids_tids['3178b576-6073-4472-81ef-4c5c8edf9fb6'];
+		
 		// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
 		$this->univ_coll_mapping['497']['526']['tid'] = $this->univ_uuids_tids['e6aea4fd-4293-40c5-beab-f90ddae63def'];
 		
