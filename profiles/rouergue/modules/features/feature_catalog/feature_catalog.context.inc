@@ -112,6 +112,12 @@ function feature_catalog_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-3d8281d3e9ec9ca5efce3f3c9ba806f7' => array(
+          'module' => 'views',
+          'delta' => '3d8281d3e9ec9ca5efce3f3c9ba806f7',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views--exp-universes-page' => array(
           'module' => 'views',
           'delta' => '-exp-universes-page',

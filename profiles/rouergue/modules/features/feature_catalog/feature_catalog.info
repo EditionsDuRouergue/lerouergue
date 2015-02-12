@@ -194,6 +194,7 @@ features[views_view][] = fc_contributors
 features[views_view][] = first_level_universes
 features[views_view][] = themes
 features[views_view][] = universes
+features[views_view][] = universes_descriptions
 features_exclude[dependencies][views] = views
 features_exclude[dependencies][better_exposed_filters] = better_exposed_filters
 features_exclude[dependencies][ds] = ds
