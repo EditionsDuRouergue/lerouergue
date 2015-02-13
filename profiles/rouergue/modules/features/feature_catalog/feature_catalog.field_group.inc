@@ -57,11 +57,11 @@ function feature_catalog_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_format',
-      1 => 'field_gencod',
-      2 => 'field_isbn',
-      3 => 'field_number_pages',
-      4 => 'field_price',
-      5 => 'field_release_date',
+      1 => 'field_number_pages',
+      2 => 'field_price',
+      3 => 'field_isbn',
+      4 => 'field_release_date',
+      5 => 'field_gencod',
     ),
     'format_type' => 'div',
     'format_settings' => array(

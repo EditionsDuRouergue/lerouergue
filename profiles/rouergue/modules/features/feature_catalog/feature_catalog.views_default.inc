@@ -1669,13 +1669,17 @@ return $query->execute()->fetchField();';
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Terme de taxonomie : Nom */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name']['value'] = 'auteur';
-  $handler->display->display_options['filters']['name']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
+    1182 => '1182',
+  );
+  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
   /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
   $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
@@ -1683,21 +1687,15 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
 
   /* Display: Auteurs fiche livre */
-  $handler = $view->new_display('block', 'Auteurs fiche livre', 'book_contributors');
+  $handler = $view->new_display('block', 'Auteurs fiche livre', 'book_contributors_author');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'field_contributor_function',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -1715,14 +1713,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Champ: Élément Field collection : Fonction */
-  $handler->display->display_options['fields']['field_contributor_function']['id'] = 'field_contributor_function';
-  $handler->display->display_options['fields']['field_contributor_function']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['fields']['field_contributor_function']['field'] = 'field_contributor_function';
-  $handler->display->display_options['fields']['field_contributor_function']['label'] = '';
-  $handler->display->display_options['fields']['field_contributor_function']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_contributor_function']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_contributor_function']['type'] = 'taxonomy_term_reference_plain';
   /* Champ: Contenu : Prénom */
   $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
   $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
@@ -1771,16 +1761,28 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Terme de taxonomie : Nom */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name']['value'] = 'auteur';
-  $handler->display->display_options['filters']['name']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
+  $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['field'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
+    1182 => '1182',
+  );
+  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
 
   /* Display: Les autres fiche livre */
-  $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_non_author');
+  $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_others');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -1795,6 +1797,17 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction du contributeur';
+  /* Relation: Entity Reference : Entité référencée */
+  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributeur';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -1856,14 +1869,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_lastname_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Terme de taxonomie : Nom */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name']['operator'] = '!=';
-  $handler->display->display_options['filters']['name']['value'] = 'auteur';
-  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
   $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
   $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
@@ -1871,12 +1876,118 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
+    1182 => '1182',
+    1201 => '1201',
+    1184 => '1184',
+  );
+  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
   $handler->display->display_options['displays'] = array(
     'book_contributors' => 'book_contributors',
     'default' => 0,
     'author' => 0,
   );
   $handler->display->display_options['attachment_position'] = 'after';
+
+  /* Display: Illustrateurs fiche livre */
+  $handler = $view->new_display('block', 'Illustrateurs fiche livre', 'book_contributors_illustrator');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'field_firstname' => 'field_firstname',
+    'field_lastname' => 'field_lastname',
+  );
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Prénom */
+  $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
+  $handler->display->display_options['fields']['field_firstname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_firstname']['label'] = '';
+  $handler->display->display_options['fields']['field_firstname']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Nom */
+  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
+  $handler->display->display_options['fields']['field_lastname']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_lastname']['label'] = '';
+  $handler->display->display_options['fields']['field_lastname']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
+  /* Champ: Prénom Nom */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'Prénom Nom';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_firstname] [field_lastname]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Pseudonyme */
+  $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
+  $handler->display->display_options['fields']['field_pseudonyme']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['fields']['field_pseudonyme']['label'] = '';
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_pseudonyme']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Élément Field collection : Auteur principal (field_ismain) */
+  $handler->display->display_options['sorts']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['sorts']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['sorts']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['sorts']['field_ismain_value']['order'] = 'DESC';
+  /* Critère de tri: Contenu : Contributor ID (field_contributor_id) */
+  $handler->display->display_options['sorts']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
+  $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['field'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
+  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
+    1184 => '1184',
+  );
+  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
+  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
   $translatables['fc_contributors'] = array(
     t('Master'),
     t('plus'),
@@ -1892,6 +2003,7 @@ return $query->execute()->fetchField();';
     t('Auteurs fiche livre'),
     t('[field_firstname] [field_lastname]'),
     t('Les autres fiche livre'),
+    t('Illustrateurs fiche livre'),
   );
   $export['fc_contributors'] = $view;
 

@@ -383,7 +383,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'field_collection_views',
         'settings' => array(
           'add' => '',
-          'display_id' => 'book_contributors',
+          'display_id' => 'book_contributors_others',
           'name' => 'fc_contributors',
         ),
         'type' => 'field_collection_views_view',
