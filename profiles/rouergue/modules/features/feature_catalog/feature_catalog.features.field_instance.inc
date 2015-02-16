@@ -276,7 +276,7 @@ function feature_catalog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
@@ -337,7 +337,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'barcode',
       'settings' => array(),
       'type' => 'barcode_textfield',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -413,7 +413,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 16,
+      'weight' => 18,
     ),
   );
 
@@ -498,14 +498,18 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 15,
+      'weight' => 17,
     ),
   );
 
   // Exported field_instance: 'node-article-field_format'
   $field_instances['node-article-field_format'] = array(
     'bundle' => 'article',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '0 x 0',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -533,7 +537,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'above',
@@ -592,7 +596,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'list' => array(
         'label' => 'above',
@@ -616,7 +620,71 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_height'
+  $field_instances['node-article-field_height'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 24,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_height',
+    'label' => 'Hauteur',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 8,
     ),
   );
 
@@ -681,7 +749,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 17,
+      'weight' => 19,
     ),
   );
 
@@ -716,7 +784,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'list' => array(
         'label' => 'above',
@@ -740,7 +808,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -990,7 +1058,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 18,
+      'weight' => 20,
     ),
   );
 
@@ -1060,7 +1128,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -1119,7 +1187,7 @@ function feature_catalog_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 23,
     ),
   );
 
@@ -1164,7 +1232,7 @@ function feature_catalog_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_decimal',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
@@ -1189,7 +1257,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -1248,7 +1316,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -1304,7 +1372,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 22,
     ),
   );
 
@@ -1382,7 +1450,7 @@ function feature_catalog_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -1443,7 +1511,7 @@ function feature_catalog_field_default_field_instances() {
         'view' => 'catalog|ervw_same_universe',
       ),
       'type' => 'entityreference_view_widget',
-      'weight' => 22,
+      'weight' => 24,
     ),
   );
 
@@ -1558,7 +1626,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 21,
     ),
   );
 
@@ -1617,6 +1685,70 @@ function feature_catalog_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_width'
+  $field_instances['node-article-field_width'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 25,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_width',
+    'label' => 'Largeur',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 7,
     ),
   );
 
@@ -2057,7 +2189,9 @@ function feature_catalog_field_default_field_instances() {
   t('Fonction');
   t('Format');
   t('Gencod');
+  t('Hauteur');
   t('ISBN');
+  t('Largeur');
   t('Lectorat');
   t('Nom');
   t('Nombre de pages');

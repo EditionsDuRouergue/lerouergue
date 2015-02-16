@@ -116,7 +116,7 @@ class ReadershipMigration extends Migration {
  *
  * The mysql query to run is :
  *
- * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, 
+ * SELECT a.articleid, a.bookid, a.isbn13, a.gencod, b.title, b.subtitle, b.resume, b.backcover, b.height, b.width,
  * c.name as collection, sc.name as subcollection, s.name as series, 
  * rp.price, fp.finalnbpage as nbpage,
  * pt.isvalidated as price_validated,
@@ -169,12 +169,12 @@ class ArticleMigration extends Migration {
 		$query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
 		$query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 		$query->leftJoin('bookreadership','br','br.bookid=b.bookid');
-		$query->join('format','f1','f1.formatid=b.formatid');
-		$query->leftJoin('format','f2','f2.formatid=fp.finalformatid');
+		//$query->join('format','f1','f1.formatid=b.formatid');
+		//$query->leftJoin('format','f2','f2.formatid=fp.finalformatid');
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod'))
-		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover'))
+		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width'))
 		->fields('rp', array('price'));
     $query->addField('fp','finalnbpage','nbpage');
     // $query->addField('c','name','collection');
@@ -184,7 +184,7 @@ class ArticleMigration extends Migration {
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
-		$query->addExpression("CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END",'format');
+		//$query->addExpression("CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END",'format');
 		$query->condition('a.statusid','1','<>');
 		$query->condition('b.projecttype','PLV','<>');
 		$query->groupBy('a.articleid');
@@ -215,8 +215,10 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_mistral_bookid', 'bookid');
 		$this->addFieldMapping('title', 'title');
 		$this->addFieldMapping('field_subtitle', 'subtitle');
-		$this->addFieldMapping('field_format', 'format');
+		//$this->addFieldMapping('field_format', 'format');
 		$this->addFieldMapping('field_number_pages', 'nbpage');
+		$this->addFieldMapping('field_width', 'width');
+		$this->addFieldMapping('field_height', 'height');
 		$this->addFieldMapping('field_price', 'price');
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
