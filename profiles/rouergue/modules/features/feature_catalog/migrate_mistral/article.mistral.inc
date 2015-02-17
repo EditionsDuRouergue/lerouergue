@@ -669,7 +669,7 @@ class ArticleMigration extends Migration {
 		
 		// Rouergue Littérature - 493 | Témoignage - 1141 | Jardins - 159   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
 		// --------------------------------------------------------------   ===>    Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
-		$this->univ_coll_mapping['493']['1141']['139']['tids'] = 
+		$this->univ_coll_mapping['493']['1141']['159']['tids'] = 
 			$this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
 		
 		//************************************************** Rouergue Livres Pratiques **********************************************************************
