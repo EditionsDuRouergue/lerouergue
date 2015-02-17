@@ -1633,7 +1633,7 @@ function feature_catalog_field_default_field_instances() {
   // Exported field_instance: 'node-article-field_universe'
   $field_instances['node-article-field_universe'] = array(
     'bundle' => 'article',
-    'default_value' => NULL,
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
