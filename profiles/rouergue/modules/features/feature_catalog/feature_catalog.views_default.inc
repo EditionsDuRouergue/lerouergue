@@ -1669,17 +1669,13 @@ return $query->execute()->fetchField();';
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    1182 => '1182',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
   $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
@@ -1761,6 +1757,13 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
   $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
   $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
@@ -1769,17 +1772,6 @@ return $query->execute()->fetchField();';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    1182 => '1182',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
 
   /* Display: Les autres fiche livre */
   $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_others');
@@ -1877,19 +1869,30 @@ return $query->execute()->fetchField();';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['operator'] = 'not';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    1182 => '1182',
-    1201 => '1201',
-    1184 => '1184',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['operator'] = '!=';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_1']['field'] = 'name';
+  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_1']['operator'] = '!=';
+  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name_1']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_2']['id'] = 'name_2';
+  $handler->display->display_options['filters']['name_2']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_2']['field'] = 'name';
+  $handler->display->display_options['filters']['name_2']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_2']['operator'] = '!=';
+  $handler->display->display_options['filters']['name_2']['value'] = 'Directeur de collection';
+  $handler->display->display_options['filters']['name_2']['group'] = 1;
   $handler->display->display_options['displays'] = array(
     'book_contributors' => 'book_contributors',
     'default' => 0,
@@ -1969,6 +1972,13 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Critère de filtrage: Élément Field collection : Communicable (field_iscommunicable) */
   $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
   $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
@@ -1977,17 +1987,6 @@ return $query->execute()->fetchField();';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
-  /* Critère de filtrage: Élément Field collection : Fonction (field_contributor_function) */
-  $handler->display->display_options['filters']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['value'] = array(
-    1184 => '1184',
-  );
-  $handler->display->display_options['filters']['field_contributor_function_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_contributor_function_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['vocabulary'] = 'functions';
-  $handler->display->display_options['filters']['field_contributor_function_tid']['hierarchy'] = 1;
   $translatables['fc_contributors'] = array(
     t('Master'),
     t('plus'),
