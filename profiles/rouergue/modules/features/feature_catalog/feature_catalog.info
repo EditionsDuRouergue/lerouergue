@@ -189,6 +189,7 @@ features[variable][] = taxonomy_menu_path_universe
 features[variable][] = taxonomy_menu_rebuild_universe
 features[variable][] = taxonomy_menu_sync_universe
 features[variable][] = taxonomy_menu_term_item_description_universe
+features[variable][] = taxonomy_menu_trails_node_article
 features[variable][] = taxonomy_menu_voc_item_description_universe
 features[variable][] = taxonomy_menu_voc_item_universe
 features[variable][] = taxonomy_menu_voc_name_universe

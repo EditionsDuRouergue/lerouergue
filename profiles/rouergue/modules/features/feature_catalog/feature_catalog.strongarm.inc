@@ -484,6 +484,24 @@ function feature_catalog_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'taxonomy_menu_trails_node_article';
+  $strongarm->value = array(
+    'selection_method' => 'first',
+    'only_without_menu' => 0,
+    'set_breadcrumb' => '0',
+    'term_path' => 'default',
+    'term_path_patterns' => array(),
+    'instances' => array(
+      'field_universe' => 'field_universe',
+    ),
+    'paths_ui' => '',
+    'trail_per_menu' => 0,
+  );
+  $export['taxonomy_menu_trails_node_article'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'taxonomy_menu_vocab_menu_universe';
   $strongarm->value = 'menu-universe';
   $export['taxonomy_menu_vocab_menu_universe'] = $strongarm;
