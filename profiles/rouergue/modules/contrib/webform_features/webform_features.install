@@ -67,11 +67,11 @@ function webform_features_install() {
     $machine_name = preg_replace('#[^a-z]+#', '_', $machine_name);
 
     // Ensure machine name is unique
-    $name = $machine_name;
+    $name = substr($machine_name, 0, 32);
     $i = 1;
     $exists = webform_features_machine_name_load($name);
     while (!empty($exists) && $exists->nid != $node->nid) {
-      $name = $machine_name . '_' . ++$i;
+      $name = substr($machine_name, 0, 31 - strlen($i)) . '_' . ++$i;
       $exists = webform_features_machine_name_load($name);
     }
 
@@ -101,14 +101,15 @@ function webform_features_install() {
     }
 
     // Build machine name from the webform's one and the form_key
-    $machine_name = $result->webform_machine_name . '-' . $result->form_key;
+    $wf_machine_name = $result->webform_machine_name;
+    $cmp_machine_name = $result->form_key;
 
     // Ensure machine name is unique
-    $name = $machine_name;
+    $name = $wf_machine_name . '__' . substr($cmp_machine_name, 0, 32);
     $i = 1;
     $exists = !empty($existing[$name]);
     while (!empty($exists) && $exists->nid != $node->nid) {
-      $name = $machine_name . '_' . ++$i;
+      $name = $wf_machine_name . '__' . substr($cmp_machine_name, 0, 31 - strlen($i)) . '_' . ++$i;
       $exists = !empty($existing[$name]);
     }
 

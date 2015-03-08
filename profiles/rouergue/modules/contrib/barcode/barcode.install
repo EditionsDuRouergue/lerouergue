@@ -29,7 +29,7 @@ function barcode_field_schema($field) {
       'value' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE),
     );
   }
-  
+
   return array('columns' => $columns);
 }
 
@@ -87,6 +87,23 @@ function barcode_requirements($phase) {
     );
   }
   $requirements['barcode_image_library']['title'] = t('Barcode image library');
+
+  // FreeType Support check.
+  if (!function_exists("imagettftext")) {
+    $requirements['barcode_freetype_gd'] = array(
+      'value' => t('Missing FreeType extension for GD'),
+      'severity' => REQUIREMENT_ERROR,
+      'description' => t('The barcode module needs FreeType extension of GD library to be enabled.'),
+    );
+  }
+  else {
+    $requirements['barcode_freetype_gd'] = array(
+      'value' => t('FreeType extnesion of GD library exists.'),
+      'severity' => REQUIREMENT_OK,
+    );
+  }
+  $requirements['barcode_freetype_gd']['title'] = t('FreeType extension');
+
 
   return $requirements;
 }

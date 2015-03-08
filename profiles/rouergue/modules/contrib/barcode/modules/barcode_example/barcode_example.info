@@ -4,9 +4,9 @@ core = 7.x
 dependencies[] = barcode
 files[] = barcode_example.module
 
-; Information added by drupal.org packaging script on 2013-09-30
-version = "7.x-2.1+9-dev"
+; Information added by Drupal.org packaging script on 2015-01-12
+version = "7.x-2.1+10-dev"
 core = "7.x"
 project = "barcode"
-datestamp = "1380555503"
+datestamp = "1421060888"
 

@@ -83,7 +83,7 @@ function webform_features_machine_name_load($name, $reset = FALSE) {
     ->fields('w', array('nid'))
     ->condition('machine_name', $name)
     ->execute()
-    ->fetchCol();
+    ->fetchField();
   if (empty($nid)) {
     return FALSE;
   }

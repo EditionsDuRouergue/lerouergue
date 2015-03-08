@@ -691,6 +691,7 @@ function subqueue_load($sqid) {
 function nodequeue_load_subqueues($sqids, $bypass_cache = FALSE) {
   static $cache = array();
   $to_load = array();
+  $subqueues = array();
 
   foreach ($sqids as $sqid) {
     if ($bypass_cache || !isset($cache[$sqid])) {

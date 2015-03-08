@@ -1,6 +1,31 @@
 <?php
 
 /**
+ * Implements hook_views_data_alter().
+ */
+function entityreference_view_widget_views_data_alter(&$data) {
+  foreach (entity_get_info() as $info) {
+    if (isset($info['base table']) && isset($data[$info['base table']]['table'])) {
+      $data[$info['base table']]['entityreference_view_widget'] = array(
+        'title' => $data[$info['base table']]['table']['group'],
+        'group' => t('Entity Reference View Widget Checkbox'),
+        'help' => t('Provide a checkbox to select the row for an entity reference.'),
+        'real field' => $info['entity keys']['id'],
+        'field' => array(
+          'handler' => 'entityreference_view_widget_handler_field_checkbox',
+          'click sortable' => FALSE,
+        ),
+      );
+      // Support for EFQ Views.
+      $efq = 'efq_' . $info['base table'];
+      if (isset($data[$efq]['table'])) {
+        $data[$efq]['entityreference_view_widget'] = $data[$info['base table']]['entityreference_view_widget'];
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_views_plugins().
  */
 function entityreference_view_widget_views_plugins() {

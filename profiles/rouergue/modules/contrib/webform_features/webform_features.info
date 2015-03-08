@@ -6,9 +6,9 @@ package = Webform
 dependencies[] = features
 dependencies[] = webform
 
-; Information added by drupal.org packaging script on 2013-10-09
-version = "7.x-4.0-unstable1"
+; Information added by Drupal.org packaging script on 2014-01-15
+version = "7.x-3.0-beta3"
 core = "7.x"
 project = "webform_features"
-datestamp = "1381308192"
+datestamp = "1389773907"
 

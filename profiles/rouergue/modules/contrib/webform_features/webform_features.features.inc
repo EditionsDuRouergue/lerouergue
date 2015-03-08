@@ -35,7 +35,7 @@ function webform_features_export_options() {
 /**
  * Implements hook_features_export().
  */
-function webform_features_export($data, &$export, $module_name) {
+function webform_features_export($data, &$export, $module) {
   $pipe = array();
   $export['dependencies']['webform'] = 'webform';
 
@@ -46,8 +46,16 @@ function webform_features_export($data, &$export, $module_name) {
     }
 
     $pipe['node'][$node->type] = $node->type;
-
     $export['features']['webform'][$machine_name] = $machine_name;
+
+    // drupal_alter() normally supports just one byref parameter. Using
+    // the __drupal_alter_by_ref key, we can store any additional parameters
+    // that need to be altered, and they'll be split out into additional params
+    // for the hook_*_alter() implementations.  The hook_alter signature is
+    // hook_webform_features_export_alter(&$export, &$pipe, $node)
+    $data = &$export;
+    $data['__drupal_alter_by_ref'] = array(&$pipe);
+    drupal_alter('webform_features_export', $data, $node);
   }
 
   return $pipe;
@@ -56,7 +64,7 @@ function webform_features_export($data, &$export, $module_name) {
 /**
  * Implements hook_features_export_render().
  */
-function webform_features_export_render($module_name, $data, $export = NULL) {
+function webform_features_export_render($module, $data, $export = NULL) {
   $code = array();
   $code[] = '$webforms = array();';
 
@@ -66,7 +74,7 @@ function webform_features_export_render($module_name, $data, $export = NULL) {
       continue;
     }
 
-    $export = $node;
+    $export = clone $node;
 
     // Use date instead of created, in the same format used by node_object_prepare.
     $export->date = format_date($export->created, 'custom', 'Y-m-d H:i:s O');
@@ -78,6 +86,15 @@ function webform_features_export_render($module_name, $data, $export = NULL) {
     unset($export->created);
     unset($export->date);
     unset($export->revision_timestamp);
+    unset($export->last_comment_timestamp);
+    unset($export->webform['nid']);
+
+    // Replace author by its username.
+    $author = user_load($export->uid);
+    $export->webform_features_author = $author->name;
+    $author = user_load($export->revision_uid);
+    $export->webform_features_revision_author = $author->name;
+    unset($export->uid, $export->revision_uid);
 
     // Manage components.
     $components_machine_names = array();
@@ -128,6 +145,10 @@ function webform_features_export_render($module_name, $data, $export = NULL) {
       }
     }
 
+    // The hook_alter signature is:
+    // hook_webform_features_export_render_alter(&$export, $node, $module);
+    drupal_alter('webform_features_export_render', $export, $node, $module);
+
     $code[] = "  \$webforms['{$machine_name}'] = " . features_var_export($export) . ";";
   }
 
@@ -164,6 +185,16 @@ function webform_features_rebuild($module) {
       $node->webform['components'] = array();
       node_object_prepare($node);
 
+      // Get the author back if possible.
+      $node->uid = 0;
+      if (!empty($node->webform_features_author) && ($author = user_load_by_name($node->webform_features_author))) {
+        $node->uid = $author->uid;
+      }
+      $node->revision_uid = 0;
+      if (!empty($node->webform_features_revision_author) && ($author = user_load_by_name($node->webform_features_revision_author))) {
+        $node->revision_uid = $author->uid;
+      }
+
       // Find the matching machine name, with a fresh cache.
       $existing = webform_features_machine_name_load($webform_machine_name);
       if (empty($existing)) {
@@ -175,6 +206,7 @@ function webform_features_rebuild($module) {
       // Reinject base properties.
       $node->nid = $existing->nid;
       $node->vid = $existing->vid;
+      $node->webform['nid'] = $existing->nid;
 
       // Manage components.
       $existing_components_machine_names = array();
@@ -198,6 +230,10 @@ function webform_features_rebuild($module) {
           $node->webform['emails'][$email['eid']] = $email;
         }
       }
+
+      // The hook_alter signature is:
+      // hook_webform_features_rebuild_alter(&node, $module);
+      drupal_alter('webform_features_rebuild', $node, $module);
 
       // Final save.
       node_save($node);

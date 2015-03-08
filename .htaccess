@@ -140,8 +140,4 @@ DirectoryIndex index.php index.html index.htm
       Header append Vary Accept-Encoding
     </FilesMatch>
   </IfModule>
-  # Use the robots.exclude.txt files instead of original robots.txt file
-  # on staging servers listed in rewrite conditions.
-  RewriteCond %{HTTP_HOST} ^rouergue\.korora\.fr$ [NC]
-  RewriteRule ^robots\.txt /robots.exclude.txt
 </IfModule>
