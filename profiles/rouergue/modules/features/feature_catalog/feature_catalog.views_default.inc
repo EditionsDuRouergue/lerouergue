@@ -1181,6 +1181,7 @@ return $query->execute()->fetchField();';
   /* Display: Modal "Livres même univers" */
   $handler = $view->new_display('entityreference_view_widget', 'Modal "Livres même univers"', 'ervw_same_universe_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -1405,6 +1406,7 @@ return $query->execute()->fetchField();';
   /* Display: Modal même univers */
   $handler = $view->new_display('entityreference_view_widget', 'Modal même univers', 'ervw_same_universe');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
