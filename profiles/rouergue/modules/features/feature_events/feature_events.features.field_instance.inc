@@ -86,16 +86,7 @@ function feature_events_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_adresse'
   $field_instances['node-event-field_adresse'] = array(
     'bundle' => 'event',
-    'default_value' => array(
-      0 => array(
-        'element_key' => 'node|event|field_adresse|und|0',
-        'thoroughfare' => '',
-        'premise' => '',
-        'postal_code' => '',
-        'locality' => '',
-        'country' => 'FR',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -157,6 +148,7 @@ function feature_events_field_default_field_instances() {
           'BE' => 'BE',
           'FR' => 'FR',
         ),
+        'default_country' => NULL,
         'format_handlers' => array(
           'address' => 'address',
           'address-hide-country' => 0,
@@ -173,7 +165,7 @@ function feature_events_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_dates'
   $field_instances['node-event-field_dates'] = array(
     'bundle' => 'event',
-    'default_value' => NULL,
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -666,6 +658,7 @@ function feature_events_field_default_field_instances() {
     'label' => 'Site web',
     'required' => 0,
     'settings' => array(
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
@@ -679,6 +672,7 @@ function feature_events_field_default_field_instances() {
       'enable_tokens' => 1,
       'rel_remove' => 'default',
       'title' => 'optional',
+      'title_label_use_field_label' => FALSE,
       'title_maxlength' => 128,
       'title_value' => '',
       'url' => 0,

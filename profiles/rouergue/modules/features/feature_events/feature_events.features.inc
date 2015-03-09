@@ -65,17 +65,9 @@ function feature_events_image_default_styles() {
 
   // Exported image style: event-block.
   $styles['event-block'] = array(
-    'name' => 'event-block',
     'label' => 'event-block',
     'effects' => array(
       4 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 260,
@@ -88,17 +80,9 @@ function feature_events_image_default_styles() {
 
   // Exported image style: event-list.
   $styles['event-list'] = array(
-    'name' => 'event-list',
     'label' => 'event-list',
     'effects' => array(
       5 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 260,
@@ -111,17 +95,9 @@ function feature_events_image_default_styles() {
 
   // Exported image style: event-page.
   $styles['event-page'] = array(
-    'name' => 'event-page',
     'label' => 'event-page',
     'effects' => array(
       6 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 555,
