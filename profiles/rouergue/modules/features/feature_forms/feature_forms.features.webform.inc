@@ -10,7 +10,6 @@
 function feature_forms_webform_defaults() {
 $webforms = array();
   $webforms['demande_de_catalogue'] = array(
-  'uid' => 0,
   'title' => 'Demande de catalogue',
   'log' => '',
   'status' => 1,
@@ -18,13 +17,11 @@ $webforms = array();
   'promote' => 1,
   'sticky' => 0,
   'vuuid' => 'ea25bd5a-cd47-42d7-96f6-70c685674e2e',
-  'ds_switch' => '',
   'type' => 'webform',
   'language' => 'fr',
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '067ce433-8c09-4d53-919a-bf509ba1a840',
-  'revision_uid' => 0,
   'metatags' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
@@ -82,7 +79,6 @@ $webforms = array();
     ),
   ),
   'webform' => array(
-    'nid' => 2295,
     'next_serial' => 3,
     'confirmation' => '<p>Votre demande de catalogue a bien été reçue....</p>
 ',
@@ -313,13 +309,14 @@ J|Jeunesse',
     'conditionals' => array(),
   ),
   'cid' => 0,
-  'last_comment_timestamp' => 1417085524,
   'last_comment_name' => NULL,
-  'last_comment_uid' => 0,
+  'last_comment_uid' => 1,
   'comment_count' => 0,
   'name' => '',
   'picture' => 0,
   'data' => NULL,
+  'webform_features_author' => '',
+  'webform_features_revision_author' => '',
 );
 return $webforms;
 }
