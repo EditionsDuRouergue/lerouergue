@@ -366,6 +366,8 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'hide_page_title' => '1',
+    'page_option_title' => '',
   );
   $export['node|article|full'] = $ds_layout;
 

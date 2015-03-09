@@ -5,6 +5,7 @@ version = 7.x-0.1
 project = feature_catalog
 dependencies[] = barcode
 dependencies[] = context
+dependencies[] = ds_extras
 dependencies[] = entityreference_view_widget
 dependencies[] = feature_core
 dependencies[] = features_date_formats
