@@ -37,17 +37,9 @@ function feature_workshops_image_default_styles() {
 
   // Exported image style: workshop-block.
   $styles['workshop-block'] = array(
-    'name' => 'workshop-block',
     'label' => 'workshop-block',
     'effects' => array(
       10 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 260,
@@ -56,13 +48,6 @@ function feature_workshops_image_default_styles() {
         'weight' => -10,
       ),
       9 => array(
-        'label' => 'Adaptive',
-        'help' => 'Adaptive image scale according to client resolution.',
-        'effect callback' => 'image_scale_effect',
-        'dimensions callback' => 'image_scale_dimensions',
-        'form callback' => 'adaptive_image_scale_form',
-        'summary theme' => 'adaptive_image_scale_summary',
-        'module' => 'adaptive_image',
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',
@@ -78,17 +63,9 @@ function feature_workshops_image_default_styles() {
 
   // Exported image style: workshop-carousel.
   $styles['workshop-carousel'] = array(
-    'name' => 'workshop-carousel',
     'label' => 'workshop-carousel',
     'effects' => array(
       5 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 600,
@@ -97,13 +74,6 @@ function feature_workshops_image_default_styles() {
         'weight' => -10,
       ),
       6 => array(
-        'label' => 'Adaptive',
-        'help' => 'Adaptive image scale according to client resolution.',
-        'effect callback' => 'image_scale_effect',
-        'dimensions callback' => 'image_scale_dimensions',
-        'form callback' => 'adaptive_image_scale_form',
-        'summary theme' => 'adaptive_image_scale_summary',
-        'module' => 'adaptive_image',
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',
@@ -119,17 +89,9 @@ function feature_workshops_image_default_styles() {
 
   // Exported image style: workshop-list.
   $styles['workshop-list'] = array(
-    'name' => 'workshop-list',
     'label' => 'workshop-list',
     'effects' => array(
       7 => array(
-        'label' => 'Mise à l’échelle et recadrage',
-        'help' => 'La mise à l\'échelle et le recadrage maintiendront les proportions originales de l\'image puis recadreront la dimension la plus large. C\'est très utile pour créer des vignettes carrées sans étirer les images.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 260,
@@ -138,13 +100,6 @@ function feature_workshops_image_default_styles() {
         'weight' => 1,
       ),
       8 => array(
-        'label' => 'Adaptive',
-        'help' => 'Adaptive image scale according to client resolution.',
-        'effect callback' => 'image_scale_effect',
-        'dimensions callback' => 'image_scale_dimensions',
-        'form callback' => 'adaptive_image_scale_form',
-        'summary theme' => 'adaptive_image_scale_summary',
-        'module' => 'adaptive_image',
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',
