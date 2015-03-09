@@ -1,0 +1,5 @@
+name = Features Date Formats
+description = Adds Date Formats support to features
+package = Features
+core = 7.x
+dependencies[] = features

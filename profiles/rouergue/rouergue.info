@@ -1,0 +1,71 @@
+name = Rouergue
+description = Installation of the Rouergue web site.
+version = 7.x-1.0
+core = 7.x
+
+; Settings (see profile's hook_install_tasks)
+;settings[default_country] = "FR"
+;settings[default_language] = "fr"
+settings[default_theme] = "bartik"
+settings[admin_theme] = "rubik"
+;settings[default_timezone] = "Europe/Paris"
+;settings[site_mail] = "christophe.espiau@gmail.com"
+;settings[site_name] = "Rouergue"
+;settings[site_slogan] = ""
+;settings[user1_name] = "superadmin"
+ 
+
+; Core modules.
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = locale
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = search
+dependencies[] = file
+dependencies[] = rdf
+
+; Contrib modules.
+dependencies[] = l10n_update
+dependencies[] = admin_menu_toolbar
+dependencies[] = block_class
+dependencies[] = ctools
+dependencies[] = boxes
+dependencies[] = context
+dependencies[] = ds
+dependencies[] = entity
+dependencies[] = features
+dependencies[] = fe_block
+dependencies[] = field_group
+dependencies[] = imce
+dependencies[] = imce_mkdir
+dependencies[] = jquery_update
+dependencies[] = libraries
+dependencies[] = menu_admin_per_menu
+dependencies[] = role_export
+dependencies[] = strongarm
+dependencies[] = taxonomy_access_fix
+dependencies[] = token
+dependencies[] = user_settings_access
+dependencies[] = uuid
+dependencies[] = uuid_features
+dependencies[] = views
+
+; Features.
+dependencies[] = feature_theme
+dependencies[] = feature_core
+dependencies[] = feature_seo
+dependencies[] = feature_pages
+dependencies[] = feature_editors
+dependencies[] = feature_contextes
+dependencies[] = feature_catalog
+
+; Custom modules.

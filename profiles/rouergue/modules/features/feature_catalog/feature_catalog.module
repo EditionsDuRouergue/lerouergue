@@ -1,0 +1,226 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Catalog feature.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function feature_catalog_menu() {
+	$items = array();
+
+	$items['admin/config/mistral'] = array(
+			'title' => t('Mistral'),
+			'description' => 'Mistral import settings',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('rouergue_mistral_settings_form'),
+			'access arguments' => array('administer Catalog'),
+			'file' => 'feature_catalog.mistral.admin.inc',
+			'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+}
+
+include_once 'feature_catalog.features.inc';
+
+
+/**
+ * Implements hook_block_info().
+ */
+function feature_catalog_block_info() {
+	$blocks = array();
+
+	$blocks['rouergue_catalog_links'] = array(
+			'info' => t('Rouergue catalog links'),
+			'cache' => DRUPAL_NO_CACHE,
+	);
+
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function feature_catalog_block_view($delta = '') {
+	switch ($delta) {
+		case 'rouergue_catalog_links':
+			$block['subject'] = '';
+			$link_path = '/catalogue/multi-criteres';
+			$link_text = 'Recherche multi-critères';
+			if (current_path() == 'catalogue/multi-criteres') {
+				$link_path = '/catalogue';
+				$link_text = 'Retour au catalogue';
+			}
+			$variables['catalog_links'] = array(
+				'link_path' => $link_path,
+				'link_text' => $link_text,
+			);
+			$block['content'] = theme('rouergue_catalog_links', $variables);
+			return $block;
+			break;
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feature_catalog_theme() {
+	return array(
+			'rouergue_catalog_links' => array(
+					'variables' => array('catalog_links' => NULL),
+					'file' => 'feature_catalog.theme.inc',
+			),
+	);
+}
+
+/**
+* Implements hook_field_extra_fields().
+*/
+
+function feature_catalog_field_extra_fields() {
+  $extra['node']['article'] = array(
+    'display' => array(
+      'field_publication_status' => array(
+        'label' => t('Publication status'),
+        'description' => t('Display the mistral article\'s publications status'),
+        'weight' => 100,
+      ),
+    	'field_bs_button_browse_pdf' => array(
+    		'label' => t('Browse'),
+    		'description' => t('Provides a \'Browse\' Bootstrap button'),
+    		'weight' => '101',
+    	),
+    ),
+  );
+  return $extra;
+}
+
+/**
+* Implements hook_node_view().
+*/
+function feature_catalog_node_view($node, $view_mode, $langcode) {
+	// Extra-fields handling
+	$extrafields_settings = field_extra_fields_get_display('node', $node->type, $view_mode);
+	// Extra field "field_publication_status" in article
+	if (!empty($extrafields_settings['field_publication_status']['visible']) && $extrafields_settings['field_publication_status']['visible']) {
+		// Article's Mistral status.
+		$classes = 'field field-name-field-publication-status field-type-text field-label-hidden clearfix';
+		
+		// article publication status evaluation.
+		if (isset($node->field_mistral_status)) {
+			switch ($node->field_mistral_status['und'][0]['value']) {
+				case '3':
+					$classes .= ' mistral-status-sold-out';
+					break;
+				case '2':
+					$classes .= ' mistral-status-missing';
+					break;
+				default:
+					$classes .= ' mistral-status-normal';
+			}
+		}
+		else {
+			$classes .= ' mistral-status-normal';
+		}
+		
+		// Article's publication state.
+		$release_date = $node->field_release_date['und'][0]['value'];
+		if (strtotime($release_date) >  strtotime('now')) {
+			$classes .= ' mistral-pubstate-coming-soon';
+		}
+		elseif ( strtotime('3 months ago') <= strtotime($release_date) && strtotime($release_date) <=  strtotime('now'))  {
+			$classes .= ' mistral-pubstate-new';
+		}
+		else {
+			$classes .= ' mistral-pubstate-normal';
+		}
+
+		// Extra field content creation
+		$node->content['field_publication_status']['#markup'] = '<div class="' . $classes . '"></div>';
+	}
+	
+	// Browse button handling
+	if (!empty($extrafields_settings['field_bs_button_browse_pdf']['visible']) 
+			&& $extrafields_settings['field_bs_button_browse_pdf']['visible']
+			&& $view_mode == 'full') {
+		$markup = '';
+		if (!empty($node->field_inner_pages)) {
+			$markup = '<div class="field field-name-field_bs_button field-type-button clearfix">';
+			$markup .= '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
+			$markup .= '</div>';
+		}
+		$node->content['field_bs_button_browse_pdf']['#markup'] = $markup;
+	}
+	
+	// BOOK
+	if ($node->type == 'article' && $view_mode == 'full') {
+		// Price display handling
+		if($node->field_price_validated['und'][0]['value'] == 0) {
+			$node->content['field_price'][0]['#markup'] = 'environ ' . $node->field_price['und'][0]['value'] . ' €';
+		}
+		// Handling of new width and height fields.
+		// Their values are intercepted and cleaned before injection into the previously used format field, for ease of display.
+		$node->content['field_format'][0]['#markup'] = '';
+		if (!empty($node->field_width) && !empty($node->field_height)) {
+			$width = trim(trim($node->field_width['und'][0]['value'], '0'), '.');
+			$width = str_replace('.', ',', $width);
+			$height = trim(trim($node->field_height['und'][0]['value'], '0'), '.');
+			$height = str_replace('.', ',', $height);
+			$node->content['field_format'][0]['#markup'] = $width . ' x ' . $height;
+		}
+	}
+
+	// CONTRIBUTOR
+	if ($node->type == 'contributor') {
+		if (strlen($node->content['field_pseudonyme'][0]['#markup']) > 1) {
+			unset($node->content['field_firstname']);
+			unset($node->content['field_lastname']);
+		}
+	}
+}
+
+/**
+ * Implements hook_view_pre_render().
+ */
+function feature_catalog_views_pre_render(&$view) {
+	if ($view->current_display == 'authors' || $view->current_display == 'book_contributors' || $view->current_display == 'book_contributors_non_author') {
+		foreach ($view->result as $result) {
+			if (strlen($result->field_field_pseudonyme[0]['rendered']['#markup']) > 1) {dpm($result->field_field_pseudonyme[0]['rendered']['#markup']);
+				$result->field_field_lastname[0]['rendered']['#markup'] = '';
+				$result->field_field_firstname[0]['rendered']['#markup'] = '';
+			}
+		}
+	}
+	
+	if ($view->current_display == 'book_contributors_illustrator') {
+		$suffix = ' <span class="book-illustrator">(illustrateur)</span>';
+		foreach ($view->result as $result) {
+			if (strlen($result->field_field_pseudonyme[0]['raw']['value']) > 1) {// (illustrateur) added to pseudoname, if any
+				$result->field_field_lastname[0]['rendered']['#markup'] = '';
+				$result->field_field_firstname[0]['rendered']['#markup'] = '';
+				$result->field_field_pseudonyme[0]['rendered']['#markup'] .= $suffix;
+			}
+			else {// otherwise added to name
+				$result->field_field_lastname[0]['rendered']['#markup'] .= $suffix;
+			}
+		}
+	}
+}
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function feature_catalog_block_view_alter(&$data, $block) {
+	if ($block->delta == 'catalog-same_author_books') {
+		if (!strstr($data['content']['#markup'], 'view-content')) {
+			$data['subject'] = '';
+		}
+	}
+	if ($block->delta == 'catalog-same_universe_books') {
+		if (!strstr($data['content']['#markup'], 'about="/catalogue/')) {
+			$data['subject'] = '';
+		}
+	}
+}

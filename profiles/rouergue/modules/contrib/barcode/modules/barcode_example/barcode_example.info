@@ -1,0 +1,12 @@
+name = Barcode example
+description = Barcode FAPI element example.
+core = 7.x
+dependencies[] = barcode
+files[] = barcode_example.module
+
+; Information added by Drupal.org packaging script on 2015-01-12
+version = "7.x-2.1+10-dev"
+core = "7.x"
+project = "barcode"
+datestamp = "1421060888"
+

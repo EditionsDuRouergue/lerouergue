@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Rouergue Utils feature.
+ */
+
+include_once 'feature_rouergue_utils.features.inc';

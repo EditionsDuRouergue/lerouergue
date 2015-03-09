@@ -1,0 +1,16 @@
+name = Feature Theme
+description = Rouergue Bootstrap theme
+core = 7.x
+package = App
+version = 7.x-1.0
+project = feature_theme
+dependencies[] = bootstrap_fieldgroup
+dependencies[] = ctools
+dependencies[] = ds_bootstrap_layouts
+dependencies[] = strongarm
+dependencies[] = views_bootstrap
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = node_admin_theme
+features[variable][] = theme_rouergue_bootstrap_settings
+project path = profiles/rouergue/modules/features

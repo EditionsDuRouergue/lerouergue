@@ -1,0 +1,48 @@
+diff --git a/includes/bootstrap.inc b/includes/bootstrap.inc
+index 9e9ced2..920c789 100644
+--- a/includes/bootstrap.inc
++++ b/includes/bootstrap.inc
+@@ -1557,7 +1557,8 @@ function format_string($string, array $args = array()) {
+  * Encodes special characters in a plain-text string for display as HTML.
+  *
+  * Also validates strings as UTF-8 to prevent cross site scripting attacks on
+- * Internet Explorer 6.
++ * Internet Explorer 6. To avoid warning messages on PHP < 5.4, verify that the
++ * text is valid UTF-8.
+  *
+  * @param $text
+  *   The text to be checked or processed.
+@@ -1570,6 +1571,15 @@ function format_string($string, array $args = array()) {
+  * @ingroup sanitization
+  */
+ function check_plain($text) {
++  static $php_lt_54;
++  if (!isset($php_lt_54)) {
++    $php_lt_54 = version_compare(PHP_VERSION, '5.4', '<');
++  }
++
++  if ($php_lt_54 && !drupal_validate_utf8($text)) {
++    return '';
++  }
++
+   return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+ }
+ 
+diff --git a/modules/simpletest/tests/common.test b/modules/simpletest/tests/common.test
+index f6e03b0..248310c 100644
+--- a/modules/simpletest/tests/common.test
++++ b/modules/simpletest/tests/common.test
+@@ -369,11 +369,9 @@ class CommonXssUnitTest extends DrupalUnitTestCase {
+    * Check that invalid multi-byte sequences are rejected.
+    */
+   function testInvalidMultiByte() {
+-     // Ignore PHP 5.3+ invalid multibyte sequence warning.
+-     $text = @check_plain("Foo\xC0barbaz");
++     $text = check_plain("Foo\xC0barbaz");
+      $this->assertEqual($text, '', 'check_plain() rejects invalid sequence "Foo\xC0barbaz"');
+-     // Ignore PHP 5.3+ invalid multibyte sequence warning.
+-     $text = @check_plain("\xc2\"");
++     $text = check_plain("\xc2\"");
+      $this->assertEqual($text, '', 'check_plain() rejects invalid sequence "\xc2\""');
+      $text = check_plain("Fooÿñ");
+      $this->assertEqual($text, "Fooÿñ", 'check_plain() accepts valid sequence "Fooÿñ"');

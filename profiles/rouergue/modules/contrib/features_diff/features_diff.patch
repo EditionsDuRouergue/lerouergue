@@ -1,0 +1,17 @@
+diff --git a/features_diff.module b/features_diff.module
+index e1345b4..96e675c 100644
+--- a/features_diff.module
++++ b/features_diff.module
+@@ -20,11 +20,11 @@ function features_diff_perm() {
+ function features_diff_menu() {
+ 
+   $items['features/diff/%'] = array(
+     'title' => 'Features Diff All',
+     'description' => 'View the diff output for all of the features',
+-    'page callback' => _features_diff_view,
++    'page callback' => '_features_diff_view',
+     'page arguments' => array(2),
+     'access arguments' => array('view diffs of features')
+   );
+ 
+   return $items;

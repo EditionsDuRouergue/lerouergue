@@ -1,0 +1,20 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function feature_dev_uninstall() {
+	module_disable(array(
+		'coffee',
+		'context_ui',
+		'devel',
+		'diff',
+		'ds_ui',
+		'features_diff',
+		'field_ui',
+		'filter_perms',
+		'module_filters',
+		'syslog',
+		'update',
+		'views_ui'
+	));
+}

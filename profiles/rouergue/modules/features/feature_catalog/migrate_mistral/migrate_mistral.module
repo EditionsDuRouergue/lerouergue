@@ -1,0 +1,114 @@
+<?php
+/**
+ * @file
+ * Code for the Migrate Mistral module.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function migrate_mistral_permission() {
+	return array(
+		'administer mistral' => array(
+				'title' => t('Administer Mistral'),
+				'description' => t('Allows to handle various Mistral imports'),
+		),
+	);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function migrate_sitra_menu() {
+	$items = array();
+	
+	$items['mistral_import'] = array(
+			'title' => 'Mistral import',
+			'description' => 'Launches import from Mistral dump archive.',
+			'page callback' => 'mistral_import',
+			'access callback' => 1,
+			'access arguments' => array('administer mistral'),
+			'type' => MENU_CALLBACK,
+	);	
+	
+	return $items;
+}
+
+/**
+ * Implements hook_cron()
+ */
+// function migrate_mistral_cron() {
+// 	mistral_import();
+// }
+
+/**
+ * Callback function handling the automated Mistral import.
+ * Can be used for import testings.
+ * 
+ * @return Ambigous <The, string, A, Optional>
+ */
+function mistral_import() {
+	// Storage directory
+	$storage_dir = variable_get('dump_directory');
+	if ($storage_dir{strlen($domain) -1} != '/') {
+		$storage_dir .= '/';
+	}
+	// Dump file name
+	$dump_filename = variable_get('dump_filename');
+	$dump_fullname = $storage_dir.$dump_filename;
+	
+	if (!file_exists($dump_fullname)) { // If there is no mistral dump, nothing to do.
+		watchdog('mistral', t('No Mistral dump file in storage directory or incorrect filename (%file).', array('%file' => $dump_fullname)));
+		dpm(t('No Mistral dump available for import.'));
+	}
+	else {
+		// FOR TESTING PURPOSES ONLY
+		$migration_object= arg(1);
+		$limit = arg(2);
+		if (isset($migration_object)) {
+			$migrations = migrate_migrations();
+			if (array_key_exists($migration_object, $migrations)) {
+				$migration = Migration::getInstance($migration_object);
+				$migration->prepareUpdate();
+				if (isset($limit)) {
+					// arg(1) always returns a string.
+					$converted_limit = intval($limit);
+					// Possible cases :
+					// - url is correct (i.e, .../sitra_import/hot/12),  so arg(1) returns '12' and intval() returns 12. Limit param is usable.
+					// - url is wrong (i.e, .../sitra_import/hot/toto), so arg(1) returns 'toto' and intval() returns 0. Limit param is useless.
+					if ($limit > 0) {
+						$options['limit']['value'] = $limit;
+						$options['limit']['unit'] = 'items';
+						//$result = $migration->processImport($options);
+						$msg = t('%object import result : %result', array('%object' => strtoupper($migration_object), '%result' => $result));
+					}
+					else {
+						$msg = t('%limit is not an integer. Import cancelled.', array('%limit' => $limit));
+					}
+				}
+				else {
+					$result = $migration->processImport();
+					$msg = t('%sitra_object import result : %result', array('%sitra_object' => strtoupper($sitra_object), '%result' => $result));
+				}
+				watchdog('mistral', $msg);
+				dsm($msg);
+			}
+			else {
+				dpm(t('Migration %key doesn\'t exist. Import cancelled.', array('!key' => $migration_object)));
+			}
+			return t('Import process terminated.');
+		}
+		else {
+			// FOR REAL IMPORTS
+			// We launch all defined migrations, one after each other, in the order provided by the $migrations array.
+			$migrations = array('theme','readership','article','function','contributor','articleContributors');
+			foreach ($migrations as $key) {
+				$migration = Migration::getInstance($key);
+				$migration->prepareUpdate();
+				$result = $migration->processImport();
+				$msg = t('%object import result : %result', array('%object' => strtoupper($key), '%result' => $result));
+				watchdog('mistral', $msg);
+			}
+		}
+	}
+}

@@ -1,0 +1,11 @@
+<?php
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the Rouergue theme.
+ */
+function feature_theme_install() {
+	$default_theme = 'rouergue_bootstrap';
+	theme_enable(array($default_theme));
+	variable_set('theme_default', $default_theme);
+}

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_features_api().
+ */
+function features_date_formats_features_api() {
+  return array(
+    'features_date_format' => array(
+      'name' => t('Date Format'),
+      'file' => drupal_get_path('module', 'features_date_formats') . '/features_date_formats.features.inc',
+      'default_hook' => 'features_date_format_default',
+      'features_source' => TRUE,
+    ),
+    'features_date_type' => array(
+      'name' => t('Date Type'),
+      'file' => drupal_get_path('module', 'features_date_formats') . '/features_date_formats.features.inc',
+      'default_hook' => 'features_date_type_default',
+      'features_source' => TRUE,
+    ),
+  );
+}

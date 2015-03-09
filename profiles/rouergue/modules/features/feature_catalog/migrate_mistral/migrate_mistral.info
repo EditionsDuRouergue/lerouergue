@@ -1,0 +1,11 @@
+name = "Migrate Mistral"
+description = "Module to migrate Mistral data to Drupal Rouergue website."
+package = "App"
+core = 7.x
+dependencies[] = migrate
+
+# Files containing Migrate classes
+files[] = migrate_mistral.migrate.inc
+files[] = article.mistral.inc
+files[] = contributor.mistral.inc
+files[] = article_contributors.mistral.inc
