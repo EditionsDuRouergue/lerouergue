@@ -149,7 +149,7 @@ class ArticleMigration extends Migration {
 	protected $univ_uuids_tids = array();
 	
   public function __construct(array $arguments) {
-  	$this->systemOfRecord = Migration::DESTINATION;
+  	//$this->systemOfRecord = Migration::DESTINATION;
   	
     $this->arguments = $arguments;
     parent::__construct();
