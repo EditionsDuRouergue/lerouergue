@@ -634,7 +634,9 @@ class ArticleMigration extends Migration {
 			$this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'] . ',' . $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
 		
 		// Rouergue Littérature - 493 | La Brune - 509   ===>   Littérature > La brune - aba0e77d-4004-47d1-83aa-0dcc982091ba
-		$this->univ_coll_mapping['493']['509']['tids'] = $this->univ_uuids_tids['aba0e77d-4004-47d1-83aa-0dcc982091ba'];
+		// -------------------------------------------   ===>   La Brune - 1cc5d1ae-4297-4a31-bc83-ec57da26f285
+		$this->univ_coll_mapping['493']['509']['tids'] = 
+		$this->univ_uuids_tids['aba0e77d-4004-47d1-83aa-0dcc982091ba'] . ',' . $this->univ_uuids_tids['1cc5d1ae-4297-4a31-bc83-ec57da26f285'];
 		
 		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
 		$this->univ_coll_mapping['493']['1140']['tids'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
