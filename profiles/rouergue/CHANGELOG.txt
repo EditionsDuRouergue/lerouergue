@@ -1,3 +1,7 @@
+Rouergue 0.1.1, 2015-03-12
+--------------------------
+Translations import removed from profile install process.
+
 Rouergue 0.1, 2015-03-09
 ------------------------
 Rouergue Web site very first release.

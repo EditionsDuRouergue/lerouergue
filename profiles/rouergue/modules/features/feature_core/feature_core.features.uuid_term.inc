@@ -44,6 +44,42 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'dacodac',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 4,
+    'uuid' => '0af3c4aa-630d-48a0-98ca-51752eba0778',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'romans de société',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 6,
+    'uuid' => '13c26811-5ade-4018-b8bb-5642b42fc1da',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'divers',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 4,
+    'uuid' => '17528d7f-806a-47d8-8536-a78c249fb288',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'bff581ca-2883-4ec8-9e83-917be1285f49',
+    ),
+  );
+  $terms[] = array(
     'name' => 'à la petite semaine',
     'description' => 'Description de l\'univers...',
     'format' => 'plain_text',
@@ -83,6 +119,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => '6113be70-821f-44af-989e-c72d4135d2d1',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'polars',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 5,
+    'uuid' => '2796300b-4322-4e79-8dcf-f3d7447c31dd',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
     ),
   );
   $terms[] = array(
@@ -164,6 +212,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => 'f39ea2eb-3cae-4b3b-92b4-3ddb6f326b4c',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'doado noir',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 1,
+    'uuid' => '4269d4f5-45c0-4629-abab-b5d15e824200',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
     ),
   );
   $terms[] = array(
@@ -254,6 +314,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => '02919f7b-735d-4f1a-acc6-0854803e8b56',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'assassins sans visage',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => '6332356c-9e6d-4c86-b14f-c39fbd7352e1',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => '63ed8920-edfe-4b4e-ae83-6cafb9fd9673',
     ),
   );
   $terms[] = array(
@@ -398,6 +470,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => 'bff581ca-2883-4ec8-9e83-917be1285f49',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'epik',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 2,
+    'uuid' => '8c1782e1-88a6-4aac-87d7-4d29ed483c9b',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
     ),
   );
   $terms[] = array(
@@ -572,11 +656,35 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
+    'name' => 'la brune',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 3,
+    'uuid' => 'ce61d6fc-faa2-47f8-a6e9-976257d809d8',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
+    ),
+  );
+  $terms[] = array(
     'name' => 'romans graphiques',
     'description' => 'Description de l\'univers...',
     'format' => 'plain_text',
     'weight' => 2,
     'uuid' => 'e0e69acb-e53c-41af-bcbb-085df9bd1cf9',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => '4509ebf0-0dac-496e-b968-96e7f4b9d248',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'catalogues d\'exposition',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 1,
+    'uuid' => 'e2c94656-1a56-402b-a016-81e7455633d2',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
     'parent' => array(
@@ -615,6 +723,30 @@ function feature_core_uuid_features_default_terms() {
     'uuid' => 'f39ea2eb-3cae-4b3b-92b4-3ddb6f326b4c',
     'vocabulary_machine_name' => 'universe',
     'metatags' => array(),
+  );
+  $terms[] = array(
+    'name' => 'témoignage',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => 'f4654d87-9e93-4505-b1b2-01d4b537edfe',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'c27add62-baf4-45de-b445-27d7fef13a4f',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'doado',
+    'description' => 'Description de l\'univers...',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => 'faaf7a44-b11c-478a-b05f-e2ca1892f5b7',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
+    ),
   );
   $terms[] = array(
     'name' => 'romans ados',
