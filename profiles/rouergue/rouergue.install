@@ -92,23 +92,26 @@ function _rouergue_install_locale(&$install_state) {
 		locale_add_language('fr', 'French', 'Français', LANGUAGE_LTR, '', 'fr', TRUE, TRUE);
 	}
 
-	// Build batch with l10n_update module.
-	// Second pass will only update translations of freshly installed modules.
-	// We force each step to refresh its cache, as modules may have been
-	// installed since last call.
-	$history = l10n_update_get_history(TRUE);
-	module_load_include('check.inc', 'l10n_update');
-	// This variable forces l10n_update to rebuild its projects list.
-	variable_set('l10n_update_rebuild_projects', 1);
-	$available = l10n_update_available_releases(TRUE);
-	$updates = l10n_update_build_updates($history, $available);
+/*
+        // Build batch with l10n_update module.
+        // Second pass will only update translations of freshly installed modules.
+        // We force each step to refresh its cache, as modules may have been
+        // installed since last call.
+        $history = l10n_update_get_history(TRUE);
+        module_load_include('check.inc', 'l10n_update');
+        // This variable forces l10n_update to rebuild its projects list.
+        variable_set('l10n_update_rebuild_projects', 1);
+        $available = l10n_update_available_releases(TRUE);
+        $updates = l10n_update_build_updates($history, $available);
 
-	module_load_include('batch.inc', 'l10n_update');
-	$updates = _l10n_update_prepare_updates($updates, NULL, array());
-	// Overwrite previous translations, as the downloaded ones are the most recent, and valid.
-	$batch = l10n_update_batch_multiple($updates, LOCALE_IMPORT_OVERWRITE);
-
-	return $batch;
+        module_load_include('batch.inc', 'l10n_update');
+        $updates = _l10n_update_prepare_updates($updates, NULL, array());
+        // Overwrite previous translations, as the downloaded ones are the most recent, and valid.
+        $batch = l10n_update_batch_multiple($updates, LOCALE_IMPORT_OVERWRITE);
+*/
+        $batch = batch_get();
+        return $batch;
+	
 }
 
 /**
