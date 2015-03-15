@@ -42,20 +42,46 @@ function rouergue_mistral_settings_form() {
 			'#type' => 'fieldset',
 			'#title' => t('Mistral data import settings'),
 	);
-	$form['rouergue_import_settings']['dump_directory'] = array(
+	$form['rouergue_import_settings']['rouergue_mistral_dumps_directory'] = array(
 			'#type' => 'textfield',
 			'#title' => t('Dump archive directory'),
 			'#description' => t('Type in the URL which the contributor pictures are available from.'),
 			'#size' => 100,
-			'#default_value' => variable_get('dump_directory', $_SERVER['DOCUMENT_ROOT']),
+			'#default_value' => variable_get('rouergue_mistral_dumps_directory', $_SERVER['DOCUMENT_ROOT'] . '/mistral_dumps/'),
 	);
-	$form['rouergue_import_settings']['dump_filename'] = array(
+	$form['rouergue_import_settings']['rouergue_mistral_dump_filename'] = array(
 			'#type' => 'textfield',
 			'#title' => t('Dump archive filename'),
 			'#description' => t('Name of the default image for cover pages.'),
 			'#size' => 100,
-			'#default_value' => variable_get('dump_filename', 'mistral_site_rouergue.zip'),
+			'#default_value' => variable_get('rouergue_mistral_dump_filename', 'mistral_site_rouergue.sql'),
 	);
-
+	$form['rouergue_import_settings']['rouergue_mistral_sync_day'] = array(
+			'#type' => 'radios',
+			'#title' => t('Synchronization day'),
+			'#options' => array(
+					'1' => 'lundi',
+					'2' => 'mardi',
+					'3' => 'mercredi',
+					'4' => 'jeudi',
+					'5' => 'vendredi',
+					'6' => 'samedi',
+					'7' => 'dimanche',
+			),
+			'#default_value' => variable_get('rouergue_mistral_sync_day', 4),
+			'#description' => t('Day in week to launch the automatic synchronization process.'),
+	);
+	
+	$form['rouergue_drush_settings'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Drush settings'),
+	);
+	$form['rouergue_drush_settings']['rouergue_drush_path'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Drush path'),
+			'#description' => t('Path to drush command.'),
+			'#size' => 100,
+			'#default_value' => variable_get('rouergue_drush_path', '/opt/drush/drush'),
+	);
 	return system_settings_form($form);
 }

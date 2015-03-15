@@ -1,3 +1,11 @@
+Rouergue 0.2, 2015-03-15
+--------------------------
+Mistral synchronization code completed.
+
+Rouergue 0.1.2, 2015-03-12
+--------------------------
+Missing mapping to "La Brune" added.
+
 Rouergue 0.1.1, 2015-03-12
 --------------------------
 Translations import removed from profile install process.
