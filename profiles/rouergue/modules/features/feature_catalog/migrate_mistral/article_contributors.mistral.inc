@@ -25,8 +25,8 @@
  * )
  */
 class ArticleContributorsMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 		
 		// DESCRIPTION
 		$this->description = t("Migrate contributor/function relationships from mistral source database to Drupal Article's Contributors field (Field Collection)");

@@ -23,8 +23,8 @@
  * )
  */
 class ThemeMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 
 		// DESCRIPTION
 		$this->description = t('Migrate themes from mistral source database to Drupal Themes vocabulary');
@@ -77,8 +77,8 @@ class ThemeMigration extends Migration {
  * FROM readership
  */
 class ReadershipMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 
 		// DESCRIPTION
 		$this->description = t('Migrate readerships from mistral source database to Drupal Lectorat vocabulary');
@@ -152,7 +152,7 @@ class ArticleMigration extends Migration {
   	//$this->systemOfRecord = Migration::DESTINATION;
   	
     $this->arguments = $arguments;
-    parent::__construct();
+    parent::__construct($arguments);
 		
 		// DESCRIPTION.
 		$this->description = t('Migrate articles from mistral source database to Drupal Article nodes');

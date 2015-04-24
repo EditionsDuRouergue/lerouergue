@@ -9,8 +9,8 @@
  * 
  */
 class FunctionMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 
 		// DESCRIPTION
 		$this->description = t('Migrate functions from mistral source database to Drupal Functions vocabulary');
@@ -64,8 +64,8 @@ class FunctionMigration extends Migration {
  * )
  */
 class ContributorMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 		
 		// DESCRIPTION
 		$this->description = t('Migrate contributors from mistral source database to Drupal Contributor nodes');
