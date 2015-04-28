@@ -204,7 +204,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Pseudonyme */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
@@ -1737,7 +1737,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Pseudonyme */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
@@ -1844,7 +1844,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Pseudonyme */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
@@ -1952,7 +1952,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Pseudonyme */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
   $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';

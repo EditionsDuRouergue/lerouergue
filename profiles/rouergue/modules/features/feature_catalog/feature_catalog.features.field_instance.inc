@@ -1817,7 +1817,7 @@ function feature_catalog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 6,
+      'weight' => 10,
     ),
   );
 
@@ -1944,6 +1944,58 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-contributor-field_displayed_name'
+  $field_instances['node-contributor-field_displayed_name'] = array(
+    'bundle' => 'contributor',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_article_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_book_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_displayed_name',
+    'label' => 'Nom affiché',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 7,
     ),
   );
@@ -1998,7 +2050,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -2052,7 +2104,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -2119,48 +2171,46 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 9,
     ),
   );
 
-  // Exported field_instance: 'node-contributor-field_pseudonyme'
-  $field_instances['node-contributor-field_pseudonyme'] = array(
+  // Exported field_instance: 'node-contributor-field_pseudofirstname'
+  $field_instances['node-contributor-field_pseudofirstname'] = array(
     'bundle' => 'contributor',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 7,
       ),
       'full' => array(
-        'label' => 'hidden',
-        'module' => 'text',
+        'label' => 'above',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'on_article_page' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 0,
       ),
       'on_book_list' => array(
-        'label' => 'hidden',
-        'module' => 'text',
+        'label' => 'above',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_pseudonyme',
-    'label' => 'Pseudonyme',
+    'field_name' => 'field_pseudofirstname',
+    'label' => 'Pseudo prénom',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2173,7 +2223,111 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-contributor-field_pseudoname'
+  $field_instances['node-contributor-field_pseudoname'] = array(
+    'bundle' => 'contributor',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_article_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_book_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pseudoname',
+    'label' => 'Pseudo nom',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-contributor-field_sorting_name'
+  $field_instances['node-contributor-field_sorting_name'] = array(
+    'bundle' => 'contributor',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_article_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'on_book_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sorting_name',
+    'label' => 'Nom de tri',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
     ),
   );
 
@@ -2201,6 +2355,8 @@ function feature_catalog_field_default_field_instances() {
   t('Largeur');
   t('Lectorat');
   t('Nom');
+  t('Nom affiché');
+  t('Nom de tri');
   t('Nombre de pages');
   t('Nouveauté');
   t('Pages intérieures');
@@ -2209,7 +2365,8 @@ function feature_catalog_field_default_field_instances() {
   t('Prix');
   t('Prix validé');
   t('Prénom');
-  t('Pseudonyme');
+  t('Pseudo nom');
+  t('Pseudo prénom');
   t('Sous-titre');
   t('Thèmes');
   t('Titres du même univers');
