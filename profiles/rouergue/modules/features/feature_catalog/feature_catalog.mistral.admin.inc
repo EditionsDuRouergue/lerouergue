@@ -1,62 +1,38 @@
 <?php
 function rouergue_mistral_settings_form() {
-	$form['rouergue_cover_images'] = array(
+	// Data store
+	$form['data_store_settings'] = array(
 			'#type' => 'fieldset',
-			'#title' => t('Cover images'),
+			'#title' => t('Data store settings'),
 	);
-	$form['rouergue_cover_images']['cover_images_url'] = array(
+	$form['data_store_settings']['rouergue_data_store'] = array(
 			'#type' => 'textfield',
-			'#title' => t('Cover images URL'),
-			'#description' => t('Type in the URL which the book cover images are available from.'),
+			'#title' => t('Data store'),
+			'#description' => t('Type in the absolute path which the Rouergue data (images, dump) are available from.'),
 			'#size' => 100,
-			'#default_value' => variable_get('cover_images_url', 'http://rouergue.abrege.net/util/couv_rouergue/'),
-	);
-	$form['rouergue_cover_images']['default_cover_image'] = array(
-			'#type' => 'textfield',
-			'#title' => t('Default image filename'),
-			'#description' => t('Name of the default image for cover pages.'),
-			'#size' => 100,
-			'#default_value' => variable_get('default_cover_image', 'article-cover-400x600.png'),
+			'#default_value' => variable_get('rouergue_data_store', ''),
 	);
 	
-	$form['rouergue_contributor_pictures'] = array(
-			'#type' => 'fieldset',
-			'#title' => t('Contributor pictures'),
-	);
-	$form['rouergue_contributor_pictures']['contributor_pictures_url'] = array(
-			'#type' => 'textfield',
-			'#title' => t('Contributor pictures URL'),
-			'#description' => t('Type in the URL which the contributor pictures are available from.'),
-			'#size' => 100,
-			'#default_value' => variable_get('contributor_pictures_url', 'http://rouergue.abrege.net/util/auteurs_rouergue/'),
-	);
-	$form['rouergue_contributor_pictures']['default_contributor_picture'] = array(
-			'#type' => 'textfield',
-			'#title' => t('Default image filename'),
-			'#description' => t('Name of the default image for cover pages.'),
-			'#size' => 100,
-			'#default_value' => variable_get('default_contributor_picture', 'contributor-pic-400x600.png'),
-	);
-	
-	$form['rouergue_import_settings'] = array(
+	// Mistral data import settings
+	$form['mistral_import_settings'] = array(
 			'#type' => 'fieldset',
 			'#title' => t('Mistral data import settings'),
 	);
-	$form['rouergue_import_settings']['rouergue_mistral_dumps_directory'] = array(
+	$form['mistral_import_settings']['rouergue_mistral_dumps_directory'] = array(
 			'#type' => 'textfield',
 			'#title' => t('Dump archive directory'),
 			'#description' => t('Type in the URL which the contributor pictures are available from.'),
 			'#size' => 100,
-			'#default_value' => variable_get('rouergue_mistral_dumps_directory', $_SERVER['DOCUMENT_ROOT'] . '/mistral_dumps/'),
+			'#default_value' => variable_get('rouergue_mistral_dumps_directory', '/mistral_dumps/'),
 	);
-	$form['rouergue_import_settings']['rouergue_mistral_dump_filename'] = array(
+	$form['mistral_import_settings']['rouergue_mistral_dump_filename'] = array(
 			'#type' => 'textfield',
 			'#title' => t('Dump archive filename'),
 			'#description' => t('Name of the default image for cover pages.'),
 			'#size' => 100,
 			'#default_value' => variable_get('rouergue_mistral_dump_filename', 'mistral_site_rouergue.sql'),
 	);
-	$form['rouergue_import_settings']['rouergue_mistral_sync_day'] = array(
+	$form['mistral_import_settings']['rouergue_mistral_sync_day'] = array(
 			'#type' => 'radios',
 			'#title' => t('Synchronization day'),
 			'#options' => array(
@@ -72,6 +48,43 @@ function rouergue_mistral_settings_form() {
 			'#description' => t('Day in week to launch the automatic synchronization process.'),
 	);
 	
+	// Rouergue images import settings
+	$form['rouergue_import_settings'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Rouergue images import setting'),
+	);
+	// Cover images
+	$form['rouergue_import_settings']['rouergue_cover_images_dir'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Cover images directory'),
+			'#description' => t('Type in the absolute path which the book cover images are available from.'),
+			'#size' => 100,
+			'#default_value' => variable_get('rouergue_cover_images_dir', 'catalog/cover-images'),
+	);
+	$form['rouergue_import_settings']['rouergue_default_cover_image'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Default cover image filename'),
+			'#description' => t('Name of the default image for cover pages.'),
+			'#size' => 100,
+			'#default_value' => variable_get('rouergue_default_cover_image', 'article-cover-400x600.png'),
+	);
+	// Contributor pictures
+	$form['rouergue_import_settings']['rouergue_contributor_pictures_dir'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Contributor pictures directory'),
+			'#description' => t('Type in the absolute path which the contributor pictures are available from.'),
+			'#size' => 100,
+			'#default_value' => variable_get('rouergue_contributor_pictures_dir', 'catalog/contributor-pictures'),
+	);
+	$form['rouergue_import_settings']['rouergue_default_contributor_picture'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Default contributor picture filename'),
+			'#description' => t('Name of the default image for cover pages.'),
+			'#size' => 100,
+			'#default_value' => variable_get('rouergue_default_contributor_picture', 'contributor-pic-400x600.png'),
+	);
+
+	// Drush command settings
 	$form['rouergue_drush_settings'] = array(
 			'#type' => 'fieldset',
 			'#title' => t('Drush settings'),
