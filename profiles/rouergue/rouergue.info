@@ -4,15 +4,15 @@ version = 7.x-1.0
 core = 7.x
 
 ; Settings (see profile's hook_install_tasks)
-;settings[default_country] = "FR"
-;settings[default_language] = "fr"
+settings[default_country] = "FR"
+settings[default_language] = "fr"
 settings[default_theme] = "bartik"
 settings[admin_theme] = "rubik"
-;settings[default_timezone] = "Europe/Paris"
-;settings[site_mail] = "christophe.espiau@gmail.com"
-;settings[site_name] = "Rouergue"
-;settings[site_slogan] = ""
-;settings[user1_name] = "superadmin"
+settings[default_timezone] = "Europe/Paris"
+settings[site_mail] = "christophe.espiau@gmail.com"
+settings[site_name] = "Rouergue"
+settings[site_slogan] = ""
+settings[user1_name] = "superadmin"
  
 
 ; Core modules.
