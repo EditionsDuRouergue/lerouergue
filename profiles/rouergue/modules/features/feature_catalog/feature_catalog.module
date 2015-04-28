@@ -173,11 +173,8 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 	}
 
 	// CONTRIBUTOR
-	if ($node->type == 'contributor') {
-// 		if (strlen($node->content['field_pseudonyme'][0]['#markup']) > 1) {
-// 			unset($node->content['field_firstname']);
-// 			unset($node->content['field_lastname']);
-// 		}
+	if ($node->type == 'contributor' && $view_mode == 'full') {
+		$node->content['field_displayed_name'][0]['#markup'] = '<h1>' . $node->content['field_displayed_name'][0]['#markup'] . '</h1>';
 	}
 }
 

@@ -428,17 +428,15 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'central' => array(
-        0 => 'field_picture',
-        1 => 'field_firstname',
-        2 => 'field_lastname',
-        3 => 'body',
-        4 => 'field_contributor_url',
+        0 => 'field_displayed_name',
+        1 => 'field_picture',
+        2 => 'body',
+        3 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
+      'field_displayed_name' => 'central',
       'field_picture' => 'central',
-      'field_firstname' => 'central',
-      'field_lastname' => 'central',
       'body' => 'central',
       'field_contributor_url' => 'central',
     ),
@@ -451,7 +449,7 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
-    'hide_page_title' => '0',
+    'hide_page_title' => '1',
     'page_option_title' => '',
   );
   $export['node|contributor|full'] = $ds_layout;
@@ -494,15 +492,11 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_firstname',
-        1 => 'field_lastname',
-        2 => 'field_pseudonyme',
+        0 => 'field_displayed_name',
       ),
     ),
     'fields' => array(
-      'field_firstname' => 'ds_content',
-      'field_lastname' => 'ds_content',
-      'field_pseudonyme' => 'ds_content',
+      'field_displayed_name' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

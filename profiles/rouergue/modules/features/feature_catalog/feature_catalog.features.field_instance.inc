@@ -1776,7 +1776,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'on_article_page' => array(
         'label' => 'hidden',
@@ -1844,7 +1844,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 19,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -1898,7 +1898,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -1963,10 +1963,11 @@ function feature_catalog_field_default_field_instances() {
         'weight' => 11,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 1,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -1975,9 +1976,10 @@ function feature_catalog_field_default_field_instances() {
         'weight' => 0,
       ),
       'on_book_list' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
     ),
@@ -2016,10 +2018,9 @@ function feature_catalog_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 17,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -2029,9 +2030,8 @@ function feature_catalog_field_default_field_instances() {
       ),
       'on_book_list' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
@@ -2070,10 +2070,9 @@ function feature_catalog_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -2083,9 +2082,8 @@ function feature_catalog_field_default_field_instances() {
       ),
       'on_book_list' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
     ),
@@ -2132,7 +2130,7 @@ function feature_catalog_field_default_field_instances() {
           'image_style' => 'article-cover',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -2193,7 +2191,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -2245,7 +2243,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 15,
       ),
       'on_article_page' => array(
         'label' => 'above',
@@ -2297,7 +2295,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
       'on_article_page' => array(
         'label' => 'above',
