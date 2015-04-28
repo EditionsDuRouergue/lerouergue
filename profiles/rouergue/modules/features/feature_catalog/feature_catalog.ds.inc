@@ -431,16 +431,14 @@ function feature_catalog_ds_layout_settings_info() {
         0 => 'field_picture',
         1 => 'field_firstname',
         2 => 'field_lastname',
-        3 => 'field_pseudonyme',
-        4 => 'body',
-        5 => 'field_contributor_url',
+        3 => 'body',
+        4 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
       'field_picture' => 'central',
       'field_firstname' => 'central',
       'field_lastname' => 'central',
-      'field_pseudonyme' => 'central',
       'body' => 'central',
       'field_contributor_url' => 'central',
     ),
@@ -453,6 +451,8 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'hide_page_title' => '0',
+    'page_option_title' => '',
   );
   $export['node|contributor|full'] = $ds_layout;
 

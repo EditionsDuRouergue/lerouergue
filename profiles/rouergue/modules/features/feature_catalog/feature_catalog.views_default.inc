@@ -169,20 +169,6 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Prénom */
-  $handler->display->display_options['fields']['field_firstname']['id'] = 'field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['table'] = 'field_data_field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['field'] = 'field_firstname';
-  $handler->display->display_options['fields']['field_firstname']['label'] = '';
-  $handler->display->display_options['fields']['field_firstname']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_firstname']['element_label_colon'] = FALSE;
-  /* Champ: Contenu : Nom */
-  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['label'] = '';
-  $handler->display->display_options['fields']['field_lastname']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
   /* Champ: Contenu : Photo */
   $handler->display->display_options['fields']['field_picture']['id'] = 'field_picture';
   $handler->display->display_options['fields']['field_picture']['table'] = 'field_data_field_picture';
@@ -194,92 +180,41 @@ function feature_catalog_views_default_views() {
     'image_style' => 'article-cover-min',
     'image_link' => 'content',
   );
-  /* Champ: Prénom Nom */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['ui_name'] = 'Prénom Nom';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_firstname] [field_lastname]';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'node/[nid]';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Champ: Gestionnaire défectueux/manquant */
-  $handler->display->display_options['fields']['field_pseudonyme']['id'] = 'field_pseudonyme';
-  $handler->display->display_options['fields']['field_pseudonyme']['table'] = 'field_data_field_pseudonyme';
-  $handler->display->display_options['fields']['field_pseudonyme']['field'] = 'field_pseudonyme';
-  $handler->display->display_options['fields']['field_pseudonyme']['label'] = '';
-  $handler->display->display_options['fields']['field_pseudonyme']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_pseudonyme']['alter']['path'] = 'node/[nid]';
-  $handler->display->display_options['fields']['field_pseudonyme']['element_label_colon'] = FALSE;
+  /* Champ: Contenu : Nom affiché */
+  $handler->display->display_options['fields']['field_displayed_name']['id'] = 'field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['table'] = 'field_data_field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['field'] = 'field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['label'] = '';
+  $handler->display->display_options['fields']['field_displayed_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_displayed_name']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_displayed_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Contenu : Nom de tri (field_sorting_name) */
+  $handler->display->display_options['sorts']['field_sorting_name_value']['id'] = 'field_sorting_name_value';
+  $handler->display->display_options['sorts']['field_sorting_name_value']['table'] = 'field_data_field_sorting_name';
+  $handler->display->display_options['sorts']['field_sorting_name_value']['field'] = 'field_sorting_name_value';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nom (field_lastname) */
-  $handler->display->display_options['arguments']['field_lastname_value']['id'] = 'field_lastname_value';
-  $handler->display->display_options['arguments']['field_lastname_value']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['arguments']['field_lastname_value']['field'] = 'field_lastname_value';
-  $handler->display->display_options['arguments']['field_lastname_value']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_lastname_value']['exception']['title'] = 'Tout';
-  $handler->display->display_options['arguments']['field_lastname_value']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['field_lastname_value']['default_argument_options']['argument'] = 'a';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_lastname_value']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['field_lastname_value']['validate']['fail'] = 'empty';
-  $handler->display->display_options['arguments']['field_lastname_value']['glossary'] = TRUE;
-  $handler->display->display_options['arguments']['field_lastname_value']['limit'] = '1';
-  $handler->display->display_options['arguments']['field_lastname_value']['case'] = 'upper';
-  $handler->display->display_options['arguments']['field_lastname_value']['path_case'] = 'lower';
-  $handler->display->display_options['path'] = 'auteurs';
-
-  /* Display: Fichier attaché */
-  $handler = $view->new_display('attachment', 'Fichier attaché', 'alpha_pager');
-  $handler->display->display_options['defaults']['group_by'] = FALSE;
-  $handler->display->display_options['defaults']['query'] = FALSE;
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
-    'field_firstname' => 'field_firstname',
-    'field_lastname' => 'field_lastname',
-  );
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['relationships'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Nom */
-  $handler->display->display_options['fields']['field_lastname']['id'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['field'] = 'field_lastname';
-  $handler->display->display_options['fields']['field_lastname']['label'] = '';
-  $handler->display->display_options['fields']['field_lastname']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_lastname']['group_columns'] = array(
-    'value' => 'value',
-  );
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nom (field_lastname) */
-  $handler->display->display_options['arguments']['field_lastname_value']['id'] = 'field_lastname_value';
-  $handler->display->display_options['arguments']['field_lastname_value']['table'] = 'field_data_field_lastname';
-  $handler->display->display_options['arguments']['field_lastname_value']['field'] = 'field_lastname_value';
-  $handler->display->display_options['arguments']['field_lastname_value']['default_action'] = 'summary';
-  $handler->display->display_options['arguments']['field_lastname_value']['exception']['title'] = 'Tout';
-  $handler->display->display_options['arguments']['field_lastname_value']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary']['format'] = 'unformatted_summary';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary_options']['count'] = FALSE;
-  $handler->display->display_options['arguments']['field_lastname_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_lastname_value']['summary_options']['inline'] = TRUE;
-  $handler->display->display_options['arguments']['field_lastname_value']['summary_options']['separator'] = ' | ';
-  $handler->display->display_options['arguments']['field_lastname_value']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['field_lastname_value']['glossary'] = TRUE;
-  $handler->display->display_options['arguments']['field_lastname_value']['limit'] = '1';
-  $handler->display->display_options['arguments']['field_lastname_value']['case'] = 'upper';
-  $handler->display->display_options['arguments']['field_lastname_value']['path_case'] = 'lower';
+  /* Filtre contextuel: Contenu : Nom de tri (field_sorting_name) */
+  $handler->display->display_options['arguments']['field_sorting_name_value']['id'] = 'field_sorting_name_value';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['table'] = 'field_data_field_sorting_name';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['field'] = 'field_sorting_name_value';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['default_argument_options']['argument'] = 'a';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['glossary'] = TRUE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['limit'] = '1';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['case'] = 'upper';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['path_case'] = 'lower';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Critère de filtrage: Contenu : Publié */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -296,6 +231,118 @@ function feature_catalog_views_default_views() {
     'contributor' => 'contributor',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 2;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_1']['field'] = 'name';
+  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name_1']['group'] = 2;
+  $handler->display->display_options['path'] = 'auteurs';
+
+  /* Display: Pager alphabétique */
+  $handler = $view->new_display('attachment', 'Pager alphabétique', 'alpha_pager');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'field_firstname' => 'field_firstname',
+    'field_lastname' => 'field_lastname',
+  );
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Entity Reference : Entité référante */
+  $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['id'] = 'reverse_field_contributor_field_collection_item';
+  $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['field'] = 'reverse_field_contributor_field_collection_item';
+  $handler->display->display_options['relationships']['reverse_field_contributor_field_collection_item']['label'] = 'FC Contributeur';
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'reverse_field_contributor_field_collection_item';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Nom affiché */
+  $handler->display->display_options['fields']['field_displayed_name']['id'] = 'field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['table'] = 'field_data_field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['field'] = 'field_displayed_name';
+  $handler->display->display_options['fields']['field_displayed_name']['label'] = '';
+  $handler->display->display_options['fields']['field_displayed_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Critère de tri: Contenu : Nom de tri (field_sorting_name) */
+  $handler->display->display_options['sorts']['field_sorting_name_value']['id'] = 'field_sorting_name_value';
+  $handler->display->display_options['sorts']['field_sorting_name_value']['table'] = 'field_data_field_sorting_name';
+  $handler->display->display_options['sorts']['field_sorting_name_value']['field'] = 'field_sorting_name_value';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Filtre contextuel: Contenu : Nom de tri (field_sorting_name) */
+  $handler->display->display_options['arguments']['field_sorting_name_value']['id'] = 'field_sorting_name_value';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['table'] = 'field_data_field_sorting_name';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['field'] = 'field_sorting_name_value';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['default_action'] = 'summary';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary']['format'] = 'unformatted_summary';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary_options']['count'] = FALSE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary_options']['inline'] = TRUE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['summary_options']['separator'] = '|';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['glossary'] = TRUE;
+  $handler->display->display_options['arguments']['field_sorting_name_value']['limit'] = '1';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['case'] = 'upper';
+  $handler->display->display_options['arguments']['field_sorting_name_value']['path_case'] = 'lower';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'contributor' => 'contributor',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 2;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_1']['field'] = 'name';
+  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name_1']['group'] = 2;
   $handler->display->display_options['displays'] = array(
     'authors' => 'authors',
     'default' => 0,
@@ -321,7 +368,7 @@ function feature_catalog_views_default_views() {
     t('[field_firstname] [field_lastname]'),
     t('Auteurs'),
     t('Tout'),
-    t('Fichier attaché'),
+    t('Pager alphabétique'),
   );
   $export['authors'] = $view;
 
