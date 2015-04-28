@@ -1727,8 +1727,7 @@ return $query->execute()->fetchField();';
   /* Display: Auteur liste livres */
   $handler = $view->new_display('block', 'Auteur liste livres', 'author');
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Élément Field collection : Contributor */
@@ -1743,14 +1742,12 @@ return $query->execute()->fetchField();';
     'links' => 0,
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Terme de taxonomie : Nom */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
-  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
   $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
@@ -1759,6 +1756,20 @@ return $query->execute()->fetchField();';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_1']['field'] = 'name';
+  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name_1']['group'] = 2;
 
   /* Display: Auteurs fiche livre */
   $handler = $view->new_display('block', 'Auteurs fiche livre', 'book_contributors_author');
@@ -1824,7 +1835,8 @@ return $query->execute()->fetchField();';
 
   /* Display: Les autres fiche livre */
   $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_others');
-  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['grouping'] = array(
