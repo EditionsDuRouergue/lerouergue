@@ -67,6 +67,10 @@ class ContributorMigration extends Migration {
 	public function __construct($arguments) {
 		parent::__construct($arguments);
 		
+		$this->store = '';
+		$this->contributor_pictures_dir = '';
+		$this->default_contributor_picture = '';
+		
 		// DESCRIPTION
 		$this->description = t('Migrate contributors from mistral source database to Drupal Contributor nodes');
 		
@@ -82,7 +86,7 @@ class ContributorMigration extends Migration {
 		$query = Database::getConnection('default', 'mistral')->select('contributor','c');
 		$query->join('bookcontributor','bc','bc.contributorid=c.contributorid');
 		$query->fields('c', array('contributorid','name','firstname','pseudoname','pseudofirstname','biography'));
-		//$query->condition('bc.bookid', $subquery, 'IN');
+		//$query->condition('c.contributorid', '');
 		$query->distinct();
 		
 		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
@@ -110,9 +114,9 @@ class ContributorMigration extends Migration {
 		$this->addFieldMapping('title', 'name');
 		$this->addFieldMapping('field_lastname', 'name');
 		$this->addFieldMapping('field_firstname', 'firstname');
-		$this->addFieldMapping('field_pseudonyme', 'pseudoname');
+		$this->addFieldMapping('field_pseudoname', 'pseudoname');
+		$this->addFieldMapping('field_pseudofirstname', 'pseudofirstname');
 		$this->addFieldMapping('body', 'biography');
-		
 	}
 	
 	/**
@@ -120,10 +124,7 @@ class ContributorMigration extends Migration {
 	 */
 	function prepareRow($row) {
 		parent::prepareRow($row);
-		
-		// Pseudo
-		$row->pseudoname = $row->pseudofirstname . ' ' . $row->pseudoname;
-		
+
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
 	}
@@ -132,20 +133,49 @@ class ContributorMigration extends Migration {
 	 * Data handling before node saving.
 	 */
 	function prepare($node, stdClass $row) {
-		// Title
-		$node->title = $node->title . ' ' . $row->firstname;		
+		// Title, displayed name and sorting name handling.
+		$title = $row->name . ' ' . $row->firstname;
+		$displayed_name = $row->firstname . ' ' . $row->name;
+		$sorting_name = $row->name;
+		
+		if (isset($row->pseudofirstname) && $row->pseudofirstname != '') {
+			$title = $row->pseudoname . ' ' . $row->pseudofirstname;
+			$displayed_name = $row->pseudofirstname . ' ' . $row->pseudoname;
+			$sorting_name = $row->pseudoname;
+		}
+		else if(isset($row->pseudoname) && $row->pseudoname != '') {
+			$title = $row->pseudoname;
+			$displayed_name = $row->pseudoname;
+			$sorting_name = $row->pseudoname;
+		}
+
+		$node->title = $title;
+		$node->field_displayed_name[LANGUAGE_NONE]['0']['value'] = $displayed_name;
+		$node->field_sorting_name[LANGUAGE_NONE]['0']['value'] = $sorting_name;
 
 		// Picture file
-		$picture_filename = $row->contributorid . '.jpg';
-		$host = variable_get('contributor_pictures_url','http://rouergue.abrege.net/util/auteurs_rouergue/');
-		$url = $host . $picture_filename;
+		if ($this->store == '') {
+			$this->store = rtrim(variable_get('rouergue_data_store', ''), '/') . '/';
+		}
+		if ($this->contributor_pictures_dir == '') {
+			$this->contributor_pictures_dir = rtrim(variable_get('rouergue_contributor_pictures_dir', 'catalog/contributor-pictures'), '/') . '/';
+		}
+		$filename = $row->contributorid . '.jpg';
+		$picture_filename = $this->store . $this->contributor_pictures_dir . $filename;
 		
-		if(!$file = system_retrieve_file($url, 'public://catalog/contributor-pictures/' . $picture_filename, TRUE, FILE_EXISTS_REPLACE)) {
-			$image_filename = variable_get('default_contributor_picture','contributor-pic-400x600.png');
-			$url = $host . $image_filename;
-			$file = system_retrieve_file($url, 'public://catalog/contributor-pictures/' . $image_filename, TRUE, FILE_EXISTS_RENAME);
+		if (!file_exists($picture_filename)) {
+			if ($this->default_contributor_picture == '') {
+				$this->default_contributor_picture = variable_get('rouergue_default_contributor_picture', 'contributor-pic-400x600.png');
+			}
+			$filename = $this->default_contributor_picture;
+			$picture_filename = $this->store . $this->contributor_pictures_dir . $filename;
 		}
 		
-		$node->field_picture[LANGUAGE_NONE]['0']['fid'] = $file->fid;
+		if ($picture = file_get_contents($picture_filename)) {
+			$file = file_save_data($picture, 'public://catalog/contributor-pictures/' . $filename, FILE_EXISTS_REPLACE);
+			if ($file) {
+				$node->field_picture[LANGUAGE_NONE]['0']['fid'] = $file->fid;
+			}
+		}
 	}
 }
