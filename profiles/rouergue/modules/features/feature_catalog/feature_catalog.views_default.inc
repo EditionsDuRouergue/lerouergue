@@ -2445,15 +2445,6 @@ return $query->execute()->fetchField();';
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Critère de filtrage: Élément Field collection : Auteur principal (field_ismain) */
-  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
-  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
-  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
-    1 => '1',
-  );
-  $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
   $handler->display->display_options['path'] = 'taxonomy/term/%';
 
   /* Display: Feed */
