@@ -25,12 +25,9 @@ function feature_workshops_field_default_field_instances() {
       ),
       'carousel' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 300,
-        ),
-        'type' => 'text_trimmed',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -106,7 +103,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 18,
       ),
       'default' => array(
         'label' => 'above',
@@ -168,12 +165,9 @@ function feature_workshops_field_default_field_instances() {
       ),
       'carousel' => array(
         'label' => 'hidden',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => 0,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'above',
@@ -246,7 +240,7 @@ function feature_workshops_field_default_field_instances() {
           'image_style' => 'workshop-carousel',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -329,7 +323,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -405,7 +399,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -472,7 +466,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
       'default' => array(
         'label' => 'above',
@@ -548,7 +542,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'default' => array(
         'label' => 'above',

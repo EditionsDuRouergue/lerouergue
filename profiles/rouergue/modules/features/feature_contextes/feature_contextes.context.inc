@@ -77,35 +77,41 @@ function feature_contextes_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-news-news_block' => array(
-          'module' => 'views',
-          'delta' => 'news-news_block',
-          'region' => 'content',
-          'weight' => '-29',
-        ),
         'views-first_level_universes-block' => array(
           'module' => 'views',
           'delta' => 'first_level_universes-block',
           'region' => 'content',
-          'weight' => '-28',
+          'weight' => '-10',
+        ),
+        'views-news-news_block' => array(
+          'module' => 'views',
+          'delta' => 'news-news_block',
+          'region' => 'content',
+          'weight' => '-9',
         ),
         'views-catalog-catalog_new_books_block' => array(
           'module' => 'views',
           'delta' => 'catalog-catalog_new_books_block',
           'region' => 'content',
-          'weight' => '-27',
+          'weight' => '-8',
         ),
         'views-events-agenda_front_block' => array(
           'module' => 'views',
           'delta' => 'events-agenda_front_block',
           'region' => 'content',
-          'weight' => '-26',
+          'weight' => '-7',
+        ),
+        'block-2' => array(
+          'module' => 'block',
+          'delta' => '2',
+          'region' => 'content',
+          'weight' => '-6',
         ),
         'views-workshops-workshops_front_block' => array(
           'module' => 'views',
           'delta' => 'workshops-workshops_front_block',
           'region' => 'content',
-          'weight' => '-25',
+          'weight' => '-5',
         ),
       ),
     ),

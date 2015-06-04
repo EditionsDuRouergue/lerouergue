@@ -154,6 +154,11 @@
       <?php endif; ?>
 
       <?php print render($page['content']); ?>
+
+
+      <?php if (!empty($page['content_bottom'])): ?>
+     <?php print render($page['content_bottom']); ?>
+      <?php endif; ?>
     
       <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
 
@@ -165,7 +170,6 @@
         <?php print render($page['sidebar_second']); ?>
       </aside>  <!-- /#sidebar-second -->
     <?php endif; ?>
-
   </div>
 
   <div class="preFooter"></div>

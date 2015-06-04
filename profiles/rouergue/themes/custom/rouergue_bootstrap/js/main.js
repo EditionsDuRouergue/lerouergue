@@ -2,7 +2,7 @@
 	Drupal.behaviors.main =  {
 		attach: function(context, settings) {
 
-			$('.infosWrapper').hide();
+			/*$('.infosWrapper').hide();
 			
 			$('.couvWrapper').mouseenter(function() {
 				$(this).parent().children('.infosWrapper').slideDown('fast')
@@ -13,6 +13,6 @@
 			});
 
 
-   }
+   }*/
  };
 })(jQuery);

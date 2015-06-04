@@ -97,12 +97,12 @@
 @font-size-large:         30px; 
 @font-size-small:         10px;
 
-@font-size-h1:            72px;
-@font-size-h2:            50px;
-@font-size-h3:            38px;
-@font-size-h4:            22px;
-@font-size-h5:            18px;
-@font-size-h6:            13px;
+@font-size-h1:            40px;
+@font-size-h2:            36px;
+@font-size-h3:            30px;
+@font-size-h4:            18px;
+@font-size-h5:            13px;
+@font-size-h6:            10px;
 
 //** Unit-less `line-height` for use in components like buttons.
 @line-height-base:        1.428571429; // 20/14
@@ -110,7 +110,7 @@
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    @font-family-light;
+@headings-font-family:    @font-family-base;
 @headings-font-weight:    normal;
 @headings-line-height:    1.1;
 @headings-color:          inherit;
@@ -446,7 +446,7 @@
 
 //=== Shared nav styles
 @nav-link-padding:                          10px 15px;
-@nav-link-hover-bg:                         @white;
+@nav-link-hover-bg:                         none;
 
 @nav-disabled-link-color:                   @gray;
 @nav-disabled-link-hover-color:             @gray;

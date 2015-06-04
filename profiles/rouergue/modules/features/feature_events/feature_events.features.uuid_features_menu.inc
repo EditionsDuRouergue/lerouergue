@@ -26,7 +26,7 @@ function feature_events_menu_default_uuid_features_menu() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 3,
+    'weight' => -47,
     'uuid' => '7ace2244-3a37-4448-95dc-05d162182be0',
   );
 

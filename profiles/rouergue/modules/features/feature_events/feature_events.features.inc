@@ -34,7 +34,7 @@ function feature_events_features_date_format_default() {
 
   $fdf_config[] = array(
     'dfid' => 37,
-    'format' => 'd F Y',
+    'format' => 'd F',
     'type' => 'custom',
     'locked' => 0,
   );
@@ -67,13 +67,24 @@ function feature_events_image_default_styles() {
   $styles['event-block'] = array(
     'label' => 'event-block',
     'effects' => array(
-      4 => array(
+      3 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 260,
+          'width' => 265,
           'height' => 200,
         ),
         'weight' => 1,
+      ),
+      4 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
       ),
     ),
   );
@@ -85,10 +96,21 @@ function feature_events_image_default_styles() {
       5 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 260,
+          'width' => 265,
           'height' => 170,
         ),
         'weight' => 1,
+      ),
+      6 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
       ),
     ),
   );
@@ -97,13 +119,24 @@ function feature_events_image_default_styles() {
   $styles['event-page'] = array(
     'label' => 'event-page',
     'effects' => array(
-      6 => array(
+      7 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 555,
           'height' => 370,
         ),
         'weight' => 1,
+      ),
+      8 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
       ),
     ),
   );

@@ -121,14 +121,14 @@ function feature_catalog_context_default_contexts() {
         'views--exp-universes-page' => array(
           'module' => 'views',
           'delta' => '-exp-universes-page',
-          'region' => 'content',
-          'weight' => '-9',
+          'region' => 'content_bottom',
+          'weight' => '-10',
         ),
         'feature_catalog-rouergue_catalog_links' => array(
           'module' => 'feature_catalog',
           'delta' => 'rouergue_catalog_links',
-          'region' => 'content',
-          'weight' => '-8',
+          'region' => 'content_bottom',
+          'weight' => '-9',
         ),
       ),
     ),

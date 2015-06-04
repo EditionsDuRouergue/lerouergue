@@ -17,8 +17,13 @@ function feature_workshops_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'workshops';
   $ds_fieldsetting->view_mode = 'carousel';
   $ds_fieldsetting->settings = array(
-    'title' => array(
+    'fabrique_title' => array(
       'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -94,28 +99,22 @@ function feature_workshops_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'title',
-        1 => 'field_event_author',
-        2 => 'body',
+        0 => 'fabrique_title',
+        1 => 'title',
       ),
       'right' => array(
-        3 => 'field_gallery',
+        2 => 'field_gallery',
       ),
     ),
     'fields' => array(
+      'fabrique_title' => 'left',
       'title' => 'left',
-      'field_event_author' => 'left',
-      'body' => 'left',
       'field_gallery' => 'right',
     ),
     'limit' => array(
       'field_gallery' => '1',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        '' => '',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'left' => 'div',
       'right' => 'div',

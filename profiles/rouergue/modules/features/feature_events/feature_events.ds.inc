@@ -18,7 +18,7 @@ function feature_events_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'block';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -38,12 +38,22 @@ function feature_events_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'list';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '3',
+      'weight' => '5',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
         'link' => '1',
-        'wrapper' => 'h4',
+        'wrapper' => 'p',
+        'class' => '',
+      ),
+    ),
+    'node_link' => array(
+      'weight' => '7',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link text' => 'suite',
+        'wrapper' => '',
         'class' => '',
       ),
     ),
@@ -69,15 +79,15 @@ function feature_events_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'central' => array(
-        0 => 'field_event_type',
-        1 => 'title',
-        2 => 'field_dates',
+        0 => 'field_dates',
+        1 => 'field_event_type',
+        2 => 'title',
       ),
     ),
     'fields' => array(
+      'field_dates' => 'central',
       'field_event_type' => 'central',
       'title' => 'central',
-      'field_dates' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -102,24 +112,26 @@ function feature_events_ds_layout_settings_info() {
     'regions' => array(
       'central' => array(
         0 => 'field_event_image',
-        1 => 'field_dates',
-        2 => 'field_event_type',
-        3 => 'title',
-        4 => 'body',
+        1 => 'group_event_details',
+        2 => 'field_dates',
+        3 => 'field_adresse',
+        4 => 'field_event_type',
+        5 => 'title',
+        6 => 'body',
+        7 => 'node_link',
       ),
     ),
     'fields' => array(
       'field_event_image' => 'central',
+      'group_event_details' => 'central',
       'field_dates' => 'central',
+      'field_adresse' => 'central',
       'field_event_type' => 'central',
       'title' => 'central',
       'body' => 'central',
+      'node_link' => 'central',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        '' => '',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'central' => 'div',
     ),

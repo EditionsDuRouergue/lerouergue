@@ -186,7 +186,7 @@ function feature_catalog_strongarm() {
         ),
         'field_publication_status' => array(
           'full' => array(
-            'weight' => '3',
+            'weight' => '2',
             'visible' => TRUE,
           ),
           'default' => array(
@@ -208,15 +208,15 @@ function feature_catalog_strongarm() {
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
-            'weight' => '14',
+            'weight' => '4',
             'visible' => TRUE,
           ),
           'list' => array(
-            'weight' => '32',
+            'weight' => '35',
             'visible' => FALSE,
           ),
           'author_books' => array(
-            'weight' => '33',
+            'weight' => '35',
             'visible' => FALSE,
           ),
         ),

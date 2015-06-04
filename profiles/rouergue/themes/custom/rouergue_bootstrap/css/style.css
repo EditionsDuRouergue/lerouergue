@@ -1003,7 +1003,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "corporateslight";
+  font-family: "corporatesregular";
   font-weight: normal;
   line-height: 1.1;
   color: inherit;
@@ -1084,27 +1084,27 @@ h6 .small,
 }
 h1,
 .h1 {
-  font-size: 72px;
+  font-size: 40px;
 }
 h2,
 .h2 {
-  font-size: 50px;
+  font-size: 36px;
 }
 h3,
 .h3 {
-  font-size: 38px;
+  font-size: 30px;
 }
 h4,
 .h4 {
-  font-size: 22px;
+  font-size: 18px;
 }
 h5,
 .h5 {
-  font-size: 18px;
+  font-size: 13px;
 }
 h6,
 .h6 {
-  font-size: 13px;
+  font-size: 10px;
 }
 p {
   margin: 0 0 10px;
@@ -3597,7 +3597,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #ffffff;
+  background-color: none;
 }
 .nav > li.disabled > a {
   color: #666666;
@@ -3612,7 +3612,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #ffffff;
+  background-color: none;
   border-color: #4d4d4d;
 }
 .nav .nav-divider {

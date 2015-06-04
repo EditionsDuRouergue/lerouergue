@@ -90,7 +90,7 @@ function feature_catalog_views_default_views() {
     'image_style' => 'article-cover-min',
     'image_link' => 'content',
   );
-  /* Champ: Image field caption : Photo (caption) */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['caption']['id'] = 'caption';
   $handler->display->display_options['fields']['caption']['table'] = 'field_picture_field_image_field_caption';
   $handler->display->display_options['fields']['caption']['field'] = 'caption';
@@ -408,6 +408,11 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Pied de page: Global : Résumé des résultats */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '@total livres';
   /* Comportement en l'absence de résultats: Global : Messages */
   $handler->display->display_options['empty']['messages']['id'] = 'messages';
   $handler->display->display_options['empty']['messages']['table'] = 'views';
@@ -494,11 +499,6 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total titres';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Critère de tri: Contenu : Date de parution (field_release_date) */
@@ -1084,6 +1084,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relation: Nodequeue : Queue */
   $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
@@ -1133,7 +1134,7 @@ return $query->execute()->fetchField();';
   /* Display: Livres du même auteur */
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Du même auteur…';
+  $handler->display->display_options['title'] = 'Du même auteur';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1615,9 +1616,9 @@ return $query->execute()->fetchField();';
     t('‹ précédent'),
     t('suivant ›'),
     t('dernier »'),
+    t('@total livres'),
     t('terme'),
     t('Catalogue'),
-    t('@total titres'),
     t('Livres auteur'),
     t('Bibliographie'),
     t('Contributeurs'),
@@ -1626,6 +1627,7 @@ return $query->execute()->fetchField();';
     t('Tout'),
     t('Classement avancé'),
     t('Sélectionnez n\'importe quel filtre et cliquez sur Appliquer pour voir les résultats'),
+    t('@total titres'),
     t('Contributeur'),
     t('Date de parution'),
     t('Titre'),
@@ -1643,7 +1645,7 @@ return $query->execute()->fetchField();';
     t('Liste nouveautés'),
     t('Bloc nouveautés'),
     t('Livres du même auteur'),
-    t('Du même auteur…'),
+    t('Du même auteur'),
     t('Modal "Livres même univers"'),
     t('Bloc "Livres même univers"'),
     t('Dans la même série…'),
@@ -2039,8 +2041,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '6';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relation: Terme de taxonomie : Terme parent */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
@@ -2231,6 +2232,11 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['header']['view']['label'] = 'Description terme';
   $handler->display->display_options['header']['view']['view_to_insert'] = 'universes_descriptions:term_description';
   $handler->display->display_options['header']['view']['inherit_arguments'] = TRUE;
+  /* Pied de page: Global : Résumé des résultats */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '@total livres';
   /* Relation: Contenu : Contributeurs (field_contributors) */
   $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
@@ -2393,11 +2399,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total livres';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';

@@ -18,7 +18,7 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'author_books';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -58,7 +58,7 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
     'authors' => array(
-      'weight' => '0',
+      'weight' => '7',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -69,7 +69,7 @@ function feature_catalog_ds_field_settings_info() {
       ),
     ),
     'illustrators' => array(
-      'weight' => '0',
+      'weight' => '8',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -90,7 +90,7 @@ function feature_catalog_ds_field_settings_info() {
       ),
     ),
     'service_links_displays_group' => array(
-      'weight' => '9',
+      'weight' => '11',
       'label' => 'hidden',
       'format' => 'sld_group_image_and_text',
     ),
@@ -105,7 +105,7 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'list';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -113,6 +113,11 @@ function feature_catalog_ds_field_settings_info() {
         'wrapper' => 'h4',
         'class' => '',
       ),
+    ),
+    'post_date' => array(
+      'weight' => '4',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_release_date',
     ),
   );
   $export['node|article|list'] = $ds_fieldsetting;
@@ -218,28 +223,18 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
-        1 => 'title',
+        1 => 'field_cover_image',
       ),
       'central' => array(
-        2 => 'field_cover_image',
+        2 => 'title',
       ),
     ),
     'fields' => array(
       'field_publication_status' => 'top',
-      'title' => 'top',
-      'field_cover_image' => 'central',
+      'field_cover_image' => 'top',
+      'title' => 'central',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        '' => '',
-      ),
-      'top' => array(
-        'infosWrapper' => 'infosWrapper',
-      ),
-      'central' => array(
-        'couvWrapper' => 'couvWrapper',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
       'central' => 'div',
@@ -297,61 +292,59 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'title',
-        3 => 'field_subtitle',
-      ),
-      'central' => array(
-        1 => 'authors',
-        2 => 'illustrators',
-        11 => 'body',
-        14 => 'field_press_quotes',
-        15 => 'service_links_displays_group',
-        16 => 'field_inner_pages',
+        1 => 'field_subtitle',
       ),
       'left' => array(
-        4 => 'group_couv_wrapper',
-        5 => 'field_publication_status',
-        6 => 'field_cover_image',
-        7 => 'group_infos_article',
-        8 => 'field_release_date',
-        9 => 'field_barcode',
-        10 => 'field_number_pages',
-        12 => 'field_price',
-        13 => 'field_format',
-        17 => 'field_isbn',
-        20 => 'field_gencod',
+        2 => 'field_publication_status',
+        3 => 'field_cover_image',
+        4 => 'field_bs_button_browse_pdf',
+        6 => 'field_themes',
+        8 => 'field_barcode',
       ),
       'right' => array(
-        18 => 'field_contributors',
-        19 => 'field_themes',
+        5 => 'field_release_date',
+        7 => 'field_number_pages',
+        10 => 'field_format',
+        12 => 'field_price',
+        14 => 'field_isbn',
+        15 => 'field_gencod',
+        19 => 'field_contributors',
+        20 => 'group_infos_article',
         21 => 'field_readership',
-        22 => 'field_bs_button_browse_pdf',
-        23 => 'field_num_version_link',
+        22 => 'field_num_version_link',
+      ),
+      'central' => array(
+        9 => 'authors',
+        11 => 'illustrators',
+        13 => 'body',
+        16 => 'field_press_quotes',
+        17 => 'service_links_displays_group',
+        18 => 'field_inner_pages',
       ),
     ),
     'fields' => array(
       'title' => 'top',
-      'authors' => 'central',
-      'illustrators' => 'central',
       'field_subtitle' => 'top',
-      'group_couv_wrapper' => 'left',
       'field_publication_status' => 'left',
       'field_cover_image' => 'left',
-      'group_infos_article' => 'left',
-      'field_release_date' => 'left',
+      'field_bs_button_browse_pdf' => 'left',
+      'field_release_date' => 'right',
+      'field_themes' => 'left',
+      'field_number_pages' => 'right',
       'field_barcode' => 'left',
-      'field_number_pages' => 'left',
+      'authors' => 'central',
+      'field_format' => 'right',
+      'illustrators' => 'central',
+      'field_price' => 'right',
       'body' => 'central',
-      'field_price' => 'left',
-      'field_format' => 'left',
+      'field_isbn' => 'right',
+      'field_gencod' => 'right',
       'field_press_quotes' => 'central',
       'service_links_displays_group' => 'central',
       'field_inner_pages' => 'central',
-      'field_isbn' => 'left',
       'field_contributors' => 'right',
-      'field_themes' => 'right',
-      'field_gencod' => 'left',
+      'group_infos_article' => 'right',
       'field_readership' => 'right',
-      'field_bs_button_browse_pdf' => 'right',
       'field_num_version_link' => 'right',
     ),
     'classes' => array(),
@@ -382,28 +375,24 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
-        1 => 'title',
-        2 => 'field_contributors',
+        1 => 'field_cover_image',
       ),
       'central' => array(
-        3 => 'field_cover_image',
+        2 => 'title',
+        3 => 'field_contributors',
+        4 => 'post_date',
       ),
     ),
     'fields' => array(
       'field_publication_status' => 'top',
-      'title' => 'top',
-      'field_contributors' => 'top',
-      'field_cover_image' => 'central',
+      'field_cover_image' => 'top',
+      'title' => 'central',
+      'field_contributors' => 'central',
+      'post_date' => 'central',
     ),
     'classes' => array(
       'layout_class' => array(
         '' => '',
-      ),
-      'top' => array(
-        'infosWrapper' => 'infosWrapper',
-      ),
-      'central' => array(
-        'couvWrapper' => 'couvWrapper',
       ),
     ),
     'wrappers' => array(

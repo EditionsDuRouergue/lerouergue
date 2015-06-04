@@ -5,6 +5,8 @@ GLOBAL STYLES
 */
 
 h1, h2, h3 {
+  text-transform: lowercase;
+  color: #000;
 }
 
 h1.page-header {
@@ -13,23 +15,27 @@ h1.page-header {
 }
 
 h2.block-title {
-  font-size: 24px;
+  font-size: 18px;
+  font-family: "corporatesdemi";
+  color: #f14a1f;
 }
 
 
 h4, h5, h6, p {
 
 }
+a {
+  transition:.5s;
+}
+
+a:active, a:hover{
+  text-decoration: none;
+}
 
 .field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
   display: inline;
 }
 
-.field .field-label {
-  font-weight: normal;
-    color: #666666;
-
-}
 
 .field-name-field-firstname:after {
   content: " ";
@@ -57,6 +63,10 @@ width: 40px;
   float: right;
 }
 
+.select.form-select {
+  height: auto;
+}
+
 /*
 ==============================================================================================
 BLOCKS STYLES
@@ -76,15 +86,10 @@ BLOCKS STYLES
   margin-top: -33px;
 }
 
-#newbooksBanner img {
-  margin-left: auto;
-  margin-right: auto;
-}
 
 #block-views-first-level-universes-block {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  text-align: center;
+
+
 }
 
 #block-views-first-level-universes-block .views-field {
@@ -104,15 +109,27 @@ BLOCKS STYLES
 }
 
 #block-views-events-agenda-front-block h2.block-title {
-
-
+font-family: "corporateslight";
+font-size: 72px;
+color: #666666;
 }
 
 
 /*
 NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
 */
+.view-display-id-catalog_new_books_block{
 
+  margin-top: 60px;
+}
+
+#newbooksBanner img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+  width: 160px;
+    height: 160px;
+}
 
 .view-display-id-catalog_new_books_block .carousel-control,
 .view-display-id-same_author_books .carousel-control, 
@@ -163,6 +180,66 @@ right: auto;
 }
 
 /*
+AGENDA
+*/
+.node-event.view-mode-list{
+background-color: #fff;
+height: 350px;
+}
+
+.group-event-details {
+  padding: 10px;
+}
+
+.field-name-field-dates, .field-name-field-adresse
+ {
+  font-size: 18px;
+  font-family: "corporatesdemi";
+  text-transform: uppercase;
+  color: #000;
+}
+
+.field-name-field-adresse
+ {
+  font-size: 16px;
+  font-family: "corporatesdemi";
+  text-transform: uppercase;
+  color: #000;
+}
+
+.field-name-field-event-type {
+  text-transform: uppercase;
+
+}
+
+.view-id-events .field-name-title {
+  font-family: "corporatesdemi";
+    text-transform: uppercase;
+    color: #000;
+}
+
+.field-name-title a, .field-name-node-link a{
+
+    color: #000;
+}
+
+.field-name-title a:hover, .field-name-node-link a:active{
+
+    color: #f14a1f;
+}
+
+.field-name-node-link {
+    font-family: "corporatesdemi";
+    float: right;
+}
+
+.view-events p {
+    margin-bottom: 0;
+    color: #666666;
+}
+
+
+/*
 WORKSHOPS CAROUSEL
 */
 
@@ -178,13 +255,31 @@ VIEWS STYLES
 }
 
 .view-display-id-events_list_page .nav-tabs {
-  float: right;
+font-size: 18px;
 }
 
 .view-display-id-events_list_page .nav-tabs .active, .view-display-id-events_list_page .nav-tabs li > a:hover , .view-display-id-events_list_page .nav-tabs li > a:focus{
-  background-color: #ffffff;
-  border-radius: 10px;
+
+
 }
+
+
+/* Liste des Univers sur la page d'accueil*/
+
+.view-id-first_level_universes li {
+  display: inline;
+  float: left;
+  text-align: left;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+.view-id-first_level_universes li:first-of-type {
+  padding-left: 120px;
+}
+
 /*
 
 
@@ -201,7 +296,7 @@ MAIN MENU
   margin-top: 10px;
   margin-left: 30px;
   text-transform: lowercase;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .menu.navbar-nav li > a {
@@ -222,9 +317,8 @@ z-index: 100;
   height: 18px;
   text-transform: uppercase;
   letter-spacing: 3px;
-
-
 }
+
 .navbar-brand a {
 color: #f2f2f2;
 }
@@ -232,58 +326,78 @@ color: #f2f2f2;
 /*
 SEARCH FORM
 */
+
+
 .block-custom-search-blocks {
   display: block;
-  padding-top: 5px;
+  margin-top: 20px;
+  margin-right: 150px;
+  float: right;
 }
 
 .search-form .custom-search-box {
   display: inline-block;
-  float: left;
-  margin-left: 60px;
-  width: 200px;
+    margin: 0;
+
+    padding-top: 5px;
+  padding-bottom: 5px;
   height: 30px;
+  width: 200px;
   border: none;
   background-color: #ffffff;
+    transition:.5s;
+
+
 }
+.search-form .custom-search-box input{
+}
+.form-item-custom-search-blocks-form-1 {
+  display: inline-block;
+}
+
+
 .search-form .custom-search-box:focus {
 border: 1px solid #1a1a1a;
+
 }
 
 .search-form .btn{
-  height: 30px;
-  float: left;
-}
+  border: none;
+    height: 30px;
+
+  background-color: #333333;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #fff;
+  margin-top: -1px;
+  margin-left: -23px;}
+
+
 
 /*
 UNIVERSE MENU
 */
 #block-menu-menu-universe {
-  margin-top: 20px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #ffffff;
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
-
+  font-family: "corporatesregular";
+  font-size: 15px;
+  margin-top: 60px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #000;
 }
 
 #block-menu-menu-universe .nav > li > a {
   padding-top: 5px;
   padding-bottom: 5px;
+  color: #000000;
+  border-radius: 5px;
 }
 
 
-#block-menu-menu-universe a.active-trail {
-  color: #666666;
-  background-color: #cccccc;
+#block-menu-menu-universe a.active-trail ,#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
 
-}
+background-color: #e5e5e5;
+    font-family: "corporatesdemi";
 
-#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
-
-color: #ffffff;
-background-color: #f14a1f;
 }
 
 
@@ -300,6 +414,12 @@ padding-left: 30px;
 padding-left: 50px;
 }
 
+#block-menu-menu-universe .leaf .active-trail {
+  background-color: #e5e5e5;
+    font-family: "corporatesdemi";
+}
+
+
 
 /*
 ==============================================================================================
@@ -312,7 +432,8 @@ ARTICLE NODE
 */
 .node-type-article h1 {
   margin-top: 0;
-  margin-bottom: 0
+  margin-bottom: 30px;
+  padding-left: 100px;
 }
 
 .node-type-article .view-fc-contributors  h3 {
@@ -326,15 +447,103 @@ ARTICLE NODE
 }
 .node-type-article .field-name-field-subtitle {
   font-size: 36px;
-    margin-bottom: 20px
- }
+  margin-bottom: 20px
+}
 
 .node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
   font-size: 24px;
   line-height: 1.1em;
   margin-top: 20px;
   margin-bottom: 10px
-  }
+}
+
+.node-type-article .field-name-field-cover-image {
+margin-bottom: 30px;
+}
+
+.node-type-article .block-title{
+text-align: right;
+}
+
+.group-infos-article {
+  color: #000;
+  font-family: "corporatesdemi";
+}
+
+.field-name-field-readership {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.field-name-field-readership a{
+  color: #f14a1f;
+}
+
+.field-name-field-readership a:hover{
+  color: #666666;
+}
+
+
+/*
+AGENDA NODE
+*/
+
+.node-type-event .field-name-title h2 {
+    font-family: "corporatesdemi";
+  color: #000;
+  text-transform: uppercase;
+  margin-top: 0;
+
+}
+
+.node-type-event .field-name-field-dates {
+padding-top: 10px;
+padding-bottom: 5px;
+
+}
+
+.node-type-event  .field-name-field-event-image {
+padding-bottom: 20px;
+
+
+}
+
+.node-type-event .block-feature-events{
+  float: right;
+}
+
+.node-type-event .field-name-field-adresse{
+margin-top: 30px;
+text-align: right;
+}
+
+/*
+==============================================================================================
+PAGES VIEWS STYLES
+==============================================================================================
+*/
+
+
+/*
+AGENDA LIST
+*/
+
+.page-agenda .page-header {
+  display: inline-block;
+  float: left;
+}
+
+.page-agenda .block-feature-events {
+  display: inline-block;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+
+}
+
+.page-agenda .view-content {
+  clear: left;
+}
 
 /*
 ==============================================================================================
@@ -342,17 +551,21 @@ INFO WRAPPER STYLES
 ==============================================================================================
 */
 .infosWrapper {
-  display: none;
-  position: absolute;
+  /*display: none;*/
+ position: absolute;
+  bottom: 0;
   z-index: 1000;
-    width: 100%;
+  text-transform: lowercase;
 
-  background-color:  rgba(0, 0, 0, 0.6);
-  color: #fff;
-  border-radius: 20px;
-  padding: 10px;
+
+
 }
+.infosBg {
+  padding: 10px;
+  background-color:  rgba(0, 0, 0, 0.8);
+  color: #fff;
 
+}
 .node-type-article .group-infos-article.infosWrapper {
     bottom: -20px;
 }
@@ -379,12 +592,8 @@ margin-bottom: 10px;
   margin-top: 0;
 }
 
-.couvWrapper {
-margin-bottom: 20px;
-}
-
-.node-type-article .group-couv-wrapper.couvWrapper {
-margin-bottom: 0;
+.gridWrapper {
+margin-bottom: 30px;
 }
 
 
@@ -411,7 +620,7 @@ margin-top: 60px;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 80px;
+  height: 50px;
   margin-top: 60px;
   color: #ffffff;
 }
@@ -420,6 +629,6 @@ margin-top: 60px;
   padding-top: 10px;
   height: 100%;
   background-color: #666666;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }

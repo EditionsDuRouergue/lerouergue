@@ -22,7 +22,7 @@ function feature_workshops_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'workshops';
+  $handler->display->display_options['title'] = 'fabrique';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -84,7 +84,7 @@ function feature_workshops_views_default_views() {
 
   /* Display: Liste workshops */
   $handler = $view->new_display('page_with_page_title', 'Liste workshops', 'workshops_page');
-  $handler->display->display_options['path'] = 'workshops';
+  $handler->display->display_options['path'] = 'fabrique';
 
   /* Display: Bloc liste workshops */
   $handler = $view->new_display('block', 'Bloc liste workshops', 'workshop_page_block');
@@ -257,7 +257,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['field_event_author']['multi_type'] = 'ul';
   $translatables['workshops'] = array(
     t('Master'),
-    t('workshops'),
+    t('fabrique'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),

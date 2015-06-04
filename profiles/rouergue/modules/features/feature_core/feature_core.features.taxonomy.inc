@@ -13,7 +13,7 @@ function feature_core_taxonomy_default_vocabularies() {
       'name' => 'Univers',
       'machine_name' => 'universe',
       'description' => '',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'rdf_mapping' => array(
