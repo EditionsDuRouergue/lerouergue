@@ -146,7 +146,7 @@ function feature_catalog_strongarm() {
         'custom_settings' => FALSE,
       ),
       'block' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'list' => array(
         'custom_settings' => TRUE,
@@ -158,6 +158,18 @@ function feature_catalog_strongarm() {
         'custom_settings' => FALSE,
       ),
       'author_books' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'carousel' => array(
+        'custom_settings' => FALSE,
+      ),
+      'map_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'in_news_block' => array(
         'custom_settings' => TRUE,
       ),
     ),
@@ -183,6 +195,7 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
           'author_books' => NULL,
+          'in_news_block' => NULL,
         ),
         'field_publication_status' => array(
           'full' => array(
@@ -205,6 +218,10 @@ function feature_catalog_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'in_news_block' => array(
+            'weight' => '7',
+            'visible' => FALSE,
+          ),
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
@@ -217,6 +234,14 @@ function feature_catalog_strongarm() {
           ),
           'author_books' => array(
             'weight' => '35',
+            'visible' => FALSE,
+          ),
+          'default' => array(
+            'weight' => '101',
+            'visible' => TRUE,
+          ),
+          'in_news_block' => array(
+            'weight' => '36',
             'visible' => FALSE,
           ),
         ),

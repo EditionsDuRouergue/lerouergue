@@ -1,6 +1,6 @@
-<div id="views-bootstrap-carousel-<?php print $id ?>" class="col-sm-12 <?php print $classes ?>" <?php print $attributes ?>>
+<div id="views-bootstrap-carousel-<?php print $id ?>" class="col-sm-10 col-sm-offset-2 <?php print $classes ?>" <?php print $attributes ?>>
 	<!-- The array containing rows is splitted into X, X being the number of books we want per slide -->
-	<?php $slides = array_chunk($rows, 6, true); ?>
+	<?php $slides = array_chunk($rows, 4, true); ?>
 	
   <?php if ($indicators): ?>
     <!-- Carousel indicators -->
@@ -16,7 +16,7 @@
   <?php foreach ($slides as $key => $slide): ?>
 	  <div class="item <?php if ($key === 0) print 'active' ?>">
 			    <?php foreach ($slide as $key => $item): ?>
-			    	<div class="col-sm-2">
+			    	<div class="col-sm-3">
 			      	<?php print $item ?>
 			      </div>
 			    <?php endforeach ?>

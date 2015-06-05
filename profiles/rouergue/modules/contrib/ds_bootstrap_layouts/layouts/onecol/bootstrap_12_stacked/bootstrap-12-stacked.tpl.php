@@ -10,7 +10,7 @@
   <?php if (isset($title_suffix['contextual_links'])): ?>
     <?php print render($title_suffix['contextual_links']); ?>
   <?php endif; ?>
-  <div class="row">
+  <div class="row couvWrapper">
     <<?php print $top_wrapper; ?> class="col-sm-12 <?php print $top_classes; ?>">
         <?php print $top; ?>
     </<?php print $top_wrapper; ?>>

@@ -24,11 +24,12 @@ h2.block-title {
 h4, h5, h6, p {
 
 }
+
 a {
   transition:.5s;
 }
 
-a:active, a:hover{
+a:active, a:hover, a:focus {
   text-decoration: none;
 }
 
@@ -42,8 +43,8 @@ a:active, a:hover{
 }
 
 .breadcrumb {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .views-exposed-form .views-exposed-widget .form-submit {
@@ -64,7 +65,7 @@ width: 40px;
 }
 
 .select.form-select {
-  height: auto;
+  height: 100px;
 }
 
 /*
@@ -130,7 +131,7 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
   width: 160px;
     height: 160px;
 }
-
+/*
 .view-display-id-catalog_new_books_block .carousel-control,
 .view-display-id-same_author_books .carousel-control, 
 .view-display-id-workshops_front_block .carousel-control {
@@ -178,6 +179,7 @@ left: 75px;
 right: auto;
 
 }
+*/
 
 /*
 AGENDA
@@ -219,11 +221,10 @@ height: 350px;
 }
 
 .field-name-title a, .field-name-node-link a{
-
     color: #000;
 }
 
-.field-name-title a:hover, .field-name-node-link a:active{
+.field-name-title a:hover, .field-name-title a:active, .field-name-node-link a:hover, .field-name-node-link a:active{
 
     color: #f14a1f;
 }
@@ -238,12 +239,34 @@ height: 350px;
     color: #666666;
 }
 
+.block-feature-events li a.active {
+    color: #f14a1f;
 
+}
 /*
 WORKSHOPS CAROUSEL
 */
+.view-display-id-workshops_front_block .field-name-fabrique-title {
+  font-family: "corporateslight";
+  font-size: 80px;
+  margin-left: 40px;
+   margin-top: 40px;
+  color: #808080;
+}
 
+.view-display-id-workshops_front_block .field-name-title{
+    margin-left: 30%;
+}
 
+.view-display-id-workshops_front_block .field-name-title a{
+    color: #f14a1f;
+    font-size: 30px;
+}
+
+.view-display-id-workshops_front_block .field-name-title a:hover, .view-display-id-workshops_front_block .field-name-title a:active{
+    color: #666666;
+
+}
 /*
 ==============================================================================================
 VIEWS STYLES
@@ -273,7 +296,6 @@ font-size: 18px;
   font-size: 18px;
   padding-left: 10px;
   padding-right: 10px;
-
 }
 
 .view-id-first_level_universes li:first-of-type {
@@ -300,12 +322,11 @@ MAIN MENU
 }
 
 .menu.navbar-nav li > a {
-z-index: 100;
+  z-index: 100;
 }
 
-.menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus{
+.menu.navbar-nav .active, .menu.navbar-nav li > a:hover , .menu.navbar-nav li > a:focus {
   color: #f14a1f;
-
 }
 
 .navbar-brand {
@@ -327,7 +348,6 @@ color: #f2f2f2;
 SEARCH FORM
 */
 
-
 .block-custom-search-blocks {
   display: block;
   margin-top: 20px;
@@ -337,40 +357,37 @@ SEARCH FORM
 
 .search-form .custom-search-box {
   display: inline-block;
-    margin: 0;
-
-    padding-top: 5px;
+  margin: 0;
+  padding-top: 5px;
   padding-bottom: 5px;
   height: 30px;
   width: 200px;
   border: none;
   background-color: #ffffff;
-    transition:.5s;
-
-
 }
+
 .search-form .custom-search-box input{
 }
+
 .form-item-custom-search-blocks-form-1 {
   display: inline-block;
 }
 
-
 .search-form .custom-search-box:focus {
-border: 1px solid #1a1a1a;
-
+  border: 1px solid #1a1a1a;
 }
 
 .search-form .btn{
   border: none;
-    height: 30px;
-
+  height: 30px;
   background-color: #333333;
   padding-top: 5px;
   padding-bottom: 5px;
   color: #fff;
   margin-top: -1px;
-  margin-left: -23px;}
+  margin-left: -23px;
+
+}
 
 
 
@@ -394,29 +411,28 @@ UNIVERSE MENU
 
 
 #block-menu-menu-universe a.active-trail ,#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
-
-background-color: #e5e5e5;
-    font-family: "corporatesdemi";
+  background-color: #e5e5e5;
+  font-family: "corporatesdemi";
 
 }
-
 
 #block-menu-menu-universe .dhtml-menu-icon {
   display: none;
 }
+
 /* second level */
 #block-menu-menu-universe .dhtml-folder .leaf a, #block-menu-menu-universe .dhtml-folder .dhtml-folder a , #block-menu-menu-universe .dhtml-folder .dhtml-folder a{
-padding-left: 30px;
+  padding-left: 30px;
 }
 
 /* third level */
  #block-menu-menu-universe .dhtml-folder .dhtml-folder .leaf a{
-padding-left: 50px;
+  padding-left: 50px;
 }
 
 #block-menu-menu-universe .leaf .active-trail {
   background-color: #e5e5e5;
-    font-family: "corporatesdemi";
+  font-family: "corporatesdemi";
 }
 
 
@@ -430,12 +446,45 @@ NODES STYLES
 /*
 ARTICLE NODE
 */
+
+.node-article.view-mode-full {
+  margin-bottom: 30px;
+}
+
 .node-type-article h1 {
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   padding-left: 100px;
 }
 
+.node-type-article h2.block-title {
+text-align: right;
+}
+
+.node-type-article .field-name-field-subtitle {
+  font-size: 30px;
+  margin-bottom: 10px;
+  padding-left: 100px;
+  text-transform: lowercase;
+}
+
+.node-type-article .group-contributors {
+  margin-bottom: 20px;
+text-transform: lowercase;
+
+}
+
+.node-type-article .view-fc-contributors a {
+  font-family: "corporatesdemi";
+  color: #000;
+
+}
+
+.node-type-article .view-fc-contributors a:hover {
+  color: #f14a1f;
+}
+
+/*
 .node-type-article .view-fc-contributors  h3 {
   margin-top: 0;
   margin-bottom: 10px
@@ -445,24 +494,18 @@ ARTICLE NODE
   margin-top: 20px;
   margin-bottom: 10px
 }
-.node-type-article .field-name-field-subtitle {
-  font-size: 36px;
-  margin-bottom: 20px
-}
+
+
 
 .node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
   font-size: 24px;
   line-height: 1.1em;
   margin-top: 20px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
-
-.node-type-article .field-name-field-cover-image {
-margin-bottom: 30px;
-}
-
-.node-type-article .block-title{
-text-align: right;
+*/
+.node-type-article .group-couv {
+  margin-bottom: 10px;
 }
 
 .group-infos-article {
@@ -475,6 +518,12 @@ text-align: right;
   font-size: 18px;
 }
 
+
+.field-name-field-readership .field-item{
+  display: block;
+  text-transform: lowercase;
+}
+
 .field-name-field-readership a{
   color: #f14a1f;
 }
@@ -483,13 +532,41 @@ text-align: right;
   color: #666666;
 }
 
+.field-name-field-themes {
+  margin-top: 20px;
+    font-size: 18px;
+    text-transform: lowercase;
+}
+
+.field-name-field-themes .field-item:after {
+    content: ",";
+    margin-right: 5px;
+}
+.field-name-field-themes .field-item:last-of-type:after {
+    content: "";
+}
+
+.node-type-article .field-name-field_bs_button {
+  text-align: right;
+}
+
+.node-type-article .field-name-field_bs_button a{
+  font-family: "corporatesdemi";
+  font-size: 14px;
+  color: #f14a1f;
+  margin-bottom: 10px;
+}
+
+.node-type-article .field-name-field_bs_button a:hover{
+  color: #666666;
+}
 
 /*
 AGENDA NODE
 */
 
 .node-type-event .field-name-title h2 {
-    font-family: "corporatesdemi";
+  font-family: "corporatesdemi";
   color: #000;
   text-transform: uppercase;
   margin-top: 0;
@@ -497,13 +574,13 @@ AGENDA NODE
 }
 
 .node-type-event .field-name-field-dates {
-padding-top: 10px;
-padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 
 }
 
 .node-type-event  .field-name-field-event-image {
-padding-bottom: 20px;
+  padding-bottom: 20px;
 
 
 }
@@ -513,8 +590,8 @@ padding-bottom: 20px;
 }
 
 .node-type-event .field-name-field-adresse{
-margin-top: 30px;
-text-align: right;
+  margin-top: 30px;
+  text-align: right;
 }
 
 /*
@@ -551,40 +628,28 @@ INFO WRAPPER STYLES
 ==============================================================================================
 */
 .infosWrapper {
-  /*display: none;*/
- position: absolute;
+  display: none;
+  position: absolute;
   bottom: 0;
   z-index: 1000;
   text-transform: lowercase;
-
-
-
 }
+
+.infosWrapper a{
+  color: #fff;
+}
+
+
 .infosBg {
   padding: 10px;
-  background-color:  rgba(0, 0, 0, 0.8);
+  background-color:  rgba(0, 0, 0, 0.7);
   color: #fff;
-
-}
-.node-type-article .group-infos-article.infosWrapper {
-    bottom: -20px;
+  border-radius: 5px;
 }
 
-.node-type-article .group-infos-article.infosWrapper {
-    font-size: 12px;
-}
-
-.node-type-article .group-infos-article.infosWrapper .field-items {
-    
-}
-
-.node-type-article .group-infos-article.infosWrapper .field-label {
-    color: #cccccc;
-}
 
 .infosWrapper .field-name-field-contributors {
-margin-bottom: 10px;
-
+  margin-bottom: 10px;
 }
 
 .infosWrapper h4,  .infosWrapper .field-name-field-firstname, .infosWrapper .field-name-field-lastname{
@@ -593,7 +658,7 @@ margin-bottom: 10px;
 }
 
 .gridWrapper {
-margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 
@@ -611,8 +676,10 @@ body {
   margin-bottom: 60px;
 }
 
+
+
 .preFooter {
-margin-top: 60px;
+  margin-top: 30px;
 }
 
 .footer {
@@ -620,8 +687,7 @@ margin-top: 60px;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 50px;
-  margin-top: 60px;
+  height: 60px;
   color: #ffffff;
 }
 

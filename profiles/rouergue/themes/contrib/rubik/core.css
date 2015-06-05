@@ -486,7 +486,7 @@ input.form-submit, a.button,
   }
 
 select.form-select {
-  height: 28px;
+ /* height: 28px;*/
 }
 
 input.form-autocomplete,

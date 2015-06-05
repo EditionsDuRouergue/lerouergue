@@ -46,6 +46,38 @@ function feature_catalog_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_couv|node|article|full';
+  $field_group->group_name = 'group_couv';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'full';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Couv wrapper',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_cover_image',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Couv wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-couv field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $export['group_couv|node|article|full'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_infos_article|node|article|full';
   $field_group->group_name = 'group_infos_article';
   $field_group->entity_type = 'node';
@@ -54,7 +86,7 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Infos',
-    'weight' => '14',
+    'weight' => '15',
     'children' => array(
       0 => 'field_format',
       1 => 'field_gencod',
