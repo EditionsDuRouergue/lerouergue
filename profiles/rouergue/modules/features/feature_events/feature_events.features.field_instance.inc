@@ -118,7 +118,7 @@ function feature_events_field_default_field_instances() {
           'use_widget_handlers' => 1,
         ),
         'type' => 'addressfield_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -284,10 +284,13 @@ function feature_events_field_default_field_instances() {
         'weight' => 8,
       ),
       'full' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 18,
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',

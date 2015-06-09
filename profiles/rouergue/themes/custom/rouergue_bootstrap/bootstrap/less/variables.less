@@ -221,21 +221,21 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       @gray-lighter;
+@input-bg:                       @white;
 //** `<input disabled>` background color
 @input-bg-disabled:              @gray-lighter;
 
 //** Text color for `<input>`s
 @input-color:                    @black;
 //** `<input>` border color
-@input-border:                   @black;
+@input-border:                   @white;
 //** `<input>` border radius
-@input-border-radius:            @border-radius-base;
+@input-border-radius:            0;
 //** Border color for inputs on focus
-@input-border-focus:             @black;
+@input-border-focus:             @white;
 
 //** Placeholder text color
-@input-color-placeholder:        @gray;
+@input-color-placeholder:        @black;
 
 //** Default `.form-control` height
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
@@ -245,7 +245,7 @@
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
 @legend-color:                   @black;
-@legend-border-color:            @black;;
+@legend-border-color:            @black;
 
 //** Background color for textual input addons
 @input-group-addon-bg:           @gray-lighter;
@@ -475,21 +475,21 @@
 //
 //##
 
-@pagination-color:                     @white;
-@pagination-bg:                        @black;
-@pagination-border:                    @black;
+@pagination-color:                     @black;
+@pagination-bg:                        @white;
+@pagination-border:                    @white;
 
-@pagination-hover-color:               @gray-lighter;
-@pagination-hover-bg:                  @gray-darker;
-@pagination-hover-border:              @gray-darker;
+@pagination-hover-color:               @white;
+@pagination-hover-bg:                  @gray-light;
+@pagination-hover-border:              @gray-light;
 
-@pagination-active-color:              @gray-lighter;
-@pagination-active-bg:                 @gray-darker;
-@pagination-active-border:             @gray-darker;
+@pagination-active-color:              @white;
+@pagination-active-bg:                 @gray-light;
+@pagination-active-border:             @gray-light;
 
-@pagination-disabled-color:            @gray;
-@pagination-disabled-bg:               @black;
-@pagination-disabled-border:           @black;
+@pagination-disabled-color:            @black;
+@pagination-disabled-bg:               @white;
+@pagination-disabled-border:           @white;
 
 
 //== Pager
@@ -497,7 +497,7 @@
 //##
 
 @pager-bg:                             @pagination-bg;
-@pager-border:                         @black;
+@pager-border:                         @white;
 @pager-border-radius:                  0;
 
 @pager-hover-bg:                       @pagination-hover-bg;
@@ -879,11 +879,11 @@
 //** Headings small color
 @headings-small-color:        @black;
 //** Blockquote small color
-@blockquote-small-color:      @black;
+@blockquote-small-color:      #f14a1f;
 //** Blockquote font size
 @blockquote-font-size:        (@font-size-base * 1.25);
 //** Blockquote border color
-@blockquote-border-color:     @black;
+@blockquote-border-color:     none;
 //** Page header border color
 @page-header-border-color:    @black;
 //** Width of horizontal description list titles

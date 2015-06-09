@@ -1291,7 +1291,7 @@ blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  border-left: 5px solid #000000;
+  border-left: 5px solid none;
 }
 blockquote p:last-child,
 blockquote ul:last-child,
@@ -1304,7 +1304,7 @@ blockquote .small {
   display: block;
   font-size: 80%;
   line-height: 1.42857143;
-  color: #000000;
+  color: #f14a1f;
 }
 blockquote footer:before,
 blockquote small:before,
@@ -1315,7 +1315,7 @@ blockquote .small:before {
 blockquote.pull-right {
   padding-right: 15px;
   padding-left: 0;
-  border-right: 5px solid #000000;
+  border-right: 5px solid none;
   border-left: 0;
   text-align: right;
 }
@@ -2372,28 +2372,28 @@ output {
   font-size: 14px;
   line-height: 1.42857143;
   color: #000000;
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   background-image: none;
-  border: 1px solid #000000;
-  border-radius: 0px;
+  border: 1px solid #ffffff;
+  border-radius: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .form-control:focus {
   background-color: #ffffff;
   border: solid 2px;
-  border-color: #000000;
+  border-color: #ffffff;
   outline: 0;
 }
 .form-control::-moz-placeholder {
-  color: #666666;
+  color: #000000;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-  color: #666666;
+  color: #000000;
 }
 .form-control::-webkit-input-placeholder {
-  color: #666666;
+  color: #000000;
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -3513,7 +3513,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #000000;
   text-align: center;
   background-color: #f2f2f2;
-  border: 1px solid #000000;
+  border: 1px solid #ffffff;
   border-radius: 0px;
 }
 .input-group-addon.input-sm {
@@ -4326,9 +4326,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #ffffff;
-  background-color: #000000;
-  border: 1px solid #000000;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   margin-left: -1px;
 }
 .pagination > li:first-child > a,
@@ -4346,9 +4346,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #f2f2f2;
-  background-color: #333333;
-  border-color: #333333;
+  color: #ffffff;
+  background-color: #808080;
+  border-color: #808080;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4357,9 +4357,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   z-index: 2;
-  color: #f2f2f2;
-  background-color: #333333;
-  border-color: #333333;
+  color: #ffffff;
+  background-color: #808080;
+  border-color: #808080;
   cursor: default;
 }
 .pagination > .disabled > span,
@@ -4368,9 +4368,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #666666;
-  background-color: #000000;
-  border-color: #000000;
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
   cursor: not-allowed;
 }
 .pagination-lg > li > a,
@@ -4416,14 +4416,14 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager li > span {
   display: inline-block;
   padding: 5px 14px;
-  background-color: #000000;
-  border: 1px solid #000000;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 0;
 }
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #333333;
+  background-color: #808080;
 }
 .pager .next > a,
 .pager .next > span {
@@ -4437,8 +4437,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  color: #666666;
-  background-color: #000000;
+  color: #000000;
+  background-color: #ffffff;
   cursor: not-allowed;
 }
 .label {

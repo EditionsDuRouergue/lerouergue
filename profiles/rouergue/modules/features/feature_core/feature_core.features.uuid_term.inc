@@ -366,7 +366,7 @@ function feature_core_uuid_features_default_terms() {
   );
   $terms[] = array(
     'name' => 'toutazimute',
-    'description' => 'Description de l\'univers...',
+    'description' => 'Voyez ce jeu exquis wallon, de graphie en kit mais bref. Portez ce vieux whisky au juge blond qui fume sur son île intérieure, à côté de l\'alcôve ovoïde, où les bûches se consument dans l\'âtre, ce qui lui permet de penser à la cænogenèse de l\'être dont il est question dans la cause ambiguë entendue à Moÿ, dans un.',
     'format' => 'plain_text',
     'weight' => 0,
     'uuid' => '75291089-f665-47fc-96c5-eba17480b851',

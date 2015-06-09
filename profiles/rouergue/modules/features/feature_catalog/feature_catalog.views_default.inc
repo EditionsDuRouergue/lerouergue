@@ -663,6 +663,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'allow_secondary' => 0,
@@ -699,8 +700,8 @@ return $query->execute()->fetchField();';
         ),
       ),
     ),
-    'field_release_date_value_1' => array(
-      'bef_format' => 'default',
+    'field_release_date_value' => array(
+      'bef_format' => 'bef_datepicker',
       'more_options' => array(
         'is_secondary' => 0,
         'any_label' => '',
@@ -715,8 +716,8 @@ return $query->execute()->fetchField();';
         ),
       ),
     ),
-    'field_release_date_value' => array(
-      'bef_format' => 'default',
+    'field_release_date_value_1' => array(
+      'bef_format' => 'bef_datepicker',
       'more_options' => array(
         'is_secondary' => 0,
         'any_label' => '',
@@ -2186,7 +2187,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascendant';
@@ -2612,6 +2612,8 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['element_type'] = 'div';
+  $handler->display->display_options['fields']['description']['element_class'] = 'col-md-8 col-md-offset-4';
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Filtre contextuel: Terme de taxonomie : Identifiant (ID) du terme */

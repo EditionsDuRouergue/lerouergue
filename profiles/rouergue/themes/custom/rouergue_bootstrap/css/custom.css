@@ -5,7 +5,6 @@ GLOBAL STYLES
 */
 
 h1, h2, h3 {
-  text-transform: lowercase;
   color: #000;
 }
 
@@ -33,9 +32,18 @@ a:active, a:hover, a:focus {
   text-decoration: none;
 }
 
+label {
+   font-family: "corporatesdemi";
+
+}
+.field .field-label {
+     font-family: "corporatesdemi";
+}
+
 .field-items, .field-item, .field-name-field-firstname, .field-name-field-lastname {
   display: inline;
 }
+
 
 
 .field-name-field-firstname:after {
@@ -43,7 +51,7 @@ a:active, a:hover, a:focus {
 }
 
 .breadcrumb {
-  margin-top: 30px;
+  margin-top: 60px;
   margin-bottom: 30px;
 }
 
@@ -51,6 +59,7 @@ a:active, a:hover, a:focus {
 margin-top: 24px;
 }
 
+/*
 .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
 font-size: 50px;
 }
@@ -59,13 +68,39 @@ font-size: 50px;
 text-shadow: none;
 width: 40px;
 }
+*/
+
+/*
+==============================================================================================
+FORMS & PAGINATION
+==============================================================================================
+*/
+
+.ui-datepicker {
+  z-index: 1000!important;
+}
 
 .pagination {
   float: right;
 }
 
-.select.form-select {
-  height: 100px;
+.container-inline-date .form-item, .container-inline-date .form-item input {
+  width: 100%;
+}
+
+.view-display-id-page_with_page_title_1 .view-footer, .view-display-id-page .view-footer, .view-display-id-catalog_multi .view-footer{
+  font-family: "corporatesdemi";
+  margin-top: 26px;
+}
+
+.block-views-exp-universes-page {
+  display: inline-block;
+}
+
+.view-id-universes_descriptions .views-field-description p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
 }
 
 /*
@@ -84,7 +119,7 @@ BLOCKS STYLES
 
 #block-feature-catalog-rouergue-catalog-links a{
   display: table;
-  margin-top: -33px;
+  margin-top: -32px;
 }
 
 
@@ -119,6 +154,22 @@ color: #666666;
 /*
 NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
 */
+
+
+.view-display-id-news_block .views-field-field-news-url {
+  position: relative;
+  background-color: #f2f2f2;
+  margin-top: -30px;
+  width: 200px;
+  height: 30px;
+  font-size: 18px;
+  padding: 5px;
+  float: right;
+  text-align: center;
+  border-top-left-radius: 5px;
+}
+
+
 .view-display-id-catalog_new_books_block{
 
   margin-top: 60px;
@@ -129,65 +180,103 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
   margin-right: auto;
   margin-top: -20px;
   width: 160px;
-    height: 160px;
+  height: 160px;
 }
+
+
 /*
-.view-display-id-catalog_new_books_block .carousel-control,
-.view-display-id-same_author_books .carousel-control, 
-.view-display-id-workshops_front_block .carousel-control {
-  top: auto;
-  bottom: -20px;
-}
-
-.view-display-id-catalog_new_books_block .carousel-control.left,  .view-display-id-catalog_new_books_block .carousel-control.right,
-.view-display-id-same_author_books .carousel-control.left,  .view-display-id-same_author_books .carousel-control.right,
-.view-display-id-workshops_front_block .carousel-control.left,  .view-display-id-workshops_front_block .carousel-control.right
-  {
-width: 25px;
-height: 25px;
-border-radius: 30px;
-background-color: #f14a1f;
-text-shadow: none;
-}
-
-
-.view-display-id-catalog_new_books_block .carousel-control .icon-prev, .view-display-id-catalog_new_books_block .carousel-control .icon-next, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-left, .view-display-id-catalog_new_books_block .carousel-control .glyphicon-chevron-right,
-.view-display-id-same_author_books .carousel-control .icon-prev, .view-display-id-same_author_books .carousel-control .icon-next, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-left, .view-display-id-same_author_books .carousel-control .glyphicon-chevron-right,
-.view-display-id-workshops_front_block .carousel-control .icon-prev, .view-display-id-workshops_front_block .carousel-control .icon-next, .view-display-id-workshops_front_block .carousel-control .glyphicon-chevron-left, .view-display-id-workshops_front_block .carousel-control .glyphicon-chevron-right {
-top: -12px;
-}
-
-
-.view-display-id-catalog_new_books_block .carousel-control.right{
-right: 0;
-left: auto;
-}
-.view-display-id-catalog_new_books_block .carousel-control.left{
-right: 75px;
-left: auto;
-}
-
-.view-display-id-same_author_books .carousel-control.left, 
-.view-display-id-workshops_front_block {
-left: 0;
-right: auto;
-}
-
-.view-display-id-same_author_books .carousel-control.right,
-.view-display-id-workshops_front_block .carousel-control.right {
-left: 75px;
-right: auto;
-
-}
+==============================================================================================
+CAROUSEL STYLES
+==============================================================================================
 */
+.carousel-control {
+  margin-right: 60px;
+  top: auto;
+  bottom: -30px;
+  opacity: 1;
+}
+
+.carousel-control.left,  .carousel-control.right {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #f14a1f;
+  text-shadow: none;
+}
+
+.carousel-control.left:hover,  .carousel-control.right:hover {
+  background-color: #999;
+}
+
+.carousel-control.left{
+  right: 75px;
+  left: auto;
+}
+
+.carousel-control.right{
+  right: -10px;
+  left: auto;
+}
+
+.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+  top: 1px;
+  color: #000;
+    transition:.5s;
+
+}
+
+.carousel-control .icon-prev {
+  left: 30px;
+
+}
+.carousel-control .icon-next {
+  right: 30px;
+}
+
+.carousel-control:hover .icon-prev {
+  left: 10px;
+
+}
+.carousel-control:hover .icon-next {
+  right: 10px;
+}
+
+
+.carousel-indicators {
+  position: absolute;
+  top: -20px;
+  z-index: 1000;
+  width: 100%;
+  left:0;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+  text-align: right;
+}
+
+.carousel-indicators li {
+  /* display: inline-block; */
+  /* width: 10px; */
+  /* height: 10px; */
+  /* margin: 1px; */
+  /* text-indent: -999px; */
+  border: 1px solid #999;
+  /* border-radius: 10px; */
+  /* cursor: pointer; */
+  /* background-color: rgba(0, 0, 0, 0); */
+}
+
+.carousel-indicators .active {
+  background-color: #999;
+}
 
 /*
 AGENDA
 */
 .node-event.view-mode-list{
-background-color: #fff;
-height: 350px;
-}
+  background-color: #fff;
+  height: 350px;
+  }
 
 .group-event-details {
   padding: 10px;
@@ -246,7 +335,7 @@ height: 350px;
 /*
 WORKSHOPS CAROUSEL
 */
-.view-display-id-workshops_front_block .field-name-fabrique-title {
+.view-display-id-workshops_front_block .field-name-fabrique-title p {
   font-family: "corporateslight";
   font-size: 80px;
   margin-left: 40px;
@@ -265,6 +354,10 @@ WORKSHOPS CAROUSEL
 
 .view-display-id-workshops_front_block .field-name-title a:hover, .view-display-id-workshops_front_block .field-name-title a:active{
     color: #666666;
+}
+
+.view-display-id-workshops_front_block img {
+  border-radius: 20px;
 
 }
 /*
@@ -457,20 +550,26 @@ ARTICLE NODE
   padding-left: 100px;
 }
 
+
+.node-type-article .block-system .col-sm-12{
+  margin-bottom: 30px;
+
+}
+
 .node-type-article h2.block-title {
-text-align: right;
+  display: inline-block;
+  margin-top: 30px;
+text-align: left;
 }
 
 .node-type-article .field-name-field-subtitle {
   font-size: 30px;
   margin-bottom: 10px;
   padding-left: 100px;
-  text-transform: lowercase;
 }
 
 .node-type-article .group-contributors {
   margin-bottom: 20px;
-text-transform: lowercase;
 
 }
 
@@ -484,18 +583,22 @@ text-transform: lowercase;
   color: #f14a1f;
 }
 
-/*
+
 .node-type-article .view-fc-contributors  h3 {
+  font-family: "corporatesdemi";
+  font-size: 14px;
   margin-top: 0;
-  margin-bottom: 10px
+  margin-bottom: 0;
+
 }
 
-.node-type-article  .view-fc-contributors .attachment h3 {
-  margin-top: 20px;
-  margin-bottom: 10px
+.node-type-article .views-field-field-displayed-name {
+  margin-bottom: 10px;
 }
 
-
+.node-type-article .view-display-id-book_contributors_others {
+  margin-bottom: 30px
+}
 
 .node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
   font-size: 24px;
@@ -503,7 +606,8 @@ text-transform: lowercase;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-*/
+
+
 .node-type-article .group-couv {
   margin-bottom: 10px;
 }
@@ -632,7 +736,6 @@ INFO WRAPPER STYLES
   position: absolute;
   bottom: 0;
   z-index: 1000;
-  text-transform: lowercase;
 }
 
 .infosWrapper a{
@@ -678,8 +781,8 @@ body {
 
 
 
-.preFooter {
-  margin-top: 30px;
+.front .preFooter {
+  margin-top: 60px;
 }
 
 .footer {
