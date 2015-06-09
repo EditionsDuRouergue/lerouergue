@@ -127,6 +127,7 @@ class ContributorMigration extends Migration {
 
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
+		$row->name = ucfirst(strtolower($row->name));
 	}
 	
 	/**
