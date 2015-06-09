@@ -127,7 +127,26 @@ class ContributorMigration extends Migration {
 
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
-		$row->name = ucfirst(strtolower($row->name));
+		
+		// Last name capitalization handling
+		$parts = explode("-", $row->name);
+		$capitalized_parts = array();
+		foreach ($parts as $part) {
+			$subparts = explode("'", $part);
+			
+			$capitalized_subparts = array();
+			foreach($subparts as $subpart) {
+				// $subpart treatment and storage in $capitalized_subparts
+				$capitalized_subparts[] = ucwords(mb_strtolower($subpart));
+			}
+			// $part reassembling from treated subparts
+			$part = implode("'", $capitalized_subparts);
+			
+			// $part storage in $capitalized_parts
+			$capitalized_parts[] = $part;
+		}
+		// name reassembling from parts
+		$row->name = implode("-", $capitalized_parts);
 	}
 	
 	/**
