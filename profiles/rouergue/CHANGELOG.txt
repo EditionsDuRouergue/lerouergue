@@ -1,3 +1,8 @@
+Rouergue 0.3, 2015-06-09
+--------------------------
+Custom theme completed.
+Various features settings.
+
 Rouergue 0.2, 2015-03-15
 --------------------------
 Mistral synchronization code completed.
