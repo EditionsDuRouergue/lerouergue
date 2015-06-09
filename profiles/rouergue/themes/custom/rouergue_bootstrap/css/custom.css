@@ -17,6 +17,7 @@ h2.block-title {
   font-size: 18px;
   font-family: "corporatesdemi";
   color: #f14a1f;
+  text-transform: lowercase;
 }
 
 
@@ -433,7 +434,7 @@ MAIN MENU
   letter-spacing: 3px;
 }
 
-.navbar-brand a {
+.navbar-default .navbar-brand {
 color: #f2f2f2;
 }
 
@@ -546,24 +547,25 @@ ARTICLE NODE
 
 .node-type-article h1 {
   margin-top: 0;
+  font-size: 30px;
   margin-bottom: 10px;
   padding-left: 100px;
 }
 
 
 .node-type-article .block-system .col-sm-12{
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
 }
 
 .node-type-article h2.block-title {
   display: inline-block;
   margin-top: 30px;
-text-align: left;
+  text-align: left;
 }
 
 .node-type-article .field-name-field-subtitle {
-  font-size: 30px;
+  font-size: 18px;
   margin-bottom: 10px;
   padding-left: 100px;
 }
@@ -695,8 +697,18 @@ AGENDA NODE
 
 .node-type-event .field-name-field-adresse{
   margin-top: 30px;
-  text-align: right;
 }
+
+/*
+CONTRIBUTOR NODE
+*/
+.node-type-contributor h1 {
+  margin-top: 0;
+  font-size: 30px;
+  margin-bottom: 10px;
+  padding-left: 100px;
+}
+
 
 /*
 ==============================================================================================
@@ -764,6 +776,11 @@ INFO WRAPPER STYLES
   margin-bottom: 30px;
 }
 
+.view-display-id-agenda_block .gridWrapper {
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #999;
+}
 
 /*
 ==============================================================================================
@@ -801,3 +818,9 @@ body {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
+
+/*
+==============================================================================================
+MEDIA QUERIES
+==============================================================================================
+*/

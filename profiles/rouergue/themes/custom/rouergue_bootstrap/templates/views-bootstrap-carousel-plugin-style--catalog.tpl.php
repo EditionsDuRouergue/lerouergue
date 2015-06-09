@@ -25,7 +25,8 @@
    
   </div>
 
-  <?php if ($navigation): ?>
+  <?php if ($navigation && (count($rows) > 4)): ?>
+
     <!-- Carousel navigation -->
     <a class="carousel-control left" href="#views-bootstrap-carousel-<?php print $id ?>" data-slide="prev">
       <span class="icon-prev"></span>
