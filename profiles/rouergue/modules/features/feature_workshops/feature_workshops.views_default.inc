@@ -22,7 +22,7 @@ function feature_workshops_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'workshops';
+  $handler->display->display_options['title'] = 'fabrique';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -84,13 +84,14 @@ function feature_workshops_views_default_views() {
 
   /* Display: Liste workshops */
   $handler = $view->new_display('page_with_page_title', 'Liste workshops', 'workshops_page');
-  $handler->display->display_options['path'] = 'workshops';
+  $handler->display->display_options['path'] = 'fabrique';
 
   /* Display: Bloc liste workshops */
   $handler = $view->new_display('block', 'Bloc liste workshops', 'workshop_page_block');
   $handler->display->display_options['display_description'] = 'Liste les titres des autres workshops';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
@@ -257,7 +258,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['field_event_author']['multi_type'] = 'ul';
   $translatables['workshops'] = array(
     t('Master'),
-    t('workshops'),
+    t('fabrique'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),

@@ -23,8 +23,8 @@
  * )
  */
 class ThemeMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 
 		// DESCRIPTION
 		$this->description = t('Migrate themes from mistral source database to Drupal Themes vocabulary');
@@ -77,8 +77,8 @@ class ThemeMigration extends Migration {
  * FROM readership
  */
 class ReadershipMigration extends Migration {
-	public function __construct() {
-		parent::__construct();
+	public function __construct($arguments) {
+		parent::__construct($arguments);
 
 		// DESCRIPTION
 		$this->description = t('Migrate readerships from mistral source database to Drupal Lectorat vocabulary');
@@ -152,7 +152,11 @@ class ArticleMigration extends Migration {
   	//$this->systemOfRecord = Migration::DESTINATION;
   	
     $this->arguments = $arguments;
-    parent::__construct();
+    parent::__construct($arguments);
+    
+    $this->store = '';
+    $this->cover_images_dir = '';
+    $this->default_cover_image = '';
 		
 		// DESCRIPTION.
 		$this->description = t('Migrate articles from mistral source database to Drupal Article nodes');
@@ -281,17 +285,30 @@ class ArticleMigration extends Migration {
 	 * Data handling before node saving.
 	 */
 	function prepare($node, stdClass $row) {
-		// Cover image
-		$image_filename = $row->gencod . '.jpg';
-		$host = variable_get('cover_images_url','http://rouergue.abrege.net/util/couv_rouergue/');
-		$url = $host . $image_filename;
-	
-		if(!$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_REPLACE)) {
-			$image_filename = variable_get('default_cover_image','article-cover-400x600.png');
-			$url = $host . $image_filename;
-			$file = system_retrieve_file($url, 'public://catalog/cover-images/' . $image_filename, TRUE, FILE_EXISTS_RENAME);
+		// Cover image		
+		if ($this->store == '') {
+			$this->store = rtrim(variable_get('rouergue_data_store', ''), '/') . '/';
 		}
-		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
+		if ($this->cover_images_dir == '') {
+			$this->cover_images_dir = rtrim(variable_get('rouergue_cover_images_dir', 'catalog/cover-images'), '/') . '/';
+		}
+		$filename = $row->gencod . '.jpg';
+		$cover_filename = $this->store . $this->cover_images_dir . $filename;
+		
+		if (!file_exists($cover_filename)) {
+			if ($this->default_cover_image == '') {
+				$this->default_cover_image = variable_get('rouergue_default_cover_image', 'article-cover-400x600.png');
+			}
+			$filename = $this->default_cover_image;
+			$cover_filename = $this->store . $this->cover_images_dir . $filename;
+		}
+		
+		if ($picture = file_get_contents($cover_filename)) {
+			$file = file_save_data($picture, 'public://catalog/cover-images/' . $filename, FILE_EXISTS_REPLACE);
+			if ($file) {
+				$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
+			}
+		}
 	}
 	
 	/**

@@ -173,7 +173,7 @@ function feature_catalog_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Nom Prénom'),
+      'title_label' => t('Titre'),
       'help' => '',
     ),
   );

@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function feature_workshops_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "boxes" && $api == "box") {
+    return array("version" => "1");
+  }
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
@@ -65,7 +68,7 @@ function feature_workshops_image_default_styles() {
   $styles['workshop-carousel'] = array(
     'label' => 'workshop-carousel',
     'effects' => array(
-      5 => array(
+      11 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 600,
@@ -73,7 +76,7 @@ function feature_workshops_image_default_styles() {
         ),
         'weight' => -10,
       ),
-      6 => array(
+      12 => array(
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',
@@ -82,7 +85,7 @@ function feature_workshops_image_default_styles() {
           'width' => 1382,
           'upscale' => '',
         ),
-        'weight' => -9,
+        'weight' => -8,
       ),
     ),
   );
@@ -109,6 +112,33 @@ function feature_workshops_image_default_styles() {
           'upscale' => '',
         ),
         'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: workshop-page.
+  $styles['workshop-page'] = array(
+    'label' => 'workshop-page',
+    'effects' => array(
+      10 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 550,
+          'height' => '',
+          'upscale' => 1,
+        ),
+        'weight' => -10,
+      ),
+      9 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => -9,
       ),
     ),
   );

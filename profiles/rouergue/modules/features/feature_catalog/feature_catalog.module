@@ -147,8 +147,8 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 			&& $view_mode == 'full') {
 		$markup = '';
 		if (!empty($node->field_inner_pages)) {
-			$markup = '<div class="field field-name-field_bs_button field-type-button clearfix">';
-			$markup .= '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
+			$markup = '<div class="field field-name-field_bs_button clearfix">';
+			$markup .= '<a href="#" data-toggle="modal" data-target="#rouergue-pdf-viewer">feuilleter</a>';
 			$markup .= '</div>';
 		}
 		$node->content['field_bs_button_browse_pdf']['#markup'] = $markup;
@@ -173,11 +173,8 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 	}
 
 	// CONTRIBUTOR
-	if ($node->type == 'contributor') {
-		if (strlen($node->content['field_pseudonyme'][0]['#markup']) > 1) {
-			unset($node->content['field_firstname']);
-			unset($node->content['field_lastname']);
-		}
+	if ($node->type == 'contributor' && $view_mode == 'full') {
+		$node->content['field_displayed_name'][0]['#markup'] = '<h1>' . $node->content['field_displayed_name'][0]['#markup'] . '</h1>';
 	}
 }
 
@@ -185,28 +182,28 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
  * Implements hook_view_pre_render().
  */
 function feature_catalog_views_pre_render(&$view) {
-	if ($view->current_display == 'authors' || $view->current_display == 'book_contributors' || $view->current_display == 'book_contributors_non_author') {
-		foreach ($view->result as $result) {
-			if (strlen($result->field_field_pseudonyme[0]['rendered']['#markup']) > 1) {dpm($result->field_field_pseudonyme[0]['rendered']['#markup']);
-				$result->field_field_lastname[0]['rendered']['#markup'] = '';
-				$result->field_field_firstname[0]['rendered']['#markup'] = '';
-			}
-		}
-	}
+// 	if ($view->current_display == 'authors' || $view->current_display == 'book_contributors' || $view->current_display == 'book_contributors_non_author') {
+// 		foreach ($view->result as $result) {
+// 			if (strlen($result->field_field_pseudonyme[0]['rendered']['#markup']) > 1) {dpm($result->field_field_pseudonyme[0]['rendered']['#markup']);
+// 				$result->field_field_lastname[0]['rendered']['#markup'] = '';
+// 				$result->field_field_firstname[0]['rendered']['#markup'] = '';
+// 			}
+// 		}
+// 	}
 	
-	if ($view->current_display == 'book_contributors_illustrator') {
-		$suffix = ' <span class="book-illustrator">(illustrateur)</span>';
-		foreach ($view->result as $result) {
-			if (strlen($result->field_field_pseudonyme[0]['raw']['value']) > 1) {// (illustrateur) added to pseudoname, if any
-				$result->field_field_lastname[0]['rendered']['#markup'] = '';
-				$result->field_field_firstname[0]['rendered']['#markup'] = '';
-				$result->field_field_pseudonyme[0]['rendered']['#markup'] .= $suffix;
-			}
-			else {// otherwise added to name
-				$result->field_field_lastname[0]['rendered']['#markup'] .= $suffix;
-			}
-		}
-	}
+// 	if ($view->current_display == 'book_contributors_illustrator') {
+// 		$suffix = ' <span class="book-illustrator">(illustrateur)</span>';
+// 		foreach ($view->result as $result) {
+// 			if (strlen($result->field_field_pseudonyme[0]['raw']['value']) > 1) {// (illustrateur) added to pseudoname, if any
+// 				$result->field_field_lastname[0]['rendered']['#markup'] = '';
+// 				$result->field_field_firstname[0]['rendered']['#markup'] = '';
+// 				$result->field_field_pseudonyme[0]['rendered']['#markup'] .= $suffix;
+// 			}
+// 			else {// otherwise added to name
+// 				$result->field_field_lastname[0]['rendered']['#markup'] .= $suffix;
+// 			}
+// 		}
+// 	}
 }
 
 /**

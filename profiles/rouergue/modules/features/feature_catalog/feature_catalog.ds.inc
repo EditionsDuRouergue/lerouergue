@@ -18,7 +18,7 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'author_books';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -58,7 +58,7 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
     'authors' => array(
-      'weight' => '0',
+      'weight' => '8',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -69,7 +69,7 @@ function feature_catalog_ds_field_settings_info() {
       ),
     ),
     'illustrators' => array(
-      'weight' => '0',
+      'weight' => '9',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -90,12 +90,37 @@ function feature_catalog_ds_field_settings_info() {
       ),
     ),
     'service_links_displays_group' => array(
-      'weight' => '9',
+      'weight' => '12',
       'label' => 'hidden',
       'format' => 'sld_group_image_and_text',
     ),
   );
   $export['node|article|full'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|article|in_news_block';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'article';
+  $ds_fieldsetting->view_mode = 'in_news_block';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h4',
+        'class' => '',
+      ),
+    ),
+    'post_date' => array(
+      'weight' => '3',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_release_date',
+    ),
+  );
+  $export['node|article|in_news_block'] = $ds_fieldsetting;
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
@@ -105,11 +130,11 @@ function feature_catalog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'list';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '1',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
-        'link' => '0',
+        'link' => '1',
         'wrapper' => 'h4',
         'class' => '',
       ),
@@ -218,28 +243,18 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
-        1 => 'title',
+        1 => 'field_cover_image',
       ),
       'central' => array(
-        2 => 'field_cover_image',
+        2 => 'title',
       ),
     ),
     'fields' => array(
       'field_publication_status' => 'top',
-      'title' => 'top',
-      'field_cover_image' => 'central',
+      'field_cover_image' => 'top',
+      'title' => 'central',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        '' => '',
-      ),
-      'top' => array(
-        'infosWrapper' => 'infosWrapper',
-      ),
-      'central' => array(
-        'couvWrapper' => 'couvWrapper',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
       'central' => 'div',
@@ -297,61 +312,63 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'title',
-        3 => 'field_subtitle',
-      ),
-      'central' => array(
-        1 => 'authors',
-        2 => 'illustrators',
-        11 => 'body',
-        14 => 'field_press_quotes',
-        15 => 'service_links_displays_group',
-        16 => 'field_inner_pages',
+        1 => 'field_subtitle',
       ),
       'left' => array(
-        4 => 'group_couv_wrapper',
-        5 => 'field_publication_status',
-        6 => 'field_cover_image',
-        7 => 'group_infos_article',
-        8 => 'field_release_date',
+        2 => 'field_publication_status',
+        3 => 'group_couv',
+        4 => 'field_cover_image',
+        5 => 'field_bs_button_browse_pdf',
+        6 => 'field_themes',
         9 => 'field_barcode',
-        10 => 'field_number_pages',
-        12 => 'field_price',
-        13 => 'field_format',
-        17 => 'field_isbn',
-        20 => 'field_gencod',
       ),
       'right' => array(
-        18 => 'field_contributors',
-        19 => 'field_themes',
-        21 => 'field_readership',
-        22 => 'field_bs_button_browse_pdf',
-        23 => 'field_num_version_link',
+        7 => 'field_release_date',
+        8 => 'field_number_pages',
+        11 => 'field_format',
+        13 => 'field_price',
+        15 => 'field_isbn',
+        16 => 'field_gencod',
+        21 => 'field_contributors',
+        22 => 'group_infos_article',
+        23 => 'field_readership',
+        24 => 'field_num_version_link',
+      ),
+      'central' => array(
+        10 => 'group_contributors',
+        12 => 'authors',
+        14 => 'illustrators',
+        17 => 'body',
+        18 => 'field_press_quotes',
+        19 => 'service_links_displays_group',
+        20 => 'field_inner_pages',
       ),
     ),
     'fields' => array(
       'title' => 'top',
-      'authors' => 'central',
-      'illustrators' => 'central',
       'field_subtitle' => 'top',
-      'group_couv_wrapper' => 'left',
       'field_publication_status' => 'left',
+      'group_couv' => 'left',
       'field_cover_image' => 'left',
-      'group_infos_article' => 'left',
-      'field_release_date' => 'left',
+      'field_bs_button_browse_pdf' => 'left',
+      'field_themes' => 'left',
+      'field_release_date' => 'right',
+      'field_number_pages' => 'right',
       'field_barcode' => 'left',
-      'field_number_pages' => 'left',
+      'group_contributors' => 'central',
+      'field_format' => 'right',
+      'authors' => 'central',
+      'field_price' => 'right',
+      'illustrators' => 'central',
+      'field_isbn' => 'right',
+      'field_gencod' => 'right',
       'body' => 'central',
-      'field_price' => 'left',
-      'field_format' => 'left',
       'field_press_quotes' => 'central',
       'service_links_displays_group' => 'central',
       'field_inner_pages' => 'central',
-      'field_isbn' => 'left',
       'field_contributors' => 'right',
-      'field_themes' => 'right',
-      'field_gencod' => 'left',
+      'group_infos_article' => 'right',
       'field_readership' => 'right',
-      'field_bs_button_browse_pdf' => 'right',
       'field_num_version_link' => 'right',
     ),
     'classes' => array(),
@@ -373,6 +390,43 @@ function feature_catalog_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|article|in_news_block';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'article';
+  $ds_layout->view_mode = 'in_news_block';
+  $ds_layout->layout = 'bootstrap_12_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'top' => array(
+        0 => 'field_cover_image',
+      ),
+      'central' => array(
+        1 => 'title',
+        2 => 'field_contributors',
+        3 => 'post_date',
+      ),
+    ),
+    'fields' => array(
+      'field_cover_image' => 'top',
+      'title' => 'central',
+      'field_contributors' => 'central',
+      'post_date' => 'central',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'top' => 'div',
+      'central' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|article|in_news_block'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|article|list';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
@@ -382,30 +436,20 @@ function feature_catalog_ds_layout_settings_info() {
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
-        1 => 'title',
-        2 => 'field_contributors',
+        1 => 'field_cover_image',
       ),
       'central' => array(
-        3 => 'field_cover_image',
+        2 => 'title',
+        3 => 'field_contributors',
       ),
     ),
     'fields' => array(
       'field_publication_status' => 'top',
-      'title' => 'top',
-      'field_contributors' => 'top',
-      'field_cover_image' => 'central',
+      'field_cover_image' => 'top',
+      'title' => 'central',
+      'field_contributors' => 'central',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        '' => '',
-      ),
-      'top' => array(
-        'infosWrapper' => 'infosWrapper',
-      ),
-      'central' => array(
-        'couvWrapper' => 'couvWrapper',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
       'central' => 'div',
@@ -424,35 +468,40 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'contributor';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'bootstrap_12';
+  $ds_layout->layout = 'bootstrap_4_5_3';
   $ds_layout->settings = array(
     'regions' => array(
+      'top' => array(
+        0 => 'field_displayed_name',
+      ),
+      'left' => array(
+        1 => 'field_picture',
+      ),
       'central' => array(
-        0 => 'field_picture',
-        1 => 'field_firstname',
-        2 => 'field_lastname',
-        3 => 'field_pseudonyme',
-        4 => 'body',
-        5 => 'field_contributor_url',
+        2 => 'body',
+        3 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
-      'field_picture' => 'central',
-      'field_firstname' => 'central',
-      'field_lastname' => 'central',
-      'field_pseudonyme' => 'central',
+      'field_displayed_name' => 'top',
+      'field_picture' => 'left',
       'body' => 'central',
       'field_contributor_url' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(
+      'top' => 'div',
+      'left' => 'div',
       'central' => 'div',
+      'right' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'hide_page_title' => '1',
+    'page_option_title' => '',
   );
   $export['node|contributor|full'] = $ds_layout;
 
@@ -494,15 +543,11 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_firstname',
-        1 => 'field_lastname',
-        2 => 'field_pseudonyme',
+        0 => 'field_displayed_name',
       ),
     ),
     'fields' => array(
-      'field_firstname' => 'ds_content',
-      'field_lastname' => 'ds_content',
-      'field_pseudonyme' => 'ds_content',
+      'field_displayed_name' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -533,6 +578,15 @@ function feature_catalog_ds_view_modes_info() {
     'node' => 'node',
   );
   $export['author_books'] = $ds_view_mode;
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'in_news_block';
+  $ds_view_mode->label = 'Dans le bloc nouveautés';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['in_news_block'] = $ds_view_mode;
 
   $ds_view_mode = new stdClass();
   $ds_view_mode->api_version = 1;

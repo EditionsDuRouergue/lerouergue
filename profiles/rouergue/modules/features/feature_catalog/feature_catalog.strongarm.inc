@@ -146,7 +146,7 @@ function feature_catalog_strongarm() {
         'custom_settings' => FALSE,
       ),
       'block' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'list' => array(
         'custom_settings' => TRUE,
@@ -158,6 +158,18 @@ function feature_catalog_strongarm() {
         'custom_settings' => FALSE,
       ),
       'author_books' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'carousel' => array(
+        'custom_settings' => FALSE,
+      ),
+      'map_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'in_news_block' => array(
         'custom_settings' => TRUE,
       ),
     ),
@@ -183,10 +195,11 @@ function feature_catalog_strongarm() {
             'visible' => TRUE,
           ),
           'author_books' => NULL,
+          'in_news_block' => NULL,
         ),
         'field_publication_status' => array(
           'full' => array(
-            'weight' => '3',
+            'weight' => '2',
             'visible' => TRUE,
           ),
           'default' => array(
@@ -205,18 +218,30 @@ function feature_catalog_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'in_news_block' => array(
+            'weight' => '7',
+            'visible' => FALSE,
+          ),
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
-            'weight' => '14',
+            'weight' => '4',
             'visible' => TRUE,
           ),
           'list' => array(
-            'weight' => '32',
+            'weight' => '35',
             'visible' => FALSE,
           ),
           'author_books' => array(
-            'weight' => '33',
+            'weight' => '35',
+            'visible' => FALSE,
+          ),
+          'default' => array(
+            'weight' => '101',
+            'visible' => TRUE,
+          ),
+          'in_news_block' => array(
+            'weight' => '36',
             'visible' => FALSE,
           ),
         ),
@@ -271,16 +296,16 @@ function feature_catalog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '10',
+          'weight' => '14',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '12',
         ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '13',
         ),
       ),
       'display' => array(),

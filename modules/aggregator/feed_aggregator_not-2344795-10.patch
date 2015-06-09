@@ -1,0 +1,13 @@
+diff --git a/modules/aggregator/aggregator.fetcher.inc b/modules/aggregator/aggregator.fetcher.inc
+index ed77bb6..9341531 100644
+--- a/modules/aggregator/aggregator.fetcher.inc
++++ b/modules/aggregator/aggregator.fetcher.inc
+@@ -23,7 +23,7 @@ function aggregator_aggregator_fetch($feed) {
+ 
+   // Generate conditional GET headers.
+   $headers = array();
+-  if ($feed->etag) {
++  if ($feed->etag && strcmp($feed->etag, "\"\"") !== 0) {
+     $headers['If-None-Match'] = $feed->etag;
+   }
+   if ($feed->modified) {

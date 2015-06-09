@@ -5,11 +5,11 @@
 			$('.infosWrapper').hide();
 			
 			$('.couvWrapper').mouseenter(function() {
-				$(this).parent().children('.infosWrapper').slideDown('fast')
+				$(this).children('.infosWrapper').slideDown('fast')
 			});
 
 			$('.couvWrapper').mouseleave(function() {
-				$(this).parent().children('.infosWrapper').slideUp('slow')
+				$(this).children('.infosWrapper').slideUp('slow')
 			});
 
 
