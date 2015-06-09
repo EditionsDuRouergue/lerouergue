@@ -32,6 +32,8 @@ DirectoryIndex index.php index.html index.htm
   php_value mbstring.http_input             pass
   php_value mbstring.http_output            pass
   php_flag mbstring.encoding_translation    off
+  # increase default php max_exec_time
+  php_value max_execution_time              300
 </IfModule>
 
 # Requires mod_expires to be enabled.
