@@ -69,6 +69,7 @@ features[user_permission][] = delete any workshops content
 features[user_permission][] = delete own workshops content
 features[user_permission][] = edit any workshops content
 features[user_permission][] = edit own workshops content
+features[uuid_features_menu][] = cbcae01d-af54-4264-a92c-a8dd25bb2697
 features[variable][] = comment_anonymous_workshops
 features[variable][] = comment_default_mode_workshops
 features[variable][] = comment_default_per_page_workshops
