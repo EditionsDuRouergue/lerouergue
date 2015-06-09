@@ -13,6 +13,39 @@ function feature_catalog_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_contributors|node|article|full';
+  $field_group->group_name = 'group_contributors';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'full';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Contributors wrapper',
+    'weight' => '7',
+    'children' => array(
+      0 => 'authors',
+      1 => 'illustrators',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Contributors wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-contributors field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $export['group_contributors|node|article|full'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_couv_wrapper|node|article|full';
   $field_group->group_name = 'group_couv_wrapper';
   $field_group->entity_type = 'node';
