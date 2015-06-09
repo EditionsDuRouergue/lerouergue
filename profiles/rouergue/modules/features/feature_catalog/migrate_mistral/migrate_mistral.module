@@ -63,9 +63,10 @@ function rouergue_mistral_synchronize() {
 		return "Nothing to do today.";
 	}
 	else {
+		$data_store = variable_get('rouergue_data_store');
 		$filepath = variable_get('rouergue_mistral_dumps_directory');
 		$filename = variable_get('rouergue_mistral_dump_filename');
-		$dumpfile = $filepath . $filename;
+		$dumpfile = $data_store . $filepath . $filename;
 		
 		if (!file_exists($dumpfile)) {
 			$msg = t('The dump file %file does not exist in folder %folder', array('%$file' => $filename, '%folder' => $filepath));

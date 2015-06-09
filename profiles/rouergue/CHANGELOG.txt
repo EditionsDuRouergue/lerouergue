@@ -1,3 +1,11 @@
+Rouergue 0.3.2, 2015-06-09
+--------------------------
+Contributors last name capitalization handling.
+
+Rouergue 0.3.1, 2015-06-09
+--------------------------
+Fixes Migrate synchronization code.
+
 Rouergue 0.3, 2015-06-09
 --------------------------
 Custom theme completed.
