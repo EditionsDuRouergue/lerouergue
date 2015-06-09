@@ -21,7 +21,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 12,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -35,7 +35,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -44,7 +44,7 @@ function feature_events_field_default_field_instances() {
           'trim_length' => 100,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -94,7 +94,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -118,13 +118,19 @@ function feature_events_field_default_field_instances() {
           'use_widget_handlers' => 1,
         ),
         'type' => 'addressfield_default',
-        'weight' => 5,
+        'weight' => 8,
       ),
       'list' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
+        'module' => 'addressfield_tokens',
+        'settings' => array(
+          'components' => array(
+            'locality' => 'locality',
+          ),
+          'separator' => '',
+        ),
+        'type' => 'addressfield_components',
+        'weight' => 3,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -180,7 +186,7 @@ function feature_events_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -206,7 +212,7 @@ function feature_events_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -219,7 +225,7 @@ function feature_events_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -266,7 +272,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'default' => array(
         'label' => 'above',
@@ -278,19 +284,19 @@ function feature_events_field_default_field_instances() {
         'weight' => 8,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 4,
+        'weight' => 7,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'map_block' => array(
         'label' => 'above',
@@ -329,7 +335,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -408,7 +414,7 @@ function feature_events_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -422,14 +428,14 @@ function feature_events_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'list' => array(
         'label' => 'hidden',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -464,7 +470,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'default' => array(
         'label' => 'above',
@@ -479,13 +485,13 @@ function feature_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 19,
       ),
       'list' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'map_block' => array(
         'label' => 'hidden',
@@ -562,7 +568,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'default' => array(
         'label' => 'inline',
@@ -576,13 +582,13 @@ function feature_events_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
       'map_block' => array(
         'label' => 'inline',
@@ -624,7 +630,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'default' => array(
         'label' => 'inline',
@@ -638,13 +644,13 @@ function feature_events_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'list' => array(
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 18,
       ),
       'map_block' => array(
         'label' => 'inline',

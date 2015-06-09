@@ -6,62 +6,63 @@
 //
 
 @font-face {
-    font-family: 'interstateRegular';
-    src: url('../fonts/interstate_regular-webfont.eot');
-    src: url('../fonts/interstate_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/interstate_regular-webfont.woff2') format('woff2'),
-         url('../fonts/interstate_regular-webfont.woff') format('woff'),
-         url('../fonts/interstate_regular-webfont.ttf') format('truetype'),
-         url('../fonts/interstate_regular-webfont.svg#interstateRegular') format('svg');
+    font-family: 'corporatesregular';
+    src: url('../fonts/corporates-regular-webfont.eot');
+    src: url('../fonts/corporates-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/corporates-regular-webfont.woff2') format('woff2'),
+         url('../fonts/corporates-regular-webfont.woff') format('woff'),
+         url('../fonts/corporates-regular-webfont.ttf') format('truetype'),
+         url('../fonts/corporates-regular-webfont.svg#corporatesregular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
 
+}
 
 @font-face {
-    font-family: 'interstateLight';
-    src: url('../fonts/interstate_light-webfont.eot');
-    src: url('../fonts/interstate_light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/interstate_light-webfont.woff2') format('woff2'),
-         url('../fonts/interstate_light-webfont.woff') format('woff'),
-         url('../fonts/interstate_light-webfont.ttf') format('truetype'),
-         url('../fonts/interstate_light-webfont.svg#interstateLight') format('svg');
+    font-family: 'corporateslight';
+    src: url('../fonts/corporates-light-webfont.eot');
+    src: url('../fonts/corporates-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/corporates-light-webfont.woff2') format('woff2'),
+         url('../fonts/corporates-light-webfont.woff') format('woff'),
+         url('../fonts/corporates-light-webfont.ttf') format('truetype'),
+         url('../fonts/corporates-light-webfont.svg#corporateslight') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
-/*
 @font-face {
-    font-family: 'interstateBold';
-    src: url('../fonts/interstate_bold-webfont.eot');
-    src: url('../fonts/interstate_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/interstate_bold-webfont.woff2') format('woff2'),
-         url('../fonts/interstate_bold-webfont.woff') format('woff'),
-         url('../fonts/interstate_bold-webfont.ttf') format('truetype'),
-         url('../fonts/interstate_bold-webfont.svg#interstateBold') format('svg');
+    font-family: 'corporatesdemi';
+    src: url('../fonts/corporates-demi-webfont.eot');
+    src: url('../fonts/corporates-demi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/corporates-demi-webfont.woff2') format('woff2'),
+         url('../fonts/corporates-demi-webfont.woff') format('woff'),
+         url('../fonts/corporates-demi-webfont.ttf') format('truetype'),
+         url('../fonts/corporates-demi-webfont.svg#corporatesdemi') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
-*/
+
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
 
-@black:                  #1a1a1a;
-
+@black:                  #000;
 @white:                  #fff;
+@orange:                 #f14a1f;
 
 @gray-darker:            #333333;
-@gray-dark:              #666666;
-@gray:                   #999999;
-@gray-light:             #cccccc;
+@gray-dark:              #4d4d4d;
+@gray:                   #666666;
+@gray-light:             #808080;
 @gray-lighter:           #f2f2f2;
 
-@brand-primary:         #009de1;
-@brand-success:         #4e9a06;
-@brand-info:            #204a87;
-@brand-warning:         #ce5c00;
-@brand-danger:          #a40000;
+@brand-primary:         @gray-light;
+@brand-success:         #a4ba6f;
+@brand-info:            #51c6ed;
+@brand-warning:         @orange;
+@brand-danger:          #a63b33;
 
 
 //== Scaffolding
@@ -76,38 +77,40 @@
 //** Global textual link color.
 @link-color:            @gray-dark;
 //** Link hover color
-@link-hover-color:      @black;
+@link-hover-color:      @orange;
 
 
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@custom-font:             "interstateLight";
+@custom-font:             "corporatesregular";
 @font-family-sans-serif:  "Helvetica", sans-serif;
 @font-family-serif:       "Times", serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   "Monaco", monospace;
 @font-family-base:        @custom-font;
+@font-family-demi:        "corporatesdemi";
+@font-family-light:       "corporateslight";
 
 @font-size-base:          14px;
-@font-size-large:         24px; 
+@font-size-large:         30px; 
 @font-size-small:         10px;
 
-@font-size-h1:            60px;
+@font-size-h1:            40px;
 @font-size-h2:            36px;
-@font-size-h3:            24px;
-@font-size-h4:            14px;
-@font-size-h5:            10px;
+@font-size-h3:            30px;
+@font-size-h4:            18px;
+@font-size-h5:            13px;
 @font-size-h6:            10px;
 
 //** Unit-less `line-height` for use in components like buttons.
-@line-height-base:        1.4; 
+@line-height-base:        1.428571429; // 20/14
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    inherit;
+@headings-font-family:    @font-family-base;
 @headings-font-weight:    normal;
 @headings-line-height:    1.1;
 @headings-color:          inherit;
@@ -149,9 +152,9 @@
 @border-radius-small:       0px;
 
 //** Global color for active items (e.g., navs or dropdowns).
-@component-active-color:    @black;
+@component-active-color:    @orange;
 //** Global background color for active items (e.g., navs or dropdowns).
-@component-active-bg:       @white;
+@component-active-bg:       transparent;
 
 //** Width of the `border` for generating carets that indicator dropdowns.
 @caret-width-base:          4px;
@@ -186,8 +189,8 @@
 
 @btn-font-weight:                normal;
 
-@btn-default-color:              @white;
-@btn-default-bg:                 @black;
+@btn-default-color:              @black;
+@btn-default-bg:                 @gray-lighter;
 @btn-default-border:             @black;
 
 @btn-primary-color:              @black;
@@ -218,21 +221,21 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       @gray-lighter;
+@input-bg:                       @white;
 //** `<input disabled>` background color
 @input-bg-disabled:              @gray-lighter;
 
 //** Text color for `<input>`s
 @input-color:                    @black;
 //** `<input>` border color
-@input-border:                   @black;
+@input-border:                   @white;
 //** `<input>` border radius
-@input-border-radius:            @border-radius-base;
+@input-border-radius:            0;
 //** Border color for inputs on focus
-@input-border-focus:             @black;
+@input-border-focus:             @white;
 
 //** Placeholder text color
-@input-color-placeholder:        @gray;
+@input-color-placeholder:        @black;
 
 //** Default `.form-control` height
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
@@ -242,7 +245,7 @@
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
 @legend-color:                   @black;
-@legend-border-color:            @black;;
+@legend-border-color:            @black;
 
 //** Background color for textual input addons
 @input-group-addon-bg:           @gray-lighter;
@@ -388,22 +391,22 @@
 @navbar-collapse-max-height:       340px;
 
 @navbar-default-color:             @black;
-@navbar-default-bg:                @gray-lighter;
+@navbar-default-bg:                transparent;
 @navbar-default-border:            none;
 
 // Navbar links
-@navbar-default-link-color:                @black;
-@navbar-default-link-hover-color:          @black;
-@navbar-default-link-hover-bg:             @white;
-@navbar-default-link-active-color:         @black;
-@navbar-default-link-active-bg:            @white;
+@navbar-default-link-color:                @gray-dark;
+@navbar-default-link-hover-color:          @orange;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         @orange;
+@navbar-default-link-active-bg:            transparent;
 @navbar-default-link-disabled-color:       @gray;
-@navbar-default-link-disabled-bg:          @gray-lighter;
+@navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
-@navbar-default-brand-color:               @brand-primary;
-@navbar-default-brand-hover-color:         @brand-primary;
-@navbar-default-brand-hover-bg:            none;
+@navbar-default-brand-color:               @white;
+@navbar-default-brand-hover-color:         @black;
+@navbar-default-brand-hover-bg:            @white;
 
 // Navbar toggle
 @navbar-default-toggle-hover-bg:           @white;
@@ -443,7 +446,7 @@
 
 //=== Shared nav styles
 @nav-link-padding:                          10px 15px;
-@nav-link-hover-bg:                         @white;
+@nav-link-hover-bg:                         none;
 
 @nav-disabled-link-color:                   @gray;
 @nav-disabled-link-hover-color:             @gray;
@@ -472,21 +475,21 @@
 //
 //##
 
-@pagination-color:                     @white;
-@pagination-bg:                        @black;
-@pagination-border:                    @black;
+@pagination-color:                     @black;
+@pagination-bg:                        @white;
+@pagination-border:                    @white;
 
-@pagination-hover-color:               @gray-lighter;
-@pagination-hover-bg:                  @gray-darker;
-@pagination-hover-border:              @gray-darker;
+@pagination-hover-color:               @white;
+@pagination-hover-bg:                  @gray-light;
+@pagination-hover-border:              @gray-light;
 
-@pagination-active-color:              @gray-lighter;
-@pagination-active-bg:                 @gray-darker;
-@pagination-active-border:             @gray-darker;
+@pagination-active-color:              @white;
+@pagination-active-bg:                 @gray-light;
+@pagination-active-border:             @gray-light;
 
-@pagination-disabled-color:            @gray;
-@pagination-disabled-bg:               @black;
-@pagination-disabled-border:           @black;
+@pagination-disabled-color:            @black;
+@pagination-disabled-bg:               @white;
+@pagination-disabled-border:           @white;
 
 
 //== Pager
@@ -494,7 +497,7 @@
 //##
 
 @pager-bg:                             @pagination-bg;
-@pager-border:                         @black;
+@pager-border:                         @white;
 @pager-border-radius:                  0;
 
 @pager-hover-bg:                       @pagination-hover-bg;
@@ -876,11 +879,11 @@
 //** Headings small color
 @headings-small-color:        @black;
 //** Blockquote small color
-@blockquote-small-color:      @black;
+@blockquote-small-color:      #f14a1f;
 //** Blockquote font size
 @blockquote-font-size:        (@font-size-base * 1.25);
 //** Blockquote border color
-@blockquote-border-color:     @black;
+@blockquote-border-color:     none;
 //** Page header border color
 @page-header-border-color:    @black;
 //** Width of horizontal description list titles

@@ -54,11 +54,6 @@ function feature_events_views_default_views() {
   $handler->display->display_options['header']['block']['label'] = 'Agenda links';
   $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
   $handler->display->display_options['header']['block']['title'] = '<none>';
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total événements à venir';
   /* Champ: Contenu : Titre */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -387,7 +382,6 @@ function feature_events_views_default_views() {
     t('suivant ›'),
     t('dernier »'),
     t('Agenda links'),
-    t('@total événements à venir'),
     t('Tout'),
     t('Liste événements'),
     t('Pas d\'événement prévu pour ce mois.'),

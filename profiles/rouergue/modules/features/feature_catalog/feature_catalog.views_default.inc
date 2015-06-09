@@ -90,7 +90,7 @@ function feature_catalog_views_default_views() {
     'image_style' => 'article-cover-min',
     'image_link' => 'content',
   );
-  /* Champ: Image field caption : Photo (caption) */
+  /* Champ: Gestionnaire défectueux/manquant */
   $handler->display->display_options['fields']['caption']['id'] = 'caption';
   $handler->display->display_options['fields']['caption']['table'] = 'field_picture_field_image_field_caption';
   $handler->display->display_options['fields']['caption']['field'] = 'caption';
@@ -494,11 +494,12 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total titres';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Pied de page: Global : Résumé des résultats */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '@total livres';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Critère de tri: Contenu : Date de parution (field_release_date) */
@@ -535,9 +536,15 @@ function feature_catalog_views_default_views() {
   $handler = $view->new_display('block', 'Livres auteur', 'author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Bibliographie';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '4';
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
+  $handler->display->display_options['style_options']['interval'] = '0';
+  $handler->display->display_options['style_options']['navigation'] = 1;
+  $handler->display->display_options['style_options']['indicators'] = 0;
+  $handler->display->display_options['style_options']['pause'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'ds';
@@ -662,6 +669,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'allow_secondary' => 0,
@@ -698,8 +706,8 @@ return $query->execute()->fetchField();';
         ),
       ),
     ),
-    'field_release_date_value_1' => array(
-      'bef_format' => 'default',
+    'field_release_date_value' => array(
+      'bef_format' => 'bef_datepicker',
       'more_options' => array(
         'is_secondary' => 0,
         'any_label' => '',
@@ -714,8 +722,8 @@ return $query->execute()->fetchField();';
         ),
       ),
     ),
-    'field_release_date_value' => array(
-      'bef_format' => 'default',
+    'field_release_date_value_1' => array(
+      'bef_format' => 'bef_datepicker',
       'more_options' => array(
         'is_secondary' => 0,
         'any_label' => '',
@@ -785,11 +793,12 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total titres';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Pied de page: Global : Résumé des résultats */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '@total livres';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relation: Contenu : Contributeurs (field_contributors) */
   $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
@@ -1133,15 +1142,15 @@ return $query->execute()->fetchField();';
   /* Display: Livres du même auteur */
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Du même auteur…';
+  $handler->display->display_options['title'] = 'Du même auteur';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
-  $handler->display->display_options['style_options']['interval'] = '5000';
+  $handler->display->display_options['style_options']['interval'] = '0';
   $handler->display->display_options['style_options']['navigation'] = 1;
-  $handler->display->display_options['style_options']['indicators'] = 1;
+  $handler->display->display_options['style_options']['indicators'] = 0;
   $handler->display->display_options['style_options']['pause'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -1426,9 +1435,13 @@ return $query->execute()->fetchField();';
   /* Display: Bloc "Livres même univers" */
   $handler = $view->new_display('block', 'Bloc "Livres même univers"', 'same_universe_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Dans la même série…';
+  $handler->display->display_options['title'] = 'à lire aussi…';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
+  $handler->display->display_options['style_options']['interval'] = '0';
+  $handler->display->display_options['style_options']['navigation'] = 1;
+  $handler->display->display_options['style_options']['indicators'] = 0;
+  $handler->display->display_options['style_options']['pause'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -1446,7 +1459,9 @@ return $query->execute()->fetchField();';
     'view_mode' => 'author_books',
     'links' => 1,
   );
+  $handler->display->display_options['fields']['field_same_universe_articles']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_same_universe_articles']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_same_universe_articles']['multi_type'] = 'ul';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Filtre contextuel: Contenu : Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -1600,6 +1615,113 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_universe_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_universe_tid']['vocabulary'] = 'universe';
   $handler->display->display_options['filters']['field_universe_tid']['hierarchy'] = 1;
+
+  /* Display: Livres auteur (liste) */
+  $handler = $view->new_display('block', 'Livres auteur (liste)', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Bibliographie';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relation: Contenu : Contributeurs (field_contributors) */
+  $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
+  $handler->display->display_options['relationships']['field_contributors_value']['field'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributors_value']['label'] = 'Contributeurs';
+  $handler->display->display_options['relationships']['field_contributors_value']['delta'] = '-1';
+  /* Relation: Entity Reference : Entité référencée */
+  $handler->display->display_options['relationships']['field_contributor_target_id']['id'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['table'] = 'field_data_field_contributor';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['field'] = 'field_contributor_target_id';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_target_id']['label'] = 'Contributor';
+  /* Relation: Élément Field collection : Fonction (field_contributor_function) */
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['id'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['table'] = 'field_data_field_contributor_function';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['field'] = 'field_contributor_function_tid';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['relationships']['field_contributor_function_tid']['label'] = 'Fonction';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Champ: Contenu : Titre */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Filtre contextuel: Contenu : Contributor ID (field_contributor_id) */
+  $handler->display->display_options['arguments']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['relationship'] = 'field_contributor_target_id';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['exception']['title'] = 'Tout';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['default_argument_options']['code'] = '$query = db_select(\'field_data_field_contributor_id\',\'cid\');
+$query->addField(\'cid\',\'field_contributor_id_value\');
+$query->condition(\'cid.entity_id\', arg(1));
+return $query->execute()->fetchField();';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_contributor_id_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Publié */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Critère de filtrage: Contenu : Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name']['value'] = 'Auteur';
+  $handler->display->display_options['filters']['name']['group'] = 2;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
+  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_1']['field'] = 'name';
+  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
+  $handler->display->display_options['filters']['name_1']['group'] = 2;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_2']['id'] = 'name_2';
+  $handler->display->display_options['filters']['name_2']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_2']['field'] = 'name';
+  $handler->display->display_options['filters']['name_2']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_2']['value'] = 'Traducteur';
+  $handler->display->display_options['filters']['name_2']['group'] = 2;
+  /* Critère de filtrage: Terme de taxonomie : Nom */
+  $handler->display->display_options['filters']['name_3']['id'] = 'name_3';
+  $handler->display->display_options['filters']['name_3']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['name_3']['field'] = 'name';
+  $handler->display->display_options['filters']['name_3']['relationship'] = 'field_contributor_function_tid';
+  $handler->display->display_options['filters']['name_3']['value'] = 'Photographe';
+  $handler->display->display_options['filters']['name_3']['group'] = 2;
   $translatables['catalog'] = array(
     t('Master'),
     t('plus'),
@@ -1617,7 +1739,7 @@ return $query->execute()->fetchField();';
     t('dernier »'),
     t('terme'),
     t('Catalogue'),
-    t('@total titres'),
+    t('@total livres'),
     t('Livres auteur'),
     t('Bibliographie'),
     t('Contributeurs'),
@@ -1641,13 +1763,15 @@ return $query->execute()->fetchField();';
     t('Lectorat'),
     t('Garder la touche CTRL appuyée pour sélectionner plusieurs valeurs.'),
     t('Liste nouveautés'),
+    t('@total titres'),
     t('Bloc nouveautés'),
     t('Livres du même auteur'),
-    t('Du même auteur…'),
+    t('Du même auteur'),
     t('Modal "Livres même univers"'),
     t('Bloc "Livres même univers"'),
-    t('Dans la même série…'),
+    t('à lire aussi…'),
     t('Modal même univers'),
+    t('Livres auteur (liste)'),
   );
   $export['catalog'] = $view;
 
@@ -2039,8 +2163,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
-  $handler->display->display_options['style_options']['columns'] = '6';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relation: Terme de taxonomie : Terme parent */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
@@ -2054,6 +2177,10 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Critère de tri: Terme de taxonomie : Poids */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Critère de filtrage: Vocabulaire de taxonomie : Nom système */
   $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
   $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
@@ -2178,7 +2305,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Ascendant';
@@ -2231,6 +2357,11 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['header']['view']['label'] = 'Description terme';
   $handler->display->display_options['header']['view']['view_to_insert'] = 'universes_descriptions:term_description';
   $handler->display->display_options['header']['view']['inherit_arguments'] = TRUE;
+  /* Pied de page: Global : Résumé des résultats */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '@total livres';
   /* Relation: Contenu : Contributeurs (field_contributors) */
   $handler->display->display_options['relationships']['field_contributors_value']['id'] = 'field_contributors_value';
   $handler->display->display_options['relationships']['field_contributors_value']['table'] = 'field_data_field_contributors';
@@ -2393,11 +2524,6 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Résumé des résultats */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@total livres';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Champ: Contenu : Couverture */
   $handler->display->display_options['fields']['field_cover_image']['id'] = 'field_cover_image';
@@ -2604,6 +2730,8 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['element_type'] = 'div';
+  $handler->display->display_options['fields']['description']['element_class'] = 'col-md-8 col-md-offset-4';
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Filtre contextuel: Terme de taxonomie : Identifiant (ID) du terme */
