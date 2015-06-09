@@ -1,5 +1,9 @@
 Rouergue 0.3.3, 2015-06-09
 --------------------------
+Patch on field_collection contrib module (migrate-fatal-error-2315921-01.patch).
+
+Rouergue 0.3.3, 2015-06-09
+--------------------------
 Increase default php max_exec_time in .htaccess
 
 Rouergue 0.3.2, 2015-06-09
