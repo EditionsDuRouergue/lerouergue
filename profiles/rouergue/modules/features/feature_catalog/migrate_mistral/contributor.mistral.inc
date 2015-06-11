@@ -127,26 +127,6 @@ class ContributorMigration extends Migration {
 
 		// Biography text cleaning.
 		$row->biography = html_entity_decode(strip_tags($row->biography));
-		
-		// Last name capitalization handling
-		$parts = explode("-", $row->name);
-		$capitalized_parts = array();
-		foreach ($parts as $part) {
-			$subparts = explode("'", $part);
-			
-			$capitalized_subparts = array();
-			foreach($subparts as $subpart) {
-				// $subpart treatment and storage in $capitalized_subparts
-				$capitalized_subparts[] = ucwords(mb_strtolower($subpart));
-			}
-			// $part reassembling from treated subparts
-			$part = implode("'", $capitalized_subparts);
-			
-			// $part storage in $capitalized_parts
-			$capitalized_parts[] = $part;
-		}
-		// name reassembling from parts
-		$row->name = implode("-", $capitalized_parts);
 	}
 	
 	/**
@@ -154,19 +134,22 @@ class ContributorMigration extends Migration {
 	 */
 	function prepare($node, stdClass $row) {
 		// Title, displayed name and sorting name handling.
-		$title = $row->name . ' ' . $row->firstname;
-		$displayed_name = $row->firstname . ' ' . $row->name;
-		$sorting_name = $row->name;
+		$name = $this->capitalize_name($row->name);
+		$title = $name . ' ' . $row->firstname;
+		$displayed_name = $row->firstname . ' ' . $name;
+		$sorting_name = $name;
 		
 		if (isset($row->pseudofirstname) && $row->pseudofirstname != '') {
-			$title = $row->pseudoname . ' ' . $row->pseudofirstname;
-			$displayed_name = $row->pseudofirstname . ' ' . $row->pseudoname;
+			$pseudoname = $this->capitalize_name($row->pseudoname);
+			$title = $pseudoname . ' ' . $row->pseudofirstname;
+			$displayed_name = $row->pseudofirstname . ' ' . $pseudoname;
 			$sorting_name = $row->pseudoname;
 		}
 		else if(isset($row->pseudoname) && $row->pseudoname != '') {
-			$title = $row->pseudoname;
-			$displayed_name = $row->pseudoname;
-			$sorting_name = $row->pseudoname;
+			$pseudoname = $this->capitalize_name($row->pseudoname);
+			$title = $pseudoname;
+			$displayed_name = $pseudoname;
+			$sorting_name = $pseudoname;
 		}
 
 		$node->title = $title;
@@ -197,5 +180,40 @@ class ContributorMigration extends Migration {
 				$node->field_picture[LANGUAGE_NONE]['0']['fid'] = $file->fid;
 			}
 		}
+	}
+	
+	/**
+	 * Contributor name capitalization.
+	 * 
+	 * Name are stored in uppercase form in database (ex. DUPONT) and must be capitalized (ex. Dupont).
+	 * Complex names are supported.
+	 * For instance, "FATOU-DIALO N'DIAYE" gives "Fatou-Dialo N'Diaye".
+	 * 
+	 * @param string $name Uppercase contributor name
+	 * @return string Capitalized name
+	 */
+	function capitalize_name($name) {
+		if(!$name) {
+			return '';
+		}
+		
+		$parts = explode("-", $name);
+		$capitalized_parts = array();
+		foreach ($parts as $part) {
+			$subparts = explode("'", $part);
+				
+			$capitalized_subparts = array();
+			foreach($subparts as $subpart) {
+				// $subpart treatment and storage in array $capitalized_subparts.
+				$capitalized_subparts[] = ucwords(mb_strtolower($subpart));
+			}
+			// Subparts reassembling after treatment.
+			$part = implode("'", $capitalized_subparts);
+				
+			// Parts storage in array $capitalized_parts.
+			$capitalized_parts[] = $part;
+		}
+		// Parts reassembling after treatment.
+		return implode("-", $capitalized_parts);
 	}
 }
