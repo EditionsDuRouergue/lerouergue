@@ -8,103 +8,142 @@
  * Implements hook_permission().
  */
 function migrate_mistral_permission() {
-	return array(
-		'administer mistral' => array(
-				'title' => t('Administer Mistral'),
-				'description' => t('Allows to handle various Mistral imports'),
-		),
-	);
+  return array(
+	'administer mistral' => array(
+	  'title' => t('Administer Mistral'),
+	  'description' => t('Allows to handle various Mistral imports'),
+	),
+  );
 }
 
 /**
  * Implements hook_menu().
  */
 function migrate_mistral_menu() {
-	$items = array();
-	
-	$items['mistral_import'] = array(
-			'title' => 'Mistral import',
-			'description' => 'Launches Mistral data import from local mistral database.',
-			'page callback' => 'rouergue_mistral_import',
-			'access arguments' => array('administer mistral'),
-			'type' => MENU_CALLBACK,
+  $items = array();
+
+  $items['mistral_db_update'] = array(
+	'title' => 'Mistral database update',
+	'description' => 'Launches Mistral database update from mistral dump file.',
+	'page callback' => 'rouergue_mistral_db_update',
+	'access arguments' => array('administer mistral'),
+	'type' => MENU_CALLBACK,
+  );
+  $items['mistral_import'] = array(
+	'title' => 'Mistral import',
+	'description' => 'Launches Mistral data import from local mistral database.',
+	'page callback' => 'rouergue_mistral_import',
+	'access arguments' => array('administer mistral'),
+	'type' => MENU_CALLBACK,
 	);	
-	$items['mistral_synchronize'] = array(
-			'title' => 'Mistral Synchronization',
-			'description' => 'Launches Mistral local database regeneration import from Mistral dump archive, followed by data import.',
-			'page callback' => 'rouergue_mistral_synchronize',
-			'access arguments' => array('administer mistral'),
-			'type' => MENU_CALLBACK,
-	);
-	
-	return $items;
+  $items['mistral_synchronize'] = array(
+	'title' => 'Mistral Synchronization',
+	'description' => 'Launches Mistral local database regeneration import from Mistral dump archive, followed by data import.',
+	'page callback' => 'rouergue_mistral_synchronize',
+	'access arguments' => array('administer mistral'),
+	'type' => MENU_CALLBACK,
+  );
+
+  return $items;
 }
 
 /**
  * Implements hook_cron()
  */
 function migrate_mistral_cron() {
-	rouergue_mistral_synchronize();
+  rouergue_mistral_synchronize();
 }
 
 /**
  * Callback functions.
  */
 
+function rouergue_mistral_db_update() {
+  $msg = _mistral_db_update();
+  return $msg;
+}
+
 function rouergue_mistral_import() {
-	return _mistral_import();
+  return _mistral_import();
 }
 
 function rouergue_mistral_synchronize() {
-	$day = variable_get('rouergue_mistral_sync_day');
-	$current_day = date('N');
-	
-	if ($current_day != $day) {
-		return "Nothing to do today.";
-	}
-	else {
-		$data_store = variable_get('rouergue_data_store');
-		$filepath = variable_get('rouergue_mistral_dumps_directory');
-		$filename = variable_get('rouergue_mistral_dump_filename');
-		$dumpfile = $data_store . $filepath . $filename;
-		
-		if (!file_exists($dumpfile)) {
-			$msg = t('The dump file %file does not exist in folder %folder', array('%$file' => $filename, '%folder' => $filepath));
-			watchdog('mistral', $msg);
-			
-			return "Synchronization process failed.<br /><b>$filename</b> not found in <b>$filepath</b>.";			
-		}
-		else {
-			$drush = variable_get('rouergue_drush_path');
-			$drop_cmd = "$drush sql-drop --database=mistral -y";
-			$insert_cmd = "$drush sql-query --database=mistral --file=$dumpfile";
-			
-			// Mistral local database regeneration
-			shell_exec($drop_cmd);
-			shell_exec($insert_cmd);
-			
-			$msg = t('Synchronization done on %date', array('%date' => date('d/m/Y - H:i:s')));
-			watchdog('mistral', $msg);
-			$return_msg = "Synchronization process completed.";
-			
-			// Mistral data update into Drupal database (existing data are updated, new data are imported).
-			$return_msg .= "<br />" . _mistral_import();
-			
-			return $return_msg;
-		}
-	}
+  $day = variable_get('rouergue_mistral_sync_day');
+  $current_day = date('N');
+
+  if ($current_day != $day) {
+	return "Nothing to do today.";
+  }
+  else {
+	$update_msg = _mistral_db_update();
+	$import_msq = _mistral_import();
+
+	$msg = $update_msg . "<br />" . $import_msq;
+
+	return $msg;
+  }
 }
 
+/**
+ * Launches Mistral local database rebuild from dump file.
+ *
+ * @return string $msg Completion message.
+ */
+function _mistral_db_update() {
+  $data_store = variable_get('rouergue_data_store');
+  if ($data_store{strlen($data_store) -1} != '/') {
+	$data_store .= '/';
+  }
+  $filepath = variable_get('rouergue_mistral_dumps_directory');
+  if ($filepath{strlen($filepath) -1} != '/') {
+	$filepath .= '/';
+  }
+  $filename = variable_get('rouergue_mistral_dump_filename');
+  $dumpfile = $data_store . $filepath . $filename;
+
+  if (!file_exists($dumpfile)) {
+	$msg = t('The dump file %file does not exist in folder %folder', array('%$file' => $filename, '%folder' => $filepath));
+	watchdog('mistral', $msg);
+
+	return "Synchronization process failed.<br /><b>$filename</b> not found in <b>$filepath</b>.";
+  }
+  else {
+	$drush = variable_get('rouergue_drush_path');
+	$drop_cmd = "$drush sql-drop --database=mistral -y";
+	$insert_cmd = "$drush sql-query --database=mistral --file=$dumpfile";
+
+	// Mistral local database rebuild.
+	shell_exec($drop_cmd);
+	shell_exec($insert_cmd);
+
+	$msg = t('Mistral database updated completed on %date', array('%date' => date('d/m/Y - H:i:s')));
+	watchdog('mistral', $msg);
+
+	$msg = "Mistral database update process completed.";
+	return $msg;
+  }
+}
+
+/**
+ * Launches Mistral data import from local Mistral database to Drupal database.
+ * Existing data are updated, new data are imported.
+ *
+ * @return string $return_messages Migrate update completion messages.
+ */
 function _mistral_import() {
-	$migrations = array('theme','readership','article','function','contributor','articleContributors');
-	foreach ($migrations as $key) {
-		$migration = Migration::getInstance($key);
-		$migration->prepareUpdate();
-		$result = $migration->processImport();
-		$msg = t('%mistral_data import result : %result', array('%mistral_data' => strtoupper($key), '%result' => $result));
-		watchdog('mistral', $msg);
-	}
-	
-	return "Mistral data update completed.";
-}
+  $drush = variable_get('rouergue_drush_path');
+  $migrations = array('theme','readership','article','function','contributor','articleContributors');
 
+  $return_messages = '';
+  foreach ($migrations as $key) {
+	$update_cmd = "$drush mi --update $key";
+	$return_msg = shell_exec($update_cmd);
+
+	$watchdog_msg = t('%mistral_data import completed. %msg', array('%mistral_data' => strtoupper($key), '%msg' => $return_msg));
+	watchdog('mistral', $watchdog_msg);
+
+	$return_messages .= strtoupper($key) . " import done. " . $return_msg . "<br>";
+  }
+
+  return $return_messages . "<br>" . "Synchronization process completed.";
+}
