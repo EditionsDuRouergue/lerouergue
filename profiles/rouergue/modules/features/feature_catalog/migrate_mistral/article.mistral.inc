@@ -279,6 +279,13 @@ class ArticleMigration extends Migration {
 		if (empty($row->price_validated)) {
 			$row->price_validated = 0;
 		}
+		// Add a default time value of 02:00:00 to ISO date.
+	  	// Saved date will be 00:00:00 (02:00:00 minus 2 hours) during summer time period instead of 22:00:00,
+	  	// which corresponds to the last day of the previous month.
+	  	// and 01:00:00 (02:00:00 minus 1 hour) during winter time period instead of 23:00:00,
+	  	// which also corresponds to the last day of the previous month.
+		// This fixes the wrong pubdate's month display.
+		$row->pubdate = $row->pubdate . 'T02:00:00';
 	}
 	
 	/**
