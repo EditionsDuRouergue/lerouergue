@@ -261,6 +261,18 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
+    'name' => 'grand format',
+    'description' => '',
+    'format' => 'full_html',
+    'weight' => 2,
+    'uuid' => '58df9ecd-f479-4da4-ae71-da888aaaecd4',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'c27add62-baf4-45de-b445-27d7fef13a4f',
+    ),
+  );
+  $terms[] = array(
     'name' => 'aveyron',
     'description' => 'Description de l\'univers...',
     'format' => 'plain_text',
@@ -474,6 +486,18 @@ function feature_core_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
+    'name' => 'rouergue en poche',
+    'description' => '',
+    'format' => 'full_html',
+    'weight' => 1,
+    'uuid' => '8f6cfb5a-e21d-4afe-9b75-389addf70654',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => 'c27add62-baf4-45de-b445-27d7fef13a4f',
+    ),
+  );
+  $terms[] = array(
     'name' => 'comptines en continu',
     'description' => 'Description de l\'univers...',
     'format' => 'plain_text',
@@ -654,6 +678,18 @@ function feature_core_uuid_features_default_terms() {
     'metatags' => array(),
     'parent' => array(
       0 => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
+    ),
+  );
+  $terms[] = array(
+    'name' => 'témoignages',
+    'description' => '',
+    'format' => 'full_html',
+    'weight' => 0,
+    'uuid' => 'd8f5d9a9-3965-44cf-a713-96533e493197',
+    'vocabulary_machine_name' => 'universe',
+    'metatags' => array(),
+    'parent' => array(
+      0 => '6d8d9942-6f62-48cb-8469-9bcee5ca29aa',
     ),
   );
   $terms[] = array(
