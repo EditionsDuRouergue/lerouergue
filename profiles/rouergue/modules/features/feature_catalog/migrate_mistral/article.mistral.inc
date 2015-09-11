@@ -18,7 +18,7 @@
  *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
  *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
  *   JOIN fabricationplan fp ON fp.articleid=a.articleid 
- *   JOIN format f ON f.formatid=fp.finalformatid
+ *   -- JOIN format f ON f.formatid=fp.finalformatid
  *   GROUP BY a.articleid
  * )
  */
@@ -34,7 +34,7 @@ class ThemeMigration extends Migration {
 		$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
 		$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
 		$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
-		$subquery->join('format','f','f.formatid=fp.finalformatid');
+		//$subquery->join('format','f','f.formatid=fp.finalformatid');
 		$subquery->fields('a', array('bookid'));
 		
 		$query = Database::getConnection('default', 'mistral')->select('theme','t');
