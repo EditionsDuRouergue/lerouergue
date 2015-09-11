@@ -675,24 +675,35 @@ class ArticleMigration extends Migration {
 		// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
 		$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
 		
-		// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
-		$this->univ_coll_mapping['493']['511']['tids'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans - c27add62-baf4-45de-b445-27d7fef13a4f
+
+		//$this->univ_coll_mapping['493']['511']['tids'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
 		
-		// Rouergue Littérature - 493 | Roman de société - 511 | Témoignage - 138   ===>   Littérature > Romans de société > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
-		$this->univ_coll_mapping['493']['511']['138']['tids'] = $this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'];
+		// Rouergue Littérature - 493 | Roman de société - 511 | Témoignage - 138   ===>   Littérature > Romans > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
+		//  ---------------------------------------------------------------------   ===>   Région > Romans > Témoignages - d8f5d9a9-3965-44cf-a713-96533e493197
+		$this->univ_coll_mapping['493']['511']['138']['tids'] =
+			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['d8f5d9a9-3965-44cf-a713-96533e493197'];
+
+		// EN ATTENTE DE LA SERIE MISTRAL GRAND FORMAT
+		// Rouergue Littérature - 493 | Roman de société - 511 | Grand format - ### ===>   Littérature > Romans > Grand format - 58df9ecd-f479-4da4-ae71-da888aaaecd4
+		//  ---------------------------------------------------------------------   ===>   Région > Romans > Grand format - 5d89969d-47af-4c0d-a22b-589fb6ea57a2
+		//$this->univ_coll_mapping['493']['511']['###']['tids'] =
+		//	$this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'] . ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];			
 		
-		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
-		$this->univ_coll_mapping['493']['943']['tids'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
+		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans > Rouergue en poche -  8f6cfb5a-e21d-4afe-9b75-389addf70654
+		//  ----------------------------------------------------  ===>   Région > Romans > Rouergue en poche - 322aa47f-7585-4688-b4ee-08e83eca5d28		
+		$this->univ_coll_mapping['493']['943']['tids'] =
+			$this->univ_uuids_tids['8f6cfb5a-e21d-4afe-9b75-389addf70654'] . ',' . $this->univ_uuids_tids['322aa47f-7585-4688-b4ee-08e83eca5d28'];
 		
-		// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
 		// --------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
 		$this->univ_coll_mapping['493']['1141']['139']['tids'] = 
-			$this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'] . ',' . $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
 		
-		// Rouergue Littérature - 493 | Témoignage - 1141 | Jardins - 159   ===>   Littérature > Romans de société - c27add62-baf4-45de-b445-27d7fef13a4f
+		// Rouergue Littérature - 493 | Témoignage - 1141 | Jardins - 159   ===>   Littérature > Romans  > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
 		// --------------------------------------------------------------   ===>    Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
 		$this->univ_coll_mapping['493']['1141']['159']['tids'] = 
-			$this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
+			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
 		
 		//************************************************** Rouergue Livres Pratiques **********************************************************************
 		// Rouergue Livres Pratiques - 494 | Aveyron - 1142   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
@@ -789,7 +800,7 @@ class ArticleMigration extends Migration {
 		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Polars - 1013  ===>   Livres numériques > polar - 2796300b-4322-4e79-8dcf-f3d7447c31dd
 		$this->univ_coll_mapping['462']['1013']['tids'] = $this->univ_uuids_tids['2796300b-4322-4e79-8dcf-f3d7447c31dd'];
 		
-		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans de société - 1013  ===>   Livres numériques > roman de société - 13c26811-5ade-4018-b8bb-5642b42fc1da
+		// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans - 1013  ===>   Livres numériques > roman - 13c26811-5ade-4018-b8bb-5642b42fc1da
 		$this->univ_coll_mapping['462']['1013']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
 		
 		//************************************************** Rouergue Romans Jeunesse **********************************************************************
