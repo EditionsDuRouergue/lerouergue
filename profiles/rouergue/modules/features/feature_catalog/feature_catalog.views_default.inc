@@ -477,8 +477,18 @@ function feature_catalog_views_default_views() {
   /* Display: Catalogue */
   $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_1');
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Éléments par page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Tout -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Décalage';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« premier';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
@@ -530,7 +540,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
   $handler->display->display_options['filters']['field_release_date_value']['field'] = 'field_release_date_value';
   $handler->display->display_options['filters']['field_release_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '3 months ago';
+  $handler->display->display_options['filters']['field_release_date_value']['default_date'] = '12 months ago';
   $handler->display->display_options['path'] = 'catalogue';
 
   /* Display: Livres auteur */
