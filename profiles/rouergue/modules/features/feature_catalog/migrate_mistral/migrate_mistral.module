@@ -145,8 +145,11 @@ function _mistral_import() {
 	$return_messages .= strtoupper($key) . " import done. " . $return_msg . "<br>";
   }
 
-  $reindex_cmd = "$drush search-reindex --immediate";
+  $return_messages . "<br>" . "Synchronization process completed.";
+
+  $reindex_cmd = "$drush search-reindex --immediate -y";
   shell_exec($reindex_cmd);
 
-  return $return_messages . "<br>" . "Synchronization process completed.";
+  return $return_messages . "<br>" . "Reindex process completed.";
+
 }
