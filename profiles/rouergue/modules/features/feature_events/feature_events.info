@@ -48,6 +48,7 @@ features[ds_layout_settings][] = node|event|map_block
 features[ds_view_modes][] = map_block
 features[features_api][] = api:2
 features[features_date_format][] = date_format_37
+features[features_date_format][] = date_format_73
 features[features_date_type][] = date_type_event_date
 features[field_base][] = field_adresse
 features[field_base][] = field_dates

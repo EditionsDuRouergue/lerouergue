@@ -37,7 +37,13 @@ function feature_events_features_date_format_default() {
 
   $fdf_config[] = array(
     'dfid' => 37,
-    'format' => 'd F',
+    'format' => 'd M.',
+    'type' => 'custom',
+    'locked' => 0,
+  );
+  $fdf_config[] = array(
+    'dfid' => 73,
+    'format' => 'd F Y',
     'type' => 'custom',
     'locked' => 0,
   );

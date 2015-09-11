@@ -205,7 +205,7 @@ function feature_events_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'event_date',
+          'format_type' => 'long',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
