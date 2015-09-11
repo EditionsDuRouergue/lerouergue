@@ -389,6 +389,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
@@ -867,6 +868,27 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['sorts']['field_lastname_value']['expose']['label'] = 'Auteur';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Critère de filtrage: Contenu : Possède les termes de taxonomie (avec profondeur) */
+  $handler->display->display_options['filters']['term_node_tid_depth']['id'] = 'term_node_tid_depth';
+  $handler->display->display_options['filters']['term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['term_node_tid_depth']['field'] = 'term_node_tid_depth';
+  $handler->display->display_options['filters']['term_node_tid_depth']['group'] = 1;
+  $handler->display->display_options['filters']['term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator_id'] = 'term_node_tid_depth_op';
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['label'] = 'Univers';
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['operator'] = 'term_node_tid_depth_op';
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['identifier'] = 'term_node_tid_depth';
+  $handler->display->display_options['filters']['term_node_tid_depth']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    7178059 => 0,
+    231346920 => 0,
+    30037204 => 0,
+  );
+  $handler->display->display_options['filters']['term_node_tid_depth']['type'] = 'select';
+  $handler->display->display_options['filters']['term_node_tid_depth']['vocabulary'] = 'universe';
+  $handler->display->display_options['filters']['term_node_tid_depth']['hierarchy'] = 1;
+  $handler->display->display_options['filters']['term_node_tid_depth']['depth'] = '2';
   /* Critère de filtrage: Contenu : Publié */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -882,26 +904,6 @@ return $query->execute()->fetchField();';
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Critère de filtrage: Contenu : Univers (field_universe) */
-  $handler->display->display_options['filters']['field_universe_tid']['id'] = 'field_universe_tid';
-  $handler->display->display_options['filters']['field_universe_tid']['table'] = 'field_data_field_universe';
-  $handler->display->display_options['filters']['field_universe_tid']['field'] = 'field_universe_tid';
-  $handler->display->display_options['filters']['field_universe_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_universe_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_universe_tid']['expose']['operator_id'] = 'field_universe_tid_op';
-  $handler->display->display_options['filters']['field_universe_tid']['expose']['label'] = 'Univers';
-  $handler->display->display_options['filters']['field_universe_tid']['expose']['operator'] = 'field_universe_tid_op';
-  $handler->display->display_options['filters']['field_universe_tid']['expose']['identifier'] = 'field_universe_tid';
-  $handler->display->display_options['filters']['field_universe_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    7178059 => 0,
-    231346920 => 0,
-    30037204 => 0,
-  );
-  $handler->display->display_options['filters']['field_universe_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_universe_tid']['vocabulary'] = 'universe';
-  $handler->display->display_options['filters']['field_universe_tid']['hierarchy'] = 1;
   /* Critère de filtrage: Contenu : Date de parution (field_release_date) */
   $handler->display->display_options['filters']['field_release_date_value']['id'] = 'field_release_date_value';
   $handler->display->display_options['filters']['field_release_date_value']['table'] = 'field_data_field_release_date';
