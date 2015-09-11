@@ -547,7 +547,7 @@ ARTICLE NODE
 
 .node-type-article h1 {
   margin-top: 0;
-  font-size: 30px;
+  font-size: 24px;
   margin-bottom: 10px;
   padding-left: 100px;
 }
@@ -565,7 +565,7 @@ ARTICLE NODE
 }
 
 .node-type-article .field-name-field-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
   padding-left: 100px;
 }
@@ -603,7 +603,7 @@ ARTICLE NODE
 }
 
 .node-type-article .field-name-field-themes .field-label, .node-type-article .field-name-field-readership .field-label{
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.1em;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -640,7 +640,7 @@ ARTICLE NODE
 
 .field-name-field-themes {
   margin-top: 20px;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: lowercase;
 }
 
@@ -780,6 +780,31 @@ INFO WRAPPER STYLES
   padding-bottom: 10px;
   margin-bottom: 0;
   border-bottom: 1px solid #999;
+}
+
+.mistral-pubstate-coming-soon, .mistral-pubstate-new, .mistral-status-sold-out  {
+  height: 22px;
+  margin-top: -22px;
+  font-family: "corporatesdemi";
+  font-size: 16px;
+  color: #f14a1f;
+
+}
+
+.mistral-pubstate-coming-soon:before {
+  content: "à paraitre";
+
+}
+
+.mistral-pubstate-new:before {
+    content: "nouveauté";
+}
+
+.mistral-status-sold-out:before {
+    content: "épuisé";
+}
+
+.mistral-status-sold-missing {
 }
 
 /*
