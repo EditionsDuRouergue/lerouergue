@@ -318,6 +318,22 @@ function feature_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'custom_search_node_types_excluded';
+  $strongarm->value = array(
+    'news' => 'news',
+    'webform' => 'webform',
+    'article' => 0,
+    'page' => 0,
+    'contributor' => 0,
+    'event' => 0,
+    'book' => 0,
+    'workshops' => 0,
+  );
+  $export['custom_search_node_types_excluded'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'custom_search_results_advanced_search';
   $strongarm->value = 0;
   $export['custom_search_results_advanced_search'] = $strongarm;

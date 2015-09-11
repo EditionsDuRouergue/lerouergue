@@ -231,6 +231,7 @@ features[variable][] = custom_search_image
 features[variable][] = custom_search_image_path
 features[variable][] = custom_search_label_visibility
 features[variable][] = custom_search_max_length
+features[variable][] = custom_search_node_types_excluded
 features[variable][] = custom_search_results_advanced_search
 features[variable][] = custom_search_results_advanced_search_collapsed
 features[variable][] = custom_search_results_advanced_search_collapsible
