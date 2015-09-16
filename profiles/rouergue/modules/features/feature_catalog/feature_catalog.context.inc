@@ -100,6 +100,11 @@ function feature_catalog_context_default_contexts() {
   $context->description = 'Universes pages';
   $context->tag = 'Layout';
   $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'catalogue' => 'catalogue',
+      ),
+    ),
     'taxonomy_term' => array(
       'values' => array(
         'universe' => 'universe',

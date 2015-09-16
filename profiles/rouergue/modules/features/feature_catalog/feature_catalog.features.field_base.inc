@@ -425,6 +425,27 @@ function feature_catalog_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
+  // Exported field_base: 'field_mistral_status'
+  $field_bases['field_mistral_status'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_mistral_status',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 1,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_new'
   $field_bases['field_new'] = array(
     'active' => 1,

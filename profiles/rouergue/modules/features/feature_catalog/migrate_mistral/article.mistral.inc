@@ -179,7 +179,7 @@ class ArticleMigration extends Migration {
 		//$query->leftJoin('format','f2','f2.formatid=fp.finalformatid');
 				
 		$query
-		->fields('a', array('articleid','bookid','isbn13','gencod'))
+		->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
 		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width'))
 		->fields('rp', array('price'));
     $query->addField('fp','finalnbpage','nbpage');
@@ -219,6 +219,7 @@ class ArticleMigration extends Migration {
 		// FIELDS MAPPING
 		$this->addFieldMapping('field_mistral_articleid', 'articleid');
 		$this->addFieldMapping('field_mistral_bookid', 'bookid');
+		$this->addFieldMapping('field_mistral_status', 'statusid');		
 		$this->addFieldMapping('title', 'title');
 		$this->addFieldMapping('field_subtitle', 'subtitle');
 		//$this->addFieldMapping('field_format', 'format');
