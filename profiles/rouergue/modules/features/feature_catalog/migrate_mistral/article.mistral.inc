@@ -413,7 +413,9 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['496']['522']['tids'] = $this->univ_uuids_tids['01014525-94b0-414e-acd9-7ccc6eda4dc7'];
 		
 		// Rouergue Albums Jeunesse - 496 | à la petite semaine - 571   ===>   Albums jeunesse > Albums dès 6 ans > à la petite semaine - 1875786a-6d12-4e8b-8786-a7dcc77cd95d
-		$this->univ_coll_mapping['496']['571']['tids'] = $this->univ_uuids_tids['1875786a-6d12-4e8b-8786-a7dcc77cd95d'];
+		// ----------------------------------------------------------   ===>   Romans jeunesse > Romans dès 8 ans > à la petite semaine - 3178b576-6073-4472-81ef-4c5c8edf9fb6
+		$this->univ_coll_mapping['496']['571']['tids'] = 
+			$this->univ_uuids_tids['1875786a-6d12-4e8b-8786-a7dcc77cd95d'] . ',' . $this->univ_uuids_tids['3178b576-6073-4472-81ef-4c5c8edf9fb6'];
 		
 		// Rouergue Albums Jeunesse - 496 | albums - 523 | album dès 2 ans - 154   ===>   Albums jeunesse > Albums dès 2 ans - c536a140-ecd1-4080-9e71-eb2977f5e55f
 		$this->univ_coll_mapping['496']['523']['154']['tids'] = $this->univ_uuids_tids['c536a140-ecd1-4080-9e71-eb2977f5e55f'];
@@ -698,13 +700,17 @@ class ArticleMigration extends Migration {
 		
 		// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
 		// --------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
+		// --------------------------------------------------------------   ===>   Région > Romans > Témoignages - d8f5d9a9-3965-44cf-a713-96533e493197
+
 		$this->univ_coll_mapping['493']['1141']['139']['tids'] = 
-			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'];
+			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['5c231e18-ad97-4038-b7e1-a1da158dc904'] . ',' . $this->univ_uuids_tids['d8f5d9a9-3965-44cf-a713-96533e493197'];
 		
 		// Rouergue Littérature - 493 | Témoignage - 1141 | Jardins - 159   ===>   Littérature > Romans  > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
-		// --------------------------------------------------------------   ===>    Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		// --------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
+		// --------------------------------------------------------------   ===>   Région > Romans > Témoignages - d8f5d9a9-3965-44cf-a713-96533e493197
+
 		$this->univ_coll_mapping['493']['1141']['159']['tids'] = 
-			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
+			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'] . ',' . $this->univ_uuids_tids['d8f5d9a9-3965-44cf-a713-96533e493197'];
 		
 		//************************************************** Rouergue Livres Pratiques **********************************************************************
 		// Rouergue Livres Pratiques - 494 | Aveyron - 1142   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
@@ -805,9 +811,6 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['462']['1013']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
 		
 		//************************************************** Rouergue Romans Jeunesse **********************************************************************
-		// Rouergue Romans Jeunesse - 497 | à la petite semaine - 1159   ===>   Romans jeunesse > Romans dès 8 ans > à la petite semaine - 3178b576-6073-4472-81ef-4c5c8edf9fb6
-		$this->univ_coll_mapping['497']['1159']['tids'] = $this->univ_uuids_tids['3178b576-6073-4472-81ef-4c5c8edf9fb6'];
-		
 		// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
 		$this->univ_coll_mapping['497']['526']['tids'] = $this->univ_uuids_tids['e6aea4fd-4293-40c5-beab-f90ddae63def'];
 		
