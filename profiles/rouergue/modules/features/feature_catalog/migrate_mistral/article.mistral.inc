@@ -169,7 +169,7 @@ class ArticleMigration extends Migration {
 		// $query->leftJoin('collection', 'c', 'c.collectionid=b.collectionid');
 		// $query->leftJoin('subcollection', 'sc', 'sc.subcollectionid=b.subcollectionid');
 		// $query->leftJoin('series', 's', 's.seriesid=b.seriesid');
-		$query->join('commercialplan','cp','cp.articleid=a.articleid');
+		//$query->join('commercialplan','cp','cp.articleid=a.articleid');
 		$query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
 		$query->join('priceandtirage','pt','pt.articleid=a.articleid');
 		$query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
@@ -180,7 +180,7 @@ class ArticleMigration extends Migration {
 				
 		$query
 		->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
-		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width'))
+		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
 		->fields('rp', array('price'));
     $query->addField('fp','finalnbpage','nbpage');
     // $query->addField('c','name','collection');
@@ -189,7 +189,7 @@ class ArticleMigration extends Migration {
     $query->addField('pt','isvalidated','price_validated');
 		$query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 		$query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
-		$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
+		//$query->addExpression("CONCAT(cp.year,'-',right(concat('0',cp.month),2),'-01')",'pubdate');
 		//$query->addExpression("CASE WHEN (fp.finalformatid IS NOT NULL AND fp.finalformatid>0) THEN f2.name ELSE f1.name END",'format');
 		$query->condition('a.statusid','1','<>');
 		$query->condition('b.projecttype','PLV','<>');
@@ -230,7 +230,7 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');
-		$this->addFieldMapping('field_release_date', 'pubdate');
+		$this->addFieldMapping('field_release_date', 'firstpublicationdate');
 		$this->addFieldMapping('body', 'backcover');
 		
 		$this->addFieldMapping('field_themes', 'theme_list')
@@ -262,31 +262,37 @@ class ArticleMigration extends Migration {
 	 * Data handling before mapping.
 	 */	
 	function prepareRow($row) {
-		parent::prepareRow($row);
+	  parent::prepareRow($row);
+
+	  // backcover or resume database field choice
+	  if (isset($row->backcover) && strlen($row->backcover) > 0) {
+		  $text = $row->backcover;
+	  }
+	  else {
+		  $text = $row->resume;
+	  }
+	  $row->backcover = html_entity_decode(strip_tags($text));
+
+	  // First publication date handling.
+	  $date_parts = explode('/', $row->firstpublicationdate);
+	  $date_parts[0] = ($date_parts[0] < 10) ?  '0' . $date_parts[0] : $date_parts[0];
+	  $row->firstpublicationdate = $date_parts[1] . '-' . $date_parts[0] . '-01';
+
 		
-		// backcover or resume database field choice
-		if (isset($row->backcover) && strlen($row->backcover) > 0) {
-			$text = $row->backcover;
-		}
-		else {
-			$text = $row->resume;
-		}
-		$row->backcover = html_entity_decode(strip_tags($text));
-		
-		// Rouergue universes. Attribution based on Drupal universes/Mistral collections mapping.
-		// $row->collection source data is used as container to stored the retrieved universe term ids.
-		$row->collection = $this->rouergue_get_universe_term_ids($row->collectionid, $row->subcollectionid, $row->seriesid);
-		
-		if (empty($row->price_validated)) {
-			$row->price_validated = 0;
-		}
-		// Add a default time value of 02:00:00 to ISO date.
-	  	// Saved date will be 00:00:00 (02:00:00 minus 2 hours) during summer time period instead of 22:00:00,
-	  	// which corresponds to the last day of the previous month.
-	  	// and 01:00:00 (02:00:00 minus 1 hour) during winter time period instead of 23:00:00,
-	  	// which also corresponds to the last day of the previous month.
-		// This fixes the wrong pubdate's month display.
-		$row->pubdate = $row->pubdate . 'T02:00:00';
+	  // Rouergue universes. Attribution based on Drupal universes/Mistral collections mapping.
+	  // $row->collection source data is used as container to stored the retrieved universe term ids.
+	  $row->collection = $this->rouergue_get_universe_term_ids($row->collectionid, $row->subcollectionid, $row->seriesid);
+
+	  if (empty($row->price_validated)) {
+		  $row->price_validated = 0;
+	  }
+	  // Add a default time value of 02:00:00 to ISO date.
+	  // Saved date will be 00:00:00 (02:00:00 minus 2 hours) during summer time period instead of 22:00:00,
+	  // which corresponds to the last day of the previous month.
+	  // and 01:00:00 (02:00:00 minus 1 hour) during winter time period instead of 23:00:00,
+	  // which also corresponds to the last day of the previous month.
+	  // This fixes the wrong pubdate's month display.
+	  $row->pubdate = $row->pubdate . 'T02:00:00';
 	}
 	
 	/**
