@@ -47,6 +47,7 @@ dependencies[] = fe_block
 dependencies[] = field_group
 dependencies[] = imce
 dependencies[] = imce_mkdir
+dependencies[] = image_field_caption
 dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = menu_admin_per_menu
