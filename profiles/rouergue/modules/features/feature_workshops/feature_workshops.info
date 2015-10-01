@@ -84,5 +84,6 @@ features[variable][] = menu_parent_workshops
 features[variable][] = node_options_workshops
 features[variable][] = node_preview_workshops
 features[variable][] = node_submitted_workshops
+features[variable][] = pathauto_node_workshops_pattern
 features[views_view][] = workshops
 project path = profiles/rouergue/modules/features
