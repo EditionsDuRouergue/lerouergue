@@ -1224,7 +1224,7 @@ if (is_numeric($article_id)) {
   $wrapper = entity_metadata_wrapper(\'node\', $article_id);
   foreach ($wrapper->field_contributors->value() as $fc_item) {
     $function = taxonomy_term_load($fc_item->field_contributor_function[\'und\'][0][\'tid\']);
-    if ($function->name == \'Auteur\' && $fc_item->field_ismain[\'und\'][0][\'value\'] == 1) {
+    if (($function->name == "Auteur" || $function->name == "Directeur d\'ouvrage") && $fc_item->field_ismain[\'und\'][0][\'value\'] == 1) {
       $contributor_id = $fc_item->field_contributor[\'und\'][0][\'target_id\'];
       break;
     }
