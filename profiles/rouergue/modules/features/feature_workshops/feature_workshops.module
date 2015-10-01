@@ -43,9 +43,17 @@ function feature_workshops_block_view($delta = '') {
  * Implements hook_block_view_alter().
  */
 function feature_workshops_block_view_alter(&$data, $block) {
-	if ($block->delta == 'workshops-workshop_media_block') {
-		if (!strstr($data['content']['#markup'], 'views-field-field-video') && !strstr($data['content']['#markup'], 'views-field-field-sound')) {
-			$data['subject'] = '';
-		}
+  if ($block->delta == 'workshops-workshop_media_block') {
+	// 'média' block title removed if empty block
+	if (!strstr($data['content']['#markup'], 'views-field-field-video') && !strstr($data['content']['#markup'], 'views-field-field-sound')) {
+		$data['subject'] = '';
 	}
+  }
+
+  if (isset($block->info) && $block->info == 'Vue : Workshops: Bloc livre lié') {
+	// 'livre lié' block title removed if empty block
+	if (!strstr($data['content']['#markup'], 'typeof="sioc:Item foaf:Document"')) {
+	  $data['subject'] = '';
+	}
+  }
 }
