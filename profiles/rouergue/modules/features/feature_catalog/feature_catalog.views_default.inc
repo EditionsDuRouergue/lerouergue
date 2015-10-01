@@ -246,6 +246,7 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
   $handler->display->display_options['filters']['name_1']['group'] = 2;
   $handler->display->display_options['path'] = 'auteurs';
+  $handler->display->display_options['page_title_pattern'] = 'Auteurs';
 
   /* Display: Pager alphabétique */
   $handler = $view->new_display('attachment', 'Pager alphabétique', 'alpha_pager');
@@ -536,6 +537,7 @@ function feature_catalog_views_default_views() {
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'catalogue';
+  $handler->display->display_options['page_title_pattern'] = 'Catalogue';
 
   /* Display: Livres auteur */
   $handler = $view->new_display('block', 'Livres auteur', 'author_books');
@@ -1004,6 +1006,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_readership_tid']['vocabulary'] = 'readership';
   $handler->display->display_options['filters']['field_readership_tid']['hierarchy'] = 1;
   $handler->display->display_options['path'] = 'catalogue/multi-criteres';
+  $handler->display->display_options['page_title_pattern'] = 'Recherche multi-critères';
 
   /* Display: Liste nouveautés */
   $handler = $view->new_display('page_with_page_title', 'Liste nouveautés', 'catalog_new_books_page');

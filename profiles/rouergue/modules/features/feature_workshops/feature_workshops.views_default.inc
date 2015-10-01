@@ -85,6 +85,7 @@ function feature_workshops_views_default_views() {
   /* Display: Liste workshops */
   $handler = $view->new_display('page_with_page_title', 'Liste workshops', 'workshops_page');
   $handler->display->display_options['path'] = 'fabrique';
+  $handler->display->display_options['page_title_pattern'] = 'Fabrique';
 
   /* Display: Bloc liste workshops */
   $handler = $view->new_display('block', 'Bloc liste workshops', 'workshop_page_block');
