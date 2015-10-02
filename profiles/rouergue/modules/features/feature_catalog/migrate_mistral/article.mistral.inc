@@ -694,10 +694,10 @@ class ArticleMigration extends Migration {
 			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['d8f5d9a9-3965-44cf-a713-96533e493197'];
 
 		// EN ATTENTE DE LA SERIE MISTRAL GRAND FORMAT
-		// Rouergue Littérature - 493 | Roman de société - 511 | Grand format - ### ===>   Littérature > Romans > Grand format - 58df9ecd-f479-4da4-ae71-da888aaaecd4
+		// Rouergue Littérature - 493 | Roman de société - 511 | Grand format - 244 ===>   Littérature > Romans > Grand format - 58df9ecd-f479-4da4-ae71-da888aaaecd4
 		//  ---------------------------------------------------------------------   ===>   Région > Romans > Grand format - 5d89969d-47af-4c0d-a22b-589fb6ea57a2
-		//$this->univ_coll_mapping['493']['511']['###']['tids'] =
-		//	$this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'] . ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];			
+		$this->univ_coll_mapping['493']['511']['244']['tids'] =
+		$this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'] . ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];			
 		
 		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans > Rouergue en poche -  8f6cfb5a-e21d-4afe-9b75-389addf70654
 		//  ----------------------------------------------------  ===>   Région > Romans > Rouergue en poche - 322aa47f-7585-4688-b4ee-08e83eca5d28		
