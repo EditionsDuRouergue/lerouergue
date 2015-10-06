@@ -41,7 +41,7 @@ function feature_workshops_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -115,7 +115,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 18,
       ),
       'list' => array(
         'label' => 'above',
@@ -185,7 +185,7 @@ function feature_workshops_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'list' => array(
         'label' => 'above',
@@ -260,7 +260,7 @@ function feature_workshops_field_default_field_instances() {
           'image_style' => 'workshop-page',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -340,7 +340,7 @@ function feature_workshops_field_default_field_instances() {
           'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -478,7 +478,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 16,
       ),
       'list' => array(
         'label' => 'above',
@@ -554,7 +554,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 17,
       ),
       'list' => array(
         'label' => 'above',
