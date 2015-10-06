@@ -566,8 +566,8 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['495']['1133']['118']['tids'] = 
 			$this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3'];
 		
-		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
-		$this->univ_coll_mapping['495']['1134']['tids'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		$this->univ_coll_mapping['495']['1134']['tids'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
 			
 		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134 | Art - 119   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
 		// ------------------------------------------------------------------   ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
@@ -667,8 +667,8 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['493']['509']['tids'] = 
 		$this->univ_uuids_tids['aba0e77d-4004-47d1-83aa-0dcc982091ba'] . ',' . $this->univ_uuids_tids['1cc5d1ae-4297-4a31-bc83-ec57da26f285'];
 		
-		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
-		$this->univ_coll_mapping['493']['1140']['tids'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		$this->univ_coll_mapping['493']['1140']['tids'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
 		
 		// Rouergue Littérature - 493 | Objet littéraire - 1140 | Cuisine - 161   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
 		// --------------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
