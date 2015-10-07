@@ -13,7 +13,10 @@ function feature_events_user_default_permissions() {
   // Exported permission: 'add terms in event_types'.
   $permissions['add terms in event_types'] = array(
     'name' => 'add terms in event_types',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'webmaster' => 'webmaster',
+    ),
     'module' => 'taxonomy_access_fix',
   );
 
