@@ -90,7 +90,7 @@ function feature_news_field_default_field_instances() {
       'image_field_caption' => 0,
       'max_filesize' => '',
       'max_resolution' => '',
-      'min_resolution' => '850x425',
+      'min_resolution' => '1140x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),

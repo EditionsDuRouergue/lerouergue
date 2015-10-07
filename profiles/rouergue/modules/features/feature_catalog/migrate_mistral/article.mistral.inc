@@ -567,8 +567,8 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['495']['1133']['118']['tids'] = 
 			$this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['8148f50e-ef2e-497c-b285-efe2dd258ff3'];
 		
-		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
-		$this->univ_coll_mapping['495']['1134']['tids'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		$this->univ_coll_mapping['495']['1134']['tids'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
 			
 		// Rouergue Beaux Livres  - 495 | Objet Littéraire - 1134 | Art - 119   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
 		// ------------------------------------------------------------------   ===>   Art & Histoire > Art - 9e65659d-3259-480c-a3f6-5fb69acef58a
@@ -668,8 +668,8 @@ class ArticleMigration extends Migration {
 		$this->univ_coll_mapping['493']['509']['tids'] = 
 		$this->univ_uuids_tids['aba0e77d-4004-47d1-83aa-0dcc982091ba'] . ',' . $this->univ_uuids_tids['1cc5d1ae-4297-4a31-bc83-ec57da26f285'];
 		
-		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature - bff581ca-2883-4ec8-9e83-917be1285f49
-		$this->univ_coll_mapping['493']['1140']['tids'] = $this->univ_uuids_tids['bff581ca-2883-4ec8-9e83-917be1285f49'];
+		// Rouergue Littérature - 493 | Objet littéraire - 1140   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
+		$this->univ_coll_mapping['493']['1140']['tids'] = $this->univ_uuids_tids['88728848-477d-401c-8d67-287baaaad668'];
 		
 		// Rouergue Littérature - 493 | Objet littéraire - 1140 | Cuisine - 161   ===>   Littérature > Objets littéraires - 88728848-477d-401c-8d67-287baaaad668
 		// --------------------------------------------------------------------   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
@@ -695,10 +695,10 @@ class ArticleMigration extends Migration {
 			$this->univ_uuids_tids['f4654d87-9e93-4505-b1b2-01d4b537edfe'] . ',' . $this->univ_uuids_tids['d8f5d9a9-3965-44cf-a713-96533e493197'];
 
 		// EN ATTENTE DE LA SERIE MISTRAL GRAND FORMAT
-		// Rouergue Littérature - 493 | Roman de société - 511 | Grand format - ### ===>   Littérature > Romans > Grand format - 58df9ecd-f479-4da4-ae71-da888aaaecd4
+		// Rouergue Littérature - 493 | Roman de société - 511 | Grand format - 244 ===>   Littérature > Romans > Grand format - 58df9ecd-f479-4da4-ae71-da888aaaecd4
 		//  ---------------------------------------------------------------------   ===>   Région > Romans > Grand format - 5d89969d-47af-4c0d-a22b-589fb6ea57a2
-		//$this->univ_coll_mapping['493']['511']['###']['tids'] =
-		//	$this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'] . ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];			
+		$this->univ_coll_mapping['493']['511']['244']['tids'] =
+		$this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'] . ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];			
 		
 		// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans > Rouergue en poche -  8f6cfb5a-e21d-4afe-9b75-389addf70654
 		//  ----------------------------------------------------  ===>   Région > Romans > Rouergue en poche - 322aa47f-7585-4688-b4ee-08e83eca5d28		

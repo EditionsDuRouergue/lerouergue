@@ -31,7 +31,7 @@ function feature_workshops_block_view($delta = '') {
 			$node = menu_get_object();
 			// The block will contain button's HTML code only if the node being viewed has inner pages pdf file attached.
 			if (!empty($node->field_inner_pages)) {
-				$content = '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
+				$content = '<button type="button" class="btn" data-toggle="modal" data-target="#rouergue-pdf-viewer">Feuilleter</button>';
 			}
 			$block['content'] = $content;
 			return $block;
