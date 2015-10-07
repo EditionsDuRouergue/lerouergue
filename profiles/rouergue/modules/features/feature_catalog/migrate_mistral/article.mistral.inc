@@ -272,7 +272,7 @@ class ArticleMigration extends Migration {
 	  else {
 		  $text = $row->resume;
 	  }
-	  $row->backcover = html_entity_decode(strip_tags($text, '<b><i>'));
+	  $row->backcover = html_entity_decode(strip_tags($text, '<b><strong><i><em>'));
 
 	  // First publication date handling.
 	  $date_parts = explode('/', $row->firstpublicationdate);
