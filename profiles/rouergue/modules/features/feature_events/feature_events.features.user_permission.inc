@@ -10,6 +10,13 @@
 function feature_events_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'add terms in event_types'.
+  $permissions['add terms in event_types'] = array(
+    'name' => 'add terms in event_types',
+    'roles' => array(),
+    'module' => 'taxonomy_access_fix',
+  );
+
   // Exported permission: 'create event content'.
   $permissions['create event content'] = array(
     'name' => 'create event content',
@@ -37,6 +44,15 @@ function feature_events_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete terms in event_types'.
+  $permissions['delete terms in event_types'] = array(
+    'name' => 'delete terms in event_types',
+    'roles' => array(
+      'webmaster' => 'webmaster',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit any event content'.
   $permissions['edit any event content'] = array(
     'name' => 'edit any event content',
@@ -53,6 +69,15 @@ function feature_events_user_default_permissions() {
       'webmaster' => 'webmaster',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit terms in event_types'.
+  $permissions['edit terms in event_types'] = array(
+    'name' => 'edit terms in event_types',
+    'roles' => array(
+      'webmaster' => 'webmaster',
+    ),
+    'module' => 'taxonomy',
   );
 
   return $permissions;
