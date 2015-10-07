@@ -232,7 +232,8 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_gencod', 'gencod');
 		$this->addFieldMapping('field_release_date', 'firstpublicationdate');
 		$this->addFieldMapping('body', 'backcover');
-		
+		$this->addFieldMapping('body:format', NULL, FALSE)->defaultValue('full_html');
+
 		$this->addFieldMapping('field_themes', 'theme_list')
 			->sourceMigration('Theme')
 			->separator(',');
