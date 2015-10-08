@@ -2414,7 +2414,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'article-cover',
+          'image_style' => 'contributor-cover',
         ),
         'type' => 'image',
         'weight' => 1,
