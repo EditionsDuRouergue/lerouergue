@@ -18,9 +18,9 @@
     <<?php print $left_wrapper; ?> class="col-sm-4 <?php print $left_classes; ?>">
       <?php print $left; ?>
     </<?php print $left_wrapper; ?>>
-    <<?php print $central_wrapper; ?> class="col-sm-5 <?php print $central_classes; ?>">
-      <?php print $central; ?>
-    </<?php print $central_wrapper; ?>>
+    <<?php print $middle_wrapper; ?> class="col-sm-5 <?php print $middle_classes; ?>">
+      <?php print $middle; ?>
+    </<?php print $middle_wrapper; ?>>
     <<?php print $right_wrapper; ?> class="col-sm-3 <?php print $right_classes; ?>">
       <?php print $right; ?>
     </<?php print $right_wrapper; ?>>
