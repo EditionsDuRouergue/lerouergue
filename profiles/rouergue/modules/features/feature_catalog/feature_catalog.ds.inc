@@ -476,15 +476,17 @@ function feature_catalog_ds_layout_settings_info() {
       ),
       'left' => array(
         1 => 'field_picture',
+        2 => 'field_copyright',
       ),
       'central' => array(
-        2 => 'body',
-        3 => 'field_contributor_url',
+        3 => 'body',
+        4 => 'field_contributor_url',
       ),
     ),
     'fields' => array(
       'field_displayed_name' => 'top',
       'field_picture' => 'left',
+      'field_copyright' => 'left',
       'body' => 'central',
       'field_contributor_url' => 'central',
     ),
