@@ -15,12 +15,12 @@
         <?php print $top; ?>
     </<?php print $top_wrapper; ?>>
 
-    <<?php print $central_wrapper; ?> class="col-sm-12 infosWrapper <?php print $central_classes; ?>">
+    <<?php print $middle_wrapper; ?> class="col-sm-12 infosWrapper <?php print $middle_classes; ?>">
         <div class="infosBg">
-      <?php print $central; ?>
+      <?php print $middle; ?>
             </div>
 
-    </<?php print $central_wrapper; ?>>
+    </<?php print $middle_wrapper; ?>>
   </div>
 </<?php print $layout_wrapper ?>>
 

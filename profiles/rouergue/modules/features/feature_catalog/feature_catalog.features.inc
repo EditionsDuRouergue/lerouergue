@@ -155,6 +155,58 @@ function feature_catalog_image_default_styles() {
     ),
   );
 
+  // Exported image style: contributor-cover.
+  $styles['contributor-cover'] = array(
+    'label' => 'contributor-cover',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 370,
+          'height' => 440,
+        ),
+        'weight' => 1,
+      ),
+      2 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: contributor-cover-min.
+  $styles['contributor-cover-min'] = array(
+    'label' => 'contributor-cover-min',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 200,
+          'height' => 240,
+        ),
+        'weight' => 1,
+      ),
+      4 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
   return $styles;
 }
 
