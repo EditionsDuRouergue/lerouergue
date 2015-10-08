@@ -829,6 +829,25 @@ double classement non encore développé
 		$node->field_cover_image[LANGUAGE_NONE]['0']['fid'] = $file->fid;
 	  }
 	}
+
+	// To prevent Contributors loss during article update,
+	// we must seek for existing field_collection_items
+	// and re-add them to node before saving.
+	if (!$node->is_new) {
+	  $query = Database::getConnection('default', 'default')->select('field_data_field_contributors','fc');
+	  $query->condition('entity_id', $node->nid);
+	  $query->fields('fc', array('field_contributors_value'));
+
+	  $fc_item_ids = $query->execute()->fetchAll();
+
+	  $fc_contributors = array();
+	  foreach ($fc_item_ids as $key => $fc_item_id) {
+		$fc_contributors[LANGUAGE_NONE][$key]['value'] = $fc_item_id->field_contributors_value;
+		$fc_contributors[LANGUAGE_NONE][$key]['revision_id'] = $fc_item_id->field_contributors_value;
+	  }
+
+	  $node->field_contributors = $fc_contributors;
+	}
   }
 }
 
