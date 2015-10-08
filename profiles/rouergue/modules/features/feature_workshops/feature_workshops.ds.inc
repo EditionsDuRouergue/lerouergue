@@ -132,16 +132,13 @@ function feature_workshops_ds_layout_settings_info() {
         1 => 'title',
       ),
       'right' => array(
-        2 => 'field_gallery',
+        2 => 'field_workshop_image',
       ),
     ),
     'fields' => array(
       'fabrique_title' => 'left',
       'title' => 'left',
-      'field_gallery' => 'right',
-    ),
-    'limit' => array(
-      'field_gallery' => '1',
+      'field_workshop_image' => 'right',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -203,7 +200,7 @@ function feature_workshops_ds_layout_settings_info() {
         0 => 'field_planned_release_date',
         1 => 'field_inner_pages',
         2 => 'body',
-        3 => 'field_gallery',
+        3 => 'field_collection_gallery',
         4 => 'field_event_author',
       ),
     ),
@@ -211,7 +208,7 @@ function feature_workshops_ds_layout_settings_info() {
       'field_planned_release_date' => 'central',
       'field_inner_pages' => 'central',
       'body' => 'central',
-      'field_gallery' => 'central',
+      'field_collection_gallery' => 'central',
       'field_event_author' => 'central',
     ),
     'classes' => array(),
@@ -238,16 +235,13 @@ function feature_workshops_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'central' => array(
-        0 => 'field_gallery',
+        0 => 'field_workshop_image',
         1 => 'title',
       ),
     ),
     'fields' => array(
-      'field_gallery' => 'central',
+      'field_workshop_image' => 'central',
       'title' => 'central',
-    ),
-    'limit' => array(
-      'field_gallery' => '1',
     ),
     'classes' => array(),
     'wrappers' => array(

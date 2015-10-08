@@ -226,7 +226,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'carousel';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Galerie */
+  /* Champ: Élément Field collection : Image de galerie */
   $handler->display->display_options['fields']['field_gallery']['id'] = 'field_gallery';
   $handler->display->display_options['fields']['field_gallery']['table'] = 'field_data_field_gallery';
   $handler->display->display_options['fields']['field_gallery']['field'] = 'field_gallery';
