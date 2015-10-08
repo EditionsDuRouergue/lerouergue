@@ -701,7 +701,7 @@ function feature_catalog_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'grand format',
+    'name' => 'l\'estive',
     'description' => 'Description de l\'univers…',
     'format' => 'plain_text',
     'weight' => 0,
@@ -761,7 +761,7 @@ function feature_catalog_uuid_features_default_terms() {
     'metatags' => array(),
   );
   $terms[] = array(
-    'name' => 'grand format',
+    'name' => 'l\'estive',
     'description' => 'Description de l\'univers...',
     'format' => 'plain_text',
     'weight' => 0,
