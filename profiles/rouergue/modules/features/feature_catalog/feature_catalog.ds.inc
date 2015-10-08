@@ -238,26 +238,26 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'author_books';
-  $ds_layout->layout = 'bootstrap_12_stacked';
+  $ds_layout->layout = 'rouergue_12_stacked';
   $ds_layout->settings = array(
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
         1 => 'field_cover_image',
       ),
-      'central' => array(
+      'middle' => array(
         2 => 'title',
       ),
     ),
     'fields' => array(
       'field_publication_status' => 'top',
       'field_cover_image' => 'top',
-      'title' => 'central',
+      'title' => 'middle',
     ),
     'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
-      'central' => 'div',
+      'middle' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
@@ -307,7 +307,7 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'bootstrap_4_5_3';
+  $ds_layout->layout = 'rouergue_4_5_3';
   $ds_layout->settings = array(
     'regions' => array(
       'top' => array(
@@ -320,27 +320,27 @@ function feature_catalog_ds_layout_settings_info() {
         4 => 'field_cover_image',
         5 => 'field_bs_button_browse_pdf',
         7 => 'field_themes',
-        8 => 'field_barcode',
+        9 => 'field_barcode',
       ),
       'right' => array(
         6 => 'field_release_date',
-        9 => 'field_number_pages',
-        10 => 'field_format',
-        14 => 'field_price',
-        17 => 'field_isbn',
-        18 => 'field_gencod',
+        8 => 'field_number_pages',
+        11 => 'field_format',
+        13 => 'field_price',
+        15 => 'field_isbn',
+        19 => 'field_gencod',
         21 => 'field_contributors',
         22 => 'group_infos_article',
         23 => 'field_readership',
         24 => 'field_num_version_link',
       ),
-      'central' => array(
-        11 => 'group_contributors',
+      'middle' => array(
+        10 => 'group_contributors',
         12 => 'authors',
-        13 => 'body',
-        15 => 'illustrators',
-        16 => 'field_press_quotes',
-        19 => 'service_links_displays_group',
+        14 => 'body',
+        16 => 'illustrators',
+        17 => 'field_press_quotes',
+        18 => 'service_links_displays_group',
         20 => 'field_inner_pages',
       ),
     ),
@@ -353,19 +353,19 @@ function feature_catalog_ds_layout_settings_info() {
       'field_bs_button_browse_pdf' => 'left',
       'field_release_date' => 'right',
       'field_themes' => 'left',
-      'field_barcode' => 'left',
       'field_number_pages' => 'right',
+      'field_barcode' => 'left',
+      'group_contributors' => 'middle',
       'field_format' => 'right',
-      'group_contributors' => 'central',
-      'authors' => 'central',
-      'body' => 'central',
+      'authors' => 'middle',
       'field_price' => 'right',
-      'illustrators' => 'central',
-      'field_press_quotes' => 'central',
+      'body' => 'middle',
       'field_isbn' => 'right',
+      'illustrators' => 'middle',
+      'field_press_quotes' => 'middle',
+      'service_links_displays_group' => 'middle',
       'field_gencod' => 'right',
-      'service_links_displays_group' => 'central',
-      'field_inner_pages' => 'central',
+      'field_inner_pages' => 'middle',
       'field_contributors' => 'right',
       'group_infos_article' => 'right',
       'field_readership' => 'right',
@@ -375,7 +375,7 @@ function feature_catalog_ds_layout_settings_info() {
     'wrappers' => array(
       'top' => 'div',
       'left' => 'div',
-      'central' => 'div',
+      'middle' => 'div',
       'right' => 'div',
     ),
     'layout_wrapper' => 'div',
@@ -394,13 +394,13 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'in_news_block';
-  $ds_layout->layout = 'bootstrap_12_stacked';
+  $ds_layout->layout = 'rouergue_12_stacked';
   $ds_layout->settings = array(
     'regions' => array(
       'top' => array(
         0 => 'field_cover_image',
       ),
-      'central' => array(
+      'middle' => array(
         1 => 'title',
         2 => 'field_contributors',
         3 => 'post_date',
@@ -408,14 +408,14 @@ function feature_catalog_ds_layout_settings_info() {
     ),
     'fields' => array(
       'field_cover_image' => 'top',
-      'title' => 'central',
-      'field_contributors' => 'central',
-      'post_date' => 'central',
+      'title' => 'middle',
+      'field_contributors' => 'middle',
+      'post_date' => 'middle',
     ),
     'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
-      'central' => 'div',
+      'middle' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
@@ -431,14 +431,14 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'list';
-  $ds_layout->layout = 'bootstrap_12_stacked';
+  $ds_layout->layout = 'rouergue_12_stacked';
   $ds_layout->settings = array(
     'regions' => array(
       'top' => array(
         0 => 'field_publication_status',
         1 => 'field_cover_image',
       ),
-      'central' => array(
+      'middle' => array(
         2 => 'title',
         3 => 'field_contributors',
       ),
@@ -446,13 +446,13 @@ function feature_catalog_ds_layout_settings_info() {
     'fields' => array(
       'field_publication_status' => 'top',
       'field_cover_image' => 'top',
-      'title' => 'central',
-      'field_contributors' => 'central',
+      'title' => 'middle',
+      'field_contributors' => 'middle',
     ),
     'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
-      'central' => 'div',
+      'middle' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
@@ -468,7 +468,7 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'contributor';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'bootstrap_4_5_3';
+  $ds_layout->layout = 'rouergue_4_5_3';
   $ds_layout->settings = array(
     'regions' => array(
       'top' => array(
@@ -478,7 +478,7 @@ function feature_catalog_ds_layout_settings_info() {
         1 => 'field_picture',
         2 => 'field_copyright',
       ),
-      'central' => array(
+      'middle' => array(
         3 => 'body',
         4 => 'field_contributor_url',
       ),
@@ -487,14 +487,14 @@ function feature_catalog_ds_layout_settings_info() {
       'field_displayed_name' => 'top',
       'field_picture' => 'left',
       'field_copyright' => 'left',
-      'body' => 'central',
-      'field_contributor_url' => 'central',
+      'body' => 'middle',
+      'field_contributor_url' => 'middle',
     ),
     'classes' => array(),
     'wrappers' => array(
       'top' => 'div',
       'left' => 'div',
-      'central' => 'div',
+      'middle' => 'div',
       'right' => 'div',
     ),
     'layout_wrapper' => 'div',
@@ -513,16 +513,8 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'contributor';
   $ds_layout->view_mode = 'on_article_page';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'bootstrap_12';
   $ds_layout->settings = array(
-    'regions' => array(
-      'ds_content' => array(
-        0 => 'title',
-      ),
-    ),
-    'fields' => array(
-      'title' => 'ds_content',
-    ),
     'classes' => array(),
     'wrappers' => array(
       'ds_content' => 'div',
@@ -532,6 +524,14 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'regions' => array(
+      'central' => array(
+        0 => 'title',
+      ),
+    ),
+    'fields' => array(
+      'title' => 'central',
+    ),
   );
   $export['node|contributor|on_article_page'] = $ds_layout;
 
@@ -541,16 +541,8 @@ function feature_catalog_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'contributor';
   $ds_layout->view_mode = 'on_book_list';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'bootstrap_12';
   $ds_layout->settings = array(
-    'regions' => array(
-      'ds_content' => array(
-        0 => 'field_displayed_name',
-      ),
-    ),
-    'fields' => array(
-      'field_displayed_name' => 'ds_content',
-    ),
     'classes' => array(),
     'wrappers' => array(
       'ds_content' => 'div',
@@ -560,6 +552,14 @@ function feature_catalog_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'regions' => array(
+      'central' => array(
+        0 => 'field_displayed_name',
+      ),
+    ),
+    'fields' => array(
+      'field_displayed_name' => 'central',
+    ),
   );
   $export['node|contributor|on_book_list'] = $ds_layout;
 

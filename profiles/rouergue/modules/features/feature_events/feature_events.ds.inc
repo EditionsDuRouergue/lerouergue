@@ -210,19 +210,19 @@ function feature_events_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'event';
   $ds_layout->view_mode = 'map_block';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'bootstrap_12';
   $ds_layout->settings = array(
     'regions' => array(
-      'ds_content' => array(
+      'central' => array(
         0 => 'field_location',
       ),
     ),
     'fields' => array(
-      'field_location' => 'ds_content',
+      'field_location' => 'central',
     ),
     'classes' => array(),
     'wrappers' => array(
-      'ds_content' => 'div',
+      'central' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
