@@ -93,13 +93,13 @@ function feature_core_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'management_rouergue-admin:user',
   );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Liste des nouveautés');
   t('ROUERGUE ADMIN');
   t('Tri des actualités');
   t('Tri du bloc nouveautés');
-
 
   return $menu_links;
 }

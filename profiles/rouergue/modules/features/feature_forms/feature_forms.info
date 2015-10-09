@@ -47,5 +47,6 @@ features[variable][] = menu_parent_webform
 features[variable][] = node_options_webform
 features[variable][] = node_preview_webform
 features[variable][] = node_submitted_webform
+features[variable][] = pathauto_node_webform_pattern
 features[webform][] = demande_de_catalogue
 project path = profiles/rouergue/modules/features
