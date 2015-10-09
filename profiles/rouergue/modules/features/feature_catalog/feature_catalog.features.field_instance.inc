@@ -10,7 +10,8 @@
 function feature_catalog_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'field_collection_item-field_contributors-field_contributor'
+  // Exported field_instance:
+  // 'field_collection_item-field_contributors-field_contributor'
   $field_instances['field_collection_item-field_contributors-field_contributor'] = array(
     'bundle' => 'field_contributors',
     'default_value' => NULL,
@@ -68,7 +69,8 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_contributors-field_contributor_function'
+  // Exported field_instance:
+  // 'field_collection_item-field_contributors-field_contributor_function'
   $field_instances['field_collection_item-field_contributors-field_contributor_function'] = array(
     'bundle' => 'field_contributors',
     'default_value' => NULL,
@@ -112,7 +114,8 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_contributors-field_iscommunicable'
+  // Exported field_instance:
+  // 'field_collection_item-field_contributors-field_iscommunicable'
   $field_instances['field_collection_item-field_contributors-field_iscommunicable'] = array(
     'bundle' => 'field_contributors',
     'default_value' => array(
@@ -161,7 +164,8 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_contributors-field_ismain'
+  // Exported field_instance:
+  // 'field_collection_item-field_contributors-field_ismain'
   $field_instances['field_collection_item-field_contributors-field_ismain'] = array(
     'bundle' => 'field_contributors',
     'default_value' => array(
@@ -1580,6 +1584,7 @@ function feature_catalog_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 3,
@@ -1593,6 +1598,7 @@ function feature_catalog_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 5,
