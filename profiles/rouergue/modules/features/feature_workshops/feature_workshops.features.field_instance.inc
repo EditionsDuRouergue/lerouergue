@@ -10,7 +10,8 @@
 function feature_workshops_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'field_collection_item-field_collection_gallery-field_gallery'
+  // Exported field_instance:
+  // 'field_collection_item-field_collection_gallery-field_gallery'
   $field_instances['field_collection_item-field_collection_gallery-field_gallery'] = array(
     'bundle' => 'field_collection_gallery',
     'deleted' => 0,
@@ -54,7 +55,8 @@ function feature_workshops_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_collection_gallery-field_gallery_caption'
+  // Exported field_instance:
+  // 'field_collection_item-field_collection_gallery-field_gallery_caption'
   $field_instances['field_collection_item-field_collection_gallery-field_gallery_caption'] = array(
     'bundle' => 'field_collection_gallery',
     'default_value' => NULL,
@@ -697,7 +699,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'content',
           'image_style' => 'workshop-list',
         ),
         'type' => 'image',

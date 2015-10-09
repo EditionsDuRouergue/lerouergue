@@ -55,26 +55,26 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Critère de tri: Contenu : Date de publication */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Contenu : Publié */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Contenu : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -116,7 +116,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
@@ -124,7 +124,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nid']['hide_empty'] = TRUE;
-  /* Champ: Contenu : Video */
+  /* Field: Content: Video */
   $handler->display->display_options['fields']['field_video']['id'] = 'field_video';
   $handler->display->display_options['fields']['field_video']['table'] = 'field_data_field_video';
   $handler->display->display_options['fields']['field_video']['field'] = 'field_video';
@@ -136,7 +136,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['field_video']['settings'] = array(
     'file_view_mode' => 'media_preview',
   );
-  /* Champ: Contenu : Son */
+  /* Field: Content: Son */
   $handler->display->display_options['fields']['field_sound']['id'] = 'field_sound';
   $handler->display->display_options['fields']['field_sound']['table'] = 'field_data_field_sound';
   $handler->display->display_options['fields']['field_sound']['field'] = 'field_sound';
@@ -149,7 +149,7 @@ function feature_workshops_views_default_views() {
     'file_view_mode' => 'default',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -172,7 +172,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Livre lié */
+  /* Field: Content: Livre lié */
   $handler->display->display_options['fields']['field_article_link']['id'] = 'field_article_link';
   $handler->display->display_options['fields']['field_article_link']['table'] = 'field_data_field_article_link';
   $handler->display->display_options['fields']['field_article_link']['field'] = 'field_article_link';
@@ -184,7 +184,7 @@ function feature_workshops_views_default_views() {
     'links' => 1,
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -226,7 +226,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'carousel';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Élément Field collection : Image de galerie */
+  /* Field: Field collection item: Image de galerie */
   $handler->display->display_options['fields']['field_gallery']['id'] = 'field_gallery';
   $handler->display->display_options['fields']['field_gallery']['table'] = 'field_data_field_gallery';
   $handler->display->display_options['fields']['field_gallery']['field'] = 'field_gallery';
@@ -239,14 +239,14 @@ function feature_workshops_views_default_views() {
   );
   $handler->display->display_options['fields']['field_gallery']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_gallery']['delta_offset'] = '0';
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Auteur(s) */
+  /* Field: Content: Auteur(s) */
   $handler->display->display_options['fields']['field_event_author']['id'] = 'field_event_author';
   $handler->display->display_options['fields']['field_event_author']['table'] = 'field_data_field_event_author';
   $handler->display->display_options['fields']['field_event_author']['field'] = 'field_event_author';
@@ -274,6 +274,7 @@ function feature_workshops_views_default_views() {
     t('suivant ›'),
     t('dernier »'),
     t('Liste workshops'),
+    t('more'),
     t('Bloc liste workshops'),
     t('Liste les titres des autres workshops'),
     t('Bloc media workshop'),
