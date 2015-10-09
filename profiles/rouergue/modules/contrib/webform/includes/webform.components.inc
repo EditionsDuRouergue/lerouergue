@@ -386,7 +386,6 @@ function webform_component_edit_form($form, $form_state, $node, $component, $clo
   drupal_set_title(t('Edit component: @name', array('@name' => $component['name'])), PASS_THROUGH);
 
   $form['#node'] = $node;
-  $form['#attached']['library'][] = array('webform', 'admin');
   $form['#tree'] = TRUE;
 
   // Print the correct field type specification.
@@ -473,6 +472,17 @@ function webform_component_edit_form($form, $form_state, $node, $component, $clo
     }
     $form['display']['title_display']['#weight'] = 8;
     $form['display']['title_display']['#parents'] = array('extra', 'title_display');
+  }
+
+  if (webform_component_feature($component['type'], 'description')) {
+    $form['display']['description_above'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => !empty($component['extra']['description_above']),
+      '#title' => t('Description above field'),
+      '#description' => t('Place the description above &mdash; rather than below &mdash; the field.'),
+      '#weight' => 8.5,
+      '#parents' => array('extra', 'description_above'),
+    );
   }
 
   if (webform_component_feature($component['type'], 'private')) {
@@ -590,6 +600,9 @@ function webform_component_edit_form($form, $form_state, $node, $component, $clo
     unset($form['validation']);
   }
   $form = array_merge($form, $additional_form_elements);
+  // Ensure that the webform admin library is attached, possibly in addition to
+  // component-specific attachments.
+  $form['#attached']['library'][] = array('webform', 'admin');
 
   // Add the submit button.
   $form['actions'] = array(
@@ -672,13 +685,12 @@ function webform_component_edit_form_submit($form, &$form_state) {
 
   // Since Webform components have been updated but the node itself has not
   // been saved, it is necessary to explicitly clear the cache to make sure
-  // the updated webform is visible to anonymous users.
+  // the updated webform is visible to anonymous users. This resets the page
+  // and block caches (only);
   cache_clear_all();
 
-  // Clear the entity cache if Entity Cache module is installed.
-  if (module_exists('entitycache')) {
-    entity_get_controller('node')->resetCache(array($node->nid));
-  }
+  // Refresh the entity cache, should it be cached in persistent storage.
+  entity_get_controller('node')->resetCache(array($node->nid));
 
   $form_state['redirect'] = array('node/' . $node->nid . '/webform/components', isset($cid) ? array('query' => array('cid' => $cid)) : array());
 }
@@ -727,13 +739,12 @@ function webform_component_delete_form_submit($form, &$form_state) {
 
   // Since Webform components have been updated but the node itself has not
   // been saved, it is necessary to explicitly clear the cache to make sure
-  // the updated webform is visible to anonymous users.
+  // the updated webform is visible to anonymous users. This resets the page
+  // and block caches (only);
   cache_clear_all();
 
-  // Clear the entity cache if Entity Cache module is installed.
-  if (module_exists('entitycache')) {
-    entity_get_controller('node')->resetCache(array($node->nid));
-  }
+  // Refresh the entity cache, should it be cached in persistent storage.
+  entity_get_controller('node')->resetCache(array($node->nid));
 
   $form_state['redirect'] = 'node/' . $node->nid . '/webform/components';
 }
@@ -856,25 +867,38 @@ function webform_component_delete($node, $component) {
   // Delete any conditionals dependent on this component.
   module_load_include('inc', 'webform', 'includes/webform.conditionals');
   foreach ($node->webform['conditionals'] as $rgid => $conditional) {
-    // Delete the whole conditional if this component is the target.
-    if ($conditional['target_type'] === 'component' && $conditional['target'] == $component['cid']) {
-      webform_conditional_delete($node, $conditional);
-    }
-    else {
-      foreach ($conditional['rules'] as $rid => $rule) {
-        if ($rule['source_type'] === 'component' && $rule['source'] == $component['cid']) {
-          // Delete the conditional if this component is the only source.
-          if (count($conditional['rules']) === 1) {
+    $delete_conditional = FALSE;
+    $specs = array(
+      array(
+        'field' => 'rules',
+        'table' => 'webform_conditional_rules',
+        'component' => 'source',
+        'component_type' => 'source_type',
+        'index' => 'rid',
+      ),
+      array(
+        'field' => 'actions',
+        'table' => 'webform_conditional_actions',
+        'component' => 'target',
+        'component_type' => 'target_type',
+        'index' => 'aid',
+      ),
+    );
+    foreach ($specs as $spec) {
+      $count = count($conditional[$spec['field']]);
+      foreach ($conditional[$spec['field']] as $key => $thing) {
+        if ($thing[$spec['component_type']] === 'component' && $thing[$spec['component']] == $component['cid']) {
+          if ($count == 1) {
+            // Delete the conditional if this component is the only source or target.
             webform_conditional_delete($node, $conditional);
+            break 2;
           }
-          // Delete only one rule if this component is one of multiple rules.
-          else {
-            db_delete('webform_conditional_rules')
-              ->condition('nid', $node->nid)
-              ->condition('rgid', $rgid)
-              ->condition('rid', $rid)
-              ->execute();
-          }
+          db_delete($spec['table'])
+            ->condition('nid', $node->nid)
+            ->condition('rgid', $rgid)
+            ->condition($spec['index'], $key)
+            ->execute();
+          $count--;
         }
       }
     }
@@ -939,10 +963,12 @@ function webform_component_feature($type, $feature) {
     'title_display' => TRUE,
     'title_inline' => TRUE,
     'conditional' => TRUE,
+    'conditional_action_set' => FALSE,
     'spam_analysis' => FALSE,
     'group' => FALSE,
     'attachment' => FALSE,
     'private' => TRUE,
+    'placeholder' => FALSE,
     'wrapper_classes' => TRUE,
     'css_classes' => TRUE,
     'views_range' => FALSE,
@@ -1065,9 +1091,11 @@ function theme_webform_component_select($variables) {
     $header = array(array('class' => array('select-all'), 'data' => ' ' . t('Include all components')));
   }
   foreach (element_children($element) as $key) {
-    $rows[] = array(
-      theme('indentation', array('size' => $element[$key]['#indent'])) . drupal_render($element[$key]),
-    );
+    if ($key != 'suffix') {
+      $rows[] = array(
+        theme('indentation', array('size' => $element[$key]['#indent'])) . drupal_render($element[$key]),
+      );
+    }
   }
 
   $element['#type'] = 'fieldset';
@@ -1086,6 +1114,11 @@ function theme_webform_component_select($variables) {
   else {
     $element['#children'] = '<div class="webform-component-select-wrapper">' . theme('table', array('header' => $header, 'rows' => $rows, 'sticky' => FALSE)) . '</div>';
   }
+
+  if (isset($element['suffix'])) {
+    $element['#children'] .= '<div class="webform-component-select-suffix">' . drupal_render($element['suffix']) . '</div>';
+  }
+
 
   return theme('fieldset', array('element' => $element));
 }
