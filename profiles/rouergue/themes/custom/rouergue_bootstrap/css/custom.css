@@ -246,7 +246,7 @@ CAROUSEL STYLES
 .carousel-indicators {
   position: absolute;
   top: -20px;
-  z-index: 1000;
+  z-index: 500;
   width: 100%;
   left:0;
   margin-left: 0;
