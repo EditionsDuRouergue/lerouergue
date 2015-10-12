@@ -40,8 +40,6 @@ label {
   display: inline;
 }
 
-
-
 .field-name-field-firstname:after {
   content: " ";
 }
@@ -139,7 +137,6 @@ BLOCKS STYLES
 NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
 */
 
-
 .view-display-id-news_block .views-field-field-news-url {
   position: relative;
   background-color: #f2f2f2;
@@ -153,7 +150,6 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
   border-top-left-radius: 5px;
 }
 
-
 .view-display-id-catalog_new_books_block{
   margin-top: 60px;
 }
@@ -165,7 +161,6 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
   width: 160px;
   height: 160px;
 }
-
 
 /*
 ==============================================================================================
@@ -217,12 +212,11 @@ CAROUSEL STYLES
 
 .carousel-control:hover .icon-prev {
   left: 10px;
-
 }
+
 .carousel-control:hover .icon-next {
   right: 10px;
 }
-
 
 .carousel-indicators {
   position: absolute;
@@ -237,15 +231,7 @@ CAROUSEL STYLES
 }
 
 .carousel-indicators li {
-  /* display: inline-block; */
-  /* width: 10px; */
-  /* height: 10px; */
-  /* margin: 1px; */
-  /* text-indent: -999px; */
   border: 1px solid #999;
-  /* border-radius: 10px; */
-  /* cursor: pointer; */
-  /* background-color: rgba(0, 0, 0, 0); */
 }
 
 .carousel-indicators .active {
@@ -295,7 +281,6 @@ AGENDA
 }
 
 .field-name-title a:hover, .field-name-title a:active, .field-name-node-link a:hover, .field-name-node-link a:active{
-
     color: #f14a1f;
 }
 
@@ -339,8 +324,8 @@ WORKSHOPS CAROUSEL
 
 .view-display-id-workshops_front_block img {
   border-radius: 20px;
-
 }
+
 /*
 ==============================================================================================
 VIEWS STYLES
@@ -352,12 +337,7 @@ VIEWS STYLES
 }
 
 .view-display-id-events_list_page .nav-tabs {
-font-size: 18px;
-}
-
-.view-display-id-events_list_page .nav-tabs .active, .view-display-id-events_list_page .nav-tabs li > a:hover , .view-display-id-events_list_page .nav-tabs li > a:focus{
-
-
+  font-size: 18px;
 }
 
 
@@ -505,10 +485,24 @@ UNIVERSE MENU
 /*
 FOOTER MENU
 */
+#block-menu-menu-footer-menu, #block-feature-core-rouergue-copyright {
+  text-align: center;
+}
+
+#block-menu-menu-footer-menu ul li a, #block-feature-core-rouergue-copyright {
+  padding-top: 0;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  padding-left: 5px
+}
+
 #block-menu-menu-footer-menu ul li {
   display: inline-block;
 }
 
+#boxes-box-footer_social_links p {
+  line-height: 32px;
+}
 
 /*
 ==============================================================================================
@@ -519,7 +513,6 @@ NODES STYLES
 /*
 ARTICLE NODE
 */
-
 .node-article.view-mode-full {
   margin-bottom: 30px;
 }
@@ -531,10 +524,8 @@ ARTICLE NODE
   padding-left: 100px;
 }
 
-
 .node-type-article .block-system .col-sm-12{
   margin-bottom: 20px;
-
 }
 
 .node-type-article h2.block-title {
@@ -551,32 +542,24 @@ ARTICLE NODE
 
 .node-type-article .group-contributors {
   margin-bottom: 20px;
-
 }
 
 .node-type-article .view-fc-contributors a {
   font-family: "corporatesdemi";
   color: #000;
-
 }
 
 .node-type-article .view-fc-contributors a:hover {
   color: #f14a1f;
 }
 
-
 .node-type-article .view-fc-contributors  h3 {
   font-family: "corporatesdemi";
   font-size: 14px;
   margin-top: 0;
   margin-bottom: 0;
+}
 
-}
-/*
-.node-type-article .views-field-field-displayed-name {
-  margin-bottom: 10px;
-}
-*/
 .node-type-article .view-display-id-book_contributors_others {
   margin-bottom: 30px
 }
@@ -587,7 +570,6 @@ ARTICLE NODE
   margin-top: 20px;
   margin-bottom: 10px;
 }
-
 
 .node-type-article .group-couv {
   margin-bottom: 10px;
@@ -602,7 +584,6 @@ ARTICLE NODE
   margin-top: 30px;
   font-size: 18px;
 }
-
 
 .field-name-field-readership .field-item{
   display: block;
@@ -619,14 +600,15 @@ ARTICLE NODE
 
 .field-name-field-themes {
   margin-top: 20px;
-    font-size: 16px;
-    text-transform: lowercase;
+  font-size: 16px;
+  text-transform: lowercase;
 }
 
 .field-name-field-themes .field-item:after {
-    content: ",";
-    margin-right: 5px;
+  content: ",";
+  margin-right: 5px;
 }
+
 .field-name-field-themes .field-item:last-of-type:after {
     content: "";
 }
@@ -649,13 +631,11 @@ ARTICLE NODE
 /*
 AGENDA NODE
 */
-
 .node-type-event .field-name-title h2 {
   font-family: "corporatesdemi";
   color: #000;
   text-transform: uppercase;
   margin-top: 0;
-
 }
 
 .node-type-event .field-name-field-dates {
@@ -666,8 +646,6 @@ AGENDA NODE
 
 .node-type-event  .field-name-field-event-image {
   padding-bottom: 20px;
-
-
 }
 
 .node-type-event .block-feature-events{
@@ -688,18 +666,15 @@ CONTRIBUTOR NODE
   padding-left: 100px;
 }
 
-
 /*
 ==============================================================================================
 PAGES VIEWS STYLES
 ==============================================================================================
 */
 
-
 /*
 AGENDA LIST
 */
-
 .page-agenda .page-header {
   display: inline-block;
   float: left;
@@ -707,10 +682,9 @@ AGENDA LIST
 
 .page-agenda .block-feature-events {
   display: inline-block;
-    float: left;
-    margin-top: 5px;
-    margin-left: 10px;
-
+  float: left;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 
 .page-agenda .view-content {
@@ -722,6 +696,7 @@ AGENDA LIST
 INFO WRAPPER STYLES
 ==============================================================================================
 */
+
 .infosWrapper {
   display: none;
   position: absolute;
@@ -733,14 +708,12 @@ INFO WRAPPER STYLES
   color: #fff;
 }
 
-
 .infosBg {
   padding: 10px;
   background-color:  rgba(0, 0, 0, 0.7);
   color: #fff;
   border-radius: 5px;
 }
-
 
 .infosWrapper .field-name-field-contributors {
   margin-bottom: 10px;
@@ -767,7 +740,6 @@ INFO WRAPPER STYLES
   font-family: "corporatesdemi";
   font-size: 16px;
   color: #f14a1f;
-
 }
 
 .mistral-pubstate-coming-soon:before {
@@ -801,30 +773,38 @@ body {
 }
 
 .preFooter {
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .front .preFooter {
-  margin-top: 60px;
+  margin-top: 90px;
 }
 
 .footer {
+  margin-top: 30px;
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  /*height: 60px; */
+  min-height: 40px;
   color: #ffffff;
 }
 
 .footer .container {
   padding-top: 10px;
   height: 100%;
-  background-color: #666666;
+  background-color: #808080;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
+.footer a {
+    color: #fff;
+}
+
+.footer a:hover {
+    color: #f14a1f;
+}
 /*
 ==============================================================================================
 MEDIA QUERIES

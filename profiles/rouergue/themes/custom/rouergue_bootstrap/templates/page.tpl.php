@@ -177,6 +177,14 @@
 </div>
 <footer class="footer">
   <div class="container">
-  <?php print render($page['footer']); ?>
+    <div class="col-sm-3">
+      <?php print render($page['footer_first']); ?>
+    </div>
+    <div class="col-sm-6">
+      <?php print render($page['footer']); ?>
+    </div>
+    <div class="col-sm-3">
+      <?php print render($page['footer_third']); ?>
+    </div>
 </div>
 </footer>
