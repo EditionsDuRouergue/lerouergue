@@ -132,16 +132,16 @@ function feature_catalog_image_default_styles() {
   $styles['article-cover-min'] = array(
     'label' => 'article-cover-min',
     'effects' => array(
-      3 => array(
+      5 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 200,
+          'width' => 260,
           'height' => '',
           'upscale' => 1,
         ),
         'weight' => 1,
       ),
-      4 => array(
+      6 => array(
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',

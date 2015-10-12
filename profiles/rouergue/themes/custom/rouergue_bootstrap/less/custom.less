@@ -4,8 +4,8 @@ GLOBAL STYLES
 ==============================================================================================
 */
 
-h1, h2, h3 {
-  color: #000;
+h1, h2, h3, h4, h5, h6 {
+  color: @gray-dark;
 }
 
 h1.page-header {
@@ -53,6 +53,29 @@ label {
   margin-top: 24px;
 }
 
+.modal-dialog {
+  width: 80%;
+}
+
+.modal-content {
+  height: 800px;
+}
+
+.modal-body {
+    height: 100%;
+
+}
+.modal iframe {
+  height: 93%;
+}
+
+.btn {
+	 transition:.5s;
+}
+
+.btn-primary:hover{
+	background: #f14a1f;
+}
 /*
 ==============================================================================================
 FORMS & PAGINATION
@@ -114,7 +137,7 @@ BLOCKS STYLES
 }
 
 #block-views-catalog-catalog-new-books-block .carousel-inner{
-  min-height: 280px;
+ // min-height: 280px;
 }
 
 #block-views-catalog-catalog-new-books-block, #block-views-catalog-same-author-books {
@@ -355,6 +378,12 @@ VIEWS STYLES
 
 .view-id-first_level_universes li:first-of-type {
   padding-left: 120px;
+}
+
+
+.view-display-id-authors .views-field-field-displayed-name {
+	text-align: center;
+	margin-top: 5px;
 }
 
 /*
@@ -668,6 +697,48 @@ CONTRIBUTOR NODE
 }
 
 /*
+WORKSHOP NODE
+*/
+.media-soundcloud-player {
+  width: 100%;
+  max-height: 150px;
+}
+
+.node-type-workshops .mistral-pubstate-coming-soon:before {
+  content: ""!important;
+}
+
+.node-type-workshops .mistral-pubstate-new:before {
+  content: ""!important;
+}
+
+.node-type-workshops .mistral-status-sold-out:before {
+  content: ""!important;
+}
+
+.field-collection-item-field-collection-gallery {
+  margin-bottom: 30px;
+}
+
+.field-name-field-gallery-caption {
+  padding-top: 5px;
+}
+
+.field-name-field-event-author.field-type-entityreference {
+margin-bottom: 30px;
+}
+
+.field-name-field-event-author.field-type-entityreference .field-item:after{
+  content: " •";
+  color: #4d4d4d;
+}
+
+.field-name-field-event-author.field-type-entityreference .field-item:last-child:after{
+  content: "";
+}
+
+
+/*
 ==============================================================================================
 PAGES VIEWS STYLES
 ==============================================================================================
@@ -756,10 +827,14 @@ INFO WRAPPER STYLES
   margin-bottom: 30px;
 }
 
-.view-display-id-agenda_block .gridWrapper {
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  border-bottom: 1px solid #999;
+.view-display-id-agenda_block .node-event.view-mode-block {
+background: #fff;
+padding: 10px;
+}
+
+
+.view-display-id-agenda_block .gridWrapper:last-child {
+  /*border-bottom: none; */
 }
 
 .mistral-pubstate-coming-soon, .mistral-pubstate-new, .mistral-status-sold-out  {
@@ -772,7 +847,6 @@ INFO WRAPPER STYLES
 
 .mistral-pubstate-coming-soon:before {
   content: "à paraître";
-
 }
 
 .mistral-pubstate-new:before {
@@ -801,11 +875,11 @@ body {
 }
 
 .preFooter {
-    margin-top: 60px;
+    margin-top: 90px;
 }
 
 .front .preFooter {
-  margin-top: 90px;
+  margin-top: 120px;
 }
 
 .footer {
@@ -838,3 +912,11 @@ body {
 MEDIA QUERIES
 ==============================================================================================
 */
+
+@media(max-width:1199px){
+	.block-custom-search-blocks {
+ 		 margin-right: 0;
+	}
+}
+
+

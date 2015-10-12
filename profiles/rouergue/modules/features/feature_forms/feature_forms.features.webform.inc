@@ -78,6 +78,9 @@ $webforms = array();
       'callback' => 'date_iso8601',
     ),
   ),
+  'path' => array(
+    'pathauto' => 0,
+  ),
   'webform' => array(
     'next_serial' => 3,
     'confirmation' => '<p>Votre demande de catalogue a bien été reçue....</p>
@@ -217,20 +220,20 @@ J|Jeunesse',
         'value' => '',
         'extra' => array(
           'title_display' => 'before',
+          'description_above' => 0,
           'private' => 0,
           'wrapper_classes' => '',
           'css_classes' => '',
           'width' => 25,
+          'placeholder' => 'Prénom',
           'maxlength' => '',
           'field_prefix' => '',
           'field_suffix' => '',
           'disabled' => 0,
           'unique' => 0,
           'description' => '',
-          'placeholder' => '',
           'attributes' => array(),
           'analysis' => FALSE,
-          'description_above' => FALSE,
         ),
         'required' => 1,
         'weight' => 4,
@@ -328,7 +331,7 @@ J|Jeunesse',
   'picture' => 0,
   'data' => NULL,
   'webform_features_author' => '',
-  'webform_features_revision_author' => '',
+  'webform_features_revision_author' => 'admin',
 );
 return $webforms;
 }

@@ -2320,7 +2320,7 @@ legend {
   line-height: inherit;
   color: #000000;
   border: 0;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #666666;
 }
 label {
   display: inline-block;
@@ -2821,7 +2821,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #000000;
-  background-color: #808080;
+  background-color: #ffffff;
   border-color: #000000;
 }
 .btn-primary:hover,
@@ -2852,15 +2852,12 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #808080;
+  background-color: #ffffff;
   border-color: #000000;
 }
 .btn-primary .badge {
-  color: #808080;
+  color: #ffffff;
   background-color: #000000;
-}
-.btn-primary {
-  border: 2px solid #000000;
 }
 .btn-success {
   color: #a4ba6f;
@@ -4987,18 +4984,14 @@ a.list-group-item-danger.active:focus {
 }
 .panel {
   margin-bottom: 20px;
-  background-color: #ffffff;
-  border: 1px solid transparent;
+  background-color: #f2f2f2;
   border-radius: 0px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body {
   padding: 15px;
 }
 .panel-heading {
   padding: 10px 15px;
-  border-bottom: 1px solid transparent;
   border-top-right-radius: -1px;
   border-top-left-radius: -1px;
 }
@@ -5017,9 +5010,6 @@ a.list-group-item-danger.active:focus {
 .panel-footer {
   padding: 10px 15px;
   background-color: #ffffff;
-  border-top: 1px solid #000000;
-  border-bottom-right-radius: -1px;
-  border-bottom-left-radius: -1px;
 }
 .panel > .list-group {
   margin-bottom: 0;
@@ -5099,10 +5089,6 @@ a.list-group-item-danger.active:focus {
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
   border-bottom-right-radius: -1px;
 }
-.panel > .panel-body + .table,
-.panel > .panel-body + .table-responsive {
-  border-top: 1px solid #000000;
-}
 .panel > .table > tbody:first-child > tr:first-child th,
 .panel > .table > tbody:first-child > tr:first-child td {
   border-top: 0;
@@ -5176,32 +5162,26 @@ a.list-group-item-danger.active:focus {
 .panel-group .panel-heading {
   border-bottom: 0;
 }
-.panel-group .panel-heading + .panel-collapse > .panel-body {
-  border-top: 1px solid #000000;
-}
 .panel-group .panel-footer {
   border-top: 0;
 }
-.panel-group .panel-footer + .panel-collapse .panel-body {
-  border-bottom: 1px solid #000000;
-}
 .panel-default {
-  border-color: #000000;
+  border-color: none;
 }
 .panel-default > .panel-heading {
   color: #000000;
-  background-color: #ffffff;
-  border-color: #000000;
+  background-color: none;
+  border-color: none;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #000000;
+  border-top-color: none;
 }
 .panel-default > .panel-heading .badge {
-  color: #ffffff;
+  color: none;
   background-color: #000000;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #000000;
+  border-bottom-color: none;
 }
 .panel-primary {
   border-color: #000000;
@@ -5347,8 +5327,8 @@ a.list-group-item-danger.active:focus {
   line-height: 1;
   color: #000000;
   text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 .close:hover,
 .close:focus {
@@ -5425,8 +5405,8 @@ button.close {
   filter: alpha(opacity=0);
 }
 .modal-backdrop.in {
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  opacity: 0.8;
+  filter: alpha(opacity=80);
 }
 .modal-header {
   padding: 15px;
@@ -6167,5 +6147,786 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important;
+  }
+}
+/*
+==============================================================================================
+GLOBAL STYLES
+==============================================================================================
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #4d4d4d;
+}
+h1.page-header {
+  margin-top: 0;
+  border-bottom: none;
+}
+h2.block-title {
+  font-size: 18px;
+  font-family: "corporatesdemi";
+  color: #f14a1f;
+  text-transform: lowercase;
+}
+a {
+  transition: .5s;
+}
+a:active,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+label {
+  font-family: "corporatesdemi";
+}
+.field .field-label {
+  font-family: "corporatesdemi";
+}
+.field-items,
+.field-item,
+.field-name-field-firstname,
+.field-name-field-lastname {
+  display: inline;
+}
+.field-name-field-firstname:after {
+  content: " ";
+}
+.breadcrumb {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 24px;
+}
+.modal-dialog {
+  width: 80%;
+}
+.modal-content {
+  height: 800px;
+}
+.modal-body {
+  height: 100%;
+}
+.modal iframe {
+  height: 93%;
+}
+.btn {
+  transition: .5s;
+}
+.btn-primary:hover {
+  background: #f14a1f;
+}
+/*
+==============================================================================================
+FORMS & PAGINATION
+==============================================================================================
+*/
+.ui-datepicker {
+  z-index: 1000!important;
+}
+.pagination {
+  float: right;
+}
+.container-inline-date .form-item,
+.container-inline-date .form-item input {
+  width: 100%;
+}
+.view-display-id-page_with_page_title_1 .view-footer,
+.view-display-id-page .view-footer,
+.view-display-id-catalog_multi .view-footer {
+  font-family: "corporatesdemi";
+  margin-top: 26px;
+}
+.block-views-exp-universes-page {
+  display: inline-block;
+}
+.view-id-universes_descriptions .views-field-description p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+/*
+==============================================================================================
+BLOCKS STYLES
+==============================================================================================
+*/
+#block-views-exp-universes-page {
+  display: inline-block;
+}
+#block-feature-catalog-rouergue-catalog-links {
+  display: inline-block;
+}
+#block-feature-catalog-rouergue-catalog-links a {
+  display: table;
+  margin-top: -32px;
+}
+#block-views-first-level-universes-block .views-field {
+  margin-bottom: 10px;
+}
+#block-views-news-news-block {
+  margin-top: 20px;
+}
+#block-views-catalog-catalog-new-books-block,
+#block-views-catalog-same-author-books {
+  margin-bottom: 20px;
+}
+#block-views-events-agenda-front-block h2.block-title {
+  font-family: "corporateslight";
+  font-size: 72px;
+  color: #666666;
+}
+#boxes-box-front_page_message {
+  margin-bottom: 45px;
+  letter-spacing: 2px;
+  color: #4d4d4d;
+}
+/*
+NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
+*/
+.view-display-id-news_block .views-field-field-news-url {
+  position: relative;
+  background-color: #f2f2f2;
+  margin-top: -30px;
+  width: 200px;
+  height: 30px;
+  font-size: 18px;
+  padding: 5px;
+  float: right;
+  text-align: center;
+  border-top-left-radius: 5px;
+}
+.view-display-id-catalog_new_books_block {
+  margin-top: 60px;
+}
+#newbooksBanner img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+  width: 160px;
+  height: 160px;
+}
+/*
+==============================================================================================
+CAROUSEL STYLES
+==============================================================================================
+*/
+.carousel-control {
+  margin-right: 60px;
+  top: auto;
+  bottom: -30px;
+  opacity: 1;
+}
+.carousel-control.left,
+.carousel-control.right {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #f14a1f;
+  text-shadow: none;
+}
+.carousel-control.left:hover,
+.carousel-control.right:hover {
+  background-color: #999;
+}
+.carousel-control.left {
+  right: 75px;
+  left: auto;
+}
+.carousel-control.right {
+  right: -10px;
+  left: auto;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  top: 1px;
+  color: #000;
+  transition: .5s;
+}
+.carousel-control .icon-prev {
+  left: 30px;
+}
+.carousel-control .icon-next {
+  right: 30px;
+}
+.carousel-control:hover .icon-prev {
+  left: 10px;
+}
+.carousel-control:hover .icon-next {
+  right: 10px;
+}
+.carousel-indicators {
+  position: absolute;
+  top: -20px;
+  z-index: 500;
+  width: 100%;
+  left: 0;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+  text-align: right;
+}
+.carousel-indicators li {
+  border: 1px solid #999;
+}
+.carousel-indicators .active {
+  background-color: #999;
+}
+/*
+AGENDA
+*/
+.node-event.view-mode-list {
+  background-color: #fff;
+}
+.group-event-details {
+  padding: 10px;
+}
+.field-name-field-dates,
+.field-name-field-adresse {
+  font-size: 18px;
+  font-family: "corporatesdemi";
+  text-transform: uppercase;
+  color: #000;
+}
+.field-name-field-adresse {
+  font-size: 16px;
+  font-family: "corporatesdemi";
+  text-transform: uppercase;
+  color: #000;
+}
+.field-name-field-event-type {
+  text-transform: uppercase;
+}
+.view-id-events .field-name-title {
+  font-family: "corporatesdemi";
+  text-transform: uppercase;
+  color: #000;
+}
+.field-name-title a,
+.field-name-node-link a {
+  color: #000;
+}
+.field-name-title a:hover,
+.field-name-title a:active,
+.field-name-node-link a:hover,
+.field-name-node-link a:active {
+  color: #f14a1f;
+}
+.field-name-node-link {
+  font-family: "corporatesdemi";
+  float: right;
+}
+.view-events p {
+  margin-bottom: 0;
+  color: #666666;
+  clear: left;
+}
+.block-feature-events li a.active {
+  color: #f14a1f;
+}
+/*
+WORKSHOPS CAROUSEL
+*/
+.view-display-id-workshops_front_block .field-name-fabrique-title p {
+  font-family: "corporateslight";
+  font-size: 80px;
+  margin-left: 40px;
+  margin-top: 40px;
+  color: #808080;
+}
+.view-display-id-workshops_front_block .field-name-title {
+  margin-left: 30%;
+}
+.view-display-id-workshops_front_block .field-name-title a {
+  color: #f14a1f;
+  font-size: 30px;
+}
+.view-display-id-workshops_front_block .field-name-title a:hover,
+.view-display-id-workshops_front_block .field-name-title a:active {
+  color: #666666;
+}
+.view-display-id-workshops_front_block img {
+  border-radius: 20px;
+}
+/*
+==============================================================================================
+VIEWS STYLES
+==============================================================================================
+*/
+.view-catalog .view-header,
+.view-universes .view-header {
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.view-display-id-events_list_page .nav-tabs {
+  font-size: 18px;
+}
+/* Liste des Univers sur la page d'accueil*/
+.view-id-first_level_universes li {
+  display: inline;
+  float: left;
+  text-align: left;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.view-id-first_level_universes li:first-of-type {
+  padding-left: 120px;
+}
+.view-display-id-authors .views-field-field-displayed-name {
+  text-align: center;
+  margin-top: 5px;
+}
+/*
+
+
+==============================================================================================
+MENUS STYLES
+==============================================================================================
+*/
+/*
+MAIN MENU
+*/
+.menu.navbar-nav {
+  margin-top: 10px;
+  margin-left: 30px;
+  text-transform: lowercase;
+  font-size: 15px;
+}
+.menu.navbar-nav li > a {
+  z-index: 100;
+}
+.menu.navbar-nav .active,
+.menu.navbar-nav li > a:hover,
+.menu.navbar-nav li > a:focus {
+  color: #f14a1f;
+}
+.navbar-brand {
+  margin-top: 60px;
+  padding-left: 80px;
+  font-size: 20px;
+  background-color: #f14a1f;
+  border-radius: 5px;
+  height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.navbar-default .navbar-brand {
+  color: #f2f2f2;
+}
+/*
+SEARCH FORM
+*/
+.block-custom-search-blocks {
+  display: block;
+  margin-top: 20px;
+  margin-right: 150px;
+  float: right;
+}
+.search-form .custom-search-box {
+  display: inline-block;
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 30px;
+  width: 200px;
+  border: none;
+  background-color: #ffffff;
+}
+.form-item-custom-search-blocks-form-1 {
+  display: inline-block;
+}
+.search-form .custom-search-box:focus {
+  border: 1px solid #1a1a1a;
+}
+.search-form .btn {
+  border: none;
+  height: 30px;
+  background-color: #333333;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #fff;
+  margin-top: -1px;
+  margin-left: -23px;
+}
+/*
+UNIVERSE MENU
+*/
+#block-menu-menu-universe {
+  font-family: "corporatesregular";
+  font-size: 15px;
+  margin-top: 60px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #000;
+}
+#block-menu-menu-universe .nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #000000;
+  border-radius: 5px;
+}
+#block-menu-menu-universe a.active-trail,
+#block-menu-menu-universe a:hover,
+#block-menu-menu-universe a.active {
+  background-color: #e5e5e5;
+  font-family: "corporatesdemi";
+}
+#block-menu-menu-universe .dhtml-menu-icon {
+  display: none;
+}
+/* second level */
+#block-menu-menu-universe .dhtml-folder .leaf a,
+#block-menu-menu-universe .dhtml-folder .dhtml-folder a,
+#block-menu-menu-universe .dhtml-folder .dhtml-folder a {
+  padding-left: 30px;
+}
+/* third level */
+#block-menu-menu-universe .dhtml-folder .dhtml-folder .leaf a {
+  padding-left: 50px;
+}
+#block-menu-menu-universe .leaf .active-trail {
+  background-color: #e5e5e5;
+  font-family: "corporatesdemi";
+}
+/*
+FOOTER MENU
+*/
+#block-menu-menu-footer-menu,
+#block-feature-core-rouergue-copyright {
+  text-align: center;
+}
+#block-menu-menu-footer-menu ul li a,
+#block-feature-core-rouergue-copyright {
+  padding-top: 0;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#block-menu-menu-footer-menu ul li {
+  display: inline-block;
+}
+#boxes-box-footer_social_links p {
+  line-height: 24px;
+}
+/*
+==============================================================================================
+NODES STYLES
+==============================================================================================
+*/
+/*
+ARTICLE NODE
+*/
+.node-article.view-mode-full {
+  margin-bottom: 30px;
+}
+.node-type-article h1 {
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding-left: 100px;
+}
+.node-type-article .block-system .col-sm-12 {
+  margin-bottom: 20px;
+}
+.node-type-article h2.block-title {
+  display: inline-block;
+  margin-top: 30px;
+  text-align: left;
+}
+.node-type-article .field-name-field-subtitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 100px;
+}
+.node-type-article .group-contributors {
+  margin-bottom: 20px;
+}
+.node-type-article .view-fc-contributors a {
+  font-family: "corporatesdemi";
+  color: #000;
+}
+.node-type-article .view-fc-contributors a:hover {
+  color: #f14a1f;
+}
+.node-type-article .view-fc-contributors h3 {
+  font-family: "corporatesdemi";
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.node-type-article .view-display-id-book_contributors_others {
+  margin-bottom: 30px;
+}
+.node-type-article .field-name-field-themes .field-label,
+.node-type-article .field-name-field-readership .field-label {
+  font-size: 16px;
+  line-height: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.node-type-article .group-couv {
+  margin-bottom: 10px;
+}
+.group-infos-article {
+  color: #000;
+  font-family: "corporatesdemi";
+}
+.field-name-field-readership {
+  margin-top: 30px;
+  font-size: 18px;
+}
+.field-name-field-readership .field-item {
+  display: block;
+  text-transform: lowercase;
+}
+.field-name-field-readership a {
+  color: #f14a1f;
+}
+.field-name-field-readership a:hover {
+  color: #666666;
+}
+.field-name-field-themes {
+  margin-top: 20px;
+  font-size: 16px;
+  text-transform: lowercase;
+}
+.field-name-field-themes .field-item:after {
+  content: ",";
+  margin-right: 5px;
+}
+.field-name-field-themes .field-item:last-of-type:after {
+  content: "";
+}
+.node-type-article .field-name-field_bs_button {
+  text-align: right;
+}
+.node-type-article .field-name-field_bs_button a {
+  font-family: "corporatesdemi";
+  font-size: 14px;
+  color: #f14a1f;
+  margin-bottom: 10px;
+}
+.node-type-article .field-name-field_bs_button a:hover {
+  color: #666666;
+}
+/*
+AGENDA NODE
+*/
+.node-type-event .field-name-title h2 {
+  font-family: "corporatesdemi";
+  color: #000;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+.node-type-event .field-name-field-dates {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+.node-type-event .field-name-field-event-image {
+  padding-bottom: 20px;
+}
+.node-type-event .block-feature-events {
+  float: right;
+}
+.node-type-event .field-name-field-adresse {
+  margin-top: 30px;
+}
+/*
+CONTRIBUTOR NODE
+*/
+.node-type-contributor h1 {
+  margin-top: 0;
+  font-size: 30px;
+  margin-bottom: 10px;
+  padding-left: 100px;
+}
+/*
+WORKSHOP NODE
+*/
+.media-soundcloud-player {
+  width: 100%;
+  max-height: 150px;
+}
+.node-type-workshops .mistral-pubstate-coming-soon:before {
+  content: "" !important;
+}
+.node-type-workshops .mistral-pubstate-new:before {
+  content: "" !important;
+}
+.node-type-workshops .mistral-status-sold-out:before {
+  content: "" !important;
+}
+.field-collection-item-field-collection-gallery {
+  margin-bottom: 30px;
+}
+.field-name-field-gallery-caption {
+  padding-top: 5px;
+}
+.field-name-field-event-author.field-type-entityreference {
+  margin-bottom: 30px;
+}
+.field-name-field-event-author.field-type-entityreference .field-item:after {
+  content: " •";
+  color: #4d4d4d;
+}
+.field-name-field-event-author.field-type-entityreference .field-item:last-child:after {
+  content: "";
+}
+/*
+==============================================================================================
+PAGES VIEWS STYLES
+==============================================================================================
+*/
+/*
+AGENDA LIST
+*/
+.page-agenda .page-header {
+  display: inline-block;
+  float: left;
+}
+.page-agenda .block-feature-events {
+  display: inline-block;
+  float: left;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.page-agenda .view-content {
+  clear: left;
+}
+/*
+CONTRIBUTORS LIST
+*/
+.page-auteurs .attachment-before {
+  margin-bottom: 30px;
+  text-align: right;
+}
+.page-auteurs .views-summary {
+  margin-right: 5px;
+}
+.page-auteurs .views-summary a {
+  display: inline-block;
+  text-align: center;
+  border-radius: 30px;
+  line-height: 20px;
+  width: 20px;
+  height: 20px;
+}
+.page-auteurs .views-summary a.active,
+.page-auteurs .views-summary a:hover {
+  color: #fff;
+  background: #f14a1f;
+}
+/*
+==============================================================================================
+INFO WRAPPER STYLES
+==============================================================================================
+*/
+.infosWrapper {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+}
+.infosWrapper a {
+  color: #fff;
+}
+.infosBg {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-radius: 5px;
+}
+.infosWrapper .field-name-field-contributors {
+  margin-bottom: 10px;
+}
+.infosWrapper h4,
+.infosWrapper .field-name-field-firstname,
+.infosWrapper .field-name-field-lastname {
+  color: #fff;
+  margin-top: 0;
+}
+.gridWrapper {
+  margin-bottom: 30px;
+}
+.view-display-id-agenda_block .node-event.view-mode-block {
+  background: #fff;
+  padding: 10px;
+}
+.view-display-id-agenda_block .gridWrapper:last-child {
+  /*border-bottom: none; */
+}
+.mistral-pubstate-coming-soon,
+.mistral-pubstate-new,
+.mistral-status-sold-out {
+  height: 22px;
+  margin-top: -22px;
+  font-family: "corporatesdemi";
+  font-size: 16px;
+  color: #f14a1f;
+}
+.mistral-pubstate-coming-soon:before {
+  content: "à paraître";
+}
+.mistral-pubstate-new:before {
+  content: "nouveauté";
+}
+.mistral-status-sold-out:before {
+  content: "épuisé";
+}
+/*
+==============================================================================================
+FOOTER
+==============================================================================================
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.preFooter {
+  margin-top: 90px;
+}
+.front .preFooter {
+  margin-top: 120px;
+}
+.footer {
+  margin-top: 30px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  min-height: 40px;
+  color: #ffffff;
+}
+.footer .container {
+  padding-top: 10px;
+  height: 100%;
+  background-color: #808080;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.footer a {
+  color: #fff;
+}
+.footer a:hover {
+  color: #f14a1f;
+}
+/*
+==============================================================================================
+MEDIA QUERIES
+==============================================================================================
+*/
+@media (max-width: 1199px) {
+  .block-custom-search-blocks {
+    margin-right: 0;
   }
 }
