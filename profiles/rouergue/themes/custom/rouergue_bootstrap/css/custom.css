@@ -692,6 +692,33 @@ AGENDA LIST
 }
 
 /*
+CONTRIBUTORS LIST
+*/
+.page-auteurs .attachment-before {
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+.page-auteurs .views-summary {
+  margin-right: 5px;
+}
+
+.page-auteurs .views-summary a {
+  display: inline-block;
+  text-align: center;
+  border-radius: 30px;
+  line-height: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.page-auteurs .views-summary a.active, .page-auteurs .views-summary a:hover {
+  color: #fff;
+  background: #f14a1f;
+
+}
+
+/*
 ==============================================================================================
 INFO WRAPPER STYLES
 ==============================================================================================
