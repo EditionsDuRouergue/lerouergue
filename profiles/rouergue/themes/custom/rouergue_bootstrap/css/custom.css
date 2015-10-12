@@ -292,6 +292,7 @@ AGENDA
 .view-events p {
     margin-bottom: 0;
     color: #666666;
+    clear: left;
 }
 
 .block-feature-events li a.active {
@@ -501,7 +502,7 @@ FOOTER MENU
 }
 
 #boxes-box-footer_social_links p {
-  line-height: 32px;
+  line-height: 24px;
 }
 
 /*
