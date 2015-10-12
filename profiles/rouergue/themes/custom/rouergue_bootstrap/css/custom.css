@@ -20,11 +20,6 @@ h2.block-title {
   text-transform: lowercase;
 }
 
-
-h4, h5, h6, p {
-
-}
-
 a {
   transition:.5s;
 }
@@ -57,19 +52,8 @@ label {
 }
 
 .views-exposed-form .views-exposed-widget .form-submit {
-margin-top: 24px;
+  margin-top: 24px;
 }
-
-/*
-.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
-font-size: 50px;
-}
-
-.carousel-control.left, .carousel-control.right{
-text-shadow: none;
-width: 40px;
-}
-*/
 
 /*
 ==============================================================================================
@@ -123,12 +107,6 @@ BLOCKS STYLES
   margin-top: -32px;
 }
 
-
-#block-views-first-level-universes-block {
-
-
-}
-
 #block-views-first-level-universes-block .views-field {
   margin-bottom: 10px;
 }
@@ -146,11 +124,16 @@ BLOCKS STYLES
 }
 
 #block-views-events-agenda-front-block h2.block-title {
-font-family: "corporateslight";
-font-size: 72px;
-color: #666666;
+  font-family: "corporateslight";
+  font-size: 72px;
+  color: #666666;
 }
 
+#boxes-box-front_page_message {
+  margin-bottom: 45px;
+  letter-spacing: 2px;
+  color: #4d4d4d;
+}
 
 /*
 NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
@@ -172,7 +155,6 @@ NEW BOOKS CAROUSEL & SAME AUTHOR BOOKS CAROUSEL & WORKSHOPS CAROUSEL
 
 
 .view-display-id-catalog_new_books_block{
-
   margin-top: 60px;
 }
 
@@ -222,8 +204,7 @@ CAROUSEL STYLES
 .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
   top: 1px;
   color: #000;
-    transition:.5s;
-
+  transition:.5s;
 }
 
 .carousel-control .icon-prev {
@@ -301,7 +282,6 @@ AGENDA
 
 .field-name-field-event-type {
   text-transform: uppercase;
-
 }
 
 .view-id-events .field-name-title {
@@ -331,8 +311,8 @@ AGENDA
 
 .block-feature-events li a.active {
     color: #f14a1f;
-
 }
+
 /*
 WORKSHOPS CAROUSEL
 */
@@ -408,7 +388,6 @@ MENUS STYLES
 MAIN MENU
 */
 .menu.navbar-nav {
-  
   margin-top: 10px;
   margin-left: 30px;
   text-transform: lowercase;
@@ -460,9 +439,6 @@ SEARCH FORM
   background-color: #ffffff;
 }
 
-.search-form .custom-search-box input{
-}
-
 .form-item-custom-search-blocks-form-1 {
   display: inline-block;
 }
@@ -483,8 +459,6 @@ SEARCH FORM
 
 }
 
-
-
 /*
 UNIVERSE MENU
 */
@@ -504,11 +478,9 @@ UNIVERSE MENU
   border-radius: 5px;
 }
 
-
 #block-menu-menu-universe a.active-trail ,#block-menu-menu-universe a:hover,  #block-menu-menu-universe a.active {
   background-color: #e5e5e5;
   font-family: "corporatesdemi";
-
 }
 
 #block-menu-menu-universe .dhtml-menu-icon {
@@ -530,6 +502,12 @@ UNIVERSE MENU
   font-family: "corporatesdemi";
 }
 
+/*
+FOOTER MENU
+*/
+#block-menu-menu-footer-menu ul li {
+  display: inline-block;
+}
 
 
 /*
@@ -835,7 +813,7 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  /*height: 60px; */
   color: #ffffff;
 }
 

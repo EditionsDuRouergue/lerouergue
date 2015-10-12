@@ -107,11 +107,17 @@ function feature_contextes_context_default_contexts() {
           'region' => 'content',
           'weight' => '-6',
         ),
+        'boxes-front_page_message' => array(
+          'module' => 'boxes',
+          'delta' => 'front_page_message',
+          'region' => 'content',
+          'weight' => '-5',
+        ),
         'views-workshops-workshops_front_block' => array(
           'module' => 'views',
           'delta' => 'workshops-workshops_front_block',
           'region' => 'content',
-          'weight' => '-5',
+          'weight' => '-4',
         ),
       ),
     ),

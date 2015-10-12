@@ -19,12 +19,11 @@ function feature_core_default_box() {
   $box->description = 'Message page d\'accueil';
   $box->options = array(
     'body' => array(
-      'value' => '<p class="rtecenter"><span style="font-size:18px"><strong>Phrase d’accroche</strong></span><br />
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis congue, lorem et dictum iaculis, quam enim molestie sem,<br />
-vel feugiat lacus leo non felis. Etiam at nunc convallis nisl hendrerit pharetra sed vulputate risus.</p>
+      'value' => '<p class="rteright"><span style="font-size:18px">retrouvez-nous sur nos deux pages facebook pour échanger et commenter</span></p>
 ',
       'format' => 'full_html',
     ),
+    'additional_classes' => '',
   );
   $export['front_page_message'] = $box;
 
