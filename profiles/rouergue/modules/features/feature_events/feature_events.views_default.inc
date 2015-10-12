@@ -22,7 +22,7 @@ function feature_events_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Agenda';
+  $handler->display->display_options['title'] = 'agenda';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -47,25 +47,25 @@ function feature_events_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Entête: Global : Block area */
+  /* Header: Global: Block area */
   $handler->display->display_options['header']['block']['id'] = 'block';
   $handler->display->display_options['header']['block']['table'] = 'views';
   $handler->display->display_options['header']['block']['field'] = 'block';
   $handler->display->display_options['header']['block']['label'] = 'Agenda links';
   $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
   $handler->display->display_options['header']['block']['title'] = '<none>';
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Critère de tri: Contenu : Dates - date de début (field_dates) */
+  /* Sort criterion: Content: Dates -  start date (field_dates) */
   $handler->display->display_options['sorts']['field_dates_value']['id'] = 'field_dates_value';
   $handler->display->display_options['sorts']['field_dates_value']['table'] = 'field_data_field_dates';
   $handler->display->display_options['sorts']['field_dates_value']['field'] = 'field_dates_value';
-  /* Filtre contextuel: Contenu : Dates - date de début (field_dates) */
+  /* Contextual filter: Content: Dates -  start date (field_dates) */
   $handler->display->display_options['arguments']['field_dates_value']['id'] = 'field_dates_value';
   $handler->display->display_options['arguments']['field_dates_value']['table'] = 'field_data_field_dates';
   $handler->display->display_options['arguments']['field_dates_value']['field'] = 'field_dates_value';
@@ -76,21 +76,21 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['field_dates_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_dates_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_dates_value']['summary_options']['items_per_page'] = '25';
-  /* Critère de filtrage: Contenu : Publié */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Contenu : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'event' => 'event',
   );
-  /* Critère de filtrage: Contenu : Dates - date de fin (field_dates:value2) */
+  /* Filter criterion: Content: Dates - end date (field_dates:value2) */
   $handler->display->display_options['filters']['field_dates_value2']['id'] = 'field_dates_value2';
   $handler->display->display_options['filters']['field_dates_value2']['table'] = 'field_data_field_dates';
   $handler->display->display_options['filters']['field_dates_value2']['field'] = 'field_dates_value2';
@@ -115,13 +115,13 @@ function feature_events_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
-  /* Comportement en l'absence de résultats: Global : Block area */
+  /* No results behavior: Global: Block area */
   $handler->display->display_options['empty']['block']['id'] = 'block';
   $handler->display->display_options['empty']['block']['table'] = 'views';
   $handler->display->display_options['empty']['block']['field'] = 'block';
   $handler->display->display_options['empty']['block']['empty'] = TRUE;
   $handler->display->display_options['empty']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
-  /* Comportement en l'absence de résultats: Global : Zone de texte */
+  /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
@@ -129,7 +129,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Pas d\'événement prévu pour ce mois.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Dates - date de début (field_dates) */
+  /* Contextual filter: Content: Dates -  start date (field_dates) */
   $handler->display->display_options['arguments']['field_dates_value']['id'] = 'field_dates_value';
   $handler->display->display_options['arguments']['field_dates_value']['table'] = 'field_data_field_dates';
   $handler->display->display_options['arguments']['field_dates_value']['field'] = 'field_dates_value';
@@ -143,14 +143,14 @@ function feature_events_views_default_views() {
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Contenu : Publié */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Contenu : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -179,7 +179,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'map_block';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Entête: Global : Block area */
+  /* Header: Global: Block area */
   $handler->display->display_options['header']['block']['id'] = 'block';
   $handler->display->display_options['header']['block']['table'] = 'views';
   $handler->display->display_options['header']['block']['field'] = 'block';
@@ -187,7 +187,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
   $handler->display->display_options['header']['block']['title'] = '<none>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -221,7 +221,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -258,7 +258,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Visuel */
+  /* Field: Content: Visuel */
   $handler->display->display_options['fields']['field_event_image']['id'] = 'field_event_image';
   $handler->display->display_options['fields']['field_event_image']['table'] = 'field_data_field_event_image';
   $handler->display->display_options['fields']['field_event_image']['field'] = 'field_event_image';
@@ -269,14 +269,14 @@ function feature_events_views_default_views() {
     'image_style' => 'event-block',
     'image_link' => 'content',
   );
-  /* Champ: Contenu : Type d'événement */
+  /* Field: Content: Type d'événement */
   $handler->display->display_options['fields']['field_event_type']['id'] = 'field_event_type';
   $handler->display->display_options['fields']['field_event_type']['table'] = 'field_data_field_event_type';
   $handler->display->display_options['fields']['field_event_type']['field'] = 'field_event_type';
   $handler->display->display_options['fields']['field_event_type']['label'] = '';
   $handler->display->display_options['fields']['field_event_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_event_type']['type'] = 'taxonomy_term_reference_plain';
-  /* Champ: Contenu : Dates */
+  /* Field: Content: Dates */
   $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
   $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
   $handler->display->display_options['fields']['field_dates']['field'] = 'field_dates';
@@ -289,14 +289,14 @@ function feature_events_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Description */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -306,7 +306,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '200',
   );
-  /* Champ: Contenu : Lien */
+  /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
@@ -321,20 +321,20 @@ function feature_events_views_default_views() {
   $handler->display->display_options['title'] = 'Agenda de l\'auteur';
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relation: Entity Reference : Entité référencée */
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_event_author_target_id']['id'] = 'field_event_author_target_id';
   $handler->display->display_options['relationships']['field_event_author_target_id']['table'] = 'field_data_field_event_author';
   $handler->display->display_options['relationships']['field_event_author_target_id']['field'] = 'field_event_author_target_id';
   $handler->display->display_options['relationships']['field_event_author_target_id']['label'] = 'Auteur(s)';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Dates */
+  /* Field: Content: Dates */
   $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
   $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
   $handler->display->display_options['fields']['field_dates']['field'] = 'field_dates';
@@ -347,14 +347,14 @@ function feature_events_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Champ: Contenu : Adresse - Localité (c&#039;est-à-dire Ville) */
+  /* Field: Content: Adresse - Locality (i.e. City) */
   $handler->display->display_options['fields']['field_adresse_locality']['id'] = 'field_adresse_locality';
   $handler->display->display_options['fields']['field_adresse_locality']['table'] = 'field_data_field_adresse';
   $handler->display->display_options['fields']['field_adresse_locality']['field'] = 'field_adresse_locality';
   $handler->display->display_options['fields']['field_adresse_locality']['label'] = '';
   $handler->display->display_options['fields']['field_adresse_locality']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -367,7 +367,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $translatables['events'] = array(
     t('Master'),
-    t('Agenda'),
+    t('agenda'),
     t('plus'),
     t('Appliquer'),
     t('Réinitialiser'),
@@ -384,11 +384,11 @@ function feature_events_views_default_views() {
     t('Agenda links'),
     t('Tout'),
     t('Liste événements'),
+    t('more'),
     t('Pas d\'événement prévu pour ce mois.'),
     t('Bloc carto'),
     t('Bloc pages agenda'),
     t('Bloc accueil'),
-    t('agenda'),
     t('Lire la suite'),
     t('Bloc pages auteur'),
     t('Agenda de l\'auteur'),

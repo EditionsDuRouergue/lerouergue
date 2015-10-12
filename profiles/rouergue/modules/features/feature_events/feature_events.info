@@ -99,6 +99,7 @@ features[variable][] = node_options_event
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
 features[variable][] = pathauto_node_event_pattern
+features[variable][] = pathauto_taxonomy_term_event_types_pattern
 features[views_view][] = events
 features_exclude[field_base][field_position] = field_position
 features_exclude[uuid_term][8c9ae363-be21-4cdf-a8ca-9882444cb008] = 8c9ae363-be21-4cdf-a8ca-9882444cb008

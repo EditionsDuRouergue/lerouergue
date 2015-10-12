@@ -186,5 +186,12 @@ function feature_events_strongarm() {
   $strongarm->value = 'agenda/[node:title]';
   $export['pathauto_node_event_pattern'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_event_types_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_event_types_pattern'] = $strongarm;
+
   return $export;
 }
