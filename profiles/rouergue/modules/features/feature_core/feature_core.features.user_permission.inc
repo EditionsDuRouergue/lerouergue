@@ -57,7 +57,6 @@ function feature_core_user_default_permissions() {
     'name' => 'access site in maintenance mode',
     'roles' => array(
       'administrator' => 'administrator',
-      'webmaster' => 'webmaster',
     ),
     'module' => 'system',
   );
