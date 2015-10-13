@@ -1,3 +1,7 @@
+Rouergue 1.0.0, 2015-09-12
+--------------------------
+Production version.
+
 Rouergue 0.3.3, 2015-06-09
 --------------------------
 Patch on field_collection contrib module (migrate-fatal-error-2315921-01.patch).

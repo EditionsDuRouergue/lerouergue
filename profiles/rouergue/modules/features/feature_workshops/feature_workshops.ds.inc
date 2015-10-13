@@ -197,17 +197,17 @@ function feature_workshops_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'central' => array(
-        0 => 'field_planned_release_date',
-        1 => 'field_inner_pages',
-        2 => 'body',
+        0 => 'field_inner_pages',
+        1 => 'body',
+        2 => 'field_planned_release_date',
         3 => 'field_event_author',
         4 => 'field_collection_gallery',
       ),
     ),
     'fields' => array(
-      'field_planned_release_date' => 'central',
       'field_inner_pages' => 'central',
       'body' => 'central',
+      'field_planned_release_date' => 'central',
       'field_event_author' => 'central',
       'field_collection_gallery' => 'central',
     ),

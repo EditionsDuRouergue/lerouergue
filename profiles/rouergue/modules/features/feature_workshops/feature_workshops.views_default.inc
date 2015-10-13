@@ -26,7 +26,11 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -109,6 +113,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc media workshop */
   $handler = $view->new_display('block', 'Bloc media workshop', 'workshop_media_block');
@@ -167,6 +172,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc livre lié */
   $handler = $view->new_display('block', 'Bloc livre lié', 'workshop_linked_book_block');
@@ -202,6 +208,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc accueil */
   $handler = $view->new_display('block', 'Bloc accueil', 'workshops_front_block');
@@ -234,19 +241,6 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'carousel';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field collection item: Image de galerie */
-  $handler->display->display_options['fields']['field_gallery']['id'] = 'field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['table'] = 'field_data_field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['field'] = 'field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['label'] = '';
-  $handler->display->display_options['fields']['field_gallery']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_gallery']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_gallery']['settings'] = array(
-    'image_style' => 'workshop-block',
-    'image_link' => 'content',
-  );
-  $handler->display->display_options['fields']['field_gallery']['delta_limit'] = '1';
-  $handler->display->display_options['fields']['field_gallery']['delta_offset'] = '0';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -265,6 +259,7 @@ function feature_workshops_views_default_views() {
   );
   $handler->display->display_options['fields']['field_event_author']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_event_author']['multi_type'] = 'ul';
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['workshops'] = array(
     t('Master'),
     t('fabrique'),
