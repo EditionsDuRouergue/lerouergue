@@ -10,6 +10,16 @@
 function feature_catalog_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access service links'.
+  $permissions['access service links'] = array(
+    'name' => 'access service links',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'service_links',
+  );
+
   // Exported permission: 'create article content'.
   $permissions['create article content'] = array(
     'name' => 'create article content',
@@ -67,36 +77,28 @@ function feature_catalog_user_default_permissions() {
   // Exported permission: 'delete terms in functions'.
   $permissions['delete terms in functions'] = array(
     'name' => 'delete terms in functions',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in readership'.
   $permissions['delete terms in readership'] = array(
     'name' => 'delete terms in readership',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in themes'.
   $permissions['delete terms in themes'] = array(
     'name' => 'delete terms in themes',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in universe'.
   $permissions['delete terms in universe'] = array(
     'name' => 'delete terms in universe',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
@@ -139,27 +141,21 @@ function feature_catalog_user_default_permissions() {
   // Exported permission: 'edit terms in functions'.
   $permissions['edit terms in functions'] = array(
     'name' => 'edit terms in functions',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in readership'.
   $permissions['edit terms in readership'] = array(
     'name' => 'edit terms in readership',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in themes'.
   $permissions['edit terms in themes'] = array(
     'name' => 'edit terms in themes',
-    'roles' => array(
-      'webmaster' => 'webmaster',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 

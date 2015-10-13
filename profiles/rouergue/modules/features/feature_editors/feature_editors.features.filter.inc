@@ -18,6 +18,15 @@ function feature_editors_filter_default_formats() {
     'status' => 1,
     'weight' => -9,
     'filters' => array(
+      'invisimail_encode_js_entities' => array(
+        'weight' => -44,
+        'status' => 1,
+        'settings' => array(
+          'encoder' => 'js_entities',
+          'chunk' => 1,
+          'link' => 1,
+        ),
+      ),
       'filter_url' => array(
         'weight' => 0,
         'status' => 1,
@@ -55,22 +64,31 @@ function feature_editors_filter_default_formats() {
     'status' => 1,
     'weight' => -10,
     'filters' => array(
+      'filter_htmlcorrector' => array(
+        'weight' => -46,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'filter_autop' => array(
+        'weight' => -45,
+        'status' => 1,
+        'settings' => array(),
+      ),
       'filter_url' => array(
-        'weight' => 0,
+        'weight' => -43,
         'status' => 1,
         'settings' => array(
           'filter_url_length' => 72,
         ),
       ),
-      'filter_autop' => array(
-        'weight' => 1,
+      'invisimail_encode_js_entities' => array(
+        'weight' => -42,
         'status' => 1,
-        'settings' => array(),
-      ),
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
-        'status' => 1,
-        'settings' => array(),
+        'settings' => array(
+          'encoder' => 'js_entities',
+          'chunk' => 1,
+          'link' => 1,
+        ),
       ),
     ),
   );

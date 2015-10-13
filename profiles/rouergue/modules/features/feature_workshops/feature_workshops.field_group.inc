@@ -21,10 +21,8 @@ function feature_workshops_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Lecteur PDF',
-    'weight' => '18',
-    'children' => array(
-      0 => 'field_inner_pages',
-    ),
+    'weight' => '20',
+    'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Lecteur PDF',

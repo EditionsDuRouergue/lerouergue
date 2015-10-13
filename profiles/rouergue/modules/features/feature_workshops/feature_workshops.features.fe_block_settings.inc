@@ -13,7 +13,7 @@ function feature_workshops_default_fe_block_settings() {
   $export['version'] = '2.0';
 
   $export['views-workshops-workshops_front_block'] = array(
-    'cache' => -1,
+    'cache' => 8,
     'css_class' => '',
     'custom' => 0,
     'delta' => 'workshops-workshops_front_block',

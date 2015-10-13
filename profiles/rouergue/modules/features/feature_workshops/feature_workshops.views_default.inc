@@ -26,7 +26,11 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -55,26 +59,26 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Critère de tri: Contenu : Date de publication */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Contenu : Publié */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Contenu : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -85,6 +89,7 @@ function feature_workshops_views_default_views() {
   /* Display: Liste workshops */
   $handler = $view->new_display('page_with_page_title', 'Liste workshops', 'workshops_page');
   $handler->display->display_options['path'] = 'fabrique';
+  $handler->display->display_options['page_title_pattern'] = 'Fabrique';
 
   /* Display: Bloc liste workshops */
   $handler = $view->new_display('block', 'Bloc liste workshops', 'workshop_page_block');
@@ -98,8 +103,17 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = '1';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'ds';
+  $handler->display->display_options['row_options']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['load_comments'] = 0;
+  $handler->display->display_options['row_options']['alternating'] = 0;
+  $handler->display->display_options['row_options']['grouping'] = 0;
+  $handler->display->display_options['row_options']['advanced'] = 0;
+  $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
+  $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc media workshop */
   $handler = $view->new_display('block', 'Bloc media workshop', 'workshop_media_block');
@@ -115,7 +129,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
@@ -123,7 +137,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nid']['hide_empty'] = TRUE;
-  /* Champ: Contenu : Video */
+  /* Field: Content: Video */
   $handler->display->display_options['fields']['field_video']['id'] = 'field_video';
   $handler->display->display_options['fields']['field_video']['table'] = 'field_data_field_video';
   $handler->display->display_options['fields']['field_video']['field'] = 'field_video';
@@ -135,7 +149,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['fields']['field_video']['settings'] = array(
     'file_view_mode' => 'media_preview',
   );
-  /* Champ: Contenu : Son */
+  /* Field: Content: Son */
   $handler->display->display_options['fields']['field_sound']['id'] = 'field_sound';
   $handler->display->display_options['fields']['field_sound']['table'] = 'field_data_field_sound';
   $handler->display->display_options['fields']['field_sound']['field'] = 'field_sound';
@@ -148,7 +162,7 @@ function feature_workshops_views_default_views() {
     'file_view_mode' => 'default',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -158,6 +172,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc livre lié */
   $handler = $view->new_display('block', 'Bloc livre lié', 'workshop_linked_book_block');
@@ -171,7 +186,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Livre lié */
+  /* Field: Content: Livre lié */
   $handler->display->display_options['fields']['field_article_link']['id'] = 'field_article_link';
   $handler->display->display_options['fields']['field_article_link']['table'] = 'field_data_field_article_link';
   $handler->display->display_options['fields']['field_article_link']['field'] = 'field_article_link';
@@ -183,7 +198,7 @@ function feature_workshops_views_default_views() {
     'links' => 1,
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Filtre contextuel: Contenu : Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -193,6 +208,7 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc accueil */
   $handler = $view->new_display('block', 'Bloc accueil', 'workshops_front_block');
@@ -225,27 +241,14 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'carousel';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Contenu : Galerie */
-  $handler->display->display_options['fields']['field_gallery']['id'] = 'field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['table'] = 'field_data_field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['field'] = 'field_gallery';
-  $handler->display->display_options['fields']['field_gallery']['label'] = '';
-  $handler->display->display_options['fields']['field_gallery']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_gallery']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_gallery']['settings'] = array(
-    'image_style' => 'workshop-block',
-    'image_link' => 'content',
-  );
-  $handler->display->display_options['fields']['field_gallery']['delta_limit'] = '1';
-  $handler->display->display_options['fields']['field_gallery']['delta_offset'] = '0';
-  /* Champ: Contenu : Titre */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Contenu : Auteur(s) */
+  /* Field: Content: Auteur(s) */
   $handler->display->display_options['fields']['field_event_author']['id'] = 'field_event_author';
   $handler->display->display_options['fields']['field_event_author']['table'] = 'field_data_field_event_author';
   $handler->display->display_options['fields']['field_event_author']['field'] = 'field_event_author';
@@ -256,6 +259,7 @@ function feature_workshops_views_default_views() {
   );
   $handler->display->display_options['fields']['field_event_author']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_event_author']['multi_type'] = 'ul';
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['workshops'] = array(
     t('Master'),
     t('fabrique'),
@@ -273,6 +277,7 @@ function feature_workshops_views_default_views() {
     t('suivant ›'),
     t('dernier »'),
     t('Liste workshops'),
+    t('more'),
     t('Bloc liste workshops'),
     t('Liste les titres des autres workshops'),
     t('Bloc media workshop'),

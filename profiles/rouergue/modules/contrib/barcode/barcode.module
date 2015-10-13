@@ -84,6 +84,13 @@ function theme_barcode_image($variables) {
     $barcode['encoding'] = $variables['encoding'];
   }
 
+  $variables['image_format'] = $variables['image_format'] ? $variables['image_format'] : $barcode['image_format'];
+  $variables['encoding'] = $variables['encoding'] ? $variables['encoding' ] : $barcode['encoding'];
+  $variables['height'] = $variables['height'] ? $variables['height'] : $barcode['height'];
+  $variables['barcolor'] = $variables['barcolor'] ? $variables['barcolor'] : $barcode['barcolor'];
+  $variables['bgcolor'] = $variables['bgcolor'] ? $variables['bgcolor'] : $barcode['bgcolor'];
+  $variables['scale'] = $variables['scale'] ? $variables['scale'] : $barcode['scale'];
+
   module_load_include('inc', 'barcode', 'includes/barcode.plugins');
   $filename = barcode_generate_image($barcode, $variables);
   if (!$filename) {
@@ -353,7 +360,7 @@ function barcode_field_formatter_view($object_type, $object, $field, $instance, 
 function barcode_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items) {
   foreach ($items as $entity_id => $entity_items) {
     foreach ($entity_items as $delta => $value) {
-      _barcode_sanitize($items[$entity_id][$delta], $delta, $field, $instances[$entity_id], $entities[$entity_id]);
+      _barcode_sanitize($items[$entity_id][$delta], $delta, $field, $instances[$entity_id], $entities[$entity_id], $entity_type);
     }
   }
 }
@@ -415,13 +422,14 @@ function barcode_field_widget_form(&$form, &$form_state, $field, $instance, $lan
  * change token to appropriate values.
  *
  */
-function _barcode_sanitize(&$item, $delta, &$field, $instance, &$node) {
+function _barcode_sanitize(&$item, $delta, &$field, $instance, $entity, $entity_type) {
   if (empty($item['value'])) {
     return;
   }
-
-  $token_node = isset($node->nid) ? node_load($node->nid) : $node;
-  $item['value'] = token_replace($item['value'], array('node' => $token_node), array('clear' => 1));
+  if (is_numeric($entity)) {
+    $entity = entity_load_single($entity_type, $entity);
+  }
+  $item['value'] = token_replace($item['value'], array($entity_type => $entity), array('clear' => 1));
 }
 
 /**************************************************************************

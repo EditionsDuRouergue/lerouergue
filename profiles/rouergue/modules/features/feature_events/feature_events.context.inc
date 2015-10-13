@@ -29,17 +29,23 @@ function feature_events_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'feature_events-rouergue_agenda_nav' => array(
+          'module' => 'feature_events',
+          'delta' => 'rouergue_agenda_nav',
+          'region' => 'sidebar_second',
+          'weight' => '-10',
+        ),
         'views-events-agenda_map_block' => array(
           'module' => 'views',
           'delta' => 'events-agenda_map_block',
           'region' => 'sidebar_second',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
         'views-events-agenda_block' => array(
           'module' => 'views',
           'delta' => 'events-agenda_block',
           'region' => 'sidebar_second',
-          'weight' => '-9',
+          'weight' => '-8',
         ),
       ),
     ),

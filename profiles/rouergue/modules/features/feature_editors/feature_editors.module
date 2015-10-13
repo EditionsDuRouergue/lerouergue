@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Feature Editors feature.
  */
+
+include_once 'feature_editors.features.inc';

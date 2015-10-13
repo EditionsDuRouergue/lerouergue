@@ -54,11 +54,8 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Couverture Wrapper',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_cover_image',
-      1 => 'field_publication_status',
-    ),
+    'weight' => '26',
+    'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Couverture Wrapper',
@@ -119,7 +116,7 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Infos',
-    'weight' => '15',
+    'weight' => '13',
     'children' => array(
       0 => 'field_format',
       1 => 'field_gencod',

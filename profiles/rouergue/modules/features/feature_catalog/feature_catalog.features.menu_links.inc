@@ -50,11 +50,11 @@ function feature_catalog_menu_default_menu_links() {
     'weight' => -49,
     'customized' => 1,
   );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Auteurs');
   t('Catalogue');
-
 
   return $menu_links;
 }

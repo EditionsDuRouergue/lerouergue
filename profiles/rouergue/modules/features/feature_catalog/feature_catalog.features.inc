@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function feature_catalog_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "boxes" && $api == "box") {
+    return array("version" => "1");
+  }
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
@@ -129,12 +132,64 @@ function feature_catalog_image_default_styles() {
   $styles['article-cover-min'] = array(
     'label' => 'article-cover-min',
     'effects' => array(
-      3 => array(
+      5 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 200,
+          'width' => 260,
           'height' => '',
           'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+      6 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: contributor-cover.
+  $styles['contributor-cover'] = array(
+    'label' => 'contributor-cover',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 370,
+          'height' => 440,
+        ),
+        'weight' => 1,
+      ),
+      2 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: contributor-cover-min.
+  $styles['contributor-cover-min'] = array(
+    'label' => 'contributor-cover-min',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 200,
+          'height' => 240,
         ),
         'weight' => 1,
       ),

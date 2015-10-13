@@ -5,3 +5,5 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 mistral_dumps
+sites/all/translations
+sites/all/modules

@@ -176,16 +176,16 @@ function feature_catalog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '27',
+          'weight' => '28',
         ),
         'title' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
         'path' => array(
-          'weight' => '26',
+          'weight' => '27',
         ),
         'redirect' => array(
-          'weight' => '25',
+          'weight' => '26',
         ),
       ),
       'display' => array(
@@ -296,16 +296,16 @@ function feature_catalog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '12',
+          'weight' => '13',
         ),
         'redirect' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
       ),
       'display' => array(),

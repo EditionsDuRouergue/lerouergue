@@ -12,6 +12,10 @@
 				$(this).children('.infosWrapper').slideUp('slow')
 			});
 
+			$('.node-event.view-mode-list').matchHeight('options');
+			$('.group-event-details .field-name-title p').matchHeight('options');
+			$('.group-event-details .field-name-body p').matchHeight('options');
+			//$('.view-news .view-mode-teaser_home .field-name-title h3, .view-news .view-mode-teaser .field-name-title h3').matchHeight('options');
 
    }
  };

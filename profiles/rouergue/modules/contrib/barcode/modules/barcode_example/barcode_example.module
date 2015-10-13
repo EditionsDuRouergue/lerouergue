@@ -24,7 +24,7 @@ function barcode_example_example($form, &$form_state) {
   ));
 
   $form['barcode'] = array(
-    '#type' => 'barcode',
+    '#type' => 'textfield',
     '#title' => t('Barcode'),
     '#description' => t('Enter a number to generate a barcode image using the %encoding encoding. You can change which encoding is used in the <a href="@settings">Barcode settings page</a>.', array('%encoding' => $encoding, '@settings' => $settings)),
     '#encoding' => $encoding,
