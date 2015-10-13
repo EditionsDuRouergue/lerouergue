@@ -3,7 +3,6 @@ core = 7.x
 package = App
 version = 7.x-0.1
 project = feature_catalog
-dependencies[] = barcode
 dependencies[] = ds_extras
 dependencies[] = entityreference_view_widget
 dependencies[] = feature_core
