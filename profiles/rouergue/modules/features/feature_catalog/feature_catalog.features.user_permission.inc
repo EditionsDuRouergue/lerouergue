@@ -162,7 +162,9 @@ function feature_catalog_user_default_permissions() {
   // Exported permission: 'edit terms in universe'.
   $permissions['edit terms in universe'] = array(
     'name' => 'edit terms in universe',
-    'roles' => array(),
+    'roles' => array(
+      'webmaster' => 'webmaster',
+    ),
     'module' => 'taxonomy',
   );
 
