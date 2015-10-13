@@ -172,13 +172,6 @@ function feature_events_views_default_views() {
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'map_block';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Block area */
-  $handler->display->display_options['header']['block']['id'] = 'block';
-  $handler->display->display_options['header']['block']['table'] = 'views';
-  $handler->display->display_options['header']['block']['field'] = 'block';
-  $handler->display->display_options['header']['block']['label'] = 'Agenda links';
-  $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
-  $handler->display->display_options['header']['block']['title'] = '<none>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -379,7 +372,6 @@ function feature_events_views_default_views() {
     t('more'),
     t('Pas d\'événement prévu pour ce mois.'),
     t('Bloc carto'),
-    t('Agenda links'),
     t('Bloc pages agenda'),
     t('Bloc accueil'),
     t('Lire la suite'),
