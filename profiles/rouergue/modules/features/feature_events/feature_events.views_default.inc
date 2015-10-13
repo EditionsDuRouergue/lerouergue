@@ -160,6 +160,8 @@ function feature_events_views_default_views() {
   /* Display: Bloc carto */
   $handler = $view->new_display('block', 'Bloc carto', 'agenda_map_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '1';
@@ -187,7 +189,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['block_caching'] = '8';
+  $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Bloc pages agenda */
   $handler = $view->new_display('block', 'Bloc pages agenda', 'agenda_block');
