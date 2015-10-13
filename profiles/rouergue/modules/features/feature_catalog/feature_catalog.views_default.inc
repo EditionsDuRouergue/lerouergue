@@ -1354,6 +1354,8 @@ return $query->execute()->fetchField();';
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Du même auteur';
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1506,7 +1508,7 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value_1']['group'] = 2;
-  $handler->display->display_options['block_caching'] = '8';
+  $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Modal "Livres même univers" */
   $handler = $view->new_display('entityreference_view_widget', 'Modal "Livres même univers"', 'ervw_same_universe_books');
@@ -1871,6 +1873,7 @@ return  $contributor_id;';
   $handler = $view->new_display('block', 'Livres auteur (liste)', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Bibliographie';
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
