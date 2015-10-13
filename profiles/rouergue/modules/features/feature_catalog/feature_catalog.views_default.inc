@@ -556,6 +556,8 @@ function feature_catalog_views_default_views() {
   $handler = $view->new_display('block', 'Livres auteur', 'author_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Bibliographie';
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -680,7 +682,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name_3']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_3']['value'] = 'Photographe';
   $handler->display->display_options['filters']['name_3']['group'] = 2;
-  $handler->display->display_options['block_caching'] = '8';
+  $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Classement avancé */
   $handler = $view->new_display('page_with_page_title', 'Classement avancé', 'catalog_multi');
@@ -1208,6 +1210,8 @@ return $query->execute()->fetchField();';
 
   /* Display: Liste nouveautés */
   $handler = $view->new_display('page_with_page_title', 'Liste nouveautés', 'catalog_new_books_page');
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '4';
