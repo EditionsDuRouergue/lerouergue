@@ -1281,6 +1281,8 @@ return $query->execute()->fetchField();';
   /* Display: Bloc nouveautés */
   $handler = $view->new_display('block', 'Bloc nouveautés', 'catalog_new_books_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1682,6 +1684,8 @@ return  $contributor_id;';
   $handler = $view->new_display('block', 'Bloc "Livres même univers"', 'same_universe_books');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'à lire aussi…';
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
   $handler->display->display_options['style_options']['interval'] = '0';
