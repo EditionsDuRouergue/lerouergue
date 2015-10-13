@@ -159,7 +159,7 @@ function feature_events_image_default_styles() {
 function feature_events_node_info() {
   $items = array(
     'event' => array(
-      'name' => t('Evénement'),
+      'name' => t('Événement'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

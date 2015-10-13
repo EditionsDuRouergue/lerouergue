@@ -65,7 +65,7 @@ function feature_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Description',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'display_summary' => 1,
       'text_processing' => 1,
@@ -386,13 +386,12 @@ function feature_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_event_image',
     'label' => 'Visuel',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'events/pictures',
       'file_extensions' => 'png gif jpg jpeg',
-      'image_field_caption' => 0,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '550x380',
@@ -612,7 +611,7 @@ function feature_events_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'file_directory' => 'event_programmes',
+      'file_directory' => 'events/files',
       'file_extensions' => 'pdf doc docx xls xlsx',
       'max_filesize' => '',
       'user_register_form' => FALSE,

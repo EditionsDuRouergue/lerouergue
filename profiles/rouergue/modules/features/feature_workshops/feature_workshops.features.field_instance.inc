@@ -35,7 +35,7 @@ function feature_workshops_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'workshops/images',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
@@ -121,7 +121,7 @@ function feature_workshops_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -323,7 +323,7 @@ function feature_workshops_field_default_field_instances() {
         'weight' => 7,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'link' => 1,
@@ -397,7 +397,7 @@ function feature_workshops_field_default_field_instances() {
           'width' => '100%',
         ),
         'type' => 'pdf_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -423,7 +423,7 @@ function feature_workshops_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'file_directory' => 'rouergue/books/inner-pages',
+      'file_directory' => 'workshops/pdf',
       'file_extensions' => 'pdf',
       'max_filesize' => '',
       'user_register_form' => FALSE,
@@ -466,11 +466,11 @@ function feature_workshops_field_default_field_instances() {
         'weight' => 1,
       ),
       'full' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -693,7 +693,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -713,7 +713,7 @@ function feature_workshops_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 1,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'workshops/images',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
@@ -725,13 +725,8 @@ function feature_workshops_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
-        'collapsible' => 1,
-        'croparea' => '0x0',
-        'enforce_minimum' => 1,
-        'enforce_ratio' => 1,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
-        'resolution' => '600x340',
       ),
       'type' => 'image_image',
       'weight' => 1,

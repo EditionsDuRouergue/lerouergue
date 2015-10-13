@@ -15,7 +15,7 @@ function feature_core_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'pages';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'Layout';
   $context->conditions = array(
     'node' => array(
       'values' => array(
@@ -39,6 +39,10 @@ function feature_core_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Layout');
   $export['pages'] = $context;
 
   return $export;
