@@ -256,6 +256,8 @@ function feature_catalog_views_default_views() {
   /* Display: Pager alphabétique */
   $handler = $view->new_display('attachment', 'Pager alphabétique', 'alpha_pager');
   $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['pager']['type'] = 'none';
@@ -1344,7 +1346,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
   $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
   $handler->display->display_options['filters']['in_queue']['value'] = '1';
-  $handler->display->display_options['block_caching'] = '8';
+  $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Livres du même auteur */
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
@@ -1734,7 +1736,7 @@ return  $contributor_id;';
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['block_caching'] = '8';
+  $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Modal même univers */
   $handler = $view->new_display('entityreference_view_widget', 'Modal même univers', 'ervw_same_universe');

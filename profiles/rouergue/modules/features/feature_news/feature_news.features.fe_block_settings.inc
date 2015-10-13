@@ -13,7 +13,7 @@ function feature_news_default_fe_block_settings() {
   $export['version'] = '2.0';
 
   $export['views-news-news_block'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'css_class' => '',
     'custom' => 0,
     'delta' => 'news-news_block',
