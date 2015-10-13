@@ -26,7 +26,11 @@ function feature_events_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -183,6 +187,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc pages agenda */
   $handler = $view->new_display('block', 'Bloc pages agenda', 'agenda_block');
@@ -218,6 +223,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc accueil */
   $handler = $view->new_display('block', 'Bloc accueil', 'agenda_front_block');
@@ -300,6 +306,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'Lire la suite';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Bloc pages auteur */
   $handler = $view->new_display('block', 'Bloc pages auteur', 'agenda_author_block');
@@ -351,6 +358,7 @@ function feature_events_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['events'] = array(
     t('Master'),
     t('agenda'),

@@ -26,7 +26,11 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -391,7 +395,11 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -670,6 +678,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name_3']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_3']['value'] = 'Photographe';
   $handler->display->display_options['filters']['name_3']['group'] = 2;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Classement avancé */
   $handler = $view->new_display('page_with_page_title', 'Classement avancé', 'catalog_multi');
@@ -1335,6 +1344,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
   $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
   $handler->display->display_options['filters']['in_queue']['value'] = '1';
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Livres du même auteur */
   $handler = $view->new_display('block', 'Livres du même auteur', 'same_author_books');
@@ -1492,6 +1502,7 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value_1']['group'] = 2;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Modal "Livres même univers" */
   $handler = $view->new_display('entityreference_view_widget', 'Modal "Livres même univers"', 'ervw_same_universe_books');
@@ -1723,6 +1734,7 @@ return  $contributor_id;';
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Modal même univers */
   $handler = $view->new_display('entityreference_view_widget', 'Modal même univers', 'ervw_same_universe');
@@ -1955,6 +1967,7 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name_3']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_3']['value'] = 'Photographe';
   $handler->display->display_options['filters']['name_3']['group'] = 2;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Clone Livres du même auteur */
   $handler = $view->new_display('block', 'Clone Livres du même auteur', 'block_2');
@@ -2218,8 +2231,12 @@ return  $contributor_id;';
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
-  $handler->display->display_options['access']['type'] = 'none';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -2323,6 +2340,7 @@ return  $contributor_id;';
   $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
   $handler->display->display_options['filters']['name_1']['group'] = 2;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Auteurs fiche livre */
   $handler = $view->new_display('block', 'Auteurs fiche livre', 'book_contributors_author');
@@ -2385,6 +2403,7 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
+  $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Les autres fiche livre */
   $handler = $view->new_display('attachment', 'Les autres fiche livre', 'book_contributors_others');
@@ -2551,6 +2570,7 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_iscommunicable_value']['group'] = 1;
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['fc_contributors'] = array(
     t('Master'),
     t('plus'),
@@ -2586,7 +2606,11 @@ return  $contributor_id;';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -2627,6 +2651,7 @@ return  $contributor_id;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['first_level_universes'] = array(
     t('Master'),
     t('plus'),
@@ -2657,7 +2682,11 @@ return  $contributor_id;';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -2733,7 +2762,11 @@ return  $contributor_id;';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'none';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -3038,10 +3071,12 @@ return  $contributor_id;';
 
   /* Display: Liste livres (backup) */
   $handler = $view->new_display('page', 'Liste livres (backup)', 'page_1');
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['path'] = 'taxonomy/term/%';
 
   /* Display: Liste livres (copie) */
   $handler = $view->new_display('page', 'Liste livres (copie)', 'page_2');
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Couverture */
@@ -3128,7 +3163,11 @@ return  $contributor_id;';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '3600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '3600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
@@ -3192,6 +3231,7 @@ return  $contributor_id;';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_caching'] = '8';
   $translatables['universes_descriptions'] = array(
     t('Master'),
     t('Description Univers'),
