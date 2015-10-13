@@ -47,13 +47,6 @@ function feature_events_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Header: Global: Block area */
-  $handler->display->display_options['header']['block']['id'] = 'block';
-  $handler->display->display_options['header']['block']['table'] = 'views';
-  $handler->display->display_options['header']['block']['field'] = 'block';
-  $handler->display->display_options['header']['block']['label'] = 'Agenda links';
-  $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
-  $handler->display->display_options['header']['block']['title'] = '<none>';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -381,12 +374,12 @@ function feature_events_views_default_views() {
     t('‹ précédent'),
     t('suivant ›'),
     t('dernier »'),
-    t('Agenda links'),
     t('Tout'),
     t('Liste événements'),
     t('more'),
     t('Pas d\'événement prévu pour ce mois.'),
     t('Bloc carto'),
+    t('Agenda links'),
     t('Bloc pages agenda'),
     t('Bloc accueil'),
     t('Lire la suite'),
