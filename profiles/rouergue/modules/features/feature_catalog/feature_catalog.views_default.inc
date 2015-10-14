@@ -490,6 +490,8 @@ function feature_catalog_views_default_views() {
 
   /* Display: Catalogue */
   $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'catalogue';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
@@ -2189,6 +2191,7 @@ return  $contributor_id;';
     t('dernier »'),
     t('term'),
     t('Catalogue'),
+    t('catalogue'),
     t('more'),
     t('@total livres'),
     t('Livres auteur'),

@@ -566,7 +566,7 @@ function feature_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'page_title_front';
-  $strongarm->value = 'Les Éditions du Rouergue';
+  $strongarm->value = 'Éditions du Rouergue';
   $export['page_title_front'] = $strongarm;
 
   $strongarm = new stdClass();

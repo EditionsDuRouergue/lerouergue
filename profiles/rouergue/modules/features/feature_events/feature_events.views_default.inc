@@ -51,6 +51,10 @@ function feature_events_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Block area */
+  $handler->display->display_options['header']['block']['id'] = 'block';
+  $handler->display->display_options['header']['block']['table'] = 'views';
+  $handler->display->display_options['header']['block']['field'] = 'block';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -111,6 +115,13 @@ function feature_events_views_default_views() {
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'field_data_field_dates|field_dates_value';
   $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Block area */
+  $handler->display->display_options['header']['block']['id'] = 'block';
+  $handler->display->display_options['header']['block']['table'] = 'views';
+  $handler->display->display_options['header']['block']['field'] = 'block';
+  $handler->display->display_options['header']['block']['block_to_insert'] = 'feature_events:rouergue_agenda_nav';
+  $handler->display->display_options['header']['block']['title'] = '<none>';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Block area */
   $handler->display->display_options['empty']['block']['id'] = 'block';

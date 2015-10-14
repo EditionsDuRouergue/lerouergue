@@ -6482,9 +6482,13 @@ VIEWS STYLES
   text-align: center;
   margin-top: 5px;
 }
+.page-catalogue h1.page-header {
+  margin-bottom: 50px;
+}
+.page-taxonomy .view-universes-descriptions p {
+  margin-bottom: 50px;
+}
 /*
-
-
 ==============================================================================================
 MENUS STYLES
 ==============================================================================================
