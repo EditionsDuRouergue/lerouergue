@@ -40,7 +40,7 @@ function feature_core_block_view($delta = '') {
 	switch ($delta) {
 		case 'rouergue_copyright':
 			$block['subject'] = '';
-			$variables['copyright-text'] = 'Les Editions du Rouergue';
+			$variables['copyright-text'] = 'Éditions du Rouergue';
 			$block['content'] = theme('rouergue_copyright', $variables);
 			return $block;
 			break;
