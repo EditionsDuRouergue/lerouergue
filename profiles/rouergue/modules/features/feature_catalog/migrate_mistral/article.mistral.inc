@@ -747,7 +747,7 @@ double classement non encore développé
 	// and 01:00:00 (02:00:00 minus 1 hour) during winter time period instead of 23:00:00,
 	// which also corresponds to the last day of the previous month.
 	// This fixes the wrong pubdate's month display.
-	$row->pubdate = $row->pubdate . 'T02:00:00';
+	$row->firstpublicationdate = $row->firstpublicationdate . 'T02:00:00';
   }
 
   /**
