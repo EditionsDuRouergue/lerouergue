@@ -101,6 +101,16 @@ function feature_core_user_default_permissions() {
     'module' => 'media',
   );
 
+  // Exported permission: 'flush caches'.
+  $permissions['flush caches'] = array(
+    'name' => 'flush caches',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'webmaster' => 'webmaster',
+    ),
+    'module' => 'admin_menu',
+  );
+
   // Exported permission: 'import media'.
   $permissions['import media'] = array(
     'name' => 'import media',
