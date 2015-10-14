@@ -307,7 +307,7 @@ J|Jeunesse',
           'private' => 0,
           'wrapper_classes' => '',
           'css_classes' => '',
-          'placeholder' => 'adresse',
+          'placeholder' => 'Adresse',
           'cols' => '',
           'rows' => '',
           'resizable' => 1,
@@ -415,7 +415,7 @@ BE|Belgique',
   'picture' => 0,
   'data' => NULL,
   'webform_features_author' => '',
-  'webform_features_revision_author' => 'admin',
+  'webform_features_revision_author' => '',
 );
 return $webforms;
 }

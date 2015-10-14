@@ -14,6 +14,7 @@ function feature_forms_default_fe_block_settings() {
 
   $export['block-catalog_request_link'] = array(
     'cache' => -1,
+    'css_class' => '',
     'custom' => 0,
     'machine_name' => 'catalog_request_link',
     'module' => 'block',
