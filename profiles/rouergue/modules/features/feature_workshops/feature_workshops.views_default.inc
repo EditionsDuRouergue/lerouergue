@@ -93,6 +93,8 @@ function feature_workshops_views_default_views() {
 
   /* Display: Bloc liste workshops */
   $handler = $view->new_display('block', 'Bloc liste workshops', 'workshop_page_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'à voir aussi dans la fabrique';
   $handler->display->display_options['display_description'] = 'Liste les titres des autres workshops';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -104,14 +106,14 @@ function feature_workshops_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'ds';
-  $handler->display->display_options['row_options']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['view_mode'] = 'workshop_page_list';
   $handler->display->display_options['row_options']['load_comments'] = 0;
   $handler->display->display_options['row_options']['alternating'] = 0;
   $handler->display->display_options['row_options']['grouping'] = 0;
   $handler->display->display_options['row_options']['advanced'] = 0;
   $handler->display->display_options['row_options']['delta_fieldset']['delta_fields'] = array();
   $handler->display->display_options['row_options']['grouping_fieldset']['group_field'] = 'node|created';
-  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'list';
+  $handler->display->display_options['row_options']['default_fieldset']['view_mode'] = 'workshop_page_list';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['block_caching'] = '8';
 
@@ -279,6 +281,7 @@ function feature_workshops_views_default_views() {
     t('Liste workshops'),
     t('more'),
     t('Bloc liste workshops'),
+    t('à voir aussi dans la fabrique'),
     t('Liste les titres des autres workshops'),
     t('Bloc media workshop'),
     t('Média'),
