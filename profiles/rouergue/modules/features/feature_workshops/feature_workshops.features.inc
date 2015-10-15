@@ -42,15 +42,15 @@ function feature_workshops_image_default_styles() {
   $styles['workshop-block'] = array(
     'label' => 'workshop-block',
     'effects' => array(
-      10 => array(
+      7 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 260,
-          'height' => 200,
+          'width' => 130,
+          'height' => 100,
         ),
         'weight' => -10,
       ),
-      9 => array(
+      8 => array(
         'name' => 'adaptive_image',
         'data' => array(
           'resolutions' => '1382, 992, 768, 480',

@@ -38,7 +38,9 @@ function feature_core_default_box() {
   $box->description = 'Message page d\'accueil';
   $box->options = array(
     'body' => array(
-      'value' => '<p class="rteright"><span style="font-size:18px">retrouvez-nous sur nos deux pages facebook pour échanger et commenter</span></p>
+      'value' => '<div class="rteleft" style="float:left"><a href="/agenda"><span style="font-size:18px">voir tout l\'agenda</span></a></div>
+
+<div class="rteright" style=" float:right"><span style="font-size:18px">retrouvez-nous sur nos deux pages facebook pour échanger et commenter</span></div>
 ',
       'format' => 'full_html',
     ),

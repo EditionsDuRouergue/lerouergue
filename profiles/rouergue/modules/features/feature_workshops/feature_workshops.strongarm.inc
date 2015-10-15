@@ -116,6 +116,12 @@ function feature_workshops_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'workshop_page_list' => array(
+        'custom_settings' => TRUE,
+      ),
+      'in_news_block' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
