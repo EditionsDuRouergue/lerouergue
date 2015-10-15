@@ -17,13 +17,18 @@ function feature_workshops_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'workshops';
   $ds_fieldsetting->view_mode = 'carousel';
   $ds_fieldsetting->settings = array(
-    'fabrique_title' => array(
+    'fabrique_header' => array(
       'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'title' => array(
+    'fabrique_title' => array(
       'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -55,6 +60,26 @@ function feature_workshops_ds_field_settings_info() {
   );
   $export['node|workshops|list'] = $ds_fieldsetting;
 
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|workshops|workshop_page_list';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'workshops';
+  $ds_fieldsetting->view_mode = 'workshop_page_list';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h4',
+        'class' => '',
+      ),
+    ),
+  );
+  $export['node|workshops|workshop_page_list'] = $ds_fieldsetting;
+
   return $export;
 }
 
@@ -63,6 +88,21 @@ function feature_workshops_ds_field_settings_info() {
  */
 function feature_workshops_ds_custom_fields_info() {
   $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'fabrique_header';
+  $ds_field->label = 'fabrique_header';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'boxes|workshops_header',
+    'block_render' => '3',
+  );
+  $export['fabrique_header'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -128,14 +168,16 @@ function feature_workshops_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'fabrique_title',
-        1 => 'title',
+        0 => 'fabrique_header',
+        1 => 'fabrique_title',
+        2 => 'title',
       ),
       'right' => array(
-        2 => 'field_workshop_image',
+        3 => 'field_workshop_image',
       ),
     ),
     'fields' => array(
+      'fabrique_header' => 'left',
       'fabrique_title' => 'left',
       'title' => 'left',
       'field_workshop_image' => 'right',
@@ -165,14 +207,12 @@ function feature_workshops_ds_layout_settings_info() {
       'central' => array(
         0 => 'body',
         1 => 'field_planned_release_date',
-        2 => 'field_gallery',
-        3 => 'field_event_author',
+        2 => 'field_event_author',
       ),
     ),
     'fields' => array(
       'body' => 'central',
       'field_planned_release_date' => 'central',
-      'field_gallery' => 'central',
       'field_event_author' => 'central',
     ),
     'classes' => array(),
@@ -254,6 +294,59 @@ function feature_workshops_ds_layout_settings_info() {
     'layout_link_custom' => '',
   );
   $export['node|workshops|list'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|workshops|workshop_page_list';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'workshops';
+  $ds_layout->view_mode = 'workshop_page_list';
+  $ds_layout->layout = 'bootstrap_6_6_stacked';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'field_workshop_image',
+      ),
+      'bottom' => array(
+        1 => 'title',
+      ),
+    ),
+    'fields' => array(
+      'field_workshop_image' => 'left',
+      'title' => 'bottom',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'top' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'bottom' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|workshops|workshop_page_list'] = $ds_layout;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_view_modes_info().
+ */
+function feature_workshops_ds_view_modes_info() {
+  $export = array();
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'workshop_page_list';
+  $ds_view_mode->label = 'Sur page fabrique';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['workshop_page_list'] = $ds_view_mode;
 
   return $export;
 }
