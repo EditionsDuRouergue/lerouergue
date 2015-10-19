@@ -1,3 +1,7 @@
+Rouergue 1.0.5, 2015-09-19
+----------------------
+Fix responsive image in field body.
+
 Rouergue 1.0.4, 2015-09-15
 ----------------------
 Fix some views issues.

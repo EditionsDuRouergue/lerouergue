@@ -2,6 +2,9 @@
 	Drupal.behaviors.main =  {
 		attach: function(context, settings) {
 
+			$('.field-name-body img').removeAttr('style');
+			$('.field-name-body img').addClass('img-responsive');
+
 			$('.infosWrapper').hide();
 			
 			$('.couvWrapper').mouseenter(function() {
