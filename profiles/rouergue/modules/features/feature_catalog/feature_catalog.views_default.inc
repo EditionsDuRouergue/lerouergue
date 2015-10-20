@@ -662,6 +662,13 @@ return $query->execute()->fetchField();';
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'not';
+  $handler->display->display_options['filters']['title']['value'] = '(EPUB)';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   /* Filter criterion: Taxonomy term: Name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
@@ -1490,6 +1497,13 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'not';
+  $handler->display->display_options['filters']['title']['value'] = '(EPUB)';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
   $handler->display->display_options['filters']['status_1']['table'] = 'node';
@@ -1520,6 +1534,13 @@ return  $contributor_id;';
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value_1']['group'] = 2;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['filters']['title_1']['table'] = 'node';
+  $handler->display->display_options['filters']['title_1']['field'] = 'title';
+  $handler->display->display_options['filters']['title_1']['operator'] = 'not';
+  $handler->display->display_options['filters']['title_1']['value'] = '(EPUB)';
+  $handler->display->display_options['filters']['title_1']['group'] = 2;
   $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Modal "Livres même univers" */

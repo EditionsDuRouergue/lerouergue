@@ -1,3 +1,7 @@
+Rouergue 1.0.7, 2015-09-20
+----------------------
+Some views enhancements.
+
 Rouergue 1.0.6, 2015-09-20
 ----------------------
 Some views enhancements.
