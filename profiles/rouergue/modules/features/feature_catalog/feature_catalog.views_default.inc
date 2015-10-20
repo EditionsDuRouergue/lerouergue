@@ -551,6 +551,12 @@ function feature_catalog_views_default_views() {
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'not';
+  $handler->display->display_options['filters']['title']['value'] = '(EPUB)';
   $handler->display->display_options['path'] = 'catalogue';
   $handler->display->display_options['page_title_pattern'] = 'Catalogue';
 

@@ -179,7 +179,7 @@ function feature_workshops_views_default_views() {
   /* Display: Bloc livre lié */
   $handler = $view->new_display('block', 'Bloc livre lié', 'workshop_linked_book_block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Livre lié';
+  $handler->display->display_options['title'] = 'le livre';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '1';
@@ -288,7 +288,7 @@ function feature_workshops_views_default_views() {
     t('Contient les champs video, son, liseuse pdf et lien vers le livre.'),
     t('Tout'),
     t('Bloc livre lié'),
-    t('Livre lié'),
+    t('le livre'),
     t('Bloc accueil'),
     t('Voir tous les workshops'),
   );
