@@ -120,6 +120,7 @@ class ContributorMigration extends Migration {
 	$this->addFieldMapping('field_pseudoname', 'pseudoname');
 	$this->addFieldMapping('field_pseudofirstname', 'pseudofirstname');
 	$this->addFieldMapping('body', 'biography');
+	$this->addFieldMapping('body:format', NULL, FALSE)->defaultValue('full_html');
   }
 
   /**
@@ -129,7 +130,7 @@ class ContributorMigration extends Migration {
 	parent::prepareRow($row);
 
 	// Biography text cleaning.
-	$row->biography = html_entity_decode(strip_tags($row->biography));
+	$row->biography = html_entity_decode(strip_tags($row->biography, '<b><strong><i><em>'));
   }
 
   /**
