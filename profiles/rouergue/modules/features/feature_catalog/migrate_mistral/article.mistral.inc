@@ -605,14 +605,14 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['494']['1143']['143']['tids'] =
 	  $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'] . ',' . $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
 
-	// Rouergue Livres Pratiques - 494 | Cuisine - 1143 | Jardins - 144   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+	// Rouergue Livres Pratiques - 494 | Cuisine - 519 | Jardins - 144   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
 	// ----------------------------------------------------------------   ===>   Nature & Jardin > Jardin - 7bf1968c-cf26-4fe6-a839-f70abf339851
-	$this->univ_coll_mapping['494']['1143']['144']['tids'] =
+	$this->univ_coll_mapping['494']['519']['144']['tids'] =
 	  $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
 
-	// Rouergue Livres Pratiques - 494 | Cuisine - 1143 | Vins - 150   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+	// Rouergue Livres Pratiques - 494 | Cuisine - 519 | Vins - 150   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
 	// -------------------------------------------------------------   ===>   Gastronomie > Vins - c838c944-79ea-4767-be9b-f66f87756c86
-	$this->univ_coll_mapping['494']['1143']['150']['tids'] =
+	$this->univ_coll_mapping['494']['519']['150']['tids'] =
 	  $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'] . ',' . $this->univ_uuids_tids['c838c944-79ea-4767-be9b-f66f87756c86'];
 
 	// Rouergue Livres Pratiques - 494 | Ecologie - 1144   ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
