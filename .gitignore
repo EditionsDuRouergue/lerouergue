@@ -7,3 +7,4 @@ sites/*/private
 mistral_dumps
 sites/all/translations
 sites/all/modules
+sites/lerouergue.dd/default.settings.php
