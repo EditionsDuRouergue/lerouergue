@@ -118,7 +118,7 @@ function feature_events_field_default_field_instances() {
           'use_widget_handlers' => 1,
         ),
         'type' => 'addressfield_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -170,6 +170,70 @@ function feature_events_field_default_field_instances() {
       ),
       'type' => 'addressfield_standard',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-event-field_article_link'
+  $field_instances['node-event-field_article_link'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 9,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 8,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'map_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_article_link',
+    'label' => 'Livre(s) lié(s)',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 8,
     ),
   );
 
@@ -562,7 +626,7 @@ function feature_events_field_default_field_instances() {
         ),
       ),
       'type' => 'geocoder',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -699,7 +763,7 @@ function feature_events_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -709,6 +773,7 @@ function feature_events_field_default_field_instances() {
   t('Auteur(s)');
   t('Dates');
   t('Description');
+  t('Livre(s) lié(s)');
   t('Localisation');
   t('Programme');
   t('Site web');

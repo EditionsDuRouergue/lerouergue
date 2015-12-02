@@ -134,7 +134,8 @@ function feature_events_ds_layout_settings_info() {
         5 => 'field_programme',
         6 => 'field_website_url',
         7 => 'field_event_author',
-        8 => 'field_adresse',
+        8 => 'field_article_link',
+        9 => 'field_adresse',
       ),
     ),
     'fields' => array(
@@ -146,6 +147,7 @@ function feature_events_ds_layout_settings_info() {
       'field_programme' => 'central',
       'field_website_url' => 'central',
       'field_event_author' => 'central',
+      'field_article_link' => 'central',
       'field_adresse' => 'central',
     ),
     'classes' => array(),

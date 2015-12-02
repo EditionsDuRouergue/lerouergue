@@ -62,6 +62,7 @@ features[field_base][] = field_website_url
 features[field_group][] = group_event_details|node|event|list
 features[field_instance][] = node-event-body
 features[field_instance][] = node-event-field_adresse
+features[field_instance][] = node-event-field_article_link
 features[field_instance][] = node-event-field_dates
 features[field_instance][] = node-event-field_event_author
 features[field_instance][] = node-event-field_event_image
