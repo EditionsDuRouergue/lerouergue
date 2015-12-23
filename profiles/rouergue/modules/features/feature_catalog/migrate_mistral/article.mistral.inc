@@ -166,7 +166,7 @@ class ArticleMigration extends Migration {
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
 		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
 		->fields('rp', array('price'));
-	  $query->addField('fp','finalnbpage','nbpage');
+	  $query->addField('b','nbpage','nbpage');
 	  $query->addField('pt','isvalidated','price_validated');
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
