@@ -66,6 +66,7 @@ features[field_instance][] = node-workshops-body
 features[field_instance][] = node-workshops-field_article_link
 features[field_instance][] = node-workshops-field_collection_gallery
 features[field_instance][] = node-workshops-field_event_author
+features[field_instance][] = node-workshops-field_gallery
 features[field_instance][] = node-workshops-field_inner_pages
 features[field_instance][] = node-workshops-field_planned_release_date
 features[field_instance][] = node-workshops-field_sound
