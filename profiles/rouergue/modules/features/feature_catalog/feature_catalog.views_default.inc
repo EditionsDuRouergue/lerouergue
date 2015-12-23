@@ -2499,8 +2499,6 @@ return  $contributor_id;';
   $handler->display->display_options['fields']['field_displayed_name']['field'] = 'field_displayed_name';
   $handler->display->display_options['fields']['field_displayed_name']['relationship'] = 'field_contributor_target_id';
   $handler->display->display_options['fields']['field_displayed_name']['label'] = '';
-  $handler->display->display_options['fields']['field_displayed_name']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_displayed_name']['alter']['text'] = '<a href="/node/[nid]" >[field_displayed_name]</a>';
   $handler->display->display_options['fields']['field_displayed_name']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Field collection item: Fonction (field_contributor_function) */
@@ -2631,7 +2629,6 @@ return  $contributor_id;';
     t('more'),
     t('Auteurs fiche livre'),
     t('Les autres fiche livre'),
-    t('<a href="/node/[nid]" >[field_displayed_name]</a>'),
     t('Illustrateurs fiche livre'),
     t(' <span class="book-illustrator">(illustrateur)</span>'),
   );
