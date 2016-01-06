@@ -290,6 +290,73 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_barcode'
+  $field_instances['node-article-field_barcode'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'barcode',
+        'settings' => array(),
+        'type' => 'barcode_default',
+        'weight' => 19,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'barcode',
+        'settings' => array(),
+        'type' => 'barcode_default',
+        'weight' => 6,
+      ),
+      'in_news_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_barcode',
+    'label' => 'Code barre',
+    'required' => 0,
+    'settings' => array(
+      'barcode_barcolor' => '#000000',
+      'barcode_bgcolor' => '#FFFFFF',
+      'barcode_height' => 10,
+      'barcode_image_format' => 'png',
+      'barcode_scale' => 0.5,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'barcode',
+      'settings' => array(),
+      'type' => 'barcode_textfield',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_contributors'
   $field_instances['node-article-field_contributors'] = array(
     'bundle' => 'article',
@@ -2628,6 +2695,7 @@ function feature_catalog_field_default_field_instances() {
   t('Champ articleid Mistral');
   t('Champ bookid Mistral');
   t('Citations presse');
+  t('Code barre');
   t('Communicable');
   t('Contributeurs');
   t('Contributor');
