@@ -1509,6 +1509,7 @@ function feature_catalog_field_default_field_instances() {
   // Exported field_instance: 'node-article-field_same_universe_articles'
   $field_instances['node-article-field_same_universe_articles'] = array(
     'bundle' => 'article',
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1561,17 +1562,20 @@ function feature_catalog_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'entityreference',
       'settings' => array(
         'allow_duplicates' => 0,
         'close_modal' => 1,
+        'match_operator' => 'CONTAINS',
         'pass_argument' => 1,
         'pass_arguments' => '',
+        'path' => '',
         'rendered_entity' => FALSE,
+        'size' => 60,
         'view' => 'catalog|ervw_same_universe',
         'view_mode' => FALSE,
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'entityreference_autocomplete',
       'weight' => 25,
     ),
   );
