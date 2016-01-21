@@ -116,6 +116,32 @@ function feature_workshops_image_default_styles() {
     ),
   );
 
+  // Exported image style: workshop-list-proportionel.
+  $styles['workshop-list-proportionel'] = array(
+    'label' => 'workshop-list-proportionel',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_resize',
+        'data' => array(
+          'width' => 260,
+          'height' => 147,
+        ),
+        'weight' => 1,
+      ),
+      1 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
   // Exported image style: workshop-page.
   $styles['workshop-page'] = array(
     'label' => 'workshop-page',
