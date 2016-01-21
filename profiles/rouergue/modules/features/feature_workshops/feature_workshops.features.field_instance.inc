@@ -384,6 +384,7 @@ function feature_workshops_field_default_field_instances() {
   // Exported field_instance: 'node-workshops-field_gallery'
   $field_instances['node-workshops-field_gallery'] = array(
     'bundle' => 'workshops',
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -425,12 +426,8 @@ function feature_workshops_field_default_field_instances() {
       ),
       'list' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'workshop-list',
-        ),
-        'type' => 'image',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'pdf_viewer' => array(
@@ -466,8 +463,13 @@ function feature_workshops_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'collapsible' => 2,
+        'croparea' => '500x500',
+        'enforce_minimum' => TRUE,
+        'enforce_ratio' => TRUE,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
+        'resolution' => '200x150',
       ),
       'type' => 'image_image',
       'weight' => 3,
@@ -830,7 +832,7 @@ function feature_workshops_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'workshop-list',
+          'image_style' => 'workshop-list-proportionel',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -865,8 +867,13 @@ function feature_workshops_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'collapsible' => 2,
+        'croparea' => '500x500',
+        'enforce_minimum' => TRUE,
+        'enforce_ratio' => TRUE,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
+        'resolution' => '200x150',
       ),
       'type' => 'image_image',
       'weight' => 1,
