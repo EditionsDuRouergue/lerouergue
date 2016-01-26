@@ -104,6 +104,7 @@ features[file_display][] = video__media_preview__media_vimeo_video
 features[menu_custom][] = main-menu
 features[menu_custom][] = management
 features[menu_custom][] = menu-footer-menu
+features[menu_links][] = management_:admin/config/content/formats/%
 features[menu_links][] = management_liste-des-nouveauts:catalogue/liste-nouveautes
 features[menu_links][] = management_rouergue-admin:user
 features[menu_links][] = management_tri-des-actualits:tri-actualites
