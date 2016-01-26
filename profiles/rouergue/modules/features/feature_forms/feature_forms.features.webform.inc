@@ -409,11 +409,15 @@ J|Jeunesse',
     ),
     'conditionals' => array(),
   ),
+  'cid' => 0,
+  'last_comment_name' => NULL,
+  'last_comment_uid' => 0,
+  'comment_count' => 0,
   'name' => '',
   'picture' => 0,
   'data' => NULL,
   'webform_features_author' => '',
-  'webform_features_revision_author' => 'admin',
+  'webform_features_revision_author' => '',
 );
 return $webforms;
 }

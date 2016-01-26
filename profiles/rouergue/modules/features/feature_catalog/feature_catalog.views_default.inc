@@ -2361,14 +2361,6 @@ return  $contributor_id;';
     2 => 'AND',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field collection item: Auteur principal (field_ismain) */
-  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
-  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
-  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
-    1 => '1',
-  );
-  $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
   /* Filter criterion: Taxonomy term: Name */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'taxonomy_term_data';
