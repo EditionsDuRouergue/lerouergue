@@ -676,8 +676,8 @@ class ArticleMigration extends Migration {
 	// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Polars - 1013  ===>   Livres numériques > polar - 2796300b-4322-4e79-8dcf-f3d7447c31dd
 	$this->univ_coll_mapping['462']['1013']['tids'] = $this->univ_uuids_tids['2796300b-4322-4e79-8dcf-f3d7447c31dd'];
 
-	// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans - 1013  ===>   Livres numériques > roman - 13c26811-5ade-4018-b8bb-5642b42fc1da
-	$this->univ_coll_mapping['462']['1013']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
+	// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans - 1012  ===>   Livres numériques > roman - 13c26811-5ade-4018-b8bb-5642b42fc1da
+	$this->univ_coll_mapping['462']['1012']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
 
 	//************************************************** Rouergue Romans Jeunesse **********************************************************************
 	// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
