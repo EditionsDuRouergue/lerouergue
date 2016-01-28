@@ -201,7 +201,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 22,
       ),
       'list' => array(
         'label' => 'above',
@@ -238,7 +238,7 @@ function feature_workshops_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -274,7 +274,7 @@ function feature_workshops_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_fields',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'list' => array(
         'label' => 'above',
@@ -301,7 +301,72 @@ function feature_workshops_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 4,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-workshops-field_embed_media_workshop'
+  $field_instances['node-workshops-field_embed_media_workshop'] = array(
+    'bundle' => 'workshops',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'carousel' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'workshop_page_list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_embed_media_workshop',
+    'label' => 'Embed vidéos - liseuses',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 7,
     ),
   );
 
@@ -340,7 +405,7 @@ function feature_workshops_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'list' => array(
         'label' => 'above',
@@ -377,7 +442,7 @@ function feature_workshops_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -416,13 +481,9 @@ function feature_workshops_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -472,7 +533,7 @@ function feature_workshops_field_default_field_instances() {
         'resolution' => '200x150',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -553,7 +614,7 @@ function feature_workshops_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -588,7 +649,7 @@ function feature_workshops_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -659,7 +720,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 20,
       ),
       'list' => array(
         'label' => 'above',
@@ -706,7 +767,7 @@ function feature_workshops_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -741,7 +802,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 21,
       ),
       'list' => array(
         'label' => 'above',
@@ -788,7 +849,7 @@ function feature_workshops_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -825,7 +886,7 @@ function feature_workshops_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 19,
       ),
       'list' => array(
         'label' => 'hidden',
@@ -885,6 +946,7 @@ function feature_workshops_field_default_field_instances() {
   t('Auteur(s)');
   t('Date de parution prévue');
   t('Description');
+  t('Embed vidéos - liseuses');
   t('Galerie');
   t('Image de galerie');
   t('Livre lié');

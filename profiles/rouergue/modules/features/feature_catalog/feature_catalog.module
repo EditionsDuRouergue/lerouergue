@@ -163,13 +163,20 @@ function feature_catalog_node_view($node, $view_mode, $langcode) {
 		// Handling of new width and height fields.
 		// Their values are intercepted and cleaned before injection into the previously used format field, for ease of display.
 		$node->content['field_format'][0]['#markup'] = '';
-		if (!empty($node->field_width) && !empty($node->field_height)) {
+		
 			$width = trim(trim($node->field_width['und'][0]['value'], '0'), '.');
 			$width = str_replace('.', ',', $width);
 			$height = trim(trim($node->field_height['und'][0]['value'], '0'), '.');
 			$height = str_replace('.', ',', $height);
-			$node->content['field_format'][0]['#markup'] = $width . ' x ' . $height;
+			
+		// if (!empty($node->field_width) && !empty($node->field_height)) {
+		
+			if (!empty($width) && !empty($height)) {
+			
+			$node->content['field_format'][0]['#markup'] = $width .' x ' . $height;
+			
 		}
+		
 	}
 
 	// CONTRIBUTOR

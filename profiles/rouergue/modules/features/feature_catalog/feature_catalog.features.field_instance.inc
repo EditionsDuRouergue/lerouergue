@@ -245,7 +245,7 @@ function feature_catalog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'in_news_block' => array(
         'label' => 'hidden',
@@ -286,7 +286,7 @@ function feature_catalog_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 17,
+      'weight' => 15,
     ),
   );
 
@@ -373,7 +373,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 19,
+      'weight' => 17,
     ),
   );
 
@@ -467,7 +467,66 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 18,
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_embed_media'
+  $field_instances['node-article-field_embed_media'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 27,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+      'in_news_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_embed_media',
+    'label' => 'Embed vidéos - liseuses',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 22,
     ),
   );
 
@@ -532,7 +591,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -571,7 +630,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 29,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -602,7 +661,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -673,7 +732,7 @@ function feature_catalog_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 20,
+      'weight' => 18,
     ),
   );
 
@@ -738,7 +797,7 @@ function feature_catalog_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -771,7 +830,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 32,
+        'weight' => 33,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -835,7 +894,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 33,
+        'weight' => 34,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -894,7 +953,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 26,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -962,7 +1021,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 34,
+        'weight' => 35,
       ),
       'in_news_block' => array(
         'label' => 'hidden',
@@ -1072,7 +1131,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 21,
+      'weight' => 19,
     ),
   );
 
@@ -1148,7 +1207,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -1213,7 +1272,7 @@ function feature_catalog_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 24,
+      'weight' => 23,
     ),
   );
 
@@ -1289,7 +1348,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -1327,7 +1386,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 30,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -1354,7 +1413,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -1416,7 +1475,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 23,
+      'weight' => 21,
     ),
   );
 
@@ -1502,7 +1561,7 @@ function feature_catalog_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 16,
+      'weight' => 14,
     ),
   );
 
@@ -1538,7 +1597,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 31,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -1576,7 +1635,7 @@ function feature_catalog_field_default_field_instances() {
         'view_mode' => FALSE,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 25,
+      'weight' => 24,
     ),
   );
 
@@ -1703,7 +1762,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 20,
     ),
   );
 
@@ -1737,7 +1796,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 32,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -1806,7 +1865,7 @@ function feature_catalog_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 28,
       ),
       'in_news_block' => array(
         'label' => 'above',
@@ -1837,7 +1896,7 @@ function feature_catalog_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -2570,6 +2629,7 @@ function feature_catalog_field_default_field_instances() {
   t('Copyright');
   t('Couverture');
   t('Date de parution');
+  t('Embed vidéos - liseuses');
   t('Fonction');
   t('Gencod');
   t('Hauteur');

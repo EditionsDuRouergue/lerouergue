@@ -21,7 +21,7 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contributors wrapper',
-    'weight' => '7',
+    'weight' => '6',
     'children' => array(
       0 => 'authors',
       1 => 'illustrators',
@@ -54,7 +54,7 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Couverture Wrapper',
-    'weight' => '26',
+    'weight' => '27',
     'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
@@ -118,12 +118,11 @@ function feature_catalog_field_group_info() {
     'label' => 'Infos',
     'weight' => '13',
     'children' => array(
-      0 => 'field_format',
-      1 => 'field_gencod',
-      2 => 'field_isbn',
-      3 => 'field_number_pages',
-      4 => 'field_price',
-      5 => 'field_release_date',
+      0 => 'field_gencod',
+      1 => 'field_isbn',
+      2 => 'field_number_pages',
+      3 => 'field_price',
+      4 => 'field_release_date',
     ),
     'format_type' => 'div',
     'format_settings' => array(
