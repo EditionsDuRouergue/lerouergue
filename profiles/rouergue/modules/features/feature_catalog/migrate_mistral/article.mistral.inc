@@ -726,7 +726,7 @@ double classement non encore développé
 	else {
 		$text = $row->resume;
 	}
-	$row->backcover = html_entity_decode(strip_tags($text, '<b><strong><i><em>'));
+	$row->backcover = html_entity_decode(strip_tags($text, '<br><b><strong><i><em>'));
 
 	// First publication date handling.
 	$date_parts = explode('/', $row->firstpublicationdate);

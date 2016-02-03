@@ -64,6 +64,32 @@ function feature_workshops_image_default_styles() {
     ),
   );
 
+  // Exported image style: workshop-block-130.
+  $styles['workshop-block-130'] = array(
+    'label' => 'workshop-block-130',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_resize',
+        'data' => array(
+          'width' => 130,
+          'height' => 74,
+        ),
+        'weight' => -10,
+      ),
+      3 => array(
+        'name' => 'adaptive_image',
+        'data' => array(
+          'resolutions' => '1382, 992, 768, 480',
+          'mobile_first' => 1,
+          'height' => '',
+          'width' => 1382,
+          'upscale' => '',
+        ),
+        'weight' => -9,
+      ),
+    ),
+  );
+
   // Exported image style: workshop-carousel.
   $styles['workshop-carousel'] = array(
     'label' => 'workshop-carousel',

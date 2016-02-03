@@ -1081,7 +1081,7 @@ function feature_catalog_field_default_field_instances() {
         'weight' => 11,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',

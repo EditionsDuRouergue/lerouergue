@@ -903,7 +903,7 @@ function feature_workshops_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'workshop-block',
+          'image_style' => 'workshop-block-130',
         ),
         'type' => 'image',
         'weight' => 0,

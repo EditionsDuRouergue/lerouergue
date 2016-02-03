@@ -75,6 +75,7 @@ features[field_instance][] = node-workshops-field_sound
 features[field_instance][] = node-workshops-field_video
 features[field_instance][] = node-workshops-field_workshop_image
 features[image][] = workshop-block
+features[image][] = workshop-block-130
 features[image][] = workshop-carousel
 features[image][] = workshop-list
 features[image][] = workshop-list-proportionel
