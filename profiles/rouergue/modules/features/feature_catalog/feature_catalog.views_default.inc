@@ -351,6 +351,13 @@ function feature_catalog_views_default_views() {
   $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
   $handler->display->display_options['filters']['name_1']['group'] = 2;
+  /* Filter criterion: Content: Contributor ID (field_contributor_id) */
+  $handler->display->display_options['filters']['field_contributor_id_value']['id'] = 'field_contributor_id_value';
+  $handler->display->display_options['filters']['field_contributor_id_value']['table'] = 'field_data_field_contributor_id';
+  $handler->display->display_options['filters']['field_contributor_id_value']['field'] = 'field_contributor_id_value';
+  $handler->display->display_options['filters']['field_contributor_id_value']['operator'] = '!=';
+  $handler->display->display_options['filters']['field_contributor_id_value']['value']['value'] = '13097';
+  $handler->display->display_options['filters']['field_contributor_id_value']['group'] = 1;
   $handler->display->display_options['displays'] = array(
     'authors' => 'authors',
     'default' => 0,
