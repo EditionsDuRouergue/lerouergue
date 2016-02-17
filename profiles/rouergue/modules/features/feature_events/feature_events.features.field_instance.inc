@@ -504,9 +504,12 @@ function feature_events_field_default_field_instances() {
       ),
       'list' => array(
         'label' => 'hidden',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_reference_view_mode' => 'full',
+          'use_content_language' => 1,
+        ),
+        'type' => 'ds_taxonomy_view_mode',
         'weight' => 4,
       ),
       'map_block' => array(
@@ -535,6 +538,7 @@ function feature_events_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_location'
   $field_instances['node-event-field_location'] = array(
     'bundle' => 'event',
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
