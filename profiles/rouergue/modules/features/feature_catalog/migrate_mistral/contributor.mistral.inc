@@ -130,7 +130,7 @@ class ContributorMigration extends Migration {
 	parent::prepareRow($row);
 
 	// Biography text cleaning.
-	$row->biography = html_entity_decode(strip_tags($row->biography, '<b><strong><i><em>'));
+	$row->biography = html_entity_decode(strip_tags($row->biography, '<br><b><strong><i><em>'));
   }
 
   /**
