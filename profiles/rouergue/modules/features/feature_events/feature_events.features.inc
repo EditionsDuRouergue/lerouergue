@@ -106,7 +106,7 @@ function feature_events_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 265,
-          'height' => 170,
+          'height' => 183,
         ),
         'weight' => 1,
       ),
