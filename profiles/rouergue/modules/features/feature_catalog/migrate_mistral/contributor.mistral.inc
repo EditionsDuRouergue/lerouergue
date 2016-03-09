@@ -156,9 +156,9 @@ class ContributorMigration extends Migration {
 	  $sorting_name = $pseudoname;
 	}
 
-	$node->title = utf8_encode($title);
-	$node->field_displayed_name[LANGUAGE_NONE]['0']['value'] = utf8_encode($displayed_name);
-	$node->field_sorting_name[LANGUAGE_NONE]['0']['value'] = utf8_encode($sorting_name);
+	$node->title = $title;
+	$node->field_displayed_name[LANGUAGE_NONE]['0']['value'] = $displayed_name;
+	$node->field_sorting_name[LANGUAGE_NONE]['0']['value'] = $sorting_name;
 
 	// Picture file
 	if ($this->store == '') {
