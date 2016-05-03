@@ -154,6 +154,7 @@ function feature_events_field_default_field_instances() {
           'BE' => 'BE',
           'CA' => 'CA',
           'CH' => 'CH',
+          'DE' => 'DE',
           'FR' => 'FR',
         ),
         'default_country' => '',
