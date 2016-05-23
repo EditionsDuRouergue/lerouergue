@@ -2208,8 +2208,8 @@ return  $contributor_id;';
   );
   $handler->display->display_options['filters']['field_ismain_value_1']['group'] = 2;
 
-  /* Display: Catalogue */
-  $handler = $view->new_display('page_with_page_title', 'Catalogue', 'page_with_page_title_2');
+  /* Display: Catalogue no epub */
+  $handler = $view->new_display('page_with_page_title', 'Catalogue no epub', 'page_with_page_title_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'catalogue';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -2335,6 +2335,7 @@ return  $contributor_id;';
     t('Livres auteur (liste)'),
     t('Clone Livres du même auteur'),
     t('Auteur principal'),
+    t('Catalogue no epub'),
   );
   $export['catalog'] = $view;
 
