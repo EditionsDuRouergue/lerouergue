@@ -38,6 +38,7 @@ function rouergue_bootstrap_field__field_inner_pages($variables) {
   return $output;
 }
 
+
 drupal_add_js(drupal_get_path('theme', 'rouergue_bootstrap') .'/js/main.js', array('type' => 'file', 'scope' => 'footer'));
 drupal_add_js(drupal_get_path('theme', 'rouergue_bootstrap') . '/js/jquery.matchHeight-min.js', array('type' => 'file', 'scope' => 'footer'));
 

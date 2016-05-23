@@ -72,7 +72,7 @@
  *
  * @ingroup themeable
  */
-?>
+?>   
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
   <div class="container">
     <div class="navbar-header">
