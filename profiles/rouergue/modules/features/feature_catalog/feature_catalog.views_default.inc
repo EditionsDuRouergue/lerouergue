@@ -1500,6 +1500,7 @@ return  $contributor_id;';
   $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    0 => '0',
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
