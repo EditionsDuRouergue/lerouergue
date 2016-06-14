@@ -1,0 +1,26 @@
+diff a/profiles/rouergue/modules/features/feature_catalog/feature_catalog.features.field_base.inc b/profiles/rouergue/modules/features/feature_catalog/feature_catalog.features.field_base.inc	(rejected hunks)
+@@ -10,6 +10,24 @@
+ function feature_catalog_field_default_field_bases() {
+   $field_bases = array();
+ 
++  // Exported field_base: 'field_barcode'
++  $field_bases['field_barcode'] = array(
++    'active' => 1,
++    'cardinality' => 1,
++    'deleted' => 0,
++    'entity_types' => array(),
++    'field_name' => 'field_barcode',
++    'indexes' => array(),
++    'locked' => 0,
++    'module' => 'barcode',
++    'settings' => array(
++      'dbsize' => 255,
++      'encoding' => 'ISBN',
++    ),
++    'translatable' => 0,
++    'type' => 'barcode_field',
++  );
++
+   // Exported field_base: 'field_contributor'
+   $field_bases['field_contributor'] = array(
+     'active' => 1,
