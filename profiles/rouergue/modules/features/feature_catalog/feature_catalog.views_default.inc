@@ -703,6 +703,14 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['name_3']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name_3']['value'] = 'Photographe';
   $handler->display->display_options['filters']['name_3']['group'] = 2;
+  /* Filter criterion: Field collection item: Auteur principal (field_ismain) */
+  $handler->display->display_options['filters']['field_ismain_value']['id'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['table'] = 'field_data_field_ismain';
+  $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
+  $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['block_caching'] = '-1';
 
   /* Display: Classement avancé */
@@ -1500,7 +1508,6 @@ return  $contributor_id;';
   $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
-    0 => '0',
     1 => '1',
   );
   $handler->display->display_options['filters']['field_ismain_value']['group'] = 1;
