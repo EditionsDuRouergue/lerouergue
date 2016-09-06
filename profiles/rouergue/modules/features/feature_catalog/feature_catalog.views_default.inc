@@ -709,6 +709,15 @@ return $query->execute()->fetchField();';
   $handler->display->display_options['filters']['field_ismain_value']['field'] = 'field_ismain_value';
   $handler->display->display_options['filters']['field_ismain_value']['relationship'] = 'field_contributors_value';
   $handler->display->display_options['filters']['field_ismain_value']['value'] = array(
+    0 => '0',
+    1 => '1',
+  );
+  /* Filter criterion: Field collection item: Communicable (field_iscommunicable) */
+  $handler->display->display_options['filters']['field_iscommunicable_value']['id'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['table'] = 'field_data_field_iscommunicable';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['field'] = 'field_iscommunicable_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['relationship'] = 'field_contributors_value';
+  $handler->display->display_options['filters']['field_iscommunicable_value']['value'] = array(
     1 => '1',
   );
   $handler->display->display_options['block_caching'] = '-1';
