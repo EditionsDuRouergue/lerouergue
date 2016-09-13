@@ -156,6 +156,7 @@ function feature_events_field_default_field_instances() {
           'CH' => 'CH',
           'DE' => 'DE',
           'FR' => 'FR',
+          'IT' => 'IT',
         ),
         'default_country' => '',
         'format_handlers' => array(
