@@ -10,24 +10,6 @@
 function feature_core_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: management_:admin/config/people/accounts/fields/%
-  $menu_links['management_:admin/config/people/accounts/fields/%'] = array(
-    'menu_name' => 'management',
-    'link_path' => 'admin/config/people/accounts/fields/%',
-    'router_path' => 'admin/config/people/accounts/fields/%',
-    'link_title' => '',
-    'options' => array(
-      'identifier' => 'management_:admin/config/people/accounts/fields/%',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 1,
-    'parent_identifier' => 'management_manage-fields:admin/config/people/accounts/fields',
-  );
   // Exported menu link: management_liste-des-nouveauts:catalogue/liste-nouveautes
   $menu_links['management_liste-des-nouveauts:catalogue/liste-nouveautes'] = array(
     'menu_name' => 'management',
