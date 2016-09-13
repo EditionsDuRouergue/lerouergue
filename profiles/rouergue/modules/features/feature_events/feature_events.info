@@ -10,6 +10,7 @@ dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
 dependencies[] = entityreference
+dependencies[] = feature_books
 dependencies[] = feature_core
 dependencies[] = features
 dependencies[] = features_date_formats
