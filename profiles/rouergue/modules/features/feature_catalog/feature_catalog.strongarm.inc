@@ -172,6 +172,12 @@ function feature_catalog_strongarm() {
       'in_news_block' => array(
         'custom_settings' => TRUE,
       ),
+      'livre_couv_li_e' => array(
+        'custom_settings' => TRUE,
+      ),
+      'workshop_page_list' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -196,6 +202,7 @@ function feature_catalog_strongarm() {
           ),
           'author_books' => NULL,
           'in_news_block' => NULL,
+          'livre_couv_li_e' => NULL,
         ),
         'field_publication_status' => array(
           'full' => array(
@@ -222,6 +229,10 @@ function feature_catalog_strongarm() {
             'weight' => '7',
             'visible' => FALSE,
           ),
+          'livre_couv_li_e' => array(
+            'weight' => '36',
+            'visible' => FALSE,
+          ),
         ),
         'field_bs_button_browse_pdf' => array(
           'full' => array(
@@ -242,6 +253,10 @@ function feature_catalog_strongarm() {
           ),
           'in_news_block' => array(
             'weight' => '36',
+            'visible' => FALSE,
+          ),
+          'livre_couv_li_e' => array(
+            'weight' => '37',
             'visible' => FALSE,
           ),
         ),

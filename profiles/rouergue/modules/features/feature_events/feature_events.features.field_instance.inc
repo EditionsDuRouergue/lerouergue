@@ -201,9 +201,10 @@ function feature_events_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => 1,
+          'links' => 1,
+          'view_mode' => 'livre_couv_li_e',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 8,
       ),
       'list' => array(
