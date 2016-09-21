@@ -6,6 +6,7 @@ project = feature_news
 dependencies[] = feature_core
 dependencies[] = image
 dependencies[] = node
+dependencies[] = text
 dependencies[] = views
 dependencies[] = views_bootstrap
 features[ctools][] = strongarm:strongarm:1
