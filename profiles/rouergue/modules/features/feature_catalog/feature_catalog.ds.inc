@@ -228,6 +228,21 @@ function feature_catalog_ds_custom_fields_info() {
   );
   $export['illustrators'] = $ds_field;
 
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'th_me_du_book';
+  $ds_field->label = 'Théme du book';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'views|theme_book-block',
+    'block_render' => '1',
+  );
+  $export['th_me_du_book'] = $ds_field;
+
   return $export;
 }
 
