@@ -202,7 +202,7 @@ class ArticleMigration extends Migration {
 		// FIELDS MAPPING
 		$this->addFieldMapping('field_mistral_articleid', 'articleid');
 		$this->addFieldMapping('field_mistral_bookid', 'bookid');
-		$this->addFieldMapping('field_group_id', 'groupid');
+		$this->addFieldMapping('field_mistral_group_id', 'groupid');
 		$this->addFieldMapping('field_mistral_status', 'statusid');		
 		$this->addFieldMapping('title', 'title');
 		$this->addFieldMapping('field_subtitle', 'subtitle');
