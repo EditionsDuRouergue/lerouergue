@@ -185,7 +185,7 @@ function feature_catalog_strongarm() {
           'weight' => '28',
         ),
         'title' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'path' => array(
           'weight' => '27',

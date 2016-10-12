@@ -21,7 +21,7 @@ function feature_catalog_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contributors wrapper',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'authors',
       1 => 'illustrators',
