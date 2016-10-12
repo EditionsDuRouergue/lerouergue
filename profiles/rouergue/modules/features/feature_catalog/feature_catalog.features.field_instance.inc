@@ -634,7 +634,7 @@ function feature_catalog_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Champ group id mistral ',
     'display' => array(
       'author_books' => array(
         'label' => 'above',
@@ -682,7 +682,7 @@ function feature_catalog_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_group_id',
     'label' => 'Group ID',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -2839,6 +2839,7 @@ function feature_catalog_field_default_field_instances() {
   t('Book ID');
   t('Champ articleid Mistral');
   t('Champ bookid Mistral');
+  t('Champ group id mistral ');
   t('Citations presse');
   t('Communicable');
   t('Contributeurs');
