@@ -629,6 +629,76 @@ function feature_catalog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_group_id'
+  $field_instances['node-article-field_group_id'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Champ group id mistral ',
+    'display' => array(
+      'author_books' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 28,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'in_news_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'list' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'livre_couv_li_e' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_group_id',
+    'label' => 'Group ID',
+    'required' => 1,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_height'
   $field_instances['node-article-field_height'] = array(
     'bundle' => 'article',
@@ -2769,6 +2839,7 @@ function feature_catalog_field_default_field_instances() {
   t('Book ID');
   t('Champ articleid Mistral');
   t('Champ bookid Mistral');
+  t('Champ group id mistral ');
   t('Citations presse');
   t('Communicable');
   t('Contributeurs');
@@ -2780,6 +2851,7 @@ function feature_catalog_field_default_field_instances() {
   t('Embed vidéos - liseuses');
   t('Fonction');
   t('Gencod');
+  t('Group ID');
   t('Hauteur');
   t('ISBN');
   t('Largeur');
