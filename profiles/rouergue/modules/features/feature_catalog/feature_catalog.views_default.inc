@@ -2852,6 +2852,12 @@ return  $contributor_id;';
   $handler->display->display_options['arguments']['nid_1']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid_1']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid_1']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Group ID (field_group_id) */
+  $handler->display->display_options['filters']['field_group_id_value']['id'] = 'field_group_id_value';
+  $handler->display->display_options['filters']['field_group_id_value']['table'] = 'field_data_field_group_id';
+  $handler->display->display_options['filters']['field_group_id_value']['field'] = 'field_group_id_value';
+  $handler->display->display_options['filters']['field_group_id_value']['operator'] = '!=';
+  $handler->display->display_options['filters']['field_group_id_value']['value']['value'] = '45';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');

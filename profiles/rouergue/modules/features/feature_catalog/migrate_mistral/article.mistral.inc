@@ -168,7 +168,7 @@ class ArticleMigration extends Migration {
 	  $query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 	  $query->leftJoin('bookreadership','br','br.bookid=b.bookid');
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
-		->fields('b', array('title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
+		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
 		->fields('rp', array('price'));
 	  $query->addField('b','nbpage','nbpage');
 	  $query->addField('pt','isvalidated','price_validated');
@@ -202,6 +202,7 @@ class ArticleMigration extends Migration {
 		// FIELDS MAPPING
 		$this->addFieldMapping('field_mistral_articleid', 'articleid');
 		$this->addFieldMapping('field_mistral_bookid', 'bookid');
+		$this->addFieldMapping('field_group_id', 'groupid');
 		$this->addFieldMapping('field_mistral_status', 'statusid');		
 		$this->addFieldMapping('title', 'title');
 		$this->addFieldMapping('field_subtitle', 'subtitle');
