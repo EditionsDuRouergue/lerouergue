@@ -60,6 +60,7 @@ dependencies[] = user_settings_access
 dependencies[] = uuid
 dependencies[] = uuid_features
 dependencies[] = views
+dependencies[] = node_clone
 
 ; Features.
 dependencies[] = feature_theme
