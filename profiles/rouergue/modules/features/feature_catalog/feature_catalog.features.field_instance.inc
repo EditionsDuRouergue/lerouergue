@@ -2165,7 +2165,7 @@ function feature_catalog_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Biographie',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 1,
       'text_processing' => 1,
