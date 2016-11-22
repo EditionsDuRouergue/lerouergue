@@ -44,7 +44,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Romans Jeunesse',
     'description' => 'Zig zag, dacodac, tic tac, boomerang, doado, épik : des mots imagés pour des collections en mouvement qui grandissent avec l’imaginaire des lecteurs, depuis l’âge de 6 ans jusqu’aux jeunes adultes.',
     'format' => 'plain_text',
-    'weight' => 64,
+    'weight' => 8,
     'uuid' => '02919f7b-735d-4f1a-acc6-0854803e8b56',
     'vocabulary_machine_name' => 'universe',
   );
@@ -89,7 +89,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'La brune',
     'description' => 'Une collection de romans francophones, ouverte aux tonalités littéraires les plus diverses. Auteurs confirmés et jeunes talents pour des lecteurs curieux et exigeants. ',
     'format' => 'plain_text',
-    'weight' => 58,
+    'weight' => 2,
     'uuid' => '1cc5d1ae-4297-4a31-bc83-ec57da26f285',
     'vocabulary_machine_name' => 'universe',
   );
@@ -97,7 +97,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Albums Jeunesse',
     'description' => 'Les albums du rouergue jeunesse proposent des parcours inventifs, à travers les mots et les images. Pour un art du récit toujours renouvelé.',
     'format' => 'plain_text',
-    'weight' => 65,
+    'weight' => 9,
     'uuid' => '21b526e8-954a-4878-a43a-7fcdc8955938',
     'vocabulary_machine_name' => 'universe',
   );
@@ -138,7 +138,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Régions',
     'description' => 'Nées provinciales, les Éditions du Rouergue aiment regarder au-delà de leurs frontières. Leurs livres voyagent à travers les régions de France en y cherchant la singularité du vécu, la noblesse des patrimoines, les mouvements de l’Histoire. Elles ont consacré quelques-unes de leurs plus belles excursions aux Cévennes voisines, terres amies auxquelles elles ont consacré de nombreux ouvrages.',
     'format' => 'plain_text',
-    'weight' => 60,
+    'weight' => 4,
     'uuid' => '28a7aacd-6429-4630-abe0-9f8fa916748e',
     'vocabulary_machine_name' => 'universe',
   );
@@ -216,7 +216,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Graphisme & Illustrations',
     'description' => 'Lorsque les illustrations, les images s’invitent dans le livre pour les plus grands.',
     'format' => 'plain_text',
-    'weight' => 66,
+    'weight' => 10,
     'uuid' => '4509ebf0-0dac-496e-b968-96e7f4b9d248',
     'vocabulary_machine_name' => 'universe',
   );
@@ -298,7 +298,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Epik (Fantasy)',
     'description' => 'Cette collection regroupe des romans dédiés à l’imaginaire (SF, fantasy, dystopie, horreur, etc.) pour repousser les frontières du réel. À destination des ados et jeunes adultes.',
     'format' => 'plain_text',
-    'weight' => 63,
+    'weight' => 7,
     'uuid' => '5ea55aec-1f9b-4ff9-a577-2ff4e9076370',
     'vocabulary_machine_name' => 'universe',
   );
@@ -558,7 +558,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Art & Histoire',
     'description' => 'En 1991, les Éditions du Rouergue publiaient Voyage en cathédrale, Sainte-Cécile d’Albi, leur premier livre d’art, avec des photographies d’Alain Willaume et un texte de Robert Dulau. L’histoire, le patrimoine, l’art sont des domaines qui n’ont pas cessé d’inspirer de beaux-livres, sous la signature d’érudits et de chercheurs, avec des ouvrages de référence comme Conques de Marie Renoue, le livre majeur sur l’abbatiale et les vitraux de Pierre Soulages, au catalogue depuis 1997.',
     'format' => 'plain_text',
-    'weight' => 59,
+    'weight' => 3,
     'uuid' => 'a82a3692-1790-4ef9-a0bb-15bb01fa5029',
     'vocabulary_machine_name' => 'universe',
   );
@@ -614,7 +614,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Littérature',
     'description' => 'Le département Littérature au Rouergue est vaste. Il s’étend de collection de littérature générale au domaine du polar, jusqu’aux romans de société.',
     'format' => 'plain_text',
-    'weight' => 57,
+    'weight' => 0,
     'uuid' => 'bff581ca-2883-4ec8-9e83-917be1285f49',
     'vocabulary_machine_name' => 'universe',
   );
@@ -655,7 +655,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Numérique',
     'description' => 'Certains romans sont disponibles en format numérique, ainsi que certaines applications dérivées des albums. Vous pouvez vous les procurer sur les plateformes de téléchargement.',
     'format' => 'plain_text',
-    'weight' => 67,
+    'weight' => 11,
     'uuid' => 'cdf5215e-8b85-4f0c-9f68-9ee517392c16',
     'vocabulary_machine_name' => 'universe',
   );
@@ -737,7 +737,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Gastronomie',
     'description' => 'Au fil des années, les Éditions du Rouergue ont construit leur singularité dans le domaine de la gastronomie. Dès 1991, avec la publication du Livre de Michel Bras (épuisé) qui a marqué l’édition culinaire, les Éditions du Rouergue ont créé des livres autour du travail de grands chefs tels que Michel Bras, Olivier Roellinger puis Thierry Marx, Jean-Luc Rabanel ou Michel Troisgros. Outre cette littérature gastronomique, elles s’intéressent aux patrimoines culinaires des régions de France et au rapport essentiel avec les producteurs.',
     'format' => 'plain_text',
-    'weight' => 62,
+    'weight' => 6,
     'uuid' => 'f39ea2eb-3cae-4b3b-92b4-3ddb6f326b4c',
     'vocabulary_machine_name' => 'universe',
   );
@@ -778,7 +778,7 @@ function feature_catalog_uuid_features_default_terms() {
     'name' => 'Nature & Jardin',
     'description' => 'Les Éditions du Rouergue ont développé un catalogue important dédié à la nature et au jardin, alliant réflexion, prospective et pratique. Régulièrement récompensé par des prix spécialisés, le catalogue nature & jardin des éditions du Rouergue est fort de nombreux livres devenus des incontournables, qui dessinent une ligne engagée, résolument à l’avant-garde des connaissances et des comportements. Avec la volonté de porter à la connaissance de chacun les savoirs et les solutions pour un développement plus respectueux de la vie.',
     'format' => 'plain_text',
-    'weight' => 61,
+    'weight' => 5,
     'uuid' => 'fe160545-8a24-4647-9d4a-f3717dec5ef4',
     'vocabulary_machine_name' => 'universe',
   );
