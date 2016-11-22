@@ -548,6 +548,10 @@ class ArticleMigration extends Migration {
 
 	// Rouergue Littérature - 493 | Polars - 510 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
 	$this->univ_coll_mapping['493']['510']['136']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
+	
+	// Rouergue Littérature - 493 | Rouergue en Poche - 943 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
+	$this->univ_coll_mapping['493']['943']['136']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
+	
 
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
 	$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
@@ -574,6 +578,8 @@ class ArticleMigration extends Migration {
 	//  ----------------------------------------------------  ===>   Région > Romans > Rouergue en poche - 322aa47f-7585-4688-b4ee-08e83eca5d28
 	$this->univ_coll_mapping['493']['943']['tids'] =
 	  $this->univ_uuids_tids['8f6cfb5a-e21d-4afe-9b75-389addf70654'] . ',' . $this->univ_uuids_tids['322aa47f-7585-4688-b4ee-08e83eca5d28'];
+	  
+	  $this->univ_coll_mapping['493']['943']['136']['tids'] = $this->univ_uuids_tids['322aa47f-7585-4688-b4ee-08e83eca5d28'];
 
 	// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
 	// --------------------------------------------------------------   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
