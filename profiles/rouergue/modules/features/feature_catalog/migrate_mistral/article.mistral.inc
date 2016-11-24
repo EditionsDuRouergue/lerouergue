@@ -554,10 +554,10 @@ class ArticleMigration extends Migration {
 	
 
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
-	$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
+	$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['408ebdfc-04e3-405b-a8fa-9fb62687f3ae']. ',' . $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
 	
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Rouergue noir - 408ebdfc-04e3-405b-a8fa-9fb62687f3ae
-	$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['408ebdfc-04e3-405b-a8fa-9fb62687f3ae'];
+	//$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['408ebdfc-04e3-405b-a8fa-9fb62687f3ae'];
 	
 	// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans - c27add62-baf4-45de-b445-27d7fef13a4f
 
