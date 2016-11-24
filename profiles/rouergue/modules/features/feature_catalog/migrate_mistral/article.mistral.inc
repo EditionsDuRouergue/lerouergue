@@ -549,8 +549,8 @@ class ArticleMigration extends Migration {
 	// Rouergue Littérature - 493 | Polars - 510 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
 	$this->univ_coll_mapping['493']['510']['136']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
 	
-	// Rouergue Littérature - 493 | Rouergue en Poche - 943 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
-	$this->univ_coll_mapping['493']['943']['136']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
+	// Rouergue Littérature - 493 | Rouergue en Poche - 943 | Assassins sans visage - 252   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
+	$this->univ_coll_mapping['493']['943']['252']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
 	
 
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
