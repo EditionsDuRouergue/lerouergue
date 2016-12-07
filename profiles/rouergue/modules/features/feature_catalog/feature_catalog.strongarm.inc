@@ -281,7 +281,7 @@ function feature_catalog_strongarm() {
         'custom_settings' => FALSE,
       ),
       'search_index' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'search_result' => array(
         'custom_settings' => FALSE,
@@ -306,6 +306,27 @@ function feature_catalog_strongarm() {
       ),
       'on_book_list' => array(
         'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'livre_couv_li_e' => array(
+        'custom_settings' => FALSE,
+      ),
+      'author_books' => array(
+        'custom_settings' => FALSE,
+      ),
+      'in_news_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'carousel' => array(
+        'custom_settings' => FALSE,
+      ),
+      'map_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'workshop_page_list' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
