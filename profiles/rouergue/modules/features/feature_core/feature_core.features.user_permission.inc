@@ -81,6 +81,15 @@ function feature_core_user_default_permissions() {
     'module' => 'media_internet',
   );
 
+  // Exported permission: 'administer Search Autocomplete'.
+  $permissions['administer Search Autocomplete'] = array(
+    'name' => 'administer Search Autocomplete',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'search_autocomplete',
+  );
+
   // Exported permission: 'administer nodes'.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -151,6 +160,16 @@ function feature_core_user_default_permissions() {
       'webmaster' => 'webmaster',
     ),
     'module' => 'search',
+  );
+
+  // Exported permission: 'use Search Autocomplete'.
+  $permissions['use Search Autocomplete'] = array(
+    'name' => 'use Search Autocomplete',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'search_autocomplete',
   );
 
   // Exported permission: 'use advanced search'.

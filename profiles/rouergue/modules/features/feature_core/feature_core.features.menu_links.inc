@@ -51,6 +51,27 @@ function feature_core_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
+  // Exported menu link: management_search-autocomplete-settings:admin/config/search/search_autocomplete
+  $menu_links['management_search-autocomplete-settings:admin/config/search/search_autocomplete'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/config/search/search_autocomplete',
+    'router_path' => 'admin/config/search/search_autocomplete',
+    'link_title' => 'Search Autocomplete settings',
+    'options' => array(
+      'attributes' => array(
+        'title' => 'Choose settings and suggestion items for autocompletion in input forms.',
+      ),
+      'identifier' => 'management_search-autocomplete-settings:admin/config/search/search_autocomplete',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 1,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 0,
+    'parent_identifier' => 'management_search-and-metadata:admin/config/search',
+  );
   // Exported menu link: management_tri-des-actualits:tri-actualites
   $menu_links['management_tri-des-actualits:tri-actualites'] = array(
     'menu_name' => 'management',
@@ -98,6 +119,7 @@ function feature_core_menu_default_menu_links() {
   // Included for use with string extractors like potx.
   t('Liste des nouveautés');
   t('ROUERGUE ADMIN');
+  t('Search Autocomplete settings');
   t('Tri des actualités');
   t('Tri du bloc nouveautés');
 
