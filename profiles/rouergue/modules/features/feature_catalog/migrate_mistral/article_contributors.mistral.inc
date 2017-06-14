@@ -97,4 +97,12 @@ class ArticleContributorsMigration extends Migration {
 	$this->addFieldMapping('field_contributor_function', 'functionid')->sourceMigration('Function');
 	$this->addFieldMapping('field_contributor_function:source_type')->defaultValue('tid');
   }
+  
+    public function postImport() {
+    parent::postImport();
+    foreach ($this->map->getRowsNeedingUpdate(10000) as $row) {
+      field_collection_item_delete($row->destid1);
+      $this->map->deleteDestination(array($row->destid1));
+    }
+  }
 }
