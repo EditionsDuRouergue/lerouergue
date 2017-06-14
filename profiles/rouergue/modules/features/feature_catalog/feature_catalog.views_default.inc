@@ -2465,13 +2465,6 @@ return  $contributor_id;';
   $handler->display->display_options['filters']['name']['relationship'] = 'field_contributor_function_tid';
   $handler->display->display_options['filters']['name']['value'] = 'Auteur';
   $handler->display->display_options['filters']['name']['group'] = 1;
-  /* Filter criterion: Taxonomy term: Name */
-  $handler->display->display_options['filters']['name_1']['id'] = 'name_1';
-  $handler->display->display_options['filters']['name_1']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['filters']['name_1']['field'] = 'name';
-  $handler->display->display_options['filters']['name_1']['relationship'] = 'field_contributor_function_tid';
-  $handler->display->display_options['filters']['name_1']['value'] = 'Illustrateur';
-  $handler->display->display_options['filters']['name_1']['group'] = 2;
   $handler->display->display_options['block_caching'] = '8';
 
   /* Display: Auteurs fiche livre */
