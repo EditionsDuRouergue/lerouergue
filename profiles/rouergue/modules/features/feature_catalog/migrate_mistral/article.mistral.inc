@@ -164,7 +164,7 @@ class ArticleMigration extends Migration {
 	  $query->join('book', 'b', 'b.bookid = a.bookid');
 	  $query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
 	  $query->join('priceandtirage','pt','pt.articleid=a.articleid');
-	  $query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
+	  $query->join('realprice','rp','rp.articleid=a.articleid');
 	  $query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 	  $query->leftJoin('bookreadership','br','br.bookid=b.bookid');
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
