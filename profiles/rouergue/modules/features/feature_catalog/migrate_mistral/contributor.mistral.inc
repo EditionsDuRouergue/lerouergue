@@ -131,7 +131,7 @@ class ContributorMigration extends Migration {
 
 	// Biography text cleaning.
 	$row->biography = html_entity_decode(strip_tags($row->biography, '<br><b><strong><i><em>'));
-	$row->biography = preg_replace('/style[^>]*/', '', $row->biography);
+	$row->biography = preg_replace('|<style\b[^>]*>(.*?)</style>|s', '', $row->biography);
   }
 
   /**
