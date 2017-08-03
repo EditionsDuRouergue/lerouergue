@@ -80,7 +80,7 @@ class ContributorMigration extends Migration {
 	$subquery->join('book','b','b.bookid=a.bookid');
 	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
 	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid');
-	$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
+	$subquery->join('realprice','r','r.articleid=a.articleid');
 	$subquery->fields('a', array('bookid'));
 	$subquery->condition('a.statusid','1','<>');
 	$subquery->condition('b.projecttype','PLV','<>');
