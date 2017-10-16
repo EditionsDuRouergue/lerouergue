@@ -723,6 +723,13 @@ class ArticleMigration extends Migration {
 	// Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans dès 8 ans > zig zag - 652fe62a-ec9a-43b9-8443-9c44f9ebb44d
 	$this->univ_coll_mapping['497']['530']['tids'] = $this->univ_uuids_tids['652fe62a-ec9a-43b9-8443-9c44f9ebb44d'];
 
+	
+	// Rouergue Beaux Livres  - 495 | Nature - 1133    ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+	$this->univ_coll_mapping['495']['1133']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+	  
+	
+	
+	
 /*
 $this->univ_coll_mapping[''] = $this->univ_uuids_tids[''];
 $this->univ_coll_mapping[''][''] = $this->univ_uuids_tids[''];
