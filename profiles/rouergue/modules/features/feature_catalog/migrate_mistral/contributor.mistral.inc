@@ -221,4 +221,13 @@ class ContributorMigration extends Migration {
 	// Parts reassembling after treatment.
 	return implode("-", $capitalized_parts);
   }
+  
+    public function postImport() {
+    parent::postImport();
+    foreach ($this->map->getRowsNeedingUpdate(10000) as $row) {
+      node_delete($row->destid1);
+      $this->map->deleteDestination(array($row->destid1));
+    }
+  }
+  
 }
