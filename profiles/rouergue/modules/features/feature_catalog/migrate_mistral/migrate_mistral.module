@@ -146,7 +146,10 @@ function _mistral_import() {
   }
 
   $return_messages . "<br>" . "Synchronization process completed.";
-
+	
+$imagecache_cmd = "$drush image-flush --all";
+  shell_exec($imagecache_cmd);
+  
   $reindex_cmd = "$drush search-reindex --immediate -y";
   shell_exec($reindex_cmd);
 
