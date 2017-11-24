@@ -167,11 +167,18 @@ class ArticleMigration extends Migration {
 	  $query->join('realprice','rp','rp.articleid=a.articleid');
 	  $query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 	  $query->leftJoin('bookreadership','br','br.bookid=b.bookid');
+	   //epub link
+	  $query->leftJoin('scanarticlelink','s','s.bookid=b.bookid');
+	  $query->leftJoin('article','a1','b.bookid=a1.bookid');
+	  $query->leftJoin('book','b2','s.bookidepub=b2.bookid');
+	  $query->leftJoin('allarticle','a2','b2.bookid=a2.bookid');
+	  
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
 		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
 		->fields('rp', array('price'));
 	  $query->addField('b','nbpage','nbpage');
 	  $query->addField('pt','isvalidated','price_validated');
+	  $query->addField('a2','gencod','gencod_epub');
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->condition('a.statusid','1','<>');
@@ -213,6 +220,8 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');
+		
+		$this->addFieldMapping('field_gencod_epub', 'gencod_epub');
 		$this->addFieldMapping('field_release_date', 'firstpublicationdate');
 		$this->addFieldMapping('body', 'backcover');
 		$this->addFieldMapping('body:format', NULL, FALSE)->defaultValue('full_html');
