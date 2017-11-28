@@ -182,7 +182,7 @@ class ArticleMigration extends Migration {
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->condition('a.statusid','1','<>');
-	  $query->condition('b.projecttype','PLV','<>');
+	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
 		
@@ -689,6 +689,7 @@ class ArticleMigration extends Migration {
 	  $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'] . ',' . $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
 
 	//************************************************** ROUERGUE NUMÉRIQUE JEUNESSE *********************************************************************
+	/* 
 	// ROUERGUE NUMÉRIQUE JEUNESSE - 463 | dacodac - 995   ===>   Livres numériques > dacodac - 0af3c4aa-630d-48a0-98ca-51752eba0778
 	$this->univ_coll_mapping['463']['995']['tids'] = $this->univ_uuids_tids['0af3c4aa-630d-48a0-98ca-51752eba0778'];
 
@@ -709,6 +710,8 @@ class ArticleMigration extends Migration {
 
 	// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans - 1012  ===>   Livres numériques > roman - 13c26811-5ade-4018-b8bb-5642b42fc1da
 	$this->univ_coll_mapping['462']['1012']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
+	 */
+	
 
 	//************************************************** Rouergue Romans Jeunesse **********************************************************************
 	// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
