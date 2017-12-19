@@ -180,9 +180,10 @@ class ArticleMigration extends Migration {
 	  $query->addField('a2','gencod','gencod_epub');
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
+	  $query->where('b.firstpublicationdate < ADDDATE(CURDATE(), INTERVAL 2 MONTH)');
 	  $query->condition('a.statusid','1','<>');
 	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
-	   $query->condition('b.firstpublicationdate',DATE_ADD(CURDATE(), INTERVAL 2 MONTH),'<');
+	   
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
 		
