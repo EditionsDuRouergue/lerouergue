@@ -158,7 +158,7 @@ class ArticleMigration extends Migration {
 	  $this->description = t('Migrate articles from mistral source database to Drupal Article nodes');
 
 	  //$this->dependencies = array('Theme');
-
+	$query_date = ADDDATE(CURDATE(), INTERVAL 2 MONTH);
 	  // SOURCE
 	  $query = Database::getConnection('default', 'mistral')->select('article','a');
 	  $query->join('book', 'b', 'b.bookid = a.bookid');
@@ -183,7 +183,7 @@ class ArticleMigration extends Migration {
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->condition('a.statusid','1','<>');
 	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
-	   $query->condition('b.firstpublicationdate',ADDDATE(CURDATE(), INTERVAL 2 MONTH),'<');
+	   $query->condition('b.firstpublicationdate',$query_date,'<');
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
 		
