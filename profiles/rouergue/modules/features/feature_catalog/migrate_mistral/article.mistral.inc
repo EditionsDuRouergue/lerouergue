@@ -158,7 +158,7 @@ class ArticleMigration extends Migration {
 	  $this->description = t('Migrate articles from mistral source database to Drupal Article nodes');
 
 	  //$this->dependencies = array('Theme');
-	$query_date = ADDDATE(CURDATE(), INTERVAL 2 MONTH);
+	$query_date = 'ADDDATE(CURDATE(), INTERVAL 2 MONTH)';
 	  // SOURCE
 	  $query = Database::getConnection('default', 'mistral')->select('article','a');
 	  $query->join('book', 'b', 'b.bookid = a.bookid');
