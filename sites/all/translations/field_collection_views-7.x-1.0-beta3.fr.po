@@ -1,0 +1,22 @@
+# French translation of Field Collection Views (7.x-1.0-beta3)
+# Copyright (c) 2012 by the French translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Field Collection Views (7.x-1.0-beta3)\n"
+"POT-Creation-Date: 2012-08-05 14:41+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+msgid "Name"
+msgstr "Nom"
+msgid "Add"
+msgstr "Ajouter"
+msgid "Leave the title empty, to hide the link."
+msgstr "Laissez le titre vide pour masquer le lien."
+msgid "Add link title"
+msgstr "Ajouter un titre lien"

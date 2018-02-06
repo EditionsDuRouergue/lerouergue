@@ -1,0 +1,96 @@
+<?php
+
+function resave_nodes_setup_batch($start=1, $count=1000000, $node_bundle=NULL) {
+  // Increase memopry limit and enable garbage collector
+  @ini_set('memory_limit', '1G');
+  gc_enable();
+  
+  $nodes_query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+      ->range($start, $count);
+
+  if ( $node_bundle ) {
+    $nodes_query->condition('type', $node_bundle);
+  }
+
+  $all_nids = $nodes_query->execute()->fetchCol();
+  $nodes_query = NULL;
+  unset($nodes_query);
+
+  //Break up all of our data so each process does not time out.
+  $chunks = array_chunk($all_nids, 50);
+  $operations = array();
+  $count_chunks = count($chunks);
+
+  for ($i=0; $i < $count_chunks; $i++) { 
+    $operations[] = array(
+      'resave_nodes_get_nodes_and_save',
+      array(
+        $chunks[$i],
+        'details' => t('Re-Saving nodes. Step @num of @tot', array('@num'=>($i+1), '@tot'=>$count_chunks)),
+      ),
+    );
+  }
+ 
+  //put all that information into our batch array
+  $batch = array(
+    'operations' => $operations,
+    'title' => t('Re-Save Nodes batch process'),
+    'init_message' => t('Setting up process..'),
+    'error_message' => t('An error occurred'),
+    'finished' => 'resave_nodes_finished_method'
+  );
+ 
+  //Get the batch process all ready!
+  batch_set($batch);
+  $batch =& batch_get();
+ 
+  //Because we are doing this on the back-end, we set progressive to false.
+  $batch['progressive'] = FALSE;
+ 
+  //Start processing the batch operations.
+  drush_backend_batch_process();
+}
+
+function resave_nodes_get_nodes_and_save($data_chunk, $operation_details, &$context) {
+  $context['message'] = $operation_details;
+  drush_log(t('Memory usage: @mem Peak: @peak)', array('@mem'=>_memConvert(memory_get_usage(true)), '@peak'=>_memConvert(memory_get_peak_usage(true))) ), 'debug');
+
+  foreach ($data_chunk as $node_id) {
+    $node = node_load($node_id);
+    /* Load and check if successfully loaded a node */
+    if ( !is_object($node) || !isset($node->nid) ) {
+      drush_log('Unable to load node: '.$node_id, 'warning');
+    }
+    else {
+      $last_change = $node->changed;
+
+      // Adding 1 second to the creaton date so something is actyually changed in the node.
+      $node->created += 1;
+      
+      if ( function_exists('entity_save') ) {
+        entity_save('node', $node);
+      } else {
+        node_save($node);
+      }
+
+      /* Reset the `last updated` timestamp for this node, add 5 seconds so Search API will think that it's acutlaly updated. */
+      $query = db_update('node')
+        ->fields(array('changed' => ($last_change + 5),))
+          ->condition('nid', $node->nid);
+      $query->execute();
+      $query = NULL;
+      unset($query);
+      
+      
+      drush_log('Saved node: '.$node_id, 'debug');
+    }
+  }
+  $node = NULL;
+  unset($node);
+}
+
+function _memConvert($size) {
+  $unit = array('B','KB','MB','GB','TB','PB');
+  return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
+}
