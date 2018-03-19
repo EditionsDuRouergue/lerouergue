@@ -28,3 +28,8 @@
     background-color: #fff;
 }
 .view-display-id-agenda_author_block .vocabulary-event-types {text-transform: uppercase;} 
+.node-type-contributor .views-field-field-event-type h2 {
+	color: #f14a1f;
+    font-size: 14px;
+    text-transform: uppercase;
+	}
