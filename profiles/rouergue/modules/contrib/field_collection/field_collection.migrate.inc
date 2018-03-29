@@ -109,7 +109,13 @@ class MigrateDestinationFieldCollection extends MigrateDestinationEntity {
       $updating = FALSE;
       $host_entity = entity_load_single($this->hostEntityType, $collection->host_entity_id);
       entity_get_controller($this->hostEntityType)->resetCache();
-      $entity->setHostEntity($this->hostEntityType, $host_entity);
+
+      if (isset($row->language)) {
+        $entity->setHostEntity($this->hostEntityType, $host_entity, $row->language, TRUE);
+      }
+      else {
+        $entity->setHostEntity($this->hostEntityType, $host_entity);
+      }
     }
 
     unset($collection->host_entity_id);

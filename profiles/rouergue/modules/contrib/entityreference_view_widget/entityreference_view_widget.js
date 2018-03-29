@@ -1,15 +1,34 @@
+/**
+ * @file
+ * File: entityreference_view_widget.js.
+ */
+
 (function($) {
   Drupal.behaviors.entityreferenceViewWidget = {
     attach: function(context, settings) {
+      var widgetCheckboxSelector = '.entityreference-view-widget-checkbox';
+
+      // Remove the reference when a checkbox is unchecked.
+      if ($(widgetCheckboxSelector).length > 0) {
+        $(widgetCheckboxSelector).click(function () {
+          if (!$(this).is(':checked')) {
+            $(this).parents('.entityreference-view-widget-table-row').get(0).remove();
+          }
+        });
+      }
+
       var checkboxes = '#modal-content input.entity-reference-view-widget-select';
       var selectAllSelector = '#entityreference-view-widget-select-all';
       $(selectAllSelector).unbind('click').data('unselect', 0).click(function() {
+        // Use the proper JQeury methd depending on the JQuery version.
+        var version = $.fn.jquery.split('.');
+        var use_prop = (version[0] > 1 || version[1] > 5);
         if ($(this).data('unselect')) {
-          $(checkboxes).removeAttr('checked');
+          use_prop ? $(checkboxes).prop('checked',false) : $(checkboxes).removeAttr('checked');
           $(this).data('unselect', 0).text(Drupal.t('Select all'));
         }
         else {
-          $(checkboxes).attr('checked', 'checked');
+          use_prop ? $(checkboxes).prop('checked',true) : $(checkboxes).attr('checked', 'checked');
           $(this).data('unselect', 1).text(Drupal.t('Unselect all'));
         }
         return false;
@@ -37,7 +56,7 @@
         }
       }
     }
-  }
+  };
 
   // Create a new ajax command, ervw_draggable that is called to make the rows
   // of the widget draggable.

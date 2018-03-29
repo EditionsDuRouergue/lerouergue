@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @file magnific_popup/includes/magnific_popup.formatters.inc
- *
+ * @file
  * Formatters for Magnific Popup.
  */
 
@@ -33,17 +32,17 @@ function magnific_popup_field_formatter_settings_form($field, $instance, $view_m
   $settings = $display['settings'];
 
   // Get all possible thumbnail fields.
-  $all_fields = !empty($form['#fields'])? $form['#fields'] : array();
-  $field_bundle = !empty($form['#bundle'])? $form['#bundle'] : '';
+  $all_fields = !empty($form['#fields']) ? $form['#fields'] : array();
+  $field_bundle = !empty($form['#bundle']) ? $form['#bundle'] : '';
   $thumbnail_field_options = _magnific_popup_thumbnail_field_options($all_fields, $field_bundle);
-  
+
   // Get all possible image styles.
   $image_style_options = _magnific_popup_image_style_options();
 
   // Gallery Mode is TRUE when this field supports multiple items.
   $gallery_available = $field['cardinality'] !== 1;
   $gallery_options = _magnific_popup_gallery_options();
-  
+
   $element = array();
   $element['gallery_available'] = array(
     '#type' => 'markup',
@@ -110,7 +109,7 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
   $wrappers = array();
   foreach ($entities as $entity_id => $entity) {
     foreach ($items[$entity_id] as $delta => &$item) {
-      // Fail-safe check to not load items 
+      // Fail-safe check to not load items.
       if (empty($item['uri'])) {
         continue;
       }
@@ -138,11 +137,11 @@ function magnific_popup_field_formatter_prepare_view($entity_type, $entities, $f
           $is_external_url = FALSE;
           // MediaYouTubeStreamWrapper implements getLocalThumbnailPath() to
           // find the thumbnail path.
-          if (method_exists($wrapper,'getLocalThumbnailPath')) {
+          if (method_exists($wrapper, 'getLocalThumbnailPath')) {
             $thumbnail_path = $wrapper->getLocalThumbnailPath();
             $is_external_url = TRUE;
           }
-          else if (!empty($displays[$entity_id]) && !empty($displays[$entity_id]['settings'])) {
+          elseif (!empty($displays[$entity_id]) && !empty($displays[$entity_id]['settings'])) {
             $current_display = $displays[$entity_id]['settings'];
             $thumbnail_field_name = !empty($current_display['thumbnail_field']) ? $current_display['thumbnail_field'] : '';
             // Check for thumbnail overrides (where a different field is used
@@ -258,10 +257,10 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
     );
     $popup_gallery['item-' . $delta]['#options']['attributes']['class'][] = 'mfp-item';
     // This item has a thumbnail image if:
-    //  - the Gallery Type is "all items" (because all items have thumbs), or
-    //  - the Gallery Type is "no gallery", or
-    //  - the Gallery Type is "first item" and this $delta is the first item, or
-    //  - the Gallery Type is "random item" and this $delta is the random item.
+    // - the Gallery Type is "all items" (because all items have thumbs), or
+    // - the Gallery Type is "no gallery", or
+    // - the Gallery Type is "first item" and this $delta is the first item, or
+    // - the Gallery Type is "random item" and this $delta is the random item.
     if ($settings['gallery_style'] == 'all_items' || $settings['gallery_style'] == 'no_gallery' || $delta == $trigger_item) {
       $image = array(
         // Try to use a "figure" theme implementation if it exists, or fall back
@@ -291,6 +290,12 @@ function magnific_popup_field_formatter_view($entity_type, $entity, $field, $ins
   return $element;
 }
 
+/**
+ * Utility function returning list of gallery options.
+ *
+ * @return array
+ *   An associative array of option names (keys) and labels (values).
+ */
 function _magnific_popup_gallery_options() {
   return array(
     'all_items' => t('Gallery: All Items Displayed'),
@@ -300,13 +305,26 @@ function _magnific_popup_gallery_options() {
   );
 }
 
-
+/**
+ * Utility function returning all possible thumbnail fields.
+ *
+ * A field is considered a potential thumbnail field if its type is "image" or
+ * "file".
+ *
+ * @param array $all_fields
+ *   An array of all fields on the entity.
+ * @param string $field_bundle
+ *   The entity's bundle machine name.
+ *
+ * @return array
+ *   An associative array of field machine names (keys) and labels (values).
+ */
 function _magnific_popup_thumbnail_field_options($all_fields, $field_bundle) {
   $file_fields = array();
   if (!empty($all_fields)) {
     foreach ($all_fields as $field_name) {
       $field_info = field_info_field($field_name);
-      if($field_info['type'] == 'file' || $field_info['type'] == 'image') {
+      if ($field_info['type'] == 'file' || $field_info['type'] == 'image') {
         $file_field = field_info_instance('node', $field_name, $field_bundle);
         if (!empty($file_field['label']) && !empty($file_field['field_name'])) {
           $file_fields[$file_field['field_name']] = $file_field['label'];
@@ -318,11 +336,17 @@ function _magnific_popup_thumbnail_field_options($all_fields, $field_bundle) {
   return $file_fields;
 }
 
-function _magnific_popup_image_style_options($all_fields, $field_bundle) {
+/**
+ * Utility function returning all available image styles.
+ *
+ * @return array
+ *   An associative array of image style names (keys) and labels (values).
+ */
+function _magnific_popup_image_style_options() {
   $image_styles = array();
   $all_styles = image_styles();
 
-  foreach($all_styles as $style) {
+  foreach ($all_styles as $style) {
     if (!empty($style['name']) && !empty($style['label'])) {
       $image_styles[$style['name']] = $style['label'];
     }
