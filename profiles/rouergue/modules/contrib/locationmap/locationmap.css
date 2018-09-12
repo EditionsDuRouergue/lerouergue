@@ -1,0 +1,7 @@
+#locationmap_map img {
+  max-width: none;
+}
+
+#locationmap_map {
+  color: black;
+}
