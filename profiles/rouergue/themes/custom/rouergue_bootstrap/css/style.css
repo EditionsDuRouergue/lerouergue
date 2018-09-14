@@ -33,6 +33,5 @@
     font-size: 14px;
     text-transform: uppercase;
 	}
-.btn btn-default form-submit ajax-processed{
-	margin-top:10px;
-}
+.btn .btn-default .form-submit .ajax-processed{margin-top:10px;}
+	
