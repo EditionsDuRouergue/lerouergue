@@ -13,7 +13,7 @@ $plugin = array(
   'title' => t("Google Geocoder"),
   'description' => t('Geocodes via google geocoder'),
   'callback' => 'geocoder_google',
-  'field_types' => array('text', 'text_long', 'addressfield', 'location', 'text_with_summary', 'computed', 'taxonomy_term_reference', 'country'),
+  'field_types' => array('text', 'text_long', 'addressfield', 'location', 'text_with_summary', 'computed', 'taxonomy_term_reference'),
   'field_callback' => 'geocoder_google_field',
   'settings_callback' => 'geocoder_google_form',
   'terms_of_service' => 'http://code.google.com/apis/maps/documentation/geocoding/#Limits',
@@ -23,123 +23,120 @@ $plugin = array(
  * Process Markup
  */
 function geocoder_google($address, $options = array()) {
-  $delay_trigger = &drupal_static(__FUNCTION__);
-  $delay = variable_get('geocoder_google_delay', 0);
-  if ($delay > 0 && $delay_trigger) {
-    usleep($delay * 1000);
-  }
-
-  geophp_load();
-
-  $query = array('address' => $address);
-
-  if (isset($options['extra_query']) && is_array($options['extra_query'])) {
-    $query += $options['extra_query'];
-  }
-
-  // Add any given biasing.
-  if (!empty($options['biasing']['bounds'])) {
-    $query['bounds'] = $options['biasing']['bounds'];
-  }
-  if (!empty($options['biasing']['region'])) {
-    $query['region'] = $options['biasing']['region'];
-  }
-  if (!empty($options['biasing']['components'])) {
-    $query['components'] = $options['biasing']['components'];
-  }
-
-  // Add Google API authentication parameters.
-  switch (variable_get('geocoder_google_auth_method')) {
-
-    // Google Geocoding API Key.
-  case GEOCODER_GOOGLE_AUTH_KEY:
-    $geocoder_settings = variable_get("geocoder_settings", array());
-    if (!empty($geocoder_settings['geocoder_apikey_google'])) {
-      $query['key'] = $geocoder_settings['geocoder_apikey_google'];
+  try {
+    $delay_trigger = &drupal_static(__FUNCTION__);
+    $delay = variable_get('geocoder_google_delay', 0);
+    if ($delay > 0 && $delay_trigger) {
+      usleep($delay * 1000);
     }
-    break;
 
-    // Google Maps for Work signature.
-  case GEOCODER_GOOGLE_AUTH_WORK:
-    $client_id   = variable_get('geocoder_google_client_id', FALSE);
-    $private_key = variable_get('geocoder_google_private_key', FALSE);
-    if (!empty($client_id) && !empty($private_key)) {
-      $google_maps_for_work = TRUE;
-      $query['client']      = $client_id;
+    geophp_load();
+
+    $query = array('address' => $address);
+
+    if (isset($options['extra_query']) && is_array($options['extra_query'])) {
+      $query += $options['extra_query'];
     }
-    break;
-  }
 
-  $google_url = 'https://maps.googleapis.com/maps/api/geocode/json';
+    // Add any given biasing.
+    if (!empty($options['biasing']['bounds'])) {
+      $query['bounds'] = $options['biasing']['bounds'];
+    }
+    if (!empty($options['biasing']['region'])) {
+      $query['region'] = $options['biasing']['region'];
+    }
+    if (!empty($options['biasing']['components'])) {
+      $query['components'] = $options['biasing']['components'];
+    }
 
-  // Build the URL.
-  $url = url($google_url, array(
-    'query' => $query,
-  ));
+    // Add Google API authentication parameters.
+    switch (variable_get('geocoder_google_auth_method')) {
 
-  // If authenticating via Google Maps for Work, add signature.
-  // @see https://developers.google.com/maps/documentation/business/webservices/auth#generating_valid_signatures
-  if (!empty($google_maps_for_work)) {
+      // Google Geocoding API Key.
+      case GEOCODER_GOOGLE_AUTH_KEY:
+        $geocoder_settings = variable_get("geocoder_settings", array());
+        if (!empty($geocoder_settings['geocoder_apikey_google'])) {
+          $query['key'] = $geocoder_settings['geocoder_apikey_google'];
+        }
+        break;
 
-    // Strip off the protocol and host for signing.
-    $parsed      = parse_url($url);
-    $url_to_sign = $parsed['path'] . '?' . $parsed['query'];
+      // Google Maps for Work signature.
+      case GEOCODER_GOOGLE_AUTH_WORK:
+        $client_id   = variable_get('geocoder_google_client_id', FALSE);
+        $private_key = variable_get('geocoder_google_private_key', FALSE);
+        if (!empty($client_id) && !empty($private_key)) {
+          $google_maps_for_work = TRUE;
+          $query['client']      = $client_id;
+        }
+        break;
+    }
 
-    // Decode the key in a URL-safe way (RFC 4648 Section 5).
-    // @see https://www.ietf.org/rfc/rfc4648.txt
-    $decoded_key = base64_decode(strtr($private_key, '-_', '+/'));
+    // Build the URL.
+    $url = url("https://maps.googleapis.com/maps/api/geocode/json", array(
+      'query' => $query,
+    ));
 
-    // Use HMAC SHA1 to sign the URL with the decoded key.
-    $signature = hash_hmac('sha1', $url_to_sign, $decoded_key, TRUE);
+    // If authenticating via Google Maps for Work, add signature.
+    // @see https://developers.google.com/maps/documentation/business/webservices/auth#generating_valid_signatures
+    if (!empty($google_maps_for_work)) {
 
-    // Append the signature to the URL's query parameters. Do this manually to
-    // avoid URL encoding.
-    $url .= '&signature=' . strtr(base64_encode($signature), '+/', '-_');
-  }
+      // Strip off the protocol and host for signing.
+      $parsed      = parse_url($url);
+      $url_to_sign = $parsed['path'] . '?' . $parsed['query'];
 
-  // Send the request.
-  $result = drupal_http_request($url);
-  $delay_trigger = TRUE;
+      // Decode the key in a URL-safe way (RFC 4648 Section 5).
+      // @see https://www.ietf.org/rfc/rfc4648.txt
+      $decoded_key = base64_decode(strtr($private_key, '-_', '+/'));
 
-  if (isset($result->error)) {
-    $args = array(
-      '@code' => $result->code,
-      '@error' => $result->error,
-    );
-    $msg = t("HTTP request to google API failed.\nCode: @code\nError: @error", $args);
-    throw new Exception($msg);
-  }
+      // Use HMAC SHA1 to sign the URL with the decoded key.
+      $signature = hash_hmac('sha1', $url_to_sign, $decoded_key, TRUE);
 
-  $data = json_decode($result->data);
+      // Append the signature to the URL's query parameters. Do this manually to
+      // avoid URL encoding.
+      $url .= '&signature=' . strtr(base64_encode($signature), '+/', '-_');
+    }
 
-  if ($data->status == 'ZERO_RESULTS') {
-    return FALSE;
-  }
-  elseif ($data->status != 'OK') {
-    $args = array(
-      '@status' => $data->status,
-      '@message' => !empty($data->error_message) ? $data->error_message : t('No specific message'),
-    );
-    $msg = t("Google API returned bad status.\nStatus: @status\nMessage: @message", $args);
-    throw new Exception($msg);
-  }
+    // Send the request.
+    $result = drupal_http_request($url);
+    $delay_trigger = TRUE;
 
-  $geometries = array();
+    if (isset($result->error)) {
+      $args = array(
+        '@code' => $result->code,
+        '@error' => $result->error,
+      );
+      $msg = t('HTTP request to google API failed.\nCode: @code\nError: @error', $args);
+      throw new Exception($msg, WATCHDOG_ERROR);
+    }
 
-  foreach ($data->results as $item) {
-    // Check if we should reject these results
-    if (isset($options['reject_results'])) {
-      if (in_array($item->geometry->location_type, $options['reject_results'], TRUE)) {
-        continue;
+    $data = json_decode($result->data);
+
+    if ($data->status == 'ZERO_RESULTS') {
+      $args = array('@status' => $data->status, '@address' => $address);
+      $msg = t('Google API returned zero results on @address status.\nStatus: @status', $args);
+      throw new Exception($msg, WATCHDOG_NOTICE);
+    }
+    elseif ($data->status != 'OK') {
+      $args = array('@status' => $data->status);
+      $msg = t('Google API returned bad status.\nStatus: @status', $args);
+      throw new Exception($msg, WATCHDOG_WARNING);
+    }
+
+    $geometries = array();
+
+    foreach ($data->results as $item) {
+      // Check if we should reject these results
+      if (isset($options['reject_results'])) {
+        if (in_array($item->geometry->location_type, $options['reject_results'], TRUE)) {
+          continue;
+        }
       }
-    }
 
-    // Construct a geoPHP Geometry depending on what type of geometry we want returned (defaults to point)
-    if (!isset($options['geometry_type']) || $options['geometry_type'] == 'point') {
-      $geom = new Point($item->geometry->location->lng, $item->geometry->location->lat);
-    }
-    elseif ($options['geometry_type'] == 'bounds') {
-      if (isset($item->geometry->bounds)) {
+      // Construct a geoPHP Geometry depending on what type of geometry we want returned (defaults to point)
+      if (!isset($options['geometry_type']) || $options['geometry_type'] == 'point') {
+        $geom = new Point($item->geometry->location->lng, $item->geometry->location->lat);
+      }
+      elseif ($options['geometry_type'] == 'bounds') {
         $points = array(
           new Point($item->geometry->bounds->southwest->lng, $item->geometry->bounds->southwest->lat),
           new Point($item->geometry->bounds->southwest->lng, $item->geometry->bounds->northeast->lat),
@@ -149,46 +146,49 @@ function geocoder_google($address, $options = array()) {
         );
         $geom = new Polygon(array(new LineString($points)));
       }
+      elseif ($options['geometry_type'] == 'viewport') {
+        $points = array(
+          new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->southwest->lat),
+          new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->northeast->lat),
+          new Point($item->geometry->viewport->northeast->lng, $item->geometry->viewport->northeast->lat),
+          new Point($item->geometry->viewport->northeast->lng, $item->geometry->viewport->southwest->lat),
+          new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->southwest->lat),
+        );
+        $geom = new Polygon(array(new LineString($points)));
+      }
+
+      // Add additional metadata to the geometry - it might be useful!
+      $geom->data = array();
+      $geom->data['geocoder_accuracy'] = $item->geometry->location_type;
+      $geom->data['geocoder_formatted_address'] = $item->formatted_address;
+      $geom->data['geocoder_address_components'] = $item->address_components;
+
+      $geometries[] = $geom;
     }
-    elseif ($options['geometry_type'] == 'viewport') {
-      $points = array(
-        new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->southwest->lat),
-        new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->northeast->lat),
-        new Point($item->geometry->viewport->northeast->lng, $item->geometry->viewport->northeast->lat),
-        new Point($item->geometry->viewport->northeast->lng, $item->geometry->viewport->southwest->lat),
-        new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->southwest->lat),
-      );
-      $geom = new Polygon(array(new LineString($points)));
+
+    if (empty($geometries)) {
+      return;
     }
 
-    // Add additional metadata to the geometry - it might be useful!
-    $geom->data = array();
-    $geom->data['geocoder_accuracy'] = $item->geometry->location_type;
-    $geom->data['geocoder_formatted_address'] = $item->formatted_address;
-    $geom->data['geocoder_address_components'] = $item->address_components;
-
-    $geometries[] = $geom;
-  }
-
-  if (empty($geometries)) {
-    return;
-  }
-
-  // Check if we should return all results as a compound geometry
-  if (isset($options['all_results'])) {
-    if ($options['all_results']) {
-      return geoPHP::geometryReduce($geometries);
+    // Check if we should return all results as a compound geometry
+    if (isset($options['all_results'])) {
+      if ($options['all_results']) {
+        return geoPHP::geometryReduce($geometries);
+      }
     }
-  }
-  // The canonical geometry is the first result (best guess)
-  $geometry = array_shift($geometries);
+    // The canonical geometry is the first result (best guess)
+    $geometry = array_shift($geometries);
 
-  // If there are any other geometries, these are auxiliary geometries that represent "alternatives"
-  if (count($geometries)) {
-    $geometry->data['geocoder_alternatives'] = $geometries;
-  }
+    // If there are any other geometries, these are auxiliary geometries that represent "alternatives"
+    if (count($geometries)) {
+      $geometry->data['geocoder_alternatives'] = $geometries;
+    }
 
-  return $geometry;
+    return $geometry;
+  } catch (Exception $e) {
+    // Just rethrow the exception, the geocoder widget handles it.
+    throw $e;
+  }
 }
 
 function geocoder_google_field($field, $field_item, $options = array()) {
@@ -197,13 +197,6 @@ function geocoder_google_field($field, $field_item, $options = array()) {
   }
   if ($field['type'] == 'addressfield' && module_exists('addressfield') && !addressfield_field_is_empty($field_item, $field)) {
     $address = geocoder_widget_parse_addressfield($field_item);
-    if(empty($address)) {
-      return FALSE;
-    }
-    return geocoder_google($address, $options);
-  }
-  if ($field['type'] == 'country') {
-    $address = geocoder_widget_parse_countryfield($field_item);
     return geocoder_google($address, $options);
   }
   if ($field['type'] == 'location') {

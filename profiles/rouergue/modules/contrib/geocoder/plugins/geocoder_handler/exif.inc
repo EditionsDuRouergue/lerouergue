@@ -15,7 +15,8 @@ function geocoder_exif($uri, $options = array()) {
     $function = $module . '_file_download';
     $result = $function($uri);
     if ($result == -1) {
-      throw new Exception(t('You do not have permission to access this file'));
+      drupal_set_message(t('You do not have permission to access this file'), 'error');
+      return FALSE;
     }
   }
 
