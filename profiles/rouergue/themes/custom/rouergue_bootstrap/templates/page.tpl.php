@@ -186,5 +186,8 @@
     <div class="col-sm-3">
       <?php print render($page['footer_third']); ?>
     </div>
+	 <div class="col-sm-12">
+      <?php print render($page['footer_fourth']); ?>
+    </div>
 </div>
 </footer>

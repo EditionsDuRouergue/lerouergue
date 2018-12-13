@@ -19,6 +19,7 @@ regions[sidebar_second] = 'Secondary'
 regions[footer_first]   = 'Footer First'
 regions[footer]         = 'Footer Second'
 regions[footer_third]   = 'Footer Third'
+regions[footer_fourth]   = 'Footer Fourth'
 regions[page_top]       = 'Page top'
 regions[page_bottom]    = 'Page bottom'
 
