@@ -520,6 +520,14 @@ class ArticleMigration extends Migration {
 	//************************************************** Rouergue Essai Jeunesse ************************************************************************
 	// Rouergue Essai Jeunesse - 606   ===>   Graphisme & Illustrations > Essais - 53c9815b-ac19-4b74-8abb-a727270582bd
 	$this->univ_coll_mapping['606']['tids'] = $this->univ_uuids_tids['53c9815b-ac19-4b74-8abb-a727270582bd'];
+	
+	
+	
+	// Rouergue Essai Jeunesse - 606  | Livre Pratique jeunesse - 1233 | Nature - 254   ===>   Nature & Jardin  > nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+	// ------------------------------------------------------------  ===>   Livre pratique jeunesse  - 939f4432-48b4-47f5-919a-df52af4175ea
+	$this->univ_coll_mapping['606']['1233']['254']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320']. ',' . $this->univ_uuids_tids['939f4432-48b4-47f5-919a-df52af4175ea'];
+	
+	
 
 	//************************************************** Rouergue Littérature ***************************************************************************
 	// Rouergue Littérature - 493 | Aveyron - 1139   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
