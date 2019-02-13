@@ -684,7 +684,7 @@ class ArticleMigration extends Migration {
 
 	// Rouergue Livres Pratiques - 494 | Nature - 521 | Région - 151  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	//--------------------------------------------------------------  ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
-	$this->univ_coll_mapping['494']['']['521']['151']['tids'] =
+	$this->univ_coll_mapping['494']['521']['151']['tids'] =
 	  $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['92100609-a178-4183-8c5f-e091e442c265'];
 
 	// Rouergue Livres Pratiques - 494 | Région - 1146 | Cuisine - 152  ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
@@ -746,7 +746,8 @@ class ArticleMigration extends Migration {
 
 	
 	// Rouergue Beaux Livres  - 495 | Nature - 1133 | Botanique - 177   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
-	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+	// ================================================================ ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
+	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];;
 	
 	
 	// Rouergue Beaux Livres  - 495 | Nature - 1133    ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
