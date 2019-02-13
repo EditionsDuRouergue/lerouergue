@@ -750,6 +750,12 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];;
 	
 	
+	// Rouergue Livres Pratiques - 494 | Santé - 1147 | Nature - 255  ===> Gastronomie > Santé - 85b490bb-bfae-46e2-9a1f-130057789068
+	//---------------------------------------------------------------  ===>  Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+	$this->univ_coll_mapping['494']['1147']['255']['tids'] =
+	  $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'] . ',' . $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
+	  
+	
 	// Rouergue Beaux Livres  - 495 | Nature - 1133    ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	$this->univ_coll_mapping['495']['1133']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
 	  
