@@ -682,6 +682,14 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['494']['521']['149']['tids'] =
 	  $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['7bf1968c-cf26-4fe6-a839-f70abf339851'];
 
+
+      // Rouergue Livres Pratiques - 494 | Nature - 521 | Loisirs créatifs - 256  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
+      //---------------------------------------------------------------  ===>    Loisirs créatifs - b8cc7148-da86-4d11-af9d-8d8e510855bd
+      $this->univ_coll_mapping['494']['521']['256']['tids'] =
+          $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['b8cc7148-da86-4d11-af9d-8d8e510855bd'];
+
+
+
 	// Rouergue Livres Pratiques - 494 | Nature - 521 | Région - 151  ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	//--------------------------------------------------------------  ===>   Régions > Régions de France - 92100609-a178-4183-8c5f-e091e442c265
 	$this->univ_coll_mapping['494']['521']['151']['tids'] =
