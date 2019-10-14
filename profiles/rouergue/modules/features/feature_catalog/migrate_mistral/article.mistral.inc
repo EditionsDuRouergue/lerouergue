@@ -744,7 +744,8 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['497']['529']['tids'] = $this->univ_uuids_tids['2a73fe7d-1781-42b7-8127-dd7a268d6bdd'];
 
 	// Rouergue Romans Jeunesse - 497 | epik - 1083   ===>   Épik SF - Fantasy - 5ea55aec-1f9b-4ff9-a577-2ff4e9076370
-	$this->univ_coll_mapping['497']['1083']['tids'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370'];
+	//  ================================================================ ===>     Romans ados > doado - fbfacf65-522b-4683-80d6-d17681e3e425
+	$this->univ_coll_mapping['497']['1083']['tids'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370']. ',' . $this->univ_uuids_tids['fbfacf65-522b-4683-80d6-d17681e3e425'];
 
 	// Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - 238c7664-3155-4a75-8d18-ee167c39fa2c
 	$this->univ_coll_mapping['497']['532']['tids'] = $this->univ_uuids_tids['238c7664-3155-4a75-8d18-ee167c39fa2c'];
@@ -755,7 +756,7 @@ class ArticleMigration extends Migration {
 	
 	// Rouergue Beaux Livres  - 495 | Nature - 1133 | Botanique - 177   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	// ================================================================ ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
-	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];;
+	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
 	
 	
 	// Rouergue Livres Pratiques - 494 | Santé - 1147 | Nature - 255  ===> Gastronomie > Santé - 85b490bb-bfae-46e2-9a1f-130057789068
