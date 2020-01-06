@@ -19,7 +19,7 @@
     <?php foreach ($items as $row): ?>
       <div class="row">
         <?php foreach ($row['content'] as $column): ?>
-          <div class="gridWrapper col-sm-<?php print $column_type ?>">
+          <div class="gridWrapper <?php print $col_classes ?>">
             <?php print $column['content'] ?>
           </div>
         <?php endforeach ?>
@@ -30,7 +30,7 @@
 
     <div class="row">
       <?php foreach ($items as $column): ?>
-        <div class="gridWrapper col-sm-<?php print $column_type ?>">
+        <div class="gridWrapper <?php print $col_classes ?>">
           <?php foreach ($column['content'] as $row): ?>
             <?php print $row['content'] ?>
           <?php endforeach ?>
