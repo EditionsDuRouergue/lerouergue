@@ -122,6 +122,16 @@ function dhtml_menu_settings($form, &$form_state) {
     '#default_value' => $settings['filter']['list'],
     '#description' => t('DHTML will be used for all menus by default, but can be switched off for specific menus.'),
   );
+  
+  if (module_exists('menu_block')) {
+    $options['filter']['menu_block'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Menu Blocks'),
+      '#options' => _dhtml_menu_blocks(),
+      '#default_value' => $settings['filter']['menu_block'],
+      '#description' => t('You may enable/disable specific menu blocks here, as long as the corresponding menu is enabled.'),
+    );
+  }
 
   $options['#tree'] = TRUE;
   $form['dhtml_menu_settings'] = $options;
@@ -159,3 +169,19 @@ function _dhtml_menu_menus() {
   return $menu_names;
 }
 
+/**
+ * Build an option list for all menu blocks in the system.
+ * Only applicable if the Menu Block module is installed.
+ */
+function _dhtml_menu_blocks() {
+  if (function_exists('menu_block_block_info')) {
+    $block_names = array();
+    $blocks = menu_block_block_info();
+    foreach ($blocks as $delta => $block) {
+      $block_names['menu_block_' . $delta] = $block['info'];
+    }
+    
+    return $block_names;
+  }
+  return NULL;
+}

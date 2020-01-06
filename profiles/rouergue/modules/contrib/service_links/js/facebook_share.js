@@ -16,7 +16,7 @@
         if (!document.getElementById('facebook-jssdk')) {
           js = document.createElement('script'); 
           js.id = 'facebook-jssdk';
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + Drupal.settings.ws_fs.app_id;
+          js.src = "//connect.facebook.net/" + Drupal.settings.ws_fs.locale + "/all.js#xfbml=1&appId=" + Drupal.settings.ws_fs.app_id;
           fjs.parentNode.insertBefore(js, fjs);
           this.scriptadded = true;
         }

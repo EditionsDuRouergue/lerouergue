@@ -32,6 +32,25 @@ function popup_field_group_field_group_formatter_info() {
         ),
       ),
     ),
+    'display' => array(
+      'popup' => array(
+        'label' => t('Popup'),
+        'description' => t('This fieldgroup renders the inner content in a simple (position-fixed) popup.'),
+        'instance_settings' => array(
+          'element' => 'div',
+          'classes' => '',
+          'required_fields' => 0,
+          'popup_title' => '',
+          'popup_close_text' => t('Save & close'),
+          'description' => '',
+          'link_title' => '',
+          'link_classes' => 'button',
+          'close_button_title' => '',
+          'close_button_classes' => 'button',
+          'extra_css' => array(),
+        ),
+      ),
+    ),
   );
 }
 
@@ -250,7 +269,7 @@ function theme_popup_field_group($variables) {
   if (isset($element['#array_parents'])) {
     // Assign an html ID.
     if (!isset($element['#attributes']['id'])) {
-      $element['#attributes']['id'] = $element['#id'];
+      $element['#attributes']['id'] = isset($element['#id']) ? $element['#id'] : drupal_html_id('popup_field_group');
     }
     // Add the 'form-wrapper' class.
     $element['#attributes']['class'][] = 'form-wrapper';

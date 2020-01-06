@@ -5,9 +5,9 @@ package = "Entity"
 dependencies[] = replicate
 files[] = views/views_handler_field_replicate_ui_link.inc
 
-; Information added by Drupal.org packaging script on 2014-12-15
-version = "7.x-1.4"
+; Information added by Drupal.org packaging script on 2016-09-27
+version = "7.x-1.5"
 core = "7.x"
 project = "replicate_ui"
-datestamp = "1418644984"
+datestamp = "1475000040"
 

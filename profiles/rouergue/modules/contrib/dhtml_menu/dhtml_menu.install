@@ -182,3 +182,14 @@ function dhtml_menu_update_7104() {
   variable_del('dhtml_menu_theme');
 }
 
+/**
+ * #7105: Ensure that 'Filter type' is set.
+ */
+function dhtml_menu_update_7105() {
+  $settings = variable_get('dhtml_menu_settings');
+  if (!isset($settings['filter']['type'])) {
+    $settings['filter']['type'] = 'blacklist';
+    variable_set('dhtml_menu_settings', $settings);
+  }
+}
+

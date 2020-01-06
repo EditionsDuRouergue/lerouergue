@@ -28,9 +28,22 @@ function dhtml_menu_preprocess_menu_link(&$variables) {
   $l = &$variables['element']['#original_link'];
 
   // Determine if the menu is blacklisted or not whitelisted.
-  $disabled = ($settings['filter']['type'] == 'blacklist') == !empty($settings['filter']['list'][$l['menu_name']]);
-  if (empty($l['menu_name']) || empty($l['mlid']) || $disabled) {
-    return;
+  // First check menu blocks.
+  if (!empty($variables['element']['#bid']['module']) &&
+      !empty($variables['element']['#bid']['delta']) &&
+      $variables['element']['#bid']['module'] == 'menu_block') {
+    $checked = !empty($settings['filter']['menu_block']['menu_block_' . $variables['element']['#bid']['delta']]);
+    if ($checked == ($settings['filter']['type'] == 'blacklist')) {
+      // This menu block is either blacklisted, or not whitelisted, hence it is disabled.
+      return;
+    }
+  }
+  // Then check menus.
+  else {
+    $disabled = ($settings['filter']['type'] == 'blacklist') == !empty($settings['filter']['list'][$l['menu_name']]);
+    if (empty($l['menu_name']) || empty($l['mlid']) || $disabled) {
+      return;
+    }
   }
 
   // Add the ID and class attributes.
@@ -45,8 +58,12 @@ function dhtml_menu_preprocess_menu_link(&$variables) {
 
   // If the current item can expand, and is neither saved as open nor in the active trail, close it.
   if ($l['has_children'] && !$l['in_active_trail'] && !in_array($variables['element']['#attributes']['id'], $cookie)) {
-    $variables['element']['#attributes']['class'][] = 'collapsed';
-    $variables['element']['#attributes']['class'][] = 'start-collapsed';
+    if (!in_array('collapsed', $variables['element']['#attributes']['class'])) {
+      $variables['element']['#attributes']['class'][] = 'collapsed';
+    }
+    if (!in_array('start-collapsed', $variables['element']['#attributes']['class'])) {
+      $variables['element']['#attributes']['class'][] = 'start-collapsed';
+    }
   }
 }
 

@@ -54,14 +54,14 @@ function  widget_services_admin() {
     '#title' => t('Width'),
     '#type' => 'textfield',
     '#default_value' => variable_get('service_links_fl_width', 100),
-    '#description' => t('A good value for button layout is 100, for box layout is 80 and for standard layout 450'),
+    '#description' => t('A good value for button layout is 100 (140 with share button), for box layout 80 and for standard layout 450'),
     '#size' => 10,
   );
   $form['facebook_like']['service_links_fl_height'] = array(
     '#title' => t('Height'),
     '#type' => 'textfield',
     '#default_value' => variable_get('service_links_fl_height', 21),
-    '#description' => t('A good value for button layout is 21, for box layout is 65 and for standard layout is 80'),
+    '#description' => t('A good value for button layout is 21, for box layout is 65 (85 with share button) and for standard layout is 80'),
     '#size' => 10,
   );
   $form['facebook_like']['service_links_fl_font'] = array(
@@ -88,6 +88,17 @@ function  widget_services_admin() {
     ),
     '#attributes' => array('class' => array('container-inline')),
     '#description' => t('This works only when the standard layout is set on'),
+  );
+  $form['facebook_like']['service_links_fl_share'] = array(
+    '#title' => t('Include Share Button'),
+    '#type' => 'radios',
+    '#default_value' => variable_get('service_links_fl_share', 'false'),
+    '#options' => array(
+      'true' => t('Yes'),
+      'false' => t('No'),
+    ),
+    '#attributes' => array('class' => array('container-inline')),
+    '#description' => t('Includes a Share button beside the Like button'),
   );
   $form['facebook_like']['service_links_fl_colorscheme'] = array(
     '#title' => t('Color Scheme'),
@@ -148,6 +159,14 @@ function  widget_services_admin() {
     '#default_value' => variable_get('service_links_fs_css', ''), 
     '#description' => t('Apply a CSS style providing a single string (i.e. %style)', array('%style' => 'text-align:left;vertical-align:top;margin-top:4px')),
     '#size' => 80,
+  );
+  $form['facebook_share']['service_links_fs_locale'] = array(
+    '#title' => t('Locale'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('service_links_fs_locale', 'en_US'),
+    '#description' => t('Enter the language code and the country code separated by an underscore (i.e. es_ES, en_GB, en_US, it_IT, fr_FR, pt_BR, pt_PT)'),
+    '#size' => 5,
+    '#attributes' => array('class' => array('container-inline')),
   );
  
   $form['google_plus_one'] = array(

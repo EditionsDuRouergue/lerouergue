@@ -61,6 +61,9 @@ function service_links_hook_info() {
     'service_links_alter' => array(
       'group' => 'service_links',
     ),
+    'service_links_node_settings_alter' => array(
+      'group' => 'service_links',
+    ),
   );
 
   return $hooks;
@@ -794,6 +797,8 @@ function _service_links_get_tags($node, &$settings) {
     'title' => $title,
     'front-page' => $front_page,
   );
+  // Invoke an alter hook to let other modules modify these values if needed.
+  drupal_alter('service_links_node_settings', $settings, $node);
 }
 
 /**
@@ -880,7 +885,18 @@ function service_links_show($node) {
     $language = isset($node->field_tags[$node->language]) ? $node->language : 'und';
 
     foreach ($node->field_tags[$language] as $term) {
-      $category_type |= in_array($term['tid'], $categories_allowed, FALSE);
+      $tid = FALSE;
+
+      if (isset($term['tid'])) {
+        $tid = $term['tid'];
+      }
+      else if(isset($term['target_id'])) {
+        $tid = $term['target_id'];
+      }
+
+      if ($tid) {
+        $category_type |= in_array($tid, $categories_allowed, FALSE);
+      }
     }
   }
   if ($node_type || $category_type) {

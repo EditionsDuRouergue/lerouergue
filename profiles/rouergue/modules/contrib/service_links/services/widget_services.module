@@ -15,7 +15,7 @@ function widget_services_service_links() {
 
   $links['facebook_share'] = array(
     'name' => t('Share on Facebook'),
-    'link' => 'http://www.facebook.com/sharer.php',
+    'link' => 'https://www.facebook.com/sharer.php',
     'description' => t('Share this post on Facebook'),
     'javascript' => 'facebook_share.js',
     'icon' => 'facebook.png',
@@ -24,7 +24,7 @@ function widget_services_service_links() {
   );
   $links['twitter_widget'] = array(
     'name' => 'Tweet Widget',
-    'link' => 'http://twitter.com/share?url=<raw-encoded-short-url>&count=<data-count>&via=<data-via>&text=<raw-encoded-title>&counturl=<raw-encoded-url>',
+    'link' => 'https://twitter.com/share?url=<raw-encoded-short-url>&count=<data-count>&via=<data-via>&text=<raw-encoded-title>&counturl=<raw-encoded-url>',
     'icon' => 'twitter.png',
     'description' => t('Tweet This'),
     'attributes' => array('class' => array('twitter-share-button')),
@@ -34,7 +34,7 @@ function widget_services_service_links() {
   );
   $links['facebook_like'] = array(
     'name' => 'Facebook Like',
-    'link' => 'http://www.facebook.com/plugins/like.php?href=<encoded-url>&layout=<layout>&show_faces=<show_faces>&action=<action>&colorscheme=<colorscheme>&width=<width>&height=<height>&font=<font>&locale=<locale>',
+    'link' => 'https://www.facebook.com/plugins/like.php?href=<encoded-url>&layout=<layout>&show_faces=<show_faces>&action=<action>&colorscheme=<colorscheme>&width=<width>&height=<height>&font=<font>&locale=<locale>',
     'icon' => 'facebook.png',
     'description' => t('I Like it'),
     'javascript' => 'facebook_like.js',
@@ -63,8 +63,7 @@ function widget_services_service_links() {
   );
   $links['pinterest_button'] = array(
     'name' => 'Pinterest',
-    //'link' => 'http://pinterest.com/pin/create/button/?url=<raw-encoded-url>&description=<pinterest-description>&media=<pinterest-media>',
-    'link' => 'http://pinterest.com/pin/create/button/?url=<raw-encoded-long-url>&description=<pinterest-description>&media=<pinterest-media>',
+    'link' => 'https://pinterest.com/pin/create/button/?url=<raw-encoded-long-url>&description=<pinterest-description>&media=<pinterest-media>',
     'icon' => 'pinterest.png',
     'description' => t('Pin It'),
     'javascript' => array(
@@ -107,6 +106,7 @@ function ws_facebook_share_data(&$service, $subst) {
       'type' => check_plain(variable_get('service_links_fs_type', 'button_count')),
       'app_id' => check_plain(variable_get('service_links_fs_app_id', '150123828484431')),
       'css' => check_plain(preg_replace('/[^0-9a-z\-:;]/', '', variable_get('service_links_fs_css', ''))),
+      'locale' => check_plain(variable_get('service_links_fs_locale', 'en_US')),
     );
 
     drupal_add_js(array('ws_fs' => $fs_settings), 'setting');
@@ -125,6 +125,7 @@ function ws_facebook_like_data(&$service, $subst) {
     $params = array(
       'layout' => check_plain(variable_get('service_links_fl_layout', 'button_count')),
       'show_faces' => check_plain(variable_get('service_links_fl_show_faces', 'false')),
+      'share' => check_plain(variable_get('service_links_fl_share', 'false')),
       'action' => check_plain(variable_get('service_links_fl_action', 'like')),
       'colorscheme' => check_plain(variable_get('service_links_fl_colorscheme', 'light')),
       'font' => check_plain(variable_get('service_links_fl_font', '')),

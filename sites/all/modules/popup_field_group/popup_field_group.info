@@ -1,13 +1,13 @@
 name = Popup field group
 description = Adds a new field group option 'popup' which puts its children in a simple popup.
+package = Fields
 core = 7.x
 
 dependencies[] = field_group
 recommends[] = system_stream_wrapper
 
-; Information added by Drupal.org packaging script on 2014-12-05
-version = "7.x-1.0"
+; Information added by Drupal.org packaging script on 2018-04-12
+version = "7.x-1.1"
 core = "7.x"
 project = "popup_field_group"
-datestamp = "1417798082"
-
+datestamp = "1523544192"

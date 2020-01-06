@@ -43,10 +43,13 @@ a.dhtml-menu-icon {
 /*
  * Provide large and visible folder icons for easy clicking.
  */
-li.dhtml-folder.expanded {
-  list-style-image: url("images/folder-open-white.png") !important;
+li.dhtml-folder {
+    list-style: none;
 }
-li.dhtml-folder.collapsed {
-  list-style-image: url("images/folder-closed-white.png") !important;
+li.dhtml-folder.expanded .dhtml-menu-icon {
+    background-image: url("images/folder-open-white.png");
+}
+li.dhtml-folder.collapsed .dhtml-menu-icon {
+    background-image: url("images/folder-closed-white.png");
 }
 

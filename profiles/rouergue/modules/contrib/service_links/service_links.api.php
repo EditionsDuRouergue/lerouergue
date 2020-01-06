@@ -82,3 +82,27 @@ function hook_service_links_alter(&$links) {
     $links['myservice']['icon'] = 'http://drupal.org/misc/favicon.ico';
   }
 }
+
+/**
+ * Allows alteration of the service link settings for a given node.
+ *
+ * @param array $settings
+ *   Reference to the array of service link settings for a node.
+ * @param node
+ *   The fully loaded node object that the settings correspond to.
+ *
+ * @see drupal_alter();
+ * @see _service_links_get_tags();
+ */
+function hook_service_links_node_settings_alter(&$settings, $node) {
+  // Use a site-specific URL shortener.
+  $short_url = "http://example.com/$node->nid";
+  $settings['subst']['short-url'] = $short_url;
+  $settings['subst']['encoded-short-url'] = urlencode($short_url);
+  $settings['subst']['raw-encoded-short-url'] = urlencode($short_url);
+
+  // Hide a specific service on nodes of a specific type.
+  if ($node->type == 'notweets') {
+    unset($settings['link_show']['twitter']);
+  }
+}

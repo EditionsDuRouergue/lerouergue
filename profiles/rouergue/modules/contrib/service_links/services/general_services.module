@@ -32,7 +32,7 @@ function general_services_service_links() {
   $links['twitter'] = array(
     'name' => 'Twitter',
     'description' => t('Share this on Twitter'),
-    'link' => 'http://twitter.com/share?url=<raw-encoded-short-url>&text=<raw-encoded-title>',
+    'link' => 'https://twitter.com/share?url=<raw-encoded-short-url>&text=<raw-encoded-title>',
   );
   $links['pingthis'] = array(
     'name' => 'Ping This!',
@@ -41,12 +41,12 @@ function general_services_service_links() {
   );
   $links['reddit'] = array(
     'name' => 'Reddit',
-    'link' => 'http://reddit.com/submit?url=<encoded-url>&title=<encoded-title>',
+    'link' => 'https://reddit.com/submit?url=<encoded-url>&title=<encoded-title>',
     'description' => t('Submit this post on reddit.com'),
   );
   $links['slashdot'] = array(
     'name' => 'SlashDot',
-    'link' => 'http://slashdot.org/bookmark.pl?url=<encoded-url>&title=<encoded-title>',
+    'link' => 'https://slashdot.org/bookmark.pl?url=<encoded-url>&title=<encoded-title>',
     'description' => t('Bookmark this post on SlashDot'),
   );
   $links['newsvine'] = array(
@@ -61,17 +61,17 @@ function general_services_service_links() {
   );
   $links['facebook'] = array(
     'name' => 'Facebook',
-    'link' => 'http://www.facebook.com/sharer.php?u=<encoded-url>&t=<encoded-title>',
+    'link' => 'https://www.facebook.com/sharer.php?u=<encoded-url>&t=<encoded-title>',
     'description' => t('Share on Facebook'),
   );
   $links['myspace'] = array(
     'name' => 'MySpace',
-    'link' => 'http://www.myspace.com/index.cfm?fuseaction=postto&t=<encoded-title>&u=<encoded-url>',
+    'link' => 'https://www.myspace.com/index.cfm?fuseaction=postto&t=<encoded-title>&u=<encoded-url>',
     'description' => t('Share on MySpace'),
   );
   $links['google'] = array(
     'name' => 'Google',
-    'link' => 'http://www.google.com/bookmarks/mark?op=add&bkmk=<encoded-url>&title=<encoded-title>',
+    'link' => 'https://www.google.com/bookmarks/mark?op=add&bkmk=<encoded-url>&title=<encoded-title>',
     'description' => t('Bookmark this post on Google'),
   );
   $links['google_plus'] = array(
@@ -81,12 +81,12 @@ function general_services_service_links() {
   );
   $links['yahoo'] = array(
     'name' => 'Yahoo',
-    'link' => 'http://bookmarks.yahoo.com/myresults/bookmarklet?u=<encoded-url>&t=<encoded-title>',
+    'link' => 'https://bookmarks.yahoo.com/myresults/bookmarklet?u=<encoded-url>&t=<encoded-title>',
     'description' => t('Bookmark this post on Yahoo'),
   );
   $links['linkedin'] = array(
     'name' => 'LinkedIn',
-    'link' => 'http://www.linkedin.com/shareArticle?mini=true&url=<encoded-url>&title=<encoded-title>&summary=<encoded-teaser>&source=<encoded-source>',
+    'link' => 'https://www.linkedin.com/shareArticle?mini=true&url=<encoded-url>&title=<encoded-title>&summary=<encoded-teaser>&source=<encoded-source>',
     'description' => t('Publish this post to LinkedIn'),
   );
   $links['technorati'] = array(
@@ -102,7 +102,7 @@ function general_services_service_links() {
   );
   $links['icerocket'] = array(
     'name' => 'Icerocket',
-    'link' => 'http://blogs.icerocket.com/search?q=<encoded-url>',
+    'link' => 'https://blogs.icerocket.com/search?q=<encoded-url>',
     'description' => t('Search IceRocket for links to this post'),
   );
   $links['misterwong'] = array(
@@ -127,7 +127,7 @@ function general_services_service_links() {
   );
   $links['identica'] = array(
     'name' => 'identi.ca',
-    'link' => 'http://identi.ca/?action=newnotice&status_textarea=<encoded-title> <encoded-url>',
+    'link' => 'https://identi.ca/?action=newnotice&status_textarea=<encoded-title> <encoded-url>',
     'description' => t('Dent this on identi.ca'),
   );
   $links['newskicks'] = array(
@@ -138,7 +138,7 @@ function general_services_service_links() {
   $links['diigo'] = array(
     'name' => 'Diigo',
     'description' => t('Post on Diigo'),
-    'link' => 'http://www.diigo.com/post?url=<encoded-url>&title=<encoded-title>&desc=<encoded-teaser>',
+    'link' => 'https://www.diigo.com/post?url=<encoded-url>&title=<encoded-title>&desc=<encoded-teaser>',
   );
   $links['viadeo'] = array(
     'name' => 'Viadeo',

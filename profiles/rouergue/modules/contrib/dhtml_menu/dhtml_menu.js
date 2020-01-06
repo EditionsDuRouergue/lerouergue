@@ -15,7 +15,7 @@ Drupal.dhtmlMenu.animation = {show:{}, hide:{}, count:0};
  * Initialize the module's JS functions
  */
 Drupal.behaviors.dhtmlMenu = {
-  attach: function() {
+  attach: function(context, settings) {
     var settings = Drupal.settings.dhtmlMenu;
 
     // Initialize the animation effects from the settings.
@@ -28,13 +28,13 @@ Drupal.behaviors.dhtmlMenu = {
     }
 
     // Sanitize by removing "expanded" on menus already marked "collapsed".
-    $('li.dhtml-menu.collapsed.expanded').removeClass('expanded');
+    $('li.dhtml-menu.collapsed.expanded', context).removeClass('expanded');
 
     /* Relevant only on "open-only" menus:
      * The links of expanded items should be marked for emphasis.
      */
     if (settings.nav == 'open') {
-      $('li.dhtml-menu.expanded').addClass('dhtml-menu-open');
+      $('li.dhtml-menu.expanded', context).addClass('dhtml-menu-open');
     }
 
     /* Relevant only when hovering:
@@ -54,7 +54,9 @@ Drupal.behaviors.dhtmlMenu = {
     else if (settings.nav == 'hover') {
       var freeze = false;
       $('ul.menu').mouseenter(function() {freeze = false});
+      $('ul.menu').focus(function() {freeze = false});
       $('body').mouseleave(function() {freeze = true});
+      $('body').blur(function() {freeze = true});
     }
 
     /* Relevant only on bullet-icon expansion:
@@ -62,7 +64,12 @@ Drupal.behaviors.dhtmlMenu = {
      */
     else if (settings.nav == 'bullet') {
       var bullet = $('<a href="#" class="dhtml-menu-icon"></a>');
-      var rtl = $('html').attr('dir') == 'rtl' ? Math.ceil($('.menu li').css('margin-right').replace('px', '')) + 1 : 0;
+      var rtl = 0;
+      if ($('html').attr('dir') === 'rtl') {
+        if (typeof($('.menu li').css('margin-right')) !== 'undefined') {
+          rtl = Math.ceil($('.menu li').css('margin-right').replace('px', '')) + 1;
+        }
+      }
     }
 
     /* Relevant only when adding cloned links:
@@ -74,7 +81,8 @@ Drupal.behaviors.dhtmlMenu = {
     }
 
     /* Add jQuery effects and listeners to all menu items. */
-    $('ul.menu li.dhtml-menu:not(.leaf)').each(function() {
+    $('ul.menu li.dhtml-menu:not(.leaf,.dhtml-processed)', context).each(function() {
+      $(this).addClass("dhtml-processed");
       var li = $(this);
       var link = $(this).find('a:first');
       var ul = $(this).find('ul:first');
@@ -104,7 +112,7 @@ Drupal.behaviors.dhtmlMenu = {
          * - @TODO: Explore whether "float:right" in dhtml_menu-rtl.css could solve this.
          */
         else if (settings.nav == 'bullet') {
-          li.addClass('dhtml-folder');
+          li.addClass('dhtml-folder dhtml-menu-processed');
           var b = bullet.clone().prependTo(link).click(function(e) {
             Drupal.dhtmlMenu.toggleMenu(li, link, ul);
             if (settings.effects.remember) {
@@ -124,10 +132,27 @@ Drupal.behaviors.dhtmlMenu = {
          * - Add mouse-hovering events.
          */
         else if (settings.nav == 'hover') {
+          link.focus(function(e) {
+            Drupal.dhtmlMenu.switchMenu(li, link, ul, true);
+          });
           link.mouseenter(function(e) {
               Drupal.dhtmlMenu.switchMenu(li, link, ul, true);
           });
           li.mouseleave(function(e) {
+            // Only collapse the menu if it was initially collapsed.
+            if (li.hasClass('start-collapsed')) {
+              /* As explained earlier, this event fires before the body event.
+               * We need to wait to make sure that the user isn't browsing a
+               * context menu right now, in which case the menu isn't collapsed.
+               */
+              setTimeout(function() {
+                if (!freeze) {
+                  Drupal.dhtmlMenu.switchMenu(li, link, ul, false);
+                }
+              }, 10);
+            }
+          });
+          li.blur(function(e) {
             // Only collapse the menu if it was initially collapsed.
             if (li.hasClass('start-collapsed')) {
               /* As explained earlier, this event fires before the body event.
@@ -173,12 +198,15 @@ Drupal.behaviors.dhtmlMenu = {
     });
 
     // When using LTR, all icons can be shifted as one, as the text width is not relevant.
-    if (settings.nav == 'bullet' && !rtl) {
+    if (settings.nav == 'bullet' && !rtl && $('.menu li.dhtml-folder').length) {
       // Shift overlay to the left by the width of the icon and the distance between icon and text.
       if ($('.menu li').hasClass('margin-left')) {
-        var shift = '-' + (Math.ceil(($('.menu li').css('margin-left').replace('px', ''))) + 16) + 'px';
-        // Shift the overlay using a negative left-hand offset, and the text using a negative right-hand margin.
-        $('.dhtml-menu-icon').css('left', shift).css('margin-right', shift);
+        // Saved for a later backport if needs.
+        if (typeof($('.menu li').css('margin-right')) !== 'undefined') {
+          var shift = '-' + (Math.ceil(($('.menu li').css('margin-left').replace('px', ''))) + 16) + 'px';
+          // Shift the overlay using a negative left-hand offset, and the text using a negative right-hand margin.
+          $('.dhtml-menu-icon').css('left', shift).css('margin-right', shift);
+        }
       }
     }
   }

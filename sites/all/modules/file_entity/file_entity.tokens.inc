@@ -185,7 +185,9 @@ function file_entity_tokens($type, $tokens, array $data = array(), array $option
             }
           }
           else {
-            $replacements[$original] = $return;
+            if (!is_null($return)) {
+              $replacements[$original] = $return;
+            }
           }
         }
 
@@ -284,7 +286,7 @@ function file_entity_tokens($type, $tokens, array $data = array(), array $option
  * Either a single value, the first of the array, or an array of values.
  */
 function _file_entity_tokens_get_property($files, $property, $array_handler = 'first') {
-
+  $value = NULL;
   // If we only need the first variable
   $return_first = ($array_handler == 'first' || empty($array_handler) || $array_handler == 'value:0');
 
@@ -302,7 +304,11 @@ function _file_entity_tokens_get_property($files, $property, $array_handler = 'f
 
     // If values are: image, height, width, https-image
     elseif (!empty($info[$file['fid']])) {
-      $value = isset($info[$file['fid']][$property]) ?: NULL;
+      if (isset($info[$file['fid']][$property])) {
+        $value = $info[$file['fid']][$property];
+      } else {
+        $value = NULL;
+      }
     }
     // If values are files types
     else {
@@ -313,8 +319,8 @@ function _file_entity_tokens_get_property($files, $property, $array_handler = 'f
       }
 
       // If file type is video
-      elseif ($file['type'] == 'video') {
-        list($provider, $filename) = explode('://v/', $file['uri']);
+      elseif ($file['type'] == 'video' && strpos($file['uri'], '://v')) {
+        list($provider, $filename) = preg_split('!://v.*/!', $file['uri']);
         $imageuri = "public://file_entity-$provider/$filename.jpg";
       }
 
@@ -329,7 +335,11 @@ function _file_entity_tokens_get_property($files, $property, $array_handler = 'f
         $info[$file['fid']]['https-image'] = str_replace('http://', 'https://', $info[$file['fid']]['image']);
       }
 
-      $value = isset($info[$file['fid']][$property]) ?: NULL;
+      if (isset($info[$file['fid']][$property])) {
+        $value = $info[$file['fid']][$property];
+      } else {
+        $value = NULL;
+      }
     }
 
     if ($return_first) {
