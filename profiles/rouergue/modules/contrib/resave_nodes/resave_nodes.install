@@ -63,6 +63,8 @@ function resave_nodes_uninstall() {
   variable_del('resave_nodes_unix_cron_job_id');
 
   variable_del('resave_nodes_selected_types');
+  // variable_del('resave_nodes_selected_product_types');
+  variable_del('resave_nodes_validate_types');
   variable_del('resave_nodes_all_nodes');
   variable_del('resave_nodes_use_cron');
   variable_del('resave_nodes_last_run');
