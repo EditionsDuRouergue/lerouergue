@@ -1,0 +1,14 @@
+name = Mandrill Reports
+description = "Providing reporting on activity through Mandrill."
+core = 7.x
+package = Mandrill
+
+dependencies[] = mandrill
+
+files[] = tests/mandrill_reports.test
+
+; Information added by Drupal.org packaging script on 2019-04-19
+version = "7.x-2.4"
+core = "7.x"
+project = "mandrill"
+datestamp = "1555698185"
