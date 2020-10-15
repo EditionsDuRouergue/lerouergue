@@ -745,9 +745,14 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['497']['529']['tids'] = $this->univ_uuids_tids['2a73fe7d-1781-42b7-8127-dd7a268d6bdd'];
 
 	// Rouergue Romans Jeunesse - 497 | epik - 1083   ===>   Épik SF - Fantasy - 5ea55aec-1f9b-4ff9-a577-2ff4e9076370
-	//  ================================================================ ===>     Romans ados > doado - fbfacf65-522b-4683-80d6-d17681e3e425
-	$this->univ_coll_mapping['497']['1083']['tids'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370']. ',' . $this->univ_uuids_tids['fbfacf65-522b-4683-80d6-d17681e3e425'];
+	//  OLD ================================================================ ===>     Romans ados > doado - fbfacf65-522b-4683-80d6-d17681e3e425
+	//  UPDATE ================================================================ ===>     Romans ados > épik - d5fe464a-72dc-4271-bfe1-a4c4478aecc0
+	$this->univ_coll_mapping['497']['1083']['tids'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370']. ',' . $this->univ_uuids_tids['d5fe464a-72dc-4271-bfe1-a4c4478aecc0'];
 
+	// Rouergue Romans Jeunesse - 497 | Poche Rouergue Jeunesse - 1242   ===>   Romans jeunesse > poches jeunesse - fe87c4bf-5dfd-4f1b-8602-3801a8a4d57d
+	$this->univ_coll_mapping['497']['1242']['tids'] = $this->univ_uuids_tids['fe87c4bf-5dfd-4f1b-8602-3801a8a4d57d'];
+	
+	
 	//  Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans 6-11 > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	// OLD Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	$this->univ_coll_mapping['497']['532']['tids'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
