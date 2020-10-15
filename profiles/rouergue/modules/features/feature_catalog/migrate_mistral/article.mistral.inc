@@ -297,9 +297,10 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['496']['522']['tids'] = $this->univ_uuids_tids['01014525-94b0-414e-acd9-7ccc6eda4dc7'];
 
 	// Rouergue Albums Jeunesse - 496 | à la petite semaine - 571   ===>   Albums jeunesse > Albums dès 6 ans > à la petite semaine - 1875786a-6d12-4e8b-8786-a7dcc77cd95d
-	// ----------------------------------------------------------   ===>   Romans jeunesse > Romans dès 8 ans > à la petite semaine - 3178b576-6073-4472-81ef-4c5c8edf9fb6
+	// OLD ----------------------------------------------------------   ===>   Romans jeunesse > Romans dès 8 ans > à la petite semaine - 3178b576-6073-4472-81ef-4c5c8edf9fb6
+	// UPDATE ----------------------------------------------------------   ===>   Romans jeunesse > Romans 6-11ans >dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	$this->univ_coll_mapping['496']['571']['tids'] =
-	  $this->univ_uuids_tids['1875786a-6d12-4e8b-8786-a7dcc77cd95d'] . ',' . $this->univ_uuids_tids['3178b576-6073-4472-81ef-4c5c8edf9fb6'];
+	  $this->univ_uuids_tids['1875786a-6d12-4e8b-8786-a7dcc77cd95d'] . ',' . $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
 
 	// Rouergue Albums Jeunesse - 496 | albums - 523 | album dès 2 ans - 154   ===>   Albums jeunesse > Albums dès 2 ans - c536a140-ecd1-4080-9e71-eb2977f5e55f
 	$this->univ_coll_mapping['496']['523']['154']['tids'] = $this->univ_uuids_tids['c536a140-ecd1-4080-9e71-eb2977f5e55f'];
@@ -747,11 +748,13 @@ class ArticleMigration extends Migration {
 	//  ================================================================ ===>     Romans ados > doado - fbfacf65-522b-4683-80d6-d17681e3e425
 	$this->univ_coll_mapping['497']['1083']['tids'] = $this->univ_uuids_tids['5ea55aec-1f9b-4ff9-a577-2ff4e9076370']. ',' . $this->univ_uuids_tids['fbfacf65-522b-4683-80d6-d17681e3e425'];
 
-	// Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - 238c7664-3155-4a75-8d18-ee167c39fa2c
-	$this->univ_coll_mapping['497']['532']['tids'] = $this->univ_uuids_tids['238c7664-3155-4a75-8d18-ee167c39fa2c'];
+	//  Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans 6-11 > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
+	// OLD Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - b4bb6966-c17a-401e-a705-907a9e42b69b
+	$this->univ_coll_mapping['497']['532']['tids'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
 
-	// Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans dès 8 ans > zig zag - 652fe62a-ec9a-43b9-8443-9c44f9ebb44d
-	$this->univ_coll_mapping['497']['530']['tids'] = $this->univ_uuids_tids['652fe62a-ec9a-43b9-8443-9c44f9ebb44d'];
+	// OLD  Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans dès 8 ans > zig zag - 652fe62a-ec9a-43b9-8443-9c44f9ebb44d
+	// UPDATE Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans 6-11 ans > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
+	$this->univ_coll_mapping['497']['530']['tids'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
 
 	
 	// Rouergue Beaux Livres  - 495 | Nature - 1133 | Botanique - 177   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
