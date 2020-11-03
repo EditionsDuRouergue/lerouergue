@@ -24,32 +24,6 @@ define('NODEQUEUE_DUPLICATE_POSITION', 3);
 /* --- HOOKS ---------------------------------------------------------------- */
 
 /**
- * Implements hook_action_info().
- */
-function nodequeue_action_info() {
-  return array(
-    'nodequeue_add_action' => array(
-      'type' => 'node',
-      'label' => t('Add to Nodequeues'),
-      'configurable' => TRUE,
-      'triggers' => array(
-        'node_presave',
-        'node_insert',
-        'node_update',
-      ),
-    ),
-    'nodequeue_remove_action' => array(
-      'type' => 'node',
-      'label' => t('Remove from Nodequeues'),
-      'configurable' => TRUE,
-      'triggers' => array(
-        'node_delete',
-      ),
-    ),
-  );
-}
-
-/**
  * Implements hook_permission().
  */
 function nodequeue_permission() {
@@ -58,7 +32,7 @@ function nodequeue_permission() {
       'title' => t('Administer nodequeue'),
       'description' => t('Administer the nodequeue module.'),
     ),
-    'manipulate queues' => array(
+   'manipulate queues' => array(
       'title' => t('Manipulate queues'),
       'description' => t('Manipulate queues.'),
     ),
@@ -79,67 +53,6 @@ function nodequeue_init() {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- * - Adds a vertical tab for nodequeue settings.
- */
-function nodequeue_form_node_type_form_alter(&$form, &$form_state) {
-  $form['nodequeue'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Queues'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#group' => 'additional_settings',
-    '#access' => 'administer nodequeue',
-  );
-
-
-  $options = array();
-  $defaults = array();
-  $queues = nodequeue_load_queues(array_keys(nodequeue_get_all_qids()));
-  foreach ($queues as $qid => $queue) {
-    $options[$qid] = t($queue->title);
-    if (in_array($form['#node_type']->type, $queue->types)) {
-      $defaults[] = $qid;
-    }
-  }
-  $form['nodequeue']['nodequeue_queues'] = array(
-    '#type' => 'checkboxes',
-    '#title' => t('Queues where this content type can be added'),
-    '#options' => $options,
-    '#default_value' => $defaults,
-  );
-
-  // Add a submit handler.
-  $form['#submit'][] = 'nodequeue_form_node_type_form_submit';
-}
-
-/**
- * Submit handler for the node type form.
- */
-function nodequeue_form_node_type_form_submit(&$form, &$form_state) {
-  $enabled_queues = $form_state['values']['nodequeue_queues'];
-  foreach ($enabled_queues as $qid => $enabled) {
-    $type = $form_state['values']['type'];
-    $queue = nodequeue_load($qid);
-    $types = $queue->types;
-    if ($enabled) {
-      if (!in_array($type, $types)) {
-        $types[] = $type;
-      }
-    }
-    else {
-      $key = array_search($type, $types);
-      if ($key !== FALSE) {
-        unset($types[$key]);
-      }
-    }
-
-    $queue->types = array_filter($types);
-    $qid = nodequeue_save($queue); // sets $queue->qid if needed.
-  }
-}
-
-/**
  * Implements hook_menu().
  */
 function nodequeue_menu() {
@@ -153,10 +66,10 @@ function nodequeue_menu() {
     'access callback' => '_nodequeue_access_admin_or_manipulate',
     'description' => 'Create and maintain simple nodequeues.',
     'file' => 'includes/nodequeue.admin.inc',
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_NORMAL_ITEM
   );
   $items['admin/structure/nodequeue/list'] = array(
-    'title' => 'List nodequeues',
+    'title' => 'List',
     'page callback' => 'nodequeue_view_queues',
     'access callback' => '_nodequeue_access_admin_or_manipulate',
     'file' => 'includes/nodequeue.admin.inc',
@@ -204,46 +117,42 @@ function nodequeue_menu() {
 
   // Administrative items for an individual queue.
   $items['admin/structure/nodequeue/%nodequeue'] = array(
-    'title callback' => 'nodequeue_admin_view_title',
-    'title arguments' => array(3),
     'page callback' => 'nodequeue_admin_view',
     'page arguments' => array(3),
     'access callback' => 'nodequeue_queue_access',
     'access arguments' => array(3),
     'file' => 'includes/nodequeue.admin.inc',
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK
   );
   $items['admin/structure/nodequeue/%nodequeue/view'] = array(
-    'title callback' => 'nodequeue_admin_view_title',
-    'title arguments' => array(3),
+    'title' => 'View',
     'page callback' => 'nodequeue_admin_view',
     'page arguments' => array(3),
     'access callback' => 'nodequeue_queue_access',
     'access arguments' => array(3),
     'file' => 'includes/nodequeue.admin.inc',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK
   );
-
-  // Administrative items for a subqueue.
   $items['admin/structure/nodequeue/%nodequeue/view/%subqueue'] = array(
-    'title callback' => 'nodequeue_admin_view_title',
-    'title arguments' => array(3),
+    'title' => 'View',
     'page callback' => 'nodequeue_admin_view',
     'page arguments' => array(3, 5),
     'access callback' => 'nodequeue_queue_access',
     'access arguments' => array(3, 5),
     'file' => 'includes/nodequeue.admin.inc',
+    'weight' => -10,
     'tab parent' => 'admin/structure/nodequeue/%',
     'type' => MENU_CALLBACK
   );
-
+  // Actual administrative items.
   $items['admin/structure/nodequeue/%nodequeue/edit'] = array(
-    'title' => 'Edit queue settings',
+    'title' => 'Edit queue',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nodequeue_edit_queue_form', 3),
     'access arguments' => $admin_access,
     'file' => 'includes/nodequeue.admin.inc',
-    'type' => MENU_LOCAL_TASK,
+    'type' => MENU_LOCAL_TASK
   );
   $items['admin/structure/nodequeue/%nodequeue/delete'] = array(
     'title' => 'Delete',
@@ -307,22 +216,19 @@ function nodequeue_admin_paths() {
  */
 function nodequeue_node_delete($node) {
   // If a node is being deleted, ensure it's also removed from any queues.
-  $result = db_query("SELECT qid, sqid FROM {nodequeue_nodes} WHERE nid =:nid", array(
+  $result = db_query("SELECT name, sqid FROM {nodequeue_nodes} WHERE nid =:nid", array(
     ':nid' => $node->nid,
   ));
   foreach ($result as $obj) {
     // If the queue is being tracked by translation set and the node is part
     // of a translation set, don't delete the queue record.
     // Instead, data will be updated in the 'translation_change' op, below.
-    $queues = nodequeue_load_queues(array($obj->qid));
+    $queues = nodequeue_load_queues(array($obj->name));
     $queue = array_shift($queues);
     if (!$queue->i18n || (isset($node->tnid) && empty($node->tnid))) {
       // This removes by nid, not position, because if we happen to have a
       // node in a queue twice, the 2nd position would be wrong.
       nodequeue_subqueue_remove_node($obj->sqid, $node->nid);
-    }
-    if (module_exists('rules')) {
-      rules_invoke_event('nodequeue_node_changed', nodequeue_load_subqueue($obj->sqid), $node);
     }
   }
 }
@@ -339,21 +245,6 @@ function nodequeue_node_view($node, $view_mode) {
     );
   }
 }
-
-/**
- * Implements hook_node_update()
- */
-function nodequeue_node_update($node) {
-  if (module_exists('rules')) {
-    $result = db_query("SELECT qid, sqid FROM {nodequeue_nodes} WHERE nid =:nid", array(
-      ':nid' => $node->nid,
-    ));
-    foreach ($result as $obj) {
-      rules_invoke_event('nodequeue_node_changed', nodequeue_load_subqueue($obj->sqid), $node);
-    }
-  }
-}
-
 
 /**
  * Implementats hook_forms().
@@ -375,19 +266,15 @@ function nodequeue_theme() {
   return array(
     'nodequeue_arrange_subqueue_form_table' => array(
       'render element' => 'form',
-      'file' => 'nodequeue.theme.inc',
     ),
     'nodequeue_subqueue_empty_text' => array(
       'variables' => array(),
-      'file' => 'nodequeue.theme.inc',
     ),
     'nodequeue_subqueue_full_text' => array(
       'variables' => array(),
-      'file' => 'nodequeue.theme.inc',
     ),
     'nodequeue_subqueue_count_text' => array(
       'variables' => array('count' => 0),
-      'file' => 'nodequeue.theme.inc',
     ),
   );
 }
@@ -440,126 +327,6 @@ function position_value(&$form) {
 }
 
 /**
- * Implements hook_contextual_links_view_alter().
- */
-function nodequeue_contextual_links_view_alter(&$element, $items) {
-  // Bail if the user doesn't have access to edit nodequeues.
-  if (!user_access('manipulate queues')) {
-    return;
-  }
-
-  if (!variable_get('nodequeue_show_contextual_links', TRUE)) {
-    return;
-  }
-
-  // Contextual links for Blocks.
-  $has_context = isset($element['#element']['#contextual_links']);
-  if ($has_context) {
-    $empty_context = empty($element['#element']['#contextual_links']['views_ui']);
-    if ($empty_context) {
-      return;
-    }
-    $views_info = $element['#element']['#contextual_links'];
-  }
-
-  // Contextual links for Views.
-  $has_views_context = isset($element['#element']['#views_contextual_links_info']);
-  if ($has_views_context) {
-    $empty_views_context = empty($element['#element']['#views_contextual_links_info']['views_ui']);
-    if ($empty_views_context) {
-      return;
-    }
-    $views_info = $element['#element']['#views_contextual_links_info'];
-  }
-
-  // Contextual links for Context blocks, or DS blocks.
-  $has_views_content_context = isset($element['#element']['content']['#views_contextual_links_info']);
-  if ($has_views_content_context) {
-    $empty_views_content_context = empty($element['#element']['content']['#views_contextual_links_info']['views_ui']);
-    if ($empty_views_context) {
-      return;
-    }
-    $views_info = $element['#element']['content']['#views_contextual_links_info'];
-  }
-
-  // Return if there is no view info.
-  if (!isset($views_info))  {
-    return;
-  }
-
-  $display_id = $views_info['views_ui']['view_display_id'];
-  $view_name = $views_info['views_ui']['view_name'];
-  $view = views_get_view($view_name, TRUE);
-
-  // Return if the view wasn't saved yet or has no display objects.
-  if (empty($view)) {
-    return;
-  }
-  $view->build($display_id);
-
-  $nodequeue_rels = array(
-    'nodequeue_handler_relationship_nodequeue'
-  );
-  $subqueue_arg_titles = array(
-    'Subqueue reference',
-    'Subqueue reference (optional)',
-  );
-
-  $elview = $element['#element']['#views_contextual_links_info']['views_ui']['view'];
-  $relationship = $elview->display_handler->handlers['argument']['name']->relationship;
-  if (!empty($relationship) && $relationship == 'nodequeue_nodes_node') {
-    $argument = $elview->display_handler->handlers['argument']['name']->argument;
-  }
-
-  // Cycle through all the relationships to find ones provided by nodequeue.
-  // We'll use this as a trigger to attach the links.
-  foreach ($view->relationship as $rel) {
-    if (!in_array(get_class($rel), $nodequeue_rels, TRUE)) {
-      continue;
-    }
-
-    foreach ($rel->options['names'] as $queue_name) {
-      if (gettype($queue_name) != 'string') {
-        if (empty($argument)) {
-          continue;
-        }
-        else {
-          $queue_name = $argument;
-        }
-      }
-      $qid_map = nodequeue_get_qid_map();
-      $qid = $qid_map[$queue_name];
-      $queue = nodequeue_load($qid);
-      $element['#links'][$queue_name] = array(
-        'title' => t('Edit queue'),
-        'href' => 'admin/structure/nodequeue/' . $qid . '/view',
-        'query' => array('destination' => current_path()),
-      );
-
-      // Cycle through all arguments to find ones that limit us by subqueue.
-      // If we find some, add further links to subqueues.
-      foreach ($view->argument as $arg) {
-        $is_subqueue_arg = $arg->options['relationship'] == $rel->options['id'] && in_array($arg->definition['title'], $subqueue_arg_titles, TRUE);
-
-        if (!$is_subqueue_arg) {
-          continue;
-        }
-
-        // Provide contextual links for each of the subqueues.
-        $subqueues = nodequeue_load_subqueues_by_reference(array($qid => $arg->value));
-        foreach ($subqueues as $sqid => $subqueue) {
-          $element['#links'][$queue_name . '_' . $sqid] = array(
-            'title' => t('Edit Subqueue'),
-            'href' => 'admin/structure/nodequeue/' . $qid . '/view/' . $sqid,
-            'query' => array('destination' => current_path()),
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_views_api().
  */
 function nodequeue_views_api() {
@@ -575,12 +342,11 @@ function nodequeue_views_api() {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function nodequeue_form_apachesolr_search_bias_form_alter(&$form, &$form_state) {
+function nodequeue_form_apachesolr_search_bias_form_alter(&$form, &$form_state, $form_id) {
   // Setup for the form building.
   $weights = drupal_map_assoc(array('21.0', '13.0', '8.0', '5.0', '3.0', '2.0', '1.0', '0.8', '0.5', '0.3', '0.2', '0.1'));
   $weights['0'] = t('Normal');
-  $queues = nodequeue_load_subqueues_by_queue(array_keys(nodequeue_get_all_qids()));
-  $env_id = $form['#env_id'];
+  $queues = nodequeue_load_subqueues_by_queue(array_keys(nodequeue_get_all_queues()));
 
   // Build the form.
   $form['biasing']['nodequeue_boost'] = array(
@@ -592,10 +358,10 @@ function nodequeue_form_apachesolr_search_bias_form_alter(&$form, &$form_state) 
   );
   $form['biasing']['nodequeue_boost']['nodequeue_apachesolr_boost'] = array(
     '#type' => 'item',
-    '#description' => t("Specify to bias the search result when a node is in a queue. Any value except <em>Normal</em> will increase the score for the given queue in the search results"),
+    '#description' => t("Specify to bias the search result when a node is in a queue. Any value except <em>Normal</em> will increase the socre for the given queue in the search results"),
   );
   foreach ($queues as $sqid => $queue) {
-    $boost = apachesolr_environment_variable_get($env_id, "nodequeue_apachesolr_boost_$sqid", 0);
+    $boost = variable_get("nodequeue_apachesolr_boost_$sqid", 0);
     // Add in setting for each queue.
     $form['biasing']['nodequeue_boost']['nodequeue_apachesolr_boost']["nodequeue_apachesolr_boost_$sqid"] = array(
       '#type' => 'select',
@@ -604,25 +370,24 @@ function nodequeue_form_apachesolr_search_bias_form_alter(&$form, &$form_state) 
       '#default_value' => $boost,
     );
   }
-  $form['actions']['submit']['#submit'][] = 'nodequeue_search_bias_form_submit';
 }
 
 /**
- * Implements hook_apachesolr_index_document_build_ENTITY_TYPE().
+ * Implements hook_apachesolr_index_document_ENTITY_TYPE().
  */
-function nodequeue_apachesolr_index_document_build_node(ApacheSolrDocument $document, $entity, $env_id) {
+function nodequeue_apachesolr_index_document_node($document, $node, $env_id) {
   if (empty($document)) {
     return;
   }
 
-  $queues = nodequeue_load_queues(array_keys(nodequeue_get_all_qids()));
-  $subqueues = nodequeue_get_subqueues_by_node($queues, $entity);
+  $queues = nodequeue_load_queues(array_keys(nodequeue_get_all_queues()));
+  $subqueues = nodequeue_get_subqueues_by_node($queues, $node);
 
-  nodequeue_set_subqueue_positions($subqueues, $entity->nid);
+  nodequeue_set_subqueue_positions($subqueues, $node->nid);
   if (is_array($subqueues)) {
     foreach ($subqueues as $sqid => $subqueue) {
       if (!empty($subqueue->position)) {
-        $key = _nodequeue_solr_qid_key();
+        $key = _nodequeue_solr_name_key();
         $document->setMultiValue($key, $sqid);
       }
     }
@@ -632,50 +397,30 @@ function nodequeue_apachesolr_index_document_build_node(ApacheSolrDocument $docu
 /**
  * Returns the apachesolr index key for group id.
  */
-function _nodequeue_solr_qid_key() {
-  $qid_key = array(
-    'index_type' => 'sint',
+function _nodequeue_solr_name_key() {
+  $name_key = array(
+    'index_type' => 'string',
     'multiple' => TRUE,
     'name' => "nodequeue",
   );
 
-  return apachesolr_index_key($qid_key);
+  return apachesolr_index_key($name_key);
 }
 
 /**
  * Implements hook_apachesolr_query_alter().
  */
 function nodequeue_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
-  $queues = nodequeue_load_subqueues_by_queue(array_keys(nodequeue_get_all_qids()));
+  $queues = nodequeue_load_subqueues_by_queue(array_keys(nodequeue_get_all_queues()));
   $added = FALSE;
-  $env_id = $query->solr('getId');
   foreach ($queues as $sqid => $queue) {
-    $boost = apachesolr_environment_variable_get($env_id, "nodequeue_apachesolr_boost_$sqid", 0);
+    $boost = variable_get("nodequeue_apachesolr_boost_$sqid", 0);
     if (!empty($boost)) {
-      $query->addParam('bq', _nodequeue_solr_qid_key() . ":$sqid^$boost");
+      $query->params['bq'][] = _nodequeue_solr_name_key() . ":$sqid^$boost";
       if (!$added) {
         // Only want to add the facet.field once. no need to repeat it.
-        $query->addParam('facet.field', _nodequeue_solr_qid_key());
+        $query->params['facet.field'][] = _nodequeue_solr_name_key();
         $added = TRUE;
-      }
-    }
-  }
-}
-
-/**
- * Additional submit handler for nodequeue values.
- */
-function nodequeue_search_bias_form_submit(&$form, &$form_state) {
-  // Exclude unnecessary elements.
-  form_state_values_clean($form_state);
-  foreach ($form_state['values'] as $key => $value) {
-    if (is_array($value) && isset($form_state['values']['array_filter'])) {
-      $value = array_keys(array_filter($value));
-    }
-    // There is no need to set default variable values.
-    if (!isset($form[$key]['#default_value']) || $form[$key]['#default_value'] != $value) {
-      if (preg_match('/nodequeue_apachesolr_boost_/', $key)) {
-        apachesolr_environment_variable_set($form['#env_id'], $key, $value);
       }
     }
   }
@@ -696,127 +441,117 @@ function nodequeue_search_bias_form_submit(&$form, &$form_state) {
  * always check to see if our variables are empty or not.
  */
 class nodequeue_queue {
-  public $name = '';
-  public $title = '';
-  public $size = 0;
-  public $link = '';
-  public $link_remove = '';
-  public $roles = array();
-  public $types = array();
-  public $show_in_links = TRUE;
-  public $show_in_tab = TRUE;
-  public $show_in_ui = TRUE;
-  public $reference = 0;
-  public $i18n = 0;
-  public $subqueue_title = '';
-  public $reverse = 0;
-  public $unique_entries = FALSE;
-  public $insert_at_front = 0;
+  var $name = '';
+  var $title = '';
+  var $size = 0;
+  var $link = '';
+  var $link_remove = '';
+  var $roles = array();
+  var $types = array();
+  var $show_in_links = TRUE;
+  var $show_in_tab = TRUE;
+  var $show_in_ui = TRUE;
+  var $reference = 0;
+  var $i18n = 0;
+
+  var $subqueue_title = '';
+  var $reverse = 0;
 
   // runtime
-  public $subqueues = array();
-  public $subqueue = NULL;
+  var $subqueues = array();
+  var $subqueue = NULL;
 
-  public $current = NULL;
+  var $current = NULL;
+  var $new = FALSE;
 
-  public function __construct($type) {
+  function nodequeue_queue($type) {
     $this->owner = $type;
   }
 }
 
 /**
- * Fetch a list of available queues for a given location.
- *
- * @param $type
- *   Content type of the node.
- * @param  $location
- *   Location where the link can appear, for example: link or tab
- * @param $account
- *   The user account, or NULL to use logged-in user.
- * @param $bypass_cache
- *   Whether or not to bypass the cache and load all qids fresh.
- *
- * @return array
- *   Array of fully loaded queues keyed by qid.
+ * Fetch a list of available queues for a given location. These queues
+ * will be fully loaded and ready to go.
  */
 function nodequeue_load_queues_by_type($type, $location = NULL, $account = NULL, $bypass_cache = FALSE) {
-  $qids = nodequeue_get_qids($type, $account, $bypass_cache);
+  $queues = nodequeue_get_queues($type, $account, $bypass_cache);
   if ($location) {
-    nodequeue_filter_qids($qids, $location);
+    nodequeue_filter_queues($queues, $location);
   }
-  return nodequeue_load_queues(array_keys($qids), $bypass_cache);
+  return nodequeue_load_queues(array_keys($queues), $bypass_cache);
 }
 
 /**
- * Filter a list of qids returned by nodequeue_get_qids to a location.
+ * Filter a list of queues returned by nodequeue_get_queues to a location.
  *
- * @param $qids
- *   An array of $qids from @see nodequeue_get_qids()
+ * @param $queues
+ *   An array of queues from @see nodequeue_get_queues()
  * @param $location
  *   One of:
  *   - 'links': Only check for queues that have node links.
  *   - 'tab': Only check for queues that appear on the node tab.
  *   - 'ui': Only check for queues that appear in the UI.
  */
-function nodequeue_filter_qids(&$qids, $location) {
+function nodequeue_filter_queues(&$queues, $location) {
   $var = "show_in_$location";
-  foreach ($qids as $qid => $info) {
+  foreach ($queues as $name => $info) {
     if (empty($info->$var)) {
-      unset($qids[$qid]);
+      unset($queues[$name]);
     }
   }
 }
 
 /**
- * Get an array of qids applicable to this node type.
+ * Get an array of queues applicable to this node type.
  *
  * @param $type
  *   The node type.
  * @param $account
  *   The account to test against. Defaults to the currently logged in user.
  *
- * @return $qids
- *   An array in the format: @code { array($qid => array('qid' => $qid, 'show_in_tab' '
+ * @return $queues
+ *   An array in the format: @code { array($name => array('name' => $name, 'show_in_tab' '
  *   => true/false, 'show_in_links' => true/false }
  *
  * @param $bypass_cache
  *  Boolean value indicating whether to bypass the cache or not.
  */
-function nodequeue_get_qids($type, $account = NULL, $bypass_cache = FALSE) {
+function nodequeue_get_queues($type, $account = NULL, $bypass_cache = FALSE) {
   if (!isset($account)) {
     global $user;
     $account = $user;
   }
 
-  $cache = &drupal_static(__FUNCTION__, array());
+  static $cache = array();
   if ($bypass_cache || !isset($cache[$type])) {
     $roles_join = $roles_where = '';
     $roles = array();
 
     // superuser always has access.
     if (!user_access('manipulate all queues', $account)) {
+      $roles_join = "INNER JOIN {nodequeue_roles} nr ON nr.name = nq.name ";
       $roles = array_keys((array) $account->roles) + array(DRUPAL_AUTHENTICATED_RID);
-      $roles_join = "INNER JOIN {nodequeue_roles} nr ON nr.qid = nq.qid ";
+
       $roles_where .= "AND nr.rid IN (:roles)";
     }
 
-    $sql = 'SELECT nq.qid, nq.show_in_tab, nq.show_in_links, nq.show_in_ui, nq.i18n ' .
+    $sql = 'SELECT nq.name, nq.show_in_tab, nq.show_in_links, nq.show_in_ui, nq.i18n ' .
       'FROM {nodequeue_queue} nq ' .
-      'INNER JOIN {nodequeue_types} nt ON nt.qid = nq.qid ' . $roles_join .
+      'INNER JOIN {nodequeue_types} nt ON nt.name = nq.name ' . $roles_join .
       "WHERE nt.type = :type " . $roles_where;
     $result = db_query($sql, array(':type' => $type, ':roles' => $roles));
 
-    $qids = array();
-    foreach ($result as $qid) {
-      $qids[$qid->qid] = $qid;
+    $queues = array();
+    foreach ($result as $queue) {
+      $queues[$queue->name] = $queue;
     }
-    $cache[$type] = $qids;
+    $cache[$type] = $queues;
   }
   return $cache[$type];
 }
 
 /**
- * Get an array of qids using the pager query. This administrative list
+ * Get an array of queue names using the pager query. This administrative list
  * does no permission checking, so should only be available to users who
  * have passed the 'administer queues' check.
  *
@@ -828,14 +563,14 @@ function nodequeue_get_qids($type, $account = NULL, $bypass_cache = FALSE) {
  * @param $bypass_cache
  *   Boolean value indicating whether to bypass the cache or not.
  *
- * @return $qids
- *   An array in the format: @code { array($qid => $qid) }
+ * @return $queues
+ *   An array in the format: @code { array($name => $name) }
  */
-function nodequeue_get_all_qids($page_size = 0, $pager_element = 0, $bypass_cache = FALSE) {
+function nodequeue_get_all_queues($page_size = 0, $pager_element = 0, $bypass_cache = FALSE) {
   $cache = &drupal_static(__FUNCTION__, array());
   if ($bypass_cache || empty($cache[$page_size])) {
     $query = db_select('nodequeue_queue', 'nq')
-      ->fields('nq', array('qid'));
+      ->fields('nq', array('name'));
 
     if (!empty($page_size)) {
       $query->extend('PagerDefault')
@@ -844,111 +579,88 @@ function nodequeue_get_all_qids($page_size = 0, $pager_element = 0, $bypass_cach
         ->element($pager_element);
     }
 
-    $qids = $query->execute()->fetchAllKeyed(0, 0);
+    $queues = $query->execute()->fetchAllKeyed(0, 0);
 
-    $cache[$page_size] = $qids;
+    $cache[$page_size] = $queues;
   }
   return $cache[$page_size];
 }
 
 /**
- * Load an array of $qids.
+ * Load an array of $queues.
  *
  * This exists to provide a way of loading a bunch of queues with
  * the fewest queries. Loading 5 queues results in only 4 queries,
  * not 20. This also caches queues so that they don't get loaded
  * repeatedly.
  *
- * @param $qids
- *   An array of queue IDs to load.
+ * @param $queue_names
+ *   An array of queue names to load.
  *
  * @param $bypass_cache
  *   Boolean value indicating whether to bypass the cache or not.
- *
- * @return array
- *   if $bypass_cache is TRUE then it will return data from catch
- *   else from database.
  */
-function nodequeue_load_queues($qids = array(), $bypass_cache = FALSE) {
-  $static = drupal_static(__FUNCTION__, array(
-    'queues' => array(),
-    'qids' => array(),
-  ));
+function nodequeue_load_queues($queue_names = array(), $bypass_cache = FALSE) {
+  static $cache = array();
+  $to_load = $loaded = array();
 
-  // Create a list of queues that need to be loaded.
-  $to_load = array();
-  foreach ($qids as $qid) {
-    if ($bypass_cache || !isset($static['qids'][$qid])) {
-      $to_load[] = $qid;
+  foreach ($queue_names as $name) {
+    if ($bypass_cache || !isset($cache[$name])) {
+      $to_load[] = $name;
     }
   }
 
-  // Load fresh queues from the database.
-  $new_queues = array();
   if (!empty($to_load)) {
+    $result = db_query("SELECT q.*, (SELECT COUNT(*) FROM {nodequeue_subqueue} s WHERE q.name = s.name) AS subqueues FROM {nodequeue_queue} q WHERE q.name IN (:to_load)", array(':to_load' => $to_load));
 
-    $result = db_query("SELECT q.*, (SELECT count(*) FROM {nodequeue_subqueue} s WHERE q.qid = s.qid) AS subqueues FROM {nodequeue_queue} q WHERE q.qid IN (:to_load)", array(':to_load' => $to_load));
     foreach ($result as $queue) {
-      $qid = $queue->qid;
-      if (!isset($static['queues'][$qid])) {
-        $new_queues[$qid] = $queue;
-        // Add valid defaults values.
-        $new_queues[$qid]->types = array();
-        $new_queues[$qid]->roles = array();
-        $new_queues[$qid]->count = 0;
-      }
+      $loaded[$queue->name] = $queue;
+      $loaded[$queue->name]->new = FALSE;
+      // ensure valid defaults:
+      $loaded[$queue->name]->types = array();
+      $loaded[$queue->name]->roles = array();
+      $loaded[$queue->name]->count = 0;
     }
 
-    // Add role data to all new queues.
-    $result = db_query("SELECT qid, rid FROM {nodequeue_roles} WHERE qid IN (:to_load)", array(':to_load' => $to_load));
+    $result = db_query("SELECT name, rid FROM {nodequeue_roles} WHERE name IN (:to_load)", array(':to_load' => $to_load));
     foreach ($result as $obj) {
-      $qid = $obj->qid;
-      $new_queues[$qid]->roles[] = $obj->rid;
+      $loaded[$obj->name]->roles[] = $obj->rid;
     }
 
-    // Add type data to all new queues.
-    $result = db_query("SELECT qid, type FROM {nodequeue_types} WHERE qid IN (:to_load)", array(':to_load' => $to_load));
+    $result = db_query("SELECT name, type FROM {nodequeue_types} WHERE name IN (:to_load)", array(':to_load' => $to_load));
     foreach ($result as $obj) {
-      $qid = $obj->qid;
-      $new_queues[$qid]->types[] = $obj->type;
+      $loaded[$obj->name]->types[] = $obj->type;
     }
 
-    // Allow other modules to load additional data to the new queues.
     $context = 'load_queues';
-    drupal_alter('nodequeue', $new_queues, $context);
+    drupal_alter('nodequeue', $loaded, $context);
   }
 
   if ($bypass_cache) {
-    return $new_queues;
+    return $loaded;
   }
-
-  if (!empty($new_queues)) {
-    $static['queues'] += $new_queues;
-    $static['qids']   += array_keys($new_queues);
-  }
-
-  // Return only the requested queues.
-  $return = array();
-  foreach ($qids as $qid) {
-    if (isset($static['queues'][$qid])) {
-      $return[$qid] = $static['queues'][$qid];
+  else {
+    if (!empty($loaded)) {
+      $cache += $loaded;
     }
+    $queues = array();
+    foreach ($queue_names as $name) {
+      if (isset($cache[$name])) {
+        $queues[$name] = $cache[$name];
+      }
+    }
+    return $queues;
   }
-
-  return $return;
 }
 
 /**
  * Load a nodequeue.
  *
- * @param $qid
- *   The qid of the queue to load.
- *
- * @return mixed
- *   if $queues is empty the function will return empty array else $queues.
+ * @param $name
+ *   The name of the queue to load.
  */
-function nodequeue_load($qid) {
-  $queues = nodequeue_load_queues(array($qid));
+function nodequeue_load($name) {
+  $queues = nodequeue_load_queues(array($name));
   return !empty($queues) ? array_shift($queues) : array();
 }
 
@@ -964,23 +676,20 @@ function subqueue_load($sqid) {
 }
 
 /**
- * Load a list of subqueues.
+ * Load a list of subqueues
  *
  * This exists to provide a way of loading a bunch of queues with
  * the fewest queries. Loading 5 queues results in only 4 queries,
  * not 20. This also caches queues so that they don't get loaded
  * repeatedly.
  *
- * @param array $sqids
+ * @param $sqids
  *   An array of subqueue IDs to load.
- * @param bool $bypass_cache
+ * @param $bypass_cache
  *   Boolean value indicating whether to bypass the cache or not.
- *
- * @return array
- *   An array of subqueues.
  */
 function nodequeue_load_subqueues($sqids, $bypass_cache = FALSE) {
-  $cache = &drupal_static(__FUNCTION__, array());
+  static $cache = array();
   $to_load = array();
   $subqueues = array();
 
@@ -991,7 +700,7 @@ function nodequeue_load_subqueues($sqids, $bypass_cache = FALSE) {
   }
 
   if (!empty($to_load)) {
-    $result = db_query("SELECT s.*, (SELECT count(*) FROM {nodequeue_nodes} n WHERE n.sqid = s.sqid) AS count FROM {nodequeue_subqueue} s WHERE s.sqid IN (:to_load)", array(':to_load' => $to_load));
+    $result = db_query("SELECT s.*, (SELECT COUNT(*) FROM {nodequeue_nodes} n WHERE n.sqid = s.sqid) AS count FROM {nodequeue_subqueue} s WHERE s.sqid IN (:to_load)", array(':to_load' => $to_load));
     foreach ($result as $obj) {
       // Sometimes we want to get to subqueues by reference, sometimes by sqid.
       // sqid is always unique, but reference is sometimes more readily available.
@@ -1014,9 +723,6 @@ function nodequeue_load_subqueues($sqids, $bypass_cache = FALSE) {
  *   The subqueue ID to load.
  * @param $bypass_cache
  *   Boolean value indicating whether to bypass the cache or not.
- *
- * @return mixed
- *
  */
 function nodequeue_load_subqueue($sqid, $bypass_cache = FALSE) {
   $subqueues = nodequeue_load_subqueues(array($sqid), $bypass_cache);
@@ -1033,26 +739,22 @@ function nodequeue_load_subqueue($sqid, $bypass_cache = FALSE) {
  * respect the pager, if desired). It does NOT cache the subqueues like
  * nodequeue_load_subqueues does, so beware of this mixed caching.
  *
- * @param $qids
- *   A $qid or array of $qids
+ * @param $queue_names
+ *   A $name or array of $queue_names.
  * @param $page_size
  *   If non-zero, use the pager_query and limit the page-size to the parameter.
- *
- * @return array
- *   If $qids is empty it will return empty array else $subqueues.
- *
  */
-function nodequeue_load_subqueues_by_queue($qids, $page_size = 0) {
-  if (is_numeric($qids)) {
-    $qids = array($qids);
+function nodequeue_load_subqueues_by_queue($queue_names, $page_size = 0) {
+  if (is_string($queue_names)) {
+    $queue_names = array($queue_names);
   }
 
-  if (empty($qids)) {
+  if (empty($queue_names)) {
     return array();
   }
 
-  $query = "SELECT s.*, (SELECT count(*) FROM {nodequeue_nodes} n WHERE n.sqid = s.sqid) AS count FROM {nodequeue_subqueue} s WHERE s.qid IN (:qids)";
-  $result = db_query($query, array(':qids' => $qids));
+  $query = "SELECT s.*, (SELECT COUNT(*) FROM {nodequeue_nodes} n WHERE n.sqid = s.sqid) AS count FROM {nodequeue_subqueue} s WHERE s.name IN (:names)";
+  $result = db_query($query, array(':names' => $queue_names));
 
   $subqueues = array();
 
@@ -1069,16 +771,12 @@ function nodequeue_load_subqueues_by_queue($qids, $page_size = 0) {
  * This can be used to load a set of subqueues by reference; it will primarily
  * be used by plugins that are managing subqueues.
  *
- * @param array $references
- *   A keyed array of references to load. The key is the $qid and each value
+ * @param $references
+ *   A keyed array of references to load. The key is the $name and each value
  *   is another array of references.
- * @param bool $bypass_cache
- *
- * @return object
- *
  */
 function nodequeue_load_subqueues_by_reference($references, $bypass_cache = FALSE) {
-  $cache = &drupal_static(__FUNCTION__, array());
+  static $cache = array();
   $subqueues = array();
   if ($bypass_cache) {
     $cache = array();
@@ -1087,64 +785,23 @@ function nodequeue_load_subqueues_by_reference($references, $bypass_cache = FALS
   if (!empty($references)) {
     $query = db_select('nodequeue_subqueue', 's')
       ->groupBy('s.sqid')
-      ->groupBy('s.qid')
-      ->groupBy('s.reference')
-      ->fields('s', array('title', 'sqid', 'qid', 'reference'));
+      ->fields('s');
     $query->leftJoin('nodequeue_nodes', 'n', 'n.sqid = s.sqid');
     $query->addExpression('COUNT(n.position)', 'count');
 
     $where = db_or();
-    foreach ($references as $qid => $reference) {
-      $where->condition(db_and()->condition('s.qid', $qid)->condition('s.reference', $reference));
+    foreach ($references as $name => $reference) {
+      $where->condition(db_and()->condition('s.name', $name)->condition('s.reference', $reference));
     }
     $query->condition($where);
     $result = $query->execute();
 
     foreach ($result as $subqueue) {
-      $cache[$subqueue->qid][$subqueue->reference] = $subqueues[$subqueue->sqid] = $subqueue;
+      $cache[$subqueue->name][$subqueue->reference] = $subqueues[$subqueue->sqid] = $subqueue;
     }
   }
 
   return $subqueues;
-}
-
-/**
- * Return a queue by its machine name. This is obviously not ideal due to the
- * extra queries, but probably preferable to changing current API calls.
- *
- * @param $name
- *   The queue machine name
- * @return array|mixed
- *   The queue definition, or an empty array if no queue was found with the
- *   given machine name.
- */
-function nodequeue_load_queue_by_name($name) {
-  $map = nodequeue_get_qid_map();
-  if (isset($map[$name])) {
-    $queues = nodequeue_load_queues(array($map[$name]));
-    if ($queues) {
-      return current($queues);
-    }
-  }
-
-  return array();
-}
-
-/**
- * Return a map of queue name to qid values to aid in various lookups.
- *
- * @return array
- *   A array of qids, keyed by machine name.
- */
-function nodequeue_get_qid_map() {
-  $map = &drupal_static(__FUNCTION__, array());
-  if (!$map) {
-    $result = db_query("SELECT qid, name FROM {nodequeue_queue}");
-    while ($get = $result->fetchObject()) {
-      $map[$get->name] = $get->qid;
-    }
-  }
-  return $map;
 }
 
 /**
@@ -1164,32 +821,32 @@ function nodequeue_save(&$queue) {
     'show_in_ui' => $queue->show_in_ui,
     'i18n' => $queue->i18n,
     'reverse' => $queue->reverse,
-    'unique_entries' => ($queue->unique_entries) ? 1 : 0,
-    'insert_at_front' => $queue->insert_at_front,
     'reference' => $queue->reference,
   );
 
-  if (!isset($queue->qid)) {
-    $queue->qid = db_insert('nodequeue_queue')
+  // Check if the queue exists in the database.
+  $stored_queue = nodequeue_load($queue->name);
+  if (empty($stored_queue)) {
+    db_insert('nodequeue_queue')
       ->fields($nodequeue_queue_fields)
       ->execute();
 
-    if (module_exists('views')) {
+    if (function_exists('views_invalidate_cache')) {
       views_invalidate_cache();
     }
   }
   else {
     db_update('nodequeue_queue')
       ->fields($nodequeue_queue_fields)
-      ->condition('qid', $queue->qid)
+      ->condition('name', $queue->name)
       ->execute();
 
     db_delete('nodequeue_roles')
-      ->condition('qid', $queue->qid)
+      ->condition('name', $queue->name)
       ->execute();
 
     db_delete('nodequeue_types')
-      ->condition('qid', $queue->qid)
+      ->condition('name', $queue->name)
       ->execute();
   }
 
@@ -1197,7 +854,7 @@ function nodequeue_save(&$queue) {
     foreach ($queue->roles as $rid) {
       db_insert('nodequeue_roles')
         ->fields(array(
-          'qid' => $queue->qid,
+          'name' => $queue->name,
           'rid' => $rid,
         ))
         ->execute();
@@ -1208,14 +865,14 @@ function nodequeue_save(&$queue) {
     foreach ($queue->types as $type) {
       db_insert('nodequeue_types')
         ->fields(array(
-          'qid' => $queue->qid,
+          'name' => $queue->name,
           'type' => $type,
         ))
         ->execute();
     }
   }
 
-  // Set global that tells us if we need to activate nodequeue_node_links().
+  // set our global that tells us whether or not we need to activate hook_link
   if (db_query("SELECT COUNT(*) FROM {nodequeue_queue} WHERE link <> ''")->fetchField()) {
     variable_set('nodequeue_links', TRUE);
   }
@@ -1225,47 +882,44 @@ function nodequeue_save(&$queue) {
 
   if (isset($queue->add_subqueue) && is_array($queue->add_subqueue)) {
     foreach ($queue->add_subqueue as $reference => $title) {
-      // If reference is unset it should be set to the qid; this is generally
-      // used for a single subqueue; setting the reference to the qid makes
+      // If reference is unset it should be set to the queue name; this is generally
+      // used for a single subqueue; setting the reference to the name makes
       // it easy to find that one subqueue.
       if ($reference == 0) {
-        $reference = $queue->qid;
+        $reference = $queue->name;
       }
       nodequeue_add_subqueue($queue, $title, $reference);
     }
   }
-  return $queue->qid;
+  return $queue->name;
 }
 
 /**
  * Delete a nodequeue.
  */
-function nodequeue_delete($qid) {
-  // Load the queue before it's deleted.
-  $queue = nodequeue_load($qid);
-
+function nodequeue_delete($name) {
   db_delete('nodequeue_roles')
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->execute();
 
   db_delete('nodequeue_types')
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->execute();
 
   db_delete('nodequeue_queue')
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->execute();
 
   db_delete('nodequeue_nodes')
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->execute();
 
   db_delete('nodequeue_subqueue')
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->execute();
 
   // Invoke a hook to notify other modules that a nodequeue has been deleted.
-  module_invoke_all('nodequeue_delete', $qid, $queue);
+  module_invoke_all('nodequeue_delete', $name);
 }
 
 /**
@@ -1278,8 +932,6 @@ function nodequeue_delete($qid) {
  * @param $reference
  *   A reference that uniquely identifies this subqueue. If NULL it will
  *   be assigned the sqid.
- *
- * @return object
  */
 function nodequeue_add_subqueue(&$queue, $title, $reference = NULL) {
   if (empty($reference)) {
@@ -1291,13 +943,13 @@ function nodequeue_add_subqueue(&$queue, $title, $reference = NULL) {
 
   $subqueue = new stdClass();
   $subqueue->reference = $reference;
-  $subqueue->qid = $queue->qid;
+  $subqueue->name = $queue->name;
   $subqueue->title = $title;
 
 
   $subqueue->sqid = db_insert('nodequeue_subqueue')
     ->fields(array(
-      'qid' => $queue->qid,
+      'name' => $queue->name,
       'reference' => $insert_reference,
       'title' => $title,
     ))
@@ -1344,24 +996,6 @@ function nodequeue_remove_subqueue($sqid) {
 /**
  * Add a node to a queue.
  *
- * @param $queue_name
- *   A machine-readable name of the queue.
- * @param $nid
- *   The node ID. Defaults to NULL.
- */
-function nodequeue_queue_add($queue_name, $nid = NULL) {
-  if (!empty($nid)) {
-    $queue = nodequeue_load_queue_by_name($queue_name);
-    $subqueues = nodequeue_load_subqueues_by_queue($queue->qid);
-    foreach ($subqueues as $subqueue) {
-      nodequeue_subqueue_add($queue, $subqueue, $nid);
-    }
-  }
-}
-
-/**
- * Add a node to a subqueue.
- *
  * @param $queue
  *   The parent queue of the subqueue. This is required so that we can
  *   pop nodes out if the queue breaks size limits.
@@ -1369,54 +1003,21 @@ function nodequeue_queue_add($queue_name, $nid = NULL) {
  *   The subqueue to add the node to.
  * @param $nid
  *   The node ID. Defaults to NULL.
- *
- * @throws Exception
  */
 function nodequeue_subqueue_add($queue, &$subqueue, $nid = NULL) {
   if (!empty($nid)) {
-    // Don't add the node if the queue is configured to enforce uniqueness.
-    if (!empty($queue->unique_entries)) {
-      $result = db_query("SELECT nid FROM {nodequeue_nodes} WHERE sqid = :sqid AND qid = :qid AND nid = :nid", array(
-        ':sqid' => $subqueue->sqid,
-        ':qid' => $queue->qid,
-        ':nid' => $nid
-      ));
-      if (empty($result) || $result->rowCount() > 0) {
-        // We have no way of telling the caller that the node was not added, so
-        // log the event and return.
-        watchdog('nodequeue', 'The queue does not allow duplicated entries and already contained the node with nid !nid', array('!nid' => $nid));
-        return;
-      }
-    }
-
     $transaction = db_transaction();
     try {
-      if ($queue->insert_at_front) {
-        db_update('nodequeue_nodes')
-          ->expression('position', 'position + 1')
-          ->condition('sqid', $subqueue->sqid)
-          ->execute();
-        $position = 1;
-      }
-      else {
-        $position = db_query("SELECT COALESCE((SELECT MAX(position) + 1 FROM {nodequeue_nodes} WHERE sqid = :sqid), 1)", array(':sqid' => $subqueue->sqid))->fetchField();
-      }
-      db_insert('nodequeue_nodes')
-        ->fields(array(
-            'sqid' => $subqueue->sqid,
-            'qid' => $queue->qid,
-            'nid' => $nid,
-            'position' => $position,
-            'timestamp' => REQUEST_TIME,
-          ))
-        ->execute();
+      $position = db_query("SELECT MAX(position) + 1 FROM (SELECT * FROM {nodequeue_nodes} WHERE sqid = :sqid) as nn", array(':sqid' => $subqueue->sqid))->fetchField();
+      $position = !empty($position) ? $position : 1;
+      db_query("INSERT INTO {nodequeue_nodes} (sqid, name, nid, position, timestamp) VALUES (:sqid, :name, :nid, :position, :time)", array(':sqid' => $subqueue->sqid, ':name' => $queue->name, ':nid' => $nid, ':position' => $position,':time' => REQUEST_TIME));
     }
     catch (Exception $e) {
       $transaction->rollback();
       watchdog_exception('nodequeue', $e);
+
       throw $e;
     }
-
     $subqueue->count = db_query("SELECT COUNT(nid) FROM {nodequeue_nodes} WHERE sqid = :sqid", array(':sqid' => $subqueue->sqid))->fetchField();
     // If adding this would make the queue too big, pop the front node
     // (or nodes) out.
@@ -1520,11 +1121,9 @@ function nodequeue_queue_clear($sqid) {
  *
  * @param $queue
  *   The queue object.
- * @param $subqueue
- * @param null $size
- *
- * @internal param $reference
+ * @param $reference
  *   The subqueue to check.
+ *
  */
 function nodequeue_check_subqueue_size($queue, &$subqueue, $size = NULL) {
   if (!isset($size)) {
@@ -1532,12 +1131,7 @@ function nodequeue_check_subqueue_size($queue, &$subqueue, $size = NULL) {
   }
 
   if ($queue->size && $subqueue->count > $size) {
-    if ($queue->insert_at_front) {
-      nodequeue_subqueue_remove($subqueue->sqid, $size + 1, $subqueue->count);
-    }
-    else {
-      nodequeue_subqueue_remove($subqueue->sqid, 1, $subqueue->count - $size);
-    }
+    nodequeue_subqueue_remove($subqueue->sqid, 1, $subqueue->count - $size);
     $subqueue->count = $size;
   }
 }
@@ -1552,7 +1146,7 @@ function nodequeue_check_subqueue_sizes($queue) {
     return;
   }
 
-  $subqueues = nodequeue_load_subqueues_by_queue($queue->qid);
+  $subqueues = nodequeue_load_subqueues_by_queue($queue->name);
   foreach ($subqueues as $subqueue) {
     nodequeue_check_subqueue_size($queue, $subqueue);
   }
@@ -1634,7 +1228,7 @@ function nodequeue_queue_front($subqueue, $position) {
 
   db_insert('nodequeue_nodes')
     ->fields(array(
-      'qid' => $entry->qid,
+      'name' => $entry->name,
       'sqid' => $subqueue->sqid,
       'nid' => $entry->nid,
       'position' => 1,
@@ -1665,13 +1259,12 @@ function nodequeue_queue_back($subqueue, $position) {
   db_update('nodequeue_nodes')
     ->expression('position', 'position - 1')
     ->condition('sqid', $subqueue->sqid)
-    ->condition('position', $position, '>')
-    ->condition('position', $subqueue->count, '<=')
+    ->condition('position', $position, '<')
     ->execute();
 
   db_insert('nodequeue_nodes')
     ->fields(array(
-      'qid' => $entry->qid,
+      'name' => $entry->name,
       'sqid' => $subqueue->sqid,
       'nid' => $entry->nid,
       'position' => $subqueue->count,
@@ -1684,20 +1277,10 @@ function nodequeue_queue_back($subqueue, $position) {
  * Get the position of a node in a subqueue, or 0 if not found.
  */
 function nodequeue_get_subqueue_position($sqid, $nid) {
-  // We use MIN to make sure we always get the closest to the front of the
+  // We use MIN to make sure we always get the closes to the front of the
   // queue in case the queue has nodes in it multiple times.
   $pos = db_query("SELECT MIN(position) FROM {nodequeue_nodes} WHERE sqid = :sqid AND nid = :nid", array(':sqid' => $sqid, ':nid' => $nid))->fetchField();
   return $pos;
-}
-
-/**
- * Get the position of a node in a subqueue, or FALSE if not found.
- *
- * @deprecated Use nodequeue_get_subqueue_position() instead.
- */
-function nodequeue_subqueue_position($sqid, $nid) {
-  $pos = nodequeue_get_subqueue_position($sqid, $nid);
-  return ($pos != 0) ? $pos : FALSE;
 }
 
 /**
@@ -1729,17 +1312,14 @@ function nodequeue_set_subqueue_positions(&$subqueues, $nid) {
  * @param $node
  *   A fully loaded node object.
  *
- * @return array|object
- *   if references is missing between $queues and $node it will return empty array
- *   else $subqueues.
  */
 function nodequeue_get_subqueues_by_node($queues, $node) {
   // Determine which subqueues are valid for each queue.
   $references = array();
-  $last_nid = &drupal_static(__FUNCTION__, 0);
+  static $last_nid = 0;
   foreach ($queues as $queue) {
     if ($result = nodequeue_api_subqueues($queue, $node)) {
-      $references[$queue->qid] = is_array($result) ? $result : array($result);
+      $references[$queue->name] = is_array($result) ? $result : array($result);
     }
   }
 
@@ -1833,16 +1413,17 @@ function nodequeue_nodequeue_info() {
  */
 function nodequeue_nodequeue_form_submit(&$queue, $form_state) {
   // This will add a single subqueue to our new queue.
-  if (!isset($queue->qid) && !isset($queue->add_subqueue)) {
+  if ($queue->new && !isset($queue->add_subqueue)) {
     // A 0 will set the reference to the sqid of the queue.
     $queue->add_subqueue = array(0 => $queue->title);
   }
-  //If the qid is set at this point, we're saving an existing queue.
-  if (isset($queue->qid)) {
-    //We don't check to see if the title has been updated since the $queue object already matches $form_state['values'].
+
+  // We don't check to see if the title has been updated since the $queue object
+  // already matches $form_state['values'].
+  if (!$queue->new) {
     db_update('nodequeue_subqueue')
       ->fields(array('title' => $form_state['values']['title']))
-      ->condition('qid', $queue->qid)
+      ->condition('name', $queue->name)
       ->execute();
   }
 }
@@ -1903,7 +1484,7 @@ function nodequeue_node_links($node) {
     }
 
     foreach ($subqueues as $subqueue) {
-      $queue = $queues[$subqueue->qid];
+      $queue = $queues[$subqueue->name];
       $id = nodequeue_get_content_id($queue, $node);
       if (module_exists('translation')) {
         $subqueue = array($subqueue->sqid => $subqueue);
@@ -1911,11 +1492,11 @@ function nodequeue_node_links($node) {
         $subqueue = array_shift($subqueue);
       }
       $query_string = nodequeue_get_query_string($id, TRUE);
-      $class = 'nodequeue-ajax-toggle nodequeue-toggle-q-' . $queue->qid . ' nodequeue-toggle-sq-' . $subqueue->sqid . ' nodequeue-toggle-ref-' . $subqueue->reference;
+      $class = 'nodequeue-ajax-toggle nodequeue-toggle-q-' . $queue->name . ' nodequeue-toggle-sq-' . $subqueue->sqid . ' nodequeue-toggle-ref-' . $subqueue->reference;
       if (!isset($subqueue->position)) {
         $links[$class] = array(
           'title' => nodequeue_title_substitute($queue->link, $queue, $subqueue),
-          'href' => "nodequeue/$queue->qid/add-node/$subqueue->sqid/$id",
+          'href' => "nodequeue/$queue->name/add-node/$subqueue->sqid/$id",
           'attributes' => array('class' => array($class . ' toggle-add')),
           'query' => $query_string,
           'purl' => array('disabled' => TRUE),
@@ -1924,7 +1505,7 @@ function nodequeue_node_links($node) {
       elseif ($queue->link_remove) {
         $links[$class] = array(
           'title' => nodequeue_title_substitute($queue->link_remove, $queue, $subqueue),
-          'href' => "nodequeue/$queue->qid/remove-node/$subqueue->sqid/$id",
+          'href' => "nodequeue/$queue->name/remove-node/$subqueue->sqid/$id",
           'attributes' => array('class' => array($class . ' toggle-remove')),
           'query' => $query_string,
           'purl' => array('disabled' => TRUE),
@@ -1939,59 +1520,18 @@ function nodequeue_node_links($node) {
 
 /**
  * Get node_view output from a nodequeue.
- *
- * @param integer $sqid
- *   Subqueue ID
- * @param boolean $backward
- *   If TRUE (default), display the node with the highest queue position first.
- * @param $view_mode
- *   View mode, e.g. 'full', 'teaser'... For backward compatibility, non-string
- *   arguments will be converted to boolean, TRUE implies 'teaser' and FALSE
- *   implies 'full'.
- * @param boolean $links
- *   Deprecated.
- * @param integer $from
- *   Display offset from highest (if $backward is FALSE, lowest) queue position.
- * @param integer $count
- *   Maximum number of nodes to display.
- *
- * @return array
- *   An array as expected by drupal_render().
  */
-function nodequeue_view_nodes($sqid, $backward = TRUE, $view_mode = 'teaser', $links = TRUE, $from = 0, $count = 0) {
-  // This is for backward compatibility with 'D6 style' argument, which used
-  // to be $teaser = TRUE (and previously wasn't converted as necessary in D7
-  // version):
-  if (!is_string($view_mode)) {
-    $view_mode = $view_mode ? 'teaser' : 'full';
-   }
-
+function nodequeue_view_nodes($sqid, $backward = TRUE, $teaser = TRUE, $links = TRUE, $from = 0, $count = 0) {
+  $output = array();
   $nodes = nodequeue_load_nodes($sqid, $backward, $from, $count);
-  $output = node_view_multiple($nodes, $view_mode);
-
-  // Keep backward compatibility with the previous version of this function, which
-  // returned an array of individually built nodes.
-  // @todo reevaluate this.
-  unset($output['nodes']['#sorted']);
-  return array_values($output['nodes']);
+  foreach ($nodes as $node) {
+    $output[] = node_view($node, $teaser, FALSE, $links);
+  }
+  return $output;
 }
 
 /**
  * Load an array of node objects belonging to a particular nodequeue.
- *
- * @param integer $sqid
- *   Subqueue ID
- * @param boolean $backward
- *   If TRUE (default), display the node with the highest queue position first.
- * @param integer $from
- *   Display offset from highest (if $backward is FALSE, lowest) queue position.
- * @param integer $count
- *   Maximum number of nodes to display.
- * @param bool $published_only
- *   If TRUE (default), only load published nodes.
- *
- * @return array
- *   An array of node objects indexed by nid.
  */
 function nodequeue_load_nodes($sqid, $backward = FALSE, $from = 0, $count = 5, $published_only = TRUE) {
   $orderby = ($backward ? "DESC" : "ASC");
@@ -2007,29 +1547,32 @@ function nodequeue_load_nodes($sqid, $backward = FALSE, $from = 0, $count = 5, $
   }
 
   if ($count) {
-    $result = $query->range($from, $count)->execute()->fetchCol();
+    $result = $query->range($from, $count)->execute();
   }
   else {
-    $result = $query->execute()->fetchCol();
+    $result = $query->execute();
   }
 
-  return node_load_multiple($result);
+  $nodes = array();
+  foreach ($result as $nid) {
+    $nodes[] = node_load($nid->nid);
+  }
+
+  return $nodes;
 }
 
 /**
  * Load the first node of a queue.
  */
 function nodequeue_load_front($sqid) {
-  $nodequeue_nodes = nodequeue_load_nodes($sqid, FALSE, 0, 1);
-  return array_shift($nodequeue_nodes);
+  return array_shift(nodequeue_load_nodes($sqid, FALSE, 0, 1));
 }
 
 /**
  * Load the last node of a queue.
  */
 function nodequeue_load_back($sqid, $teaser = TRUE, $links = TRUE) {
-  $nodequeue_nodes = nodequeue_load_nodes($sqid, TRUE, 0, 1);
-  return array_shift($nodequeue_nodes);
+  return array_shift(nodequeue_load_nodes($sqid, TRUE, 0, 1));
 }
 
 /**
@@ -2063,31 +1606,29 @@ function nodequeue_load_random_node($sqid) {
      ->execute()
      ->fetchField();
 
-  $nodequeue_nodes = nodequeue_load_nodes($sqid, TRUE, rand(0, $count - 1), 1);
-  return array_shift($nodequeue_nodes);
+  return array_shift(nodequeue_load_nodes($sqid, TRUE, rand(0, $count - 1), 1));
+}
+
+/**
+ * Get the position of a node in a subqueue, or FALSE if not found.
+ */
+function nodequeue_subqueue_position($sqid, $nid) {
+  return db_query("SELECT position FROM {nodequeue_nodes} WHERE sqid = :sqid AND nid = :nid", array(':sqid' => $sqid, ':nid' => $nid))->fetchField();
 }
 
 /**
  * Get the position of a node in a queue; this queue MUST have only one
  * subqueue or the results of this function will be unpredictable.
- *
- * @param $qid
- *   Queue ID for the queue with the node in it.
- * @param $nid
- *   Node ID for the node you are seeking.
- *
- * return int
- *   Position of the node in the quue.
  */
-function nodequeue_queue_position($qid, $nid) {
+function nodequeue_queue_position($name, $nid) {
   $sqid = db_select('nodequeue_subqueue', 'ns')
     ->fields('ns', array('sqid'))
-    ->condition('qid', $qid)
+    ->condition('name', $name)
     ->range(0, 1)
     ->execute()
     ->fetchField();
 
-  return nodequeue_get_subqueue_position($sqid, $nid);
+  return nodequeue_subqueue_position($sqid, $nid);
 }
 
 // --------------------------------------------------------------------------
@@ -2177,7 +1718,7 @@ function nodequeue_api_subqueues(&$queue, $node) {
     return $function($queue, $node);
   }
   else {
-    return $queue->qid;
+    return $queue->name;
   }
 }
 
@@ -2192,7 +1733,7 @@ function nodequeue_api_subqueues(&$queue, $node) {
  * @param $string
  *   The string being matched.
  *
- * @return array
+ * @return
  *   An keyed array $nid => $title
  */
 function nodequeue_api_autocomplete($queue, $subqueue, $string) {
@@ -2210,6 +1751,7 @@ function nodequeue_api_autocomplete($queue, $subqueue, $string) {
     $query->condition('n.type', $queue->types, 'IN');
   }
 
+  $where_args = array();
   global $user;
   if (!user_access('administer nodes', $user)) {
     $query->condition(db_or()->condition('n.status', 1)->condition('n.uid', $user->uid));
@@ -2231,21 +1773,19 @@ function nodequeue_api_autocomplete($queue, $subqueue, $string) {
     $query->where('LOWER(n.title) LIKE LOWER(:string)', array(':string' => '%' . db_like($string) . '%'));
   }
 
-  $query->addMetaData('queue', $queue);
-  $query->addMetaData('subqueue', $subqueue);
-  $query->addTag('nodequeue_api_autocomplete');
-  $query->addTag('i18n_select');
-  $result = $query->execute();
-
-  // Call to hook_nodequeue_api_autocomplete.
-  $matches = module_invoke_all('nodequeue_api_autocomplete', $queue, $subqueue, $string, $result);
-  if (!empty($matches)) {
-    return $matches;
+  // Call to the API.
+  $function = $queue->owner . "_nodequeue_autocomplete";
+  if (function_exists($function)) {
+    return $function($queue, $subqueue, $string, $where, $where_args);
   }
+  else {
+    $query->addTag('i18n_select');
+    $result = $query->execute();
 
-  foreach ($result as $node) {
-    $id = nodequeue_get_content_id($queue, $node);
-    $matches[$node->nid] = check_plain($node->title) . " [nid: $id]";
+    foreach ($result as $node) {
+      $id = nodequeue_get_content_id($queue, $node);
+      $matches[$node->nid] = check_plain($node->title) . " [nid: $id]";
+    }
   }
 
   return $matches;
@@ -2289,7 +1829,7 @@ function nodequeue_api_subqueue_access($subqueue, $account = NULL, $queue = NULL
   }
 
   if (!$queue) {
-    $queue = nodequeue_load($subqueue->qid);
+    $queue = nodequeue_load($subqueue->name);
   }
 
   $function = $queue->owner . '_subqueue_access';
@@ -2310,13 +1850,13 @@ function nodequeue_api_subqueue_access($subqueue, $account = NULL, $queue = NULL
  * @param $seed
  *   The seed to use when generating a token. If NULL no token will
  *   be generated.
- * @param bool $destination
+ * @param $destination
  *   The destination to use. If FALSE one won't be used; if TRUE
  *   one will be generated from drupal_get_destination().
- * @param array $query
+ * @param $query
  *   An array of additional items to add to the query.
  *
- * @return array|string
+ * @return
  *   The query string suitable for use in the l() function.
  */
 function nodequeue_get_query_string($seed, $destination = FALSE, $query = array()) {
@@ -2366,10 +1906,9 @@ function _nodequeue_access_admin_or_manipulate() {
  *
  * No, this isn't some odd hook_access implementation.
  *
- * @param object $node
- * @param object $queue
- * @param object $subqueue
- * @return bool
+ * @param unknown_type $node
+ * @param unknown_type $queue
+ * @return unknown
  */
 function nodequeue_node_and_queue_access($node, $queue, $subqueue = NULL) {
   return nodequeue_nodequeue_access($node->type) && nodequeue_queue_access($queue, $subqueue);
@@ -2385,21 +1924,17 @@ function nodequeue_node_and_queue_access($node, $queue, $subqueue = NULL) {
  *   - 'links': Only check for queues that have node links.
  *   - 'tab': Only check for queues that appear on the node tab.
  *   - 'ui': Only check for queues that appear in the UI.
- * @param object $account
- *
- * @return bool
- *   if $qids is empty it will return FALSE else TRUE.
  */
 function nodequeue_nodequeue_access($type, $location = NULL, $account = NULL) {
   if (isset($type->type)) {
     $type = $type->type;
   }
-  $qids = nodequeue_get_qids($type, $account);
+  $queues = nodequeue_get_queues($type, $account);
   if ($location) {
-    nodequeue_filter_qids($qids, $location);
+    nodequeue_filter_queues($queues, $location);
   }
 
-  return !empty($qids);
+  return !empty($queues);
 }
 
 /**
@@ -2468,7 +2003,7 @@ function nodequeue_js_output($label, $href, $count = NULL, $sqid = NULL) {
   }
 
   drupal_json_output($return);
-  drupal_exit();
+  exit;
 }
 
 /**
@@ -2488,27 +2023,138 @@ function nodequeue_machine_name_exists($machine_name) {
 }
 
 /**
- * Implements hook_nodequeue_add()
+ * Get the list of nodes in the subqueue, taking into account node access restrictions.
  */
-function nodequeue_nodequeue_add($sqid, $nid) {
-  if (module_exists('rules')) {
-    // When a node is added to a nodequeue invoke the corresponding rules event
-    $subqueue = nodequeue_load_subqueue($sqid);
-    $node = node_load($nid);
-    rules_invoke_event('nodequeue_added', $subqueue, $node);
-    rules_invoke_event('nodequeue_saved', $subqueue, $node);
+function nodequeue_nids_visible($sqid = -1, $account = NULL) {
+  $node_status_sql = '';
+  if (!$account) {
+    global $user;
+    $account = $user;
   }
+  $nids_visible = array();
+
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->addTag('node_access')
+    ->distinct()
+    ->condition('nq.sqid', $sqid)
+    ->orderBy('nq.position', 'ASC');
+  $query->leftJoin('nodequeue_nodes', 'nq', 'nq.nid = n.nid');
+
+  if (!user_access('administer nodes', $account)) {
+    $query->condition(db_or()->condition('n.status', 1)->condition('n.uid', $account->uid));
+  }
+
+  // Disable i18n_select for this query.
+  if (arg(0) == 'admin') {
+    $query->addTag('i18n_select');
+  }
+
+  $query_restricted = $query->execute();
+  foreach ($query_restricted as $result_restricted) {
+    $nids_visible[$result_restricted->nid] = $result_restricted->nid;
+  }
+  return $nids_visible;
+}
+
+/* --- THEME ---------------------------------------------------------------- */
+
+/**
+ * Theme the subqueue overview as a sortable list.
+ *
+ * @ingroup themeable
+ */
+function theme_nodequeue_arrange_subqueue_form_table($variables) {
+  $form = $variables['form'];
+
+  $output = '';
+
+  // Get css to hide some of the help text if javascript is disabled.
+  drupal_add_css(drupal_get_path('module', 'nodequeue') . '/nodequeue.css');
+
+  $table_id = 'nodequeue-dragdrop-' . $form['#subqueue']['sqid'];
+  $table_classes = array(
+    'nodequeue-dragdrop',
+    'nodequeue-dragdrop-name-' . $form['#subqueue']['name'],
+    'nodequeue-dragdrop-sqid-' . $form['#subqueue']['sqid'],
+    'nodequeue-dragdrop-reference-' . $form['#subqueue']['reference'],
+  );
+  drupal_add_tabledrag($table_id, 'order', 'sibling', 'node-position');
+  drupal_add_js(drupal_get_path('module', 'nodequeue') . '/nodequeue_dragdrop.js');
+
+  $reverse[str_replace('-', '_', $table_id)] = (bool) $form['#queue']['reverse'];
+  drupal_add_js(
+    array(
+      'nodequeue' => array(
+        'reverse' => $reverse,
+      )
+    ),
+    array(
+      'type' => 'setting',
+      'scope' => JS_DEFAULT,
+    )
+  );
+
+  // Render form as table rows.
+  $rows = array();
+  $counter = 1;
+  foreach (element_children($form) as $key) {
+    if (isset($form[$key]['title'])) {
+      $row = array();
+
+      $row[] = drupal_render($form[$key]['title']);
+      $row[] = drupal_render($form[$key]['author']);
+      $row[] = drupal_render($form[$key]['date']);
+      $row[] = drupal_render($form[$key]['position']);
+      $row[] = (!empty($form[$key]['edit'])) ? drupal_render($form[$key]['edit']) : '&nbsp;';
+      $row[] = drupal_render($form[$key]['remove']);
+      $row[] = array(
+        'data' => $counter,
+        'class' => array('position')
+      );
+
+      $rows[] = array(
+        'data'  => $row,
+        'class' => array('draggable'),
+      );
+    }
+
+    $counter++;
+  }
+  if (empty($rows)) {
+    $rows[] = array(array('data' => t('No nodes in this queue.'), 'colspan' => 7));
+  }
+
+  // Render the main nodequeue table.
+  $header = array(t('Title'), t('Author'), t('Post Date'), t('Position'), array('data' => t('Operations'), 'colspan' => 2), t('Position'));
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => $table_id, 'class' => $table_classes)));
+
+  return $output;
 }
 
 /**
- * Implements hook_nodequeue_remove().
+ * Return a "queue is empty" message.
+ *
+ * @ingroup themeable
  */
-function nodequeue_nodequeue_remove($sqid, $nid) {
-  if (module_exists('rules')) {
-    // When a node is removed from a nodequeue invoke the corresponding rules event
-    $subqueue = nodequeue_load_subqueue($sqid);
-    $node = node_load($nid);
-    rules_invoke_event('nodequeue_removed', $subqueue, $node);
-    rules_invoke_event('nodequeue_saved', $subqueue, $node);
-  }
+function theme_nodequeue_subqueue_empty_text() {
+  return t('Queue empty');
+}
+
+/**
+ * Return a "queue is full" message.
+ *
+ * @ingroup themeable
+ */
+function theme_nodequeue_subqueue_full_text() {
+  return t('Queue full');
+}
+
+/**
+ * Return a count of elements in the queue.
+ *
+ * @ingroup themeable
+ */
+function theme_nodequeue_subqueue_count_text($variables) {
+  return t('@count in queue', array('@count' => $variables['count']));
 }

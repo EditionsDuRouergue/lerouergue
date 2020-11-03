@@ -84,24 +84,6 @@ function nodequeue_views_data() {
     ),
   );
 
-  $data['nodequeue_nodes']['qid'] = array(
-    'title' => t('Queue ID'),
-    'help' => t('The ID of the queue the node belongs to.'),
-    'field' => array(
-      'handler' => 'views_handler_field_numeric',
-      'click sortable' => TRUE,
-     ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-    'argument' => array(
-      'handler' => 'views_handler_argument_numeric',
-      'name field' => 'title',
-      'name table' => 'nodequeue_queue',
-      'empty field name' => t('No queue'),
-    ),
-  );
-
   $data['nodequeue_nodes']['sqid'] = array(
     'title' => t('Subqueue ID'),
     'help' => t('The ID of the subqueue the node belongs to.'),
@@ -124,10 +106,6 @@ function nodequeue_views_data() {
   $data['nodequeue_nodes']['in_queue'] = array(
     'title' => t('In queue'),
     'help' => t('Filter to ensure a node IS or IS NOT in the related queue'),
-    'sort' => array(
-      'help' => t('Sort by whether this is a nodequeue node or not'),
-      'handler' => 'nodequeue_handler_sort_in_queue',
-    ),
     'filter' => array(
       'handler' => 'nodequeue_handler_filter_in_queue',
       'label' => t('In queue'),
@@ -159,8 +137,8 @@ function nodequeue_views_data() {
   // For use with the relationship.
   $data['nodequeue_queue']['table']['join'] = array(
     'nodequeue_nodes' => array(
-      'left_field' => 'qid',
-      'field' => 'qid',
+      'left_field' => 'name',
+      'field' => 'name',
     ),
   );
 

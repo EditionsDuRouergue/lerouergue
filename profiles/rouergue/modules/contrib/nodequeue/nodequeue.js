@@ -1,4 +1,3 @@
-(function ($) {
 
 /**
  * Nodequeue object
@@ -394,9 +393,9 @@ Drupal.nodequeue.autoAttach = function() {
         if (data.status) {
           // Change label back
           $(a).attr('href', data.href);
-          $(a).html(data.label.replace(/<[^>]*>?/gm, ''));
+          $(a).html(data.label);
           if (data.sqid) {
-            $('#nodequeue-count-' + data.sqid).html(data.count.replace(/<[^>]*>?/gm, ''));
+            $('#nodequeue-count-' + data.sqid).html(data.count);
           }
           if (data.href.search('remove-node') > -1) {
             $(a).removeClass('toggle-add');
@@ -418,6 +417,9 @@ Drupal.nodequeue.autoAttach = function() {
 
 }
 
-$(document).ready(Drupal.nodequeue.autoAttach);
+if (Drupal.jsEnabled) {
+  $(document).ready(Drupal.nodequeue.autoAttach);
+}
 
-})(jQuery);
+
+

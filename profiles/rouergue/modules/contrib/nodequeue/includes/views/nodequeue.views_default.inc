@@ -1,15 +1,10 @@
 <?php
-/**
- * @file
- *
- * Default views for nodequeue.
- *
- * @todo  This modifies an exported view; it might actually work better to
- * create the view dynamically. It would be less code and more modifiable later.
- */
 
 /**
- * Implements hook_views_default_views().
+ * @file
+ * Default views for nodequeue. This modifies an exported view; it might
+ * actually work better to create the view dynamically. It would be less
+ * code and more modifiable later.
  */
 function nodequeue_views_default_views() {
   $views = array();
@@ -17,10 +12,10 @@ function nodequeue_views_default_views() {
     return $views;
   }
 
-  $queues = nodequeue_load_queues(nodequeue_get_all_qids());
+  $queues = nodequeue_load_queues(nodequeue_get_all_queues());
   foreach ($queues as $queue) {
     $view = new view;
-    $view->name = "nodequeue_$queue->qid";
+    $view->name = "nodequeue_$queue->name";
     $view->description = t("Display a list of all nodes in queue '@queue'", array('@queue' => $queue->title));
     $view->tag = t('nodequeue');
     $view->view_php = '';
@@ -50,7 +45,7 @@ function nodequeue_views_default_views() {
           'label' => 'queue',
           'required' => 1,
           'limit' => TRUE,
-          'qids' => array($queue->qid => $queue->qid),
+          'queues' => array($queue->name => $queue->name),
           'relationship' => 'none',
         ),
       ),
@@ -137,7 +132,7 @@ function nodequeue_views_default_views() {
       'sorts' => array(),
       'arguments' => array(),
       'filters' => array(),
-      'path' => "nodequeue/$queue->qid",
+      'path' => "nodequeue/$queue->name",
     );
     $view->display['page'] = $display;
     $display = new views_display;
