@@ -1,12 +1,17 @@
 <?php
 
 /**
+ * @file
  * Views handler to display the open or closed status of a webform.
+ */
+
+/**
+ *
  */
 class webform_handler_field_webform_status extends views_handler_field_boolean {
 
   /**
-   * {@inheritdoc}
+   *
    */
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
@@ -14,7 +19,7 @@ class webform_handler_field_webform_status extends views_handler_field_boolean {
   }
 
   /**
-   * {@inheritdoc}
+   *
    */
   public function option_definition() {
     $options = parent::option_definition();
@@ -37,20 +42,8 @@ class webform_handler_field_webform_status extends views_handler_field_boolean {
       case 'true-false':
         return $value ? t('True') : t('False');
 
-      case 'unicode-yes-no':
-        return $value ? t('✔') : t('✖');
-
-      case 'enabled-disabled':
-        return $value ? t('Enabled') : t('Disabled');
-
-      case 'boolean':
-        return $value ? 1 : 0;
-
       case 'on-off':
         return $value ? t('On') : t('Off');
-
-      case 'custom':
-        return $value ? $this->options['type_custom_true'] : $this->options['type_custom_false'];
 
       case 'open-closed':
       default:
