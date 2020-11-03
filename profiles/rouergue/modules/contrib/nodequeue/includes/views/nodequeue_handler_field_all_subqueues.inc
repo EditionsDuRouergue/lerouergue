@@ -16,17 +16,17 @@ class nodequeue_handler_field_all_subqueues extends nodequeue_handler_field_all_
 
       if ($nids) {
         $query = db_select('nodequeue_nodes', 'nn');
-        $query->innerJoin('nodequeue_queue', 'nq', 'nn.name = nq.name');
+        $query->innerJoin('nodequeue_queue', 'nq', 'nn.qid = nq.qid');
         $query->innerJoin('nodequeue_subqueue', 'ns', 'nn.sqid = ns.sqid');
-        $query->fields('nn', array('nid', 'sqid', 'name'));
+        $query->fields('nn', array('nid', 'sqid', 'qid'));
         $query->fields('nq', array('subqueue_title'));
         $query->fields('ns', array('title'));
         $query->orderby('ns.title');
         $query->orderby('nq.subqueue_title');
         $query->condition('nn.nid', $nids);
-        $queues = array_filter($this->options['queues']);
-        if (!empty($this->options['limit']) && !empty($queues)) {
-          $query->condition('nn.name', $queues);
+        $qids = array_filter($this->options['qids']);
+        if (!empty($this->options['limit']) && !empty($qids)) {
+          $query->condition('nn.qid', $qids);
         }
         $result = $query->execute();
 
@@ -36,7 +36,7 @@ class nodequeue_handler_field_all_subqueues extends nodequeue_handler_field_all_
 
           if (!empty($this->options['link_to_queue'])) {
             $this->items[$queue->nid][$queue->sqid]['make_link'] = TRUE;
-            $this->items[$queue->nid][$queue->sqid]['path'] = 'admin/structure/nodequeue/' . $queue->name . '/view/' . $queue->sqid;
+            $this->items[$queue->nid][$queue->sqid]['path'] = 'admin/structure/nodequeue/' . $queue->qid . '/view/' . $queue->sqid;
           }
         }
       }

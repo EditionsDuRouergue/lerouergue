@@ -12,10 +12,11 @@ function smartqueue_schema() {
   $schema['smartqueue'] = array(
     'description' => 'Table for smartqueues, storing global information for each queue.',
     'fields' => array(
-      'name' => array(
-        'description' => 'The machine name for the queue.',
-        'type' => 'varchar',
-        'length' => 128,
+      'qid' => array(
+        'description' => 'The primary identifier for a queue.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE
       ),
       'use_parents' => array(
         'description' => "Whether a queue is to use the terms' parents when displaying the queue selection.",
@@ -23,8 +24,14 @@ function smartqueue_schema() {
         'size' => 'tiny',
         'default' => 0,
       ),
+      'use_parents_all' => array(
+        'description' => 'Whether a queue is to use all the terms ancestors when displaying the queue selection.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 0,
+      ),
     ),
-    'primary key' => array('name'),
+    'primary key' => array('qid'),
   );
 
   return $schema;
@@ -94,7 +101,20 @@ function smartqueue_update_7001() {
  * Clean-up leftovers from the {smartqueue} table.
  */
 function smartqueue_update_7002() {
-  db_query('DELETE FROM {smartqueue} WHERE `name` NOT IN (SELECT `name` FROM {nodequeue_queue})');
+  db_query('DELETE FROM {smartqueue} WHERE qid NOT IN (SELECT qid FROM {nodequeue_queue})');
 
   return t('The {smartqueue} table has been cleaned.');
+}
+
+/**
+ * Add use_parents_all.
+ */
+function smartqueue_update_7003() {
+  $spec = array(
+    'description' => 'Whether a queue is to use all the terms ancestors when displaying the queue selection.',
+    'type' => 'int',
+    'size' => 'tiny',
+    'default' => 0,
+  );
+  db_add_field('smartqueue', 'use_parents_all', $spec);
 }

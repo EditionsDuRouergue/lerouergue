@@ -11,13 +11,24 @@ class nodequeue_handler_relationship_nodequeue extends views_handler_relationshi
    */
   function init(&$view, &$options) {
     parent::init($view, $options);
+
+    // Tranlate an older setting which was using qids instead of machine names.
+    if (!empty($options['qids'])) {
+      $map = array_flip(nodequeue_get_qid_map());
+      foreach ($options['qids'] as $key => $value) {
+        if ($value && isset($map[$key])) {
+          $this->options['names'][$map[$key]] = ($value) ? $map[$key] : 0;
+        }
+      }
+      unset($this->options['qids']);
+    }
   }
 
   function option_definition() {
     $options = parent::option_definition();
 
     $options['limit']['default'] = FALSE;
-    $options['queues']['default'] = array();
+    $options['names']['default'] = array();
     return $options;
   }
 
@@ -35,18 +46,18 @@ class nodequeue_handler_relationship_nodequeue extends views_handler_relationshi
     );
 
     $options = array();
-    $queues = nodequeue_load_queues(nodequeue_get_all_queues(0, 0, TRUE), TRUE);
+    $queues = nodequeue_load_queues(nodequeue_get_all_qids(0, 0, TRUE), TRUE);
     foreach ($queues as $queue) {
       $options[$queue->name] = $queue->title;
     }
 
-    $form['queues'] = array(
-      '#prefix' => '<div><div id="edit-options-queues">',
+    $form['names'] = array(
+      '#prefix' => '<div><div id="edit-options-names">',
       '#suffix' => '</div></div>',
       '#type' => 'checkboxes',
       '#title' => t('Queues'),
       '#options' => $options,
-      '#default_value' => $this->options['queues'],
+      '#default_value' => $this->options['names'],
       '#process' => array('form_process_checkboxes', 'ctools_dependent_process'),
       '#dependency' => array('edit-options-limit' => array(TRUE)),
     );
@@ -60,8 +71,8 @@ class nodequeue_handler_relationship_nodequeue extends views_handler_relationshi
 
     // Check that at least on queue has been selected.
     $options = $form_state['values']['options'];
-    if($options['limit'] && empty($options['queues'])) {
-      form_set_error('queues', t('You must check at least one queue.'));
+    if($options['limit'] && empty($options['names'])) {
+      form_set_error('names', t('You must check at least one queue.'));
     }
   }
 
@@ -83,11 +94,18 @@ class nodequeue_handler_relationship_nodequeue extends views_handler_relationshi
     }
 
     if (!empty($this->options['limit'])) {
-      $queues = array_keys(array_filter($this->options['queues']));
+      $names = array_keys(array_filter($this->options['names']));
+      $qids = array();
+      $map = nodequeue_get_qid_map();
+      foreach ($names as $name) {
+        if (isset($map[$name])) {
+          $qids[] = $map[$name];
+        }
+      }
 
       $join->definition['extra'] = array(array(
-        'field' => 'name',
-        'value' => $queues,
+        'field' => 'qid',
+        'value' => $qids,
       ));
     }
 

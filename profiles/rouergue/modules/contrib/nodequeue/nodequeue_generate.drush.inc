@@ -10,7 +10,7 @@
  *
  * @See drush_parse_command() for a list of recognized keys.
  *
- * @return
+ * @return array
  *   An associative array describing your command(s).
  */
 function nodequeue_generate_drush_command() {
@@ -63,37 +63,40 @@ function drush_nodequeue_generate() {
     drush_set_error('error', dt('At least one queue must be specified.'));
   }
 
-  // Check if queues exist.
-  $queues = array();
-  foreach ($args as $name) {
+  // Get qids from machine names.
+  $qids = array();
+  foreach ($args as $queue) {
 
-    $exists = db_select('nodequeue_queue', 'nq')
-      ->fields('nq', array('name'))
-      ->condition('name', $name)
+    $qid = db_select('nodequeue_queue', 'nq')
+      ->fields('nq', array('qid'))
+      ->condition('name', $queue)
       ->execute()
       ->fetchField();
 
-    if (!$exists) {
-      drush_set_error('error', dt('Queue @queue was not found.', array('@queue' => $name)));
+    if ($qid) {
+      $qids[] = $qid;
+    }
+    else {
+      drush_set_error('error', dt('Queue @queue was not found.', array('@queue' => $queue)));
     }
 
   }
 
   nodequeue_generate_rehash();
-  nodequeue_generate_repopulate_queues($args);
+  nodequeue_generate_repopulate_queues($qids);
 }
 
 /**
  * Re-populates all nodequeues with random nodes.
  */
 function drush_nodequeue_generate_all() {
-  $queues = db_select('nodequeue_queue', 'nq')
-    ->fields('nq', array('name'))
+  $qids = db_select('nodequeue_queue', 'nq')
+    ->fields('nq', array('qid'))
     ->execute()
-    ->fetchAll(PDO::FETCH_COLUMN, 'name');
+    ->fetchAll(PDO::FETCH_COLUMN, 'qid');
 
   nodequeue_generate_rehash();
-  nodequeue_generate_repopulate_queues($queues);
+  nodequeue_generate_repopulate_queues($qids);
 }
 
 /**

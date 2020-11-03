@@ -24,7 +24,7 @@ function nodequeue_generate_form() {
     '#markup' => '<p>' . t('Select which queues shall be <strong>emptied</strong> and re-populated with new nodes.') . '</p>'
   );
 
-  $queues = nodequeue_load_queues(nodequeue_get_all_queues(25));
+  $queues = nodequeue_load_queues(nodequeue_get_all_qids(25));
 
   // Tableselect header.
   $header = array(
@@ -36,9 +36,9 @@ function nodequeue_generate_form() {
   // Tableselect data.
   $data = array();
   foreach ($queues as $queue) {
-    $data[$queue->name]['name'] = check_plain($queue->title);
-    $data[$queue->name]['max_nodes'] = $queue->size == 0 ? t('Infinite') : $queue->size;
-    $data[$queue->name]['subqueues'] = $queue->subqueues;
+    $data[$queue->qid]['name'] = check_plain($queue->title);
+    $data[$queue->qid]['max_nodes'] = $queue->size == 0 ? t('Infinite') : $queue->size;
+    $data[$queue->qid]['subqueues'] = $queue->subqueues;
   }
 
   // Table select element.
@@ -71,35 +71,39 @@ function nodequeue_generate_form() {
  * Make sure that at least one queue was selected.
  */
 function nodequeue_generate_form_validate($form, &$form_state) {
-  $queues = array_keys(array_filter($form_state['values']['nodequeues']));
-  if (count($queues) < 1) {
+  $qids = array_keys(array_filter($form_state['values']['nodequeues']));
+  if (count($qids) < 1) {
     form_set_error('nodequeues', t('You must select a Queue.'));
   }
 }
 
 function nodequeue_generate_form_submit($form, &$form_state) {
-  // Get a list of all nodequeues that need to be re-populated and repopulate
-  // them.
-  $queues = array_keys(array_filter($form_state['values']['nodequeues']));
+  // Get qids of all nodequeues that need to be re-populated and repopulate them.
+  $qids = array_keys(array_filter($form_state['values']['nodequeues']));
   $nodes_limit = $form_state['values']['nodequeue_generate_nodes_limit'];
   nodequeue_generate_rehash();
-  nodequeue_generate_repopulate_queues($queues, $nodes_limit);
+  nodequeue_generate_repopulate_queues($qids, $nodes_limit);
 }
 
 /**
  * Re-populates nodequeues with nodes.
  *
- * @param $queues Array of queues, that need to be repopulated.
+ * @param array $qids
+ *   Array of queues, that need to be repopulated.
+ * @param int $nodes_limit
+ *   The node limit.
  */
-function nodequeue_generate_repopulate_queues($queues, $nodes_limit = 10) {
+function nodequeue_generate_repopulate_queues($qids, $nodes_limit = 10) {
   // Remove existing nodes from queues.
-  db_query("DELETE FROM {nodequeue_nodes} WHERE name IN (:queues)", array(':queues' => $queues));
+  db_query("DELETE FROM {nodequeue_nodes} WHERE qid IN (:qids)", array(':qids' => $qids));
 
   // Load all queues and their subqueues.
-  $queues = nodequeue_load_queues($queues);
+  $queues = nodequeue_load_queues($qids);
+  $subqueues = nodequeue_load_subqueues_by_queue($qids);
 
   // Re-populate subqueues
-  foreach ($queues as $queue) {
+  foreach ($qids as $qid) {
+    $queue = nodequeue_load($qid);
 
     // Skip nodequeues that do not belong to any node types.
     if (!empty($queue->types)) {
@@ -113,7 +117,7 @@ function nodequeue_generate_repopulate_queues($queues, $nodes_limit = 10) {
     }
   }
 
-  drupal_set_message(format_plural(count($queues), '1 queue populated', '@count queues populated.'));
+  drupal_set_message(format_plural(count($qids), '1 queue populated', '@count queues populated.'));
 }
 
 /**
@@ -125,17 +129,20 @@ function nodequeue_generate_repopulate_queues($queues, $nodes_limit = 10) {
  */
 function nodequeue_generate_rehash() {
   // Delete existing smartqueue taxonomy subqueues
-  db_query("DELETE ns FROM {nodequeue_subqueue} ns INNER JOIN {nodequeue_queue} nq ON ns.name = nq.name WHERE nq.owner = 'smartqueue_taxonomy'");
+  $subqueues = db_query("SELECT sqid FROM {nodequeue_subqueue} ns INNER JOIN {nodequeue_queue} nq ON ns.qid = nq.qid WHERE nq.owner = 'smartqueue_taxonomy'")->fetchCol();
+  if (!empty($subqueues)) {
+    db_query("DELETE FROM {nodequeue_subqueue} WHERE sqid IN (:subqueues)", array(':subqueues' => $subqueues));
+  }
 
   // Get all queues, owned by Smartqueue taxonomy.
-  $queues = db_select('nodequeue_queue', 'nq')
-    ->fields('nq', array('name'))
+  $qids = db_select('nodequeue_queue', 'nq')
+    ->fields('nq', array('qid'))
     ->condition('owner', 'smartqueue_taxonomy')
     ->execute()
     ->fetchAll();
 
-  foreach ($queues as $name) {
-    $queue = nodequeue_load($name->name);
+  foreach ($qids as $qid) {
+    $queue = nodequeue_load($qid->qid);
     $fields = explode('-', $queue->reference);
 
     $tids = array();
@@ -171,8 +178,8 @@ function nodequeue_generate_rehash() {
         }
       }
 
-      foreach ($nids as $nid) {
-        $node = node_load($nid['entity_id']);
+      $nodes = node_load_multiple($nids);
+      foreach ($nodes as $node) {
         nodequeue_api_subqueues($queue, $node);
       }
     }
@@ -183,7 +190,7 @@ function nodequeue_generate_rehash() {
  * Implements hook_nodequeue_generate() for owner 'nodequeue'.
  */
 function nodequeue_nodequeue_generate($queue, $limit) {
-  $subqueues = nodequeue_load_subqueues_by_queue($queue->name);
+  $subqueues = nodequeue_load_subqueues_by_queue($queue->qid);
   foreach ($subqueues as $subqueue) {
     $nodes = db_select('node', 'n')
       ->condition('n.status', NODE_PUBLISHED)
@@ -204,7 +211,7 @@ function nodequeue_nodequeue_generate($queue, $limit) {
  * Implements hook_nodequeue_generate() for owner 'smartqueue_taxonomy'.
  */
 function smartqueue_taxonomy_nodequeue_generate($queue, $limit) {
-  $subqueues = nodequeue_load_subqueues_by_queue($queue->name);
+  $subqueues = nodequeue_load_subqueues_by_queue($queue->qid);
   foreach ($subqueues as $subqueue) {
     $nodes = db_select('taxonomy_index', 'tn');
     $nodes->join('node', 'n', 'n.nid=tn.nid');
