@@ -11,14 +11,14 @@
 function webform_features_schema_alter(&$schema) {
   $schema['webform']['fields']['machine_name'] = array(
     'type' => 'varchar',
-    'length' => 32,
+    'length' => WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH,
     'not null' => TRUE,
     'default' => '',
     'description' => 'The machine name of the webform. Used during exports & for template suggestions.',
   );
   $schema['webform_component']['fields']['machine_name'] = array(
     'type' => 'varchar',
-    'length' => 66,
+    'length' => (2 * WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH) + 2,
     'not null' => TRUE,
     'default' => '',
     'description' => "The machine name of the webform's component. Used during exports.",
@@ -43,6 +43,7 @@ function webform_features_install() {
   }
 
   // Populate existing webforms' machine names
+  $maxlength = WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH;
   $query = db_select('node', 'n')
     ->fields('n', array('nid', 'title', 'type'))
     ->condition('type', webform_variable_get('webform_node_types'), 'IN')
@@ -65,13 +66,15 @@ function webform_features_install() {
     $machine_name = $node->title;
     $machine_name = drupal_strtolower($machine_name);
     $machine_name = preg_replace('#[^a-z]+#', '_', $machine_name);
+    $machine_name = substr($machine_name, 0, $maxlength);
 
     // Ensure machine name is unique
-    $name = substr($machine_name, 0, 32);
+    $name = $machine_name;
     $i = 1;
     $exists = webform_features_machine_name_load($name);
     while (!empty($exists) && $exists->nid != $node->nid) {
-      $name = substr($machine_name, 0, 31 - strlen($i)) . '_' . ++$i;
+      $suffix = '_' . ++$i;
+      $name = substr($machine_name, 0, $maxlength - strlen($suffix)) . $suffix;
       $exists = webform_features_machine_name_load($name);
     }
 
@@ -81,6 +84,7 @@ function webform_features_install() {
   }
 
   // Populate existing webform_components' machine names
+  $maxlength = (2 * WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH) + 2;
   $query = db_select('webform_component', 'wc')
     ->fields('wc', array('nid', 'cid', 'form_key', 'machine_name'))
     ->orderBy('nid', 'ASC');
@@ -101,15 +105,16 @@ function webform_features_install() {
     }
 
     // Build machine name from the webform's one and the form_key
-    $wf_machine_name = $result->webform_machine_name;
-    $cmp_machine_name = $result->form_key;
+    $machine_name = $result->webform_machine_name . '-' . $result->form_key;
+    $machine_name = substr($machine_name, 0, $maxlength);
 
     // Ensure machine name is unique
-    $name = $wf_machine_name . '__' . substr($cmp_machine_name, 0, 32);
+    $name = $machine_name;
     $i = 1;
     $exists = !empty($existing[$name]);
     while (!empty($exists) && $exists->nid != $node->nid) {
-      $name = $wf_machine_name . '__' . substr($cmp_machine_name, 0, 31 - strlen($i)) . '_' . ++$i;
+      $suffix = '_' . ++$i;
+      $name = substr($machine_name, 0, $maxlength - strlen($suffix)) . $suffix;
       $exists = !empty($existing[$name]);
     }
 
@@ -117,6 +122,7 @@ function webform_features_install() {
     db_update('webform_component')
       ->fields(array('machine_name' => $name))
       ->condition('cid', $result->cid)
+      ->condition('nid', $result->nid)
       ->execute();
     $existing[$name] = TRUE;
   }

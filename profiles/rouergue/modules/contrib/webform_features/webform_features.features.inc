@@ -35,9 +35,10 @@ function webform_features_export_options() {
 /**
  * Implements hook_features_export().
  */
-function webform_features_export($data, &$export, $module) {
+function webform_features_export($data, &$export, $module_name) {
   $pipe = array();
   $export['dependencies']['webform'] = 'webform';
+  $export['dependencies']['webform_features'] = 'webform_features';
 
   foreach ($data as $machine_name) {
     $node = webform_features_machine_name_load($machine_name);
@@ -46,16 +47,8 @@ function webform_features_export($data, &$export, $module) {
     }
 
     $pipe['node'][$node->type] = $node->type;
-    $export['features']['webform'][$machine_name] = $machine_name;
 
-    // drupal_alter() normally supports just one byref parameter. Using
-    // the __drupal_alter_by_ref key, we can store any additional parameters
-    // that need to be altered, and they'll be split out into additional params
-    // for the hook_*_alter() implementations.  The hook_alter signature is
-    // hook_webform_features_export_alter(&$export, &$pipe, $node)
-    $data = &$export;
-    $data['__drupal_alter_by_ref'] = array(&$pipe);
-    drupal_alter('webform_features_export', $data, $node);
+    $export['features']['webform'][$machine_name] = $machine_name;
   }
 
   return $pipe;
@@ -64,7 +57,7 @@ function webform_features_export($data, &$export, $module) {
 /**
  * Implements hook_features_export_render().
  */
-function webform_features_export_render($module, $data, $export = NULL) {
+function webform_features_export_render($module_name, $data, $export = NULL) {
   $code = array();
   $code[] = '$webforms = array();';
 
@@ -88,13 +81,8 @@ function webform_features_export_render($module, $data, $export = NULL) {
     unset($export->revision_timestamp);
     unset($export->last_comment_timestamp);
     unset($export->webform['nid']);
-
-    // Replace author by its username.
-    $author = user_load($export->uid);
-    $export->webform_features_author = $author->name;
-    $author = user_load($export->revision_uid);
-    $export->webform_features_revision_author = $author->name;
-    unset($export->uid, $export->revision_uid);
+    unset($export->webform['next_serial']);
+    unset($export->path['source']);
 
     // Manage components.
     $components_machine_names = array();
@@ -112,6 +100,37 @@ function webform_features_export_render($module, $data, $export = NULL) {
       $components_array[$component['machine_name']] = $component;
     }
     $export->webform['components'] = $components_array;
+
+    // Manage conditionals.
+    $conditionals_array = array();
+    foreach ($export->webform['conditionals'] as $key => $conditional) {
+      // Remove IDs.
+      unset($conditional['nid']);
+
+      // Convert rule source component IDs to machine names.
+      foreach ($conditional['rules'] as &$rule) {
+        if ($rule['source_type'] == 'component') {
+          if (array_key_exists($rule['source'], $components_machine_names)) {
+            $rule['source'] = $components_machine_names[$rule['source']];
+            $rule['source_component_machine_name'] = TRUE;
+          }
+        }
+        unset($rule['nid']);
+      }
+      // Convert action target component IDs to machine names.
+      foreach ($conditional['actions'] as &$action) {
+        if ($action['target_type'] == 'component') {
+          if (array_key_exists($action['target'], $components_machine_names)) {
+            $action['target'] = $components_machine_names[$action['target']];
+            $action['target_component_machine_name'] = TRUE;
+          }
+        }
+        unset($action['nid']);
+      }
+
+      $conditionals_array[] = $conditional;
+    }
+    $export->webform['conditionals'] = $conditionals_array;
 
     // Manage emails.
     $emails_array = array();
@@ -144,10 +163,6 @@ function webform_features_export_render($module, $data, $export = NULL) {
         $field = array();
       }
     }
-
-    // The hook_alter signature is:
-    // hook_webform_features_export_render_alter(&$export, $node, $module);
-    drupal_alter('webform_features_export_render', $export, $node, $module);
 
     $code[] = "  \$webforms['{$machine_name}'] = " . features_var_export($export) . ";";
   }
@@ -185,16 +200,6 @@ function webform_features_rebuild($module) {
       $node->webform['components'] = array();
       node_object_prepare($node);
 
-      // Get the author back if possible.
-      $node->uid = 0;
-      if (!empty($node->webform_features_author) && ($author = user_load_by_name($node->webform_features_author))) {
-        $node->uid = $author->uid;
-      }
-      $node->revision_uid = 0;
-      if (!empty($node->webform_features_revision_author) && ($author = user_load_by_name($node->webform_features_revision_author))) {
-        $node->revision_uid = $author->uid;
-      }
-
       // Find the matching machine name, with a fresh cache.
       $existing = webform_features_machine_name_load($webform_machine_name);
       if (empty($existing)) {
@@ -207,6 +212,9 @@ function webform_features_rebuild($module) {
       $node->nid = $existing->nid;
       $node->vid = $existing->vid;
       $node->webform['nid'] = $existing->nid;
+      if (!empty($node->path)) {
+        $node->path['source'] = 'node/' . $existing->nid;
+      }
 
       // Manage components.
       $existing_components_machine_names = array();
@@ -214,6 +222,43 @@ function webform_features_rebuild($module) {
         $existing_components_machine_names[$component['machine_name']] = $component['cid'];
       }
       _webform_features_rebuild_components($node, $data['webform']['components'], $existing_components_machine_names);
+
+      // Manage conditionals, conditionals_rules and conditionals_actions.
+      db_delete('webform_conditional')
+        ->condition('nid', $node->nid)
+        ->execute();
+      db_delete('webform_conditional_rules')
+        ->condition('nid', $node->nid)
+        ->execute();
+      db_delete('webform_conditional_actions')
+        ->condition('nid', $node->nid)
+        ->execute();
+
+      if (!empty($data['webform']['conditionals'])) {
+        foreach ($data['webform']['conditionals'] as $index => $conditional) {
+          // Replace IDs.
+          $conditional['nid'] = $node->nid;
+
+          // Convert rule source component machine names to IDs.
+          foreach ($conditional['rules'] as &$rule) {
+            if (!empty($rule['source_component_machine_name'])) {
+              $rule['source'] = $existing_components_machine_names[$rule['source']];
+              unset($rule['source_component_machine_name']);
+            }
+            $rule['nid'] = $node->nid;
+          }
+          // Convert action target component machine names to IDs.
+          foreach ($conditional['actions'] as &$action) {
+            if (!empty($action['target_component_machine_name'])) {
+              $action['target'] = $existing_components_machine_names[$action['target']];
+              unset($action['target_component_machine_name']);
+            }
+            $action['nid'] = $node->nid;
+          }
+
+          $node->webform['conditionals'][$index] = $conditional;
+        }
+      }
 
       // Manage emails.
       db_delete('webform_emails')
@@ -231,10 +276,6 @@ function webform_features_rebuild($module) {
         }
       }
 
-      // The hook_alter signature is:
-      // hook_webform_features_rebuild_alter(&node, $module);
-      drupal_alter('webform_features_rebuild', $node, $module);
-
       // Final save.
       node_save($node);
     }
@@ -244,7 +285,7 @@ function webform_features_rebuild($module) {
 /**
  * Recursively build components.
  */
-function _webform_features_rebuild_components($node, $components, $existing_components_machine_names) {
+function _webform_features_rebuild_components($node, &$components, &$existing_components_machine_names) {
   if (!empty($components)) {
     // First pass, manage parents and new components.
     foreach ($components as $component) {

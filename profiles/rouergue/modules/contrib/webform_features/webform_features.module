@@ -6,6 +6,17 @@
  */
 
 /**
+ * Webform machine names are limited to this length.
+ *
+ * Component machine names also use this limit in the UI, but may be up to
+ * ((2 * this length) + 2) chars internally, as they contain their webform's
+ * machine name as a prefix, with a 2 character '__' separator in between.
+ *
+ * These are stored as varchar(255), and so this value is limited to 126.
+ */
+define('WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH', 126);
+
+/**
  * Implements hook_form_alter().
  */
 function webform_features_form_alter(&$form, &$form_state, $form_id) {
@@ -15,7 +26,7 @@ function webform_features_form_alter(&$form, &$form_state, $form_id) {
     $form['machine_name'] = array(
       '#type' => 'machine_name',
       '#default_value' => !empty($node->webform['machine_name']) ? $node->webform['machine_name'] : '',
-      '#maxlength' => 32,
+      '#maxlength' => WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH,
       '#required' => TRUE,
       '#disabled' => empty($node->is_new) && !empty($node->nid),
       '#machine_name' => array(
@@ -35,7 +46,7 @@ function webform_features_form_alter(&$form, &$form_state, $form_id) {
     $form['machine_name'] = array(
       '#type' => 'machine_name',
       '#default_value' => !empty($component) ? substr($component['machine_name'], strrpos($component['machine_name'], '__') + 2) : $form['form_key']['#default_value'],
-      '#maxlength' => 32,
+      '#maxlength' => WEBFORM_FEATURES_MACHINE_NAME_MAXLENGTH,
       '#required' => TRUE,
       '#disabled' => !empty($form['cid']['#value']),
       '#element_validate' => array('webform_features_component_machine_name_validate'),
@@ -147,6 +158,7 @@ function webform_features_webform_component_insert($component) {
   db_update('webform_component')
     ->fields(array('machine_name' => $component['machine_name']))
     ->condition('cid', $component['cid'])
+    ->condition('nid', $component['nid'])
     ->execute();
 }
 
