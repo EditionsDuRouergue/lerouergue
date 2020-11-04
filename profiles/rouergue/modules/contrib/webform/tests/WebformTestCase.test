@@ -185,10 +185,9 @@ class WebformTestCase extends DrupalWebTestCase {
           'value' => '',
           'extra' => array(
             // Left side.
-            'questions' => "one|What's your option?\ntwo|Agåin?|Again, right text\nthree|One more time!",
+            'questions' => "one|What's your option?\ntwo|Agåin?\nthree|One more time!",
             // Top.
             'options' => "one|Option one\ntwo|Option 2\nthree| Three is me",
-            'title_display' => 'internal',
           ),
           'required' => '0',
           'pid' => '0',
@@ -851,7 +850,7 @@ class WebformTestCase extends DrupalWebTestCase {
         ),
         'error values' => array(
           '1.5' => t('!name field value of @value must be an integer.', array('!name' => 'Integer', '@value' => '1.5')),
-          '101' => t('!name field value must be less than or equal to @max.', array('!name' => 'Integer', '@max' => '100')),
+          '101' => t('!name field value must be less than @max.', array('!name' => 'Integer', '@max' => '100')),
         ),
       ),
       'integer_range' => array(
@@ -915,7 +914,7 @@ class WebformTestCase extends DrupalWebTestCase {
           'empty' => TRUE,
         ),
         'error values' => array(
-          '-1' => t('!name field value must be greater than or equal to @min.', array('!name' => 'Decimal positive', '@min' => '0')),
+          '-1' => t('!name field value must be greater than @min.', array('!name' => 'Decimal positive', '@min' => '0')),
         ),
       ),
       'decimal_range' => array(
@@ -988,11 +987,8 @@ class WebformTestCase extends DrupalWebTestCase {
 
   /**
    * Create a sample Webform node.
-   *
-   * @param array $webform_settings
-   *   Settings to use for this form. Any unspecified settings will be default.
    */
-  public function webformForm(array $webform_settings = array()) {
+  public function webformForm() {
     if (isset($this->_webform_node)) {
       return $this->_webform_node;
     }
@@ -1010,7 +1006,7 @@ class WebformTestCase extends DrupalWebTestCase {
       'title' => 'Test Webform',
       'log' => '',
       'format' => '1',
-      'webform' => $webform_settings + array(
+      'webform' => array(
         'confirmation' => 'Thanks!',
       ) + webform_node_defaults(),
     );
