@@ -73,8 +73,6 @@
  * @ingroup themeable
  */
 ?>
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/152c217b1aa34fae97a0ee74a/26f70f1dc6912a0cefdc05ffe.js");</script>
-   
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
   <div class="container">
     <div class="navbar-header">
