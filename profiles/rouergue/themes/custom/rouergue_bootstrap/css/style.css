@@ -41,5 +41,10 @@
 	display: block;
 	margin-right: 10.1em;
 	margin-top: -30px;
-};@media (min-width:991px){.news_mailchimp{margin-right: 0em}}
+}
 
+@media (max-width: 1250px) {
+  .news_mailchimp {
+    margin-right: 0em;
+  }
+}
