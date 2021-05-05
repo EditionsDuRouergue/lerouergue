@@ -17,7 +17,7 @@
  *   FROM `article` a
  *   JOIN priceandtirage pt ON pt.articleid=a.articleid and pt.isvalidated='1'
  *   JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
- *   JOIN fabricationplan fp ON fp.articleid=a.articleid 
+ *   JOIN fabricationplan fp ON fp.articleid=a.articleid
  *	--JOIN book b on b.bookid=a.bookid
 *	--where b.groupid = 45
  *   -- JOIN format f ON f.formatid=fp.finalformatid
@@ -77,7 +77,7 @@ class ThemeMigration extends Migration {
  *
  * The mysql query to run is :
  *
- * SELECT readershipid, name 
+ * SELECT readershipid, name
  * FROM readership
  */
 class ReadershipMigration extends Migration {
@@ -125,7 +125,9 @@ class ReadershipMigration extends Migration {
  * rp.price,
  * fp.finalnbpage as nbpage,
  * pt.isvalidated as price_validated,
- * GROUP_CONCAT(bt.themeid) as theme_list, GROUP_CONCAT(DISTINCT br.readershipid) as readership_list
+ * a2.gencod as gencod_epub,
+ * GROUP_CONCAT(bt.themeid) as theme_list,
+ * GROUP_CONCAT(DISTINCT br.readershipid) as readership_list
  * FROM `article` a
  * JOIN book b ON b.bookid=a.bookid
  * JOIN fabricationplan fp ON fp.articleid=a.articleid
@@ -133,27 +135,31 @@ class ReadershipMigration extends Migration {
  * JOIN realprice rp ON rp.articleid=a.articleid and rp.iscurrentprice='1'
  * LEFT JOIN booktheme bt ON bt.bookid=a.bookid
  * LEFT JOIN bookreadership br ON br.bookid=b.bookid
+ * LEFT JOIN scanarticlelink s ON s.bookid=b.bookid
+ * LEFT JOIN article a1 ON b.bookid=a1.bookid
+ * LEFT JOIN book b2 ON s.bookidepub=b2.bookid
+ * LEFT JOIN allarticle a2 ON b2.bookid=a2.bookid
  * WHERE a.statusid <> 1
- * AND b.projecttype <> 'PLV'
- * GROUP BY a.articleid
- * ORDER BY a.articleid ASC
+ * AND b.projecttype not in ('NUM','PLV')
+ * AND b.firstpublicationdate < ADDDATE(CURDATE(), INTERVAL 2 MONTH)
+ *
  */
 class ArticleMigration extends Migration {
   // Universes <-> Collections/Subcollections/Series mapping data
   protected $univ_coll_mapping = array();
 
   protected $univ_uuids_tids = array();
-	
+
   public function __construct(array $arguments) {
   	//$this->systemOfRecord = Migration::DESTINATION;
 
     $this->arguments = $arguments;
     parent::__construct($arguments);
-    
+
     $this->store = '';
     $this->cover_images_dir = '';
     $this->default_cover_image = '';
-		
+
 	  // DESCRIPTION.
 	  $this->description = t('Migrate articles from mistral source database to Drupal Article nodes');
 
@@ -161,9 +167,9 @@ class ArticleMigration extends Migration {
 	  // SOURCE
 	  $query = Database::getConnection('default', 'mistral')->select('article','a');
 	  $query->join('book', 'b', 'b.bookid = a.bookid');
-	  $query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
-	  $query->join('priceandtirage','pt','pt.articleid=a.articleid');
-	  $query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
+	 // $query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
+	 // $query->join('priceandtirage','pt','pt.articleid=a.articleid');
+	 //  $query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
 	  $query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 	  $query->leftJoin('bookreadership','br','br.bookid=b.bookid');
 	   //epub link
@@ -171,27 +177,27 @@ class ArticleMigration extends Migration {
 	  $query->leftJoin('article','a1','b.bookid=a1.bookid');
 	  $query->leftJoin('book','b2','s.bookidepub=b2.bookid');
 	  $query->leftJoin('allarticle','a2','b2.bookid=a2.bookid');
-	  
+
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
-		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'))
-		->fields('rp', array('price'));
+		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate','b.expectedprice'));
+		// ->fields('rp', array('price'));
 	  $query->addField('b','nbpage','nbpage');
-	  $query->addField('pt','isvalidated','price_validated');
+	 // $query->addField('pt','isvalidated','price_validated');
 	  $query->addField('a2','gencod','gencod_epub');
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->where('b.firstpublicationdate < ADDDATE(CURDATE(), INTERVAL 2 MONTH)');
 	  $query->condition('a.statusid','1','<>');
 	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
-	   
+
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
-		
+
 		$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
-		
+
 		// DESTINATION
 		$this->destination = new MigrateDestinationNode('article');
-		
+
 		// MAP
 		$this->map = new MigrateSQLMap(
 		  $this->machineName,
@@ -206,22 +212,22 @@ class ArticleMigration extends Migration {
 		  ),
 		  MigrateDestinationNode::getKeySchema()
 		);
-		
+
 		// FIELDS MAPPING
 		$this->addFieldMapping('field_mistral_articleid', 'articleid');
 		$this->addFieldMapping('field_mistral_bookid', 'bookid');
 		$this->addFieldMapping('field_mistral_group_id', 'groupid');
-		$this->addFieldMapping('field_mistral_status', 'statusid');		
+		$this->addFieldMapping('field_mistral_status', 'statusid');
 		$this->addFieldMapping('title', 'title');
 		$this->addFieldMapping('field_subtitle', 'subtitle');
 		$this->addFieldMapping('field_number_pages', 'nbpage');
 		$this->addFieldMapping('field_width', 'width');
 		$this->addFieldMapping('field_height', 'height');
-		$this->addFieldMapping('field_price', 'price');
+		$this->addFieldMapping('field_price', 'expectedprice');
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');
-		
+
 		$this->addFieldMapping('field_gencod_epub', 'gencod_epub');
 		$this->addFieldMapping('field_release_date', 'firstpublicationdate');
 		$this->addFieldMapping('body', 'backcover');
@@ -231,21 +237,21 @@ class ArticleMigration extends Migration {
 			->sourceMigration('Theme')
 			->separator(',');
 		$this->addFieldMapping('field_themes:source_type')->defaultValue('tid');
-		
+
 		$this->addFieldMapping('field_readership', 'readership_list')
 			->sourceMigration('Readership')
 			->separator(',');
 		$this->addFieldMapping('field_readership:source_type')->defaultValue('tid');
-		
+
 		$this->addFieldMapping('field_universe', 'collection')
 			->separator(',');
 		$this->addFieldMapping('field_universe:source_type')->defaultValue('tid');
-		
+
 		// UNIVERSE TERMS IDs FETCHING
 		if (empty($this->univ_uuids_tids)) {
 			$this->rouergue_fetch_universe_terms_ids();
 		}
-		
+
 		// COLLECTIONS---UNIVERSES MAPPING
 		if (empty($this->univ_coll_mapping)) {
 			$this->rouergue_set_mapping();
@@ -270,7 +276,7 @@ class ArticleMigration extends Migration {
 		$this->univ_uuids_tids[$term->uuid] = $term->tid;
 	  }
 	}
-	
+
 	/**
 	 * Stores mapping between Mistral Collection/Subcollection/Series and Drupal Universes terms
 	 * in array $this->univ_coll_mapping.
@@ -521,14 +527,14 @@ class ArticleMigration extends Migration {
 	//************************************************** Rouergue Essai Jeunesse ************************************************************************
 	// Rouergue Essai Jeunesse - 606   ===>   Graphisme & Illustrations > Essais - 53c9815b-ac19-4b74-8abb-a727270582bd
 	$this->univ_coll_mapping['606']['tids'] = $this->univ_uuids_tids['53c9815b-ac19-4b74-8abb-a727270582bd'];
-	
-	
-	
+
+
+
 	// Rouergue Essai Jeunesse - 606  | Livre Pratique jeunesse - 1233 | Nature - 254   ===>   Nature & Jardin  > nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	// ------------------------------------------------------------  ===>   Livre pratique jeunesse  - 939f4432-48b4-47f5-919a-df52af4175ea
 	$this->univ_coll_mapping['606']['1233']['254']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320']. ',' . $this->univ_uuids_tids['939f4432-48b4-47f5-919a-df52af4175ea'];
-	
-	
+
+
 
 	//************************************************** Rouergue Littérature ***************************************************************************
 	// Rouergue Littérature - 493 | Aveyron - 1139   ===>   Régions > Aveyron - 5c231e18-ad97-4038-b7e1-a1da158dc904
@@ -567,18 +573,18 @@ class ArticleMigration extends Migration {
 
 	// Rouergue Littérature - 493 | Polars - 510 | Assassins sans visage - 136   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
 	$this->univ_coll_mapping['493']['510']['136']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1'];
-	
+
 	// Rouergue Littérature - 493 | Rouergue en Poche - 943 | Assassins sans visage - 252   ===>   Littérature > Polars > assassins sans visage- 6332356c-9e6d-4c86-b14f-c39fbd7352e1
 	// ---------------------------------------------------------------------   ===> Littérature > Romans > Rouergue en poche -  8f6cfb5a-e21d-4afe-9b75-389addf70654
 	$this->univ_coll_mapping['493']['943']['252']['tids'] = $this->univ_uuids_tids['6332356c-9e6d-4c86-b14f-c39fbd7352e1']. ',' . $this->univ_uuids_tids['8f6cfb5a-e21d-4afe-9b75-389addf70654'];
-	
+
 
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Littérature > Polars > rouergue noir - 0007e2ce-750f-4ef6-a648-3b465add8036
 	$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['408ebdfc-04e3-405b-a8fa-9fb62687f3ae']. ',' . $this->univ_uuids_tids['0007e2ce-750f-4ef6-a648-3b465add8036'];
-	
+
 	// Rouergue Littérature - 493 | Polars - 510 | Rouergue noir - 137   ===>   Rouergue noir - 408ebdfc-04e3-405b-a8fa-9fb62687f3ae
 	//$this->univ_coll_mapping['493']['510']['137']['tids'] = $this->univ_uuids_tids['408ebdfc-04e3-405b-a8fa-9fb62687f3ae'];
-	
+
 	// Rouergue Littérature - 493 | Roman de société - 511   ===>   Littérature > Romans - c27add62-baf4-45de-b445-27d7fef13a4f
 
 	//$this->univ_coll_mapping['493']['511']['tids'] = $this->univ_uuids_tids['c27add62-baf4-45de-b445-27d7fef13a4f'];
@@ -595,15 +601,15 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['493']['511']['244']['tids'] =
 	  $this->univ_uuids_tids['58df9ecd-f479-4da4-ae71-da888aaaecd4'];
 	  // ',' . $this->univ_uuids_tids['5d89969d-47af-4c0d-a22b-589fb6ea57a2'];
-	  
-	  
+
+
 
 	// Rouergue Littérature - 493 | Rouergue en Poche - 943   ===>   Littérature > Romans > Rouergue en poche -  8f6cfb5a-e21d-4afe-9b75-389addf70654
 	//  ----------------------------------------------------  ===>   Région > Romans > Rouergue en poche - 322aa47f-7585-4688-b4ee-08e83eca5d28
 	$this->univ_coll_mapping['493']['943']['tids'] =
 	  $this->univ_uuids_tids['8f6cfb5a-e21d-4afe-9b75-389addf70654'];
 //	  . ',' . $this->univ_uuids_tids['322aa47f-7585-4688-b4ee-08e83eca5d28'];
-	  
+
 	  //$this->univ_coll_mapping['493']['943']['136']['tids'] = $this->univ_uuids_tids['322aa47f-7585-4688-b4ee-08e83eca5d28'];
 
 	// Rouergue Littérature - 493 | Témoignage - 1141 | Aveyron - 139   ===>   Littérature > Romans > Témoignages - f4654d87-9e93-4505-b1b2-01d4b537edfe
@@ -707,7 +713,7 @@ class ArticleMigration extends Migration {
 	  $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'] . ',' . $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
 
 	//************************************************** ROUERGUE NUMÉRIQUE JEUNESSE *********************************************************************
-	/* 
+	/*
 	// ROUERGUE NUMÉRIQUE JEUNESSE - 463 | dacodac - 995   ===>   Livres numériques > dacodac - 0af3c4aa-630d-48a0-98ca-51752eba0778
 	$this->univ_coll_mapping['463']['995']['tids'] = $this->univ_uuids_tids['0af3c4aa-630d-48a0-98ca-51752eba0778'];
 
@@ -729,7 +735,7 @@ class ArticleMigration extends Migration {
 	// ROUERGUE NUMÉRIQUE TEXTE  - 462 | Romans - 1012  ===>   Livres numériques > roman - 13c26811-5ade-4018-b8bb-5642b42fc1da
 	$this->univ_coll_mapping['462']['1012']['tids'] = $this->univ_uuids_tids['13c26811-5ade-4018-b8bb-5642b42fc1da'];
 	 */
-	
+
 
 	//************************************************** Rouergue Romans Jeunesse **********************************************************************
 	// Rouergue Romans Jeunesse - 497 | boomerang - 526   ===>   Romans jeunesse > Romans dès 7 ans > boomerang - e6aea4fd-4293-40c5-beab-f90ddae63def
@@ -751,8 +757,8 @@ class ArticleMigration extends Migration {
 
 	// Rouergue Romans Jeunesse - 497 | Poche Rouergue Jeunesse - 1242   ===>   Romans jeunesse > poches jeunesse - fe87c4bf-5dfd-4f1b-8602-3801a8a4d57d
 	$this->univ_coll_mapping['497']['1242']['tids'] = $this->univ_uuids_tids['fe87c4bf-5dfd-4f1b-8602-3801a8a4d57d'];
-	
-	
+
+
 	//  Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans 6-11 > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	// OLD Rouergue Romans Jeunesse - 497 | tic tac - 532   ===>   Romans jeunesse > Romans dès 6 ans > tic tac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	$this->univ_coll_mapping['497']['532']['tids'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
@@ -761,24 +767,24 @@ class ArticleMigration extends Migration {
 	// UPDATE Rouergue Romans Jeunesse - 497 | zig zag - 530   ===>   Romans jeunesse > Romans 6-11 ans > dacodac - b4bb6966-c17a-401e-a705-907a9e42b69b
 	$this->univ_coll_mapping['497']['530']['tids'] = $this->univ_uuids_tids['b4bb6966-c17a-401e-a705-907a9e42b69b'];
 
-	
+
 	// Rouergue Beaux Livres  - 495 | Nature - 1133 | Botanique - 177   ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	// ================================================================ ===>   Nature & Jardin > Botanique - 48169487-b368-480b-83a4-46ddb4205188
 	$this->univ_coll_mapping['495']['1133']['177']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'] . ',' . $this->univ_uuids_tids['48169487-b368-480b-83a4-46ddb4205188'];
-	
-	
+
+
 	// Rouergue Livres Pratiques - 494 | Santé - 1147 | Nature - 255  ===> Gastronomie > Santé - 85b490bb-bfae-46e2-9a1f-130057789068
 	//---------------------------------------------------------------  ===>  Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	$this->univ_coll_mapping['494']['1147']['255']['tids'] =
 	  $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'] . ',' . $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
-	  
-	
+
+
 	// Rouergue Beaux Livres  - 495 | Nature - 1133    ===>   Nature & Jardin > Nature - ae01c103-055b-41e3-a1e1-3e5c6a9aa320
 	$this->univ_coll_mapping['495']['1133']['tids'] = $this->univ_uuids_tids['ae01c103-055b-41e3-a1e1-3e5c6a9aa320'];
-	  
-	
-	
-	
+
+
+
+
 /*
 $this->univ_coll_mapping[''] = $this->univ_uuids_tids[''];
 $this->univ_coll_mapping[''][''] = $this->univ_uuids_tids[''];
@@ -786,7 +792,7 @@ $this->univ_coll_mapping[''][''][''] = $this->univ_uuids_tids[''];
 double classement non encore développé
 */
   }
-	
+
   /**
    * HELPER FUNCTIONS
    */
@@ -851,7 +857,7 @@ double classement non encore développé
 // 		}
 // 		$array[$term]['tid'] = $tid;
 // 	}
-	
+
   /**
    * Returns universe term id that matches the Mistral's collection, subcollection, series values of row being imported.
    *
@@ -927,7 +933,7 @@ double classement non encore développé
 	  $node->field_contributors = $fc_contributors;
 	}
   }
-  
+
     public function postImport() {
     parent::postImport();
     foreach ($this->map->getRowsNeedingUpdate(10000) as $row) {
@@ -935,6 +941,5 @@ double classement non encore développé
       $this->map->deleteDestination(array($row->destid1));
     }
   }
-  
-}
 
+}
