@@ -35,8 +35,8 @@ class ArticleContributorsMigration extends Migration {
 	// SOURCE
 	$subquery = Database::getConnection('default', 'mistral')->select('article','a');
 	$subquery->join('book','b','b.bookid=a.bookid');
-	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
-	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid');
+//	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+//	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid');
 	/*$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');*/
 	$subquery->fields('a', array('bookid'));
 	$subquery->condition('a.statusid','1','<>');
@@ -97,7 +97,7 @@ class ArticleContributorsMigration extends Migration {
 	$this->addFieldMapping('field_contributor_function', 'functionid')->sourceMigration('Function');
 	$this->addFieldMapping('field_contributor_function:source_type')->defaultValue('tid');
   }
-  
+
     public function postImport() {
     parent::postImport();
     foreach ($this->map->getRowsNeedingUpdate(10000) as $row) {
