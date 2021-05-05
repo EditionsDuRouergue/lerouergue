@@ -179,7 +179,7 @@ class ArticleMigration extends Migration {
 	  $query->leftJoin('allarticle','a2','b2.bookid=a2.bookid');
 
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
-		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate','b.expectedprice'));
+		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate','expectedprice'));
 		// ->fields('rp', array('price'));
 	  $query->addField('b','nbpage','nbpage');
 	 // $query->addField('pt','isvalidated','price_validated');
