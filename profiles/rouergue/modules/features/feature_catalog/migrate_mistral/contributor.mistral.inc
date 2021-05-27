@@ -17,7 +17,7 @@ class FunctionMigration extends Migration {
 
 	// SOURCE
 	$query = Database::getConnection('default', 'mistral')->select('function_contrib');
-	$query->fields('function', array('functionid','printname','name'));
+	$query->fields('function_contrib', array('functionid','printname','name'));
 
 	$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
 

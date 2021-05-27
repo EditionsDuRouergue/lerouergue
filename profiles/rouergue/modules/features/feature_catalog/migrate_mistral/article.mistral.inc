@@ -190,7 +190,11 @@ class ArticleMigration extends Migration {
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->where('b.firstpublicationdate < ADDDATE(CURDATE(), INTERVAL 2 MONTH)');
 	  $query->condition('a.statusid','1','<>');
-	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
+	  $query->condition('b.projecttype',array('NUM','PLV', 'ASSORT', 'REVUE', 'CDNUM'),'NOT IN');
+    $query->condition('b.projectsubtypeid','4','<>');
+    $query->condition('b.projectsubtypeid','7','<>');
+    $query->condition('b.projectsubtypeid','18','<>');
+    $query->condition('b.projectsubtypeid','19','<>');
     $query->condition('b.houseid', '36', '=');
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
