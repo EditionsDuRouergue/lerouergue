@@ -41,7 +41,7 @@ class ArticleContributorsMigration extends Migration {
 	$subquery->fields('a', array('bookid'));
 	$subquery->condition('a.statusid','1','<>');
 	$subquery->condition('b.projecttype','PLV','<>');
-  $query->condition('b.houseid', '36', '=');
+  $subquery->condition('b.houseid', '36', '=');
 	$subquery->groupBy('a.articleid');
 
 	$query = Database::getConnection('default', 'mistral')->select('bookcontributor','bc');
