@@ -36,6 +36,7 @@ class ThemeMigration extends Migration {
 	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
 	$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
 	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+  $subquery->join('book', 'b', 'b.bookid = a.bookid');
   $subquery->condition('b.houseid', '36', '=');
 	//$subquery->join('book','b','b.bookid=a.bookid');
 	//$subquery->condition('b.groupid','45','<>');
