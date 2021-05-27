@@ -36,6 +36,7 @@ class ThemeMigration extends Migration {
 	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid AND pt.isvalidated=1');
 	$subquery->join('realprice','r','r.articleid=a.articleid AND r.iscurrentprice=1');
 	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+  $query->condition('b.houseid', '36', '=');
 	//$subquery->join('book','b','b.bookid=a.bookid');
 	//$subquery->condition('b.groupid','45','<>');
 	//$subquery->join('format','f','f.formatid=fp.finalformatid');
@@ -167,9 +168,9 @@ class ArticleMigration extends Migration {
 	  // SOURCE
 	  $query = Database::getConnection('default', 'mistral')->select('article','a');
 	  $query->join('book', 'b', 'b.bookid = a.bookid');
-	 // $query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
-	 // $query->join('priceandtirage','pt','pt.articleid=a.articleid');
-	 //  $query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
+	   $query->join('fabricationplan', 'fp', 'fp.articleid = a.articleid');
+	    $query->join('priceandtirage','pt','pt.articleid=a.articleid');
+	   $query->join('realprice','rp','rp.articleid=a.articleid AND rp.iscurrentprice=1');
 	  $query->leftJoin('booktheme','bt','bt.bookid=b.bookid');
 	  $query->leftJoin('bookreadership','br','br.bookid=b.bookid');
 	   //epub link
@@ -179,17 +180,17 @@ class ArticleMigration extends Migration {
 	  $query->leftJoin('allarticle','a2','b2.bookid=a2.bookid');
 
 	  $query->fields('a', array('articleid','bookid','isbn13','gencod','statusid'))
-		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate','expectedprice'));
-		// ->fields('rp', array('price'));
+		->fields('b', array('groupid','title','subtitle','collectionid','subcollectionid','seriesid','resume','backcover','height','width','firstpublicationdate'));
+		 ->fields('rp', array('price'));
 	  $query->addField('b','nbpage','nbpage');
-	 // $query->addField('pt','isvalidated','price_validated');
+	  $query->addField('pt','isvalidated','price_validated');
 	  $query->addField('a2','gencod','gencod_epub');
 	  $query->addExpression('GROUP_CONCAT(bt.themeid)', 'theme_list');
 	  $query->addExpression('GROUP_CONCAT(DISTINCT br.readershipid)', 'readership_list');
 	  $query->where('b.firstpublicationdate < ADDDATE(CURDATE(), INTERVAL 2 MONTH)');
 	  $query->condition('a.statusid','1','<>');
 	  $query->condition('b.projecttype',array('NUM','PLV'),'NOT IN');
-
+    $query->condition('b.houseid', '36', '=');
 	  $query->groupBy('a.articleid');
 	  $query->orderBy('a.articleid', 'ASC');
 
@@ -223,7 +224,7 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_number_pages', 'nbpage');
 		$this->addFieldMapping('field_width', 'width');
 		$this->addFieldMapping('field_height', 'height');
-		$this->addFieldMapping('field_price', 'expectedprice');
+		$this->addFieldMapping('field_price', 'price');
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');

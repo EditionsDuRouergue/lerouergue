@@ -16,7 +16,7 @@ class FunctionMigration extends Migration {
 	$this->description = t('Migrate functions from mistral source database to Drupal Functions vocabulary');
 
 	// SOURCE
-	$query = Database::getConnection('default', 'mistral')->select('function');
+	$query = Database::getConnection('default', 'mistral')->select('function_contrib');
 	$query->fields('function', array('functionid','printname','name'));
 
 	$this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
@@ -78,12 +78,13 @@ class ContributorMigration extends Migration {
 	// SOURCE
 	$subquery = Database::getConnection('default', 'mistral')->select('article','a');
 	$subquery->join('book','b','b.bookid=a.bookid');
-	//$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
-//	$subquery->join('priceandtirage','pt','pt.articleid=a.articleid');
+	$subquery->join('fabricationplan','fp','fp.articleid=a.articleid');
+  $subquery->join('priceandtirage','pt','pt.articleid=a.articleid');
 	$subquery->join('realprice','r','r.articleid=a.articleid');
 	$subquery->fields('a', array('bookid'));
 	$subquery->condition('a.statusid','1','<>');
 	$subquery->condition('b.projecttype','PLV','<>');
+    $query->condition('b.houseid', '36', '=');
 	$subquery->groupBy('a.articleid');
 
 	$query = Database::getConnection('default', 'mistral')->select('contributor','c');
