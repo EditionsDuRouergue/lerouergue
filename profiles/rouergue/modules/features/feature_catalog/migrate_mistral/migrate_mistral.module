@@ -35,7 +35,7 @@ function migrate_mistral_menu() {
 	'page callback' => 'rouergue_mistral_import',
 	'access arguments' => array('administer mistral'),
 	'type' => MENU_CALLBACK,
-	);	
+	);
   $items['mistral_synchronize'] = array(
 	'title' => 'Mistral Synchronization',
 	'description' => 'Launches Mistral local database regeneration import from Mistral dump archive, followed by data import.',
@@ -59,12 +59,19 @@ function migrate_mistral_cron() {
  */
 
 function rouergue_mistral_db_update() {
-  $msg = _mistral_db_update();
-  return $msg;
+  /**
+   * Désactivation function car ajouté dans cron tab
+   */
+//$msg = _mistral_db_update();
+//  return $msg;
+
 }
 
 function rouergue_mistral_import() {
-  return _mistral_import();
+  /**
+   * Désactivation function car ajouté dans cron tab
+   */
+  // return _mistral_import();
 }
 
 function rouergue_mistral_synchronize() {
@@ -75,12 +82,15 @@ function rouergue_mistral_synchronize() {
 	return "Nothing to do today.";
   }
   else {
-	$update_msg = _mistral_db_update();
-	$import_msq = _mistral_import();
+    /**
+     * Désactivation function car ajouté dans cron tab
+     */
+	//$update_msg = _mistral_db_update();
+//	$import_msq = _mistral_import();
 
-	$msg = $update_msg . "<br />" . $import_msq;
+//	$msg = $update_msg . "<br />" . $import_msq;
 
-	return $msg;
+//	return $msg;
   }
 }
 
@@ -146,16 +156,16 @@ function _mistral_import() {
   }
 
   $return_messages . "<br>" . "Synchronization process completed.";
-	
+
   $imagecache_cmd = "$drush image-flush --all";
   shell_exec($imagecache_cmd);
-  
+
   $contributor_mrs = "$drush mrs articleContributors";
   shell_exec($contributor_mrs);
-  
+
   $contributor_last_update = "$drush mi articleContributors";
   shell_exec($contributor_last_update);
-  
+
   $reindex_cmd = "$drush search-reindex --immediate -y";
   shell_exec($reindex_cmd);
 
