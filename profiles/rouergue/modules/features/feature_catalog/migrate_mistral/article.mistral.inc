@@ -820,10 +820,10 @@ double classement non encore développé
 	$row->backcover = html_entity_decode(strip_tags($text, '<br><b><strong><i><em>'));
 
 	// First publication date handling.
-	$date_parts = explode('-', $row->firstpublicationdate);
+	$date_parts = explode('-', $row->datepub);
 	//$date_parts[0] = ($date_parts[0] < 10) ?  '0' . $date_parts[0] : $date_parts[0];
 	//$row->firstpublicationdate = $date_parts[1] . '-' . $date_parts[0] . '-01';
-	$row->firstpublicationdate =sprintf('%02d-%02d-01', $date_parts[0], $date_parts[1]);
+	$row->datepub =sprintf('%02d-%02d-01', $date_parts[0], $date_parts[1]);
 
 	// Rouergue universes. Attribution based on Drupal universes/Mistral collections mapping.
 	// $row->collection source data is used as container to stored the retrieved universe term ids.
@@ -838,7 +838,7 @@ double classement non encore développé
 	// and 01:00:00 (02:00:00 minus 1 hour) during winter time period instead of 23:00:00,
 	// which also corresponds to the last day of the previous month.
 	// This fixes the wrong pubdate's month display.
-	$row->firstpublicationdate = $row->firstpublicationdate . 'T02:00:00';
+	$row->datepub = $row->datepub . 'T02:00:00';
   }
 
   /**
