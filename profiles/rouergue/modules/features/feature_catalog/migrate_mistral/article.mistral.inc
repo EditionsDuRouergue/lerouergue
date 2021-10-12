@@ -719,6 +719,12 @@ class ArticleMigration extends Migration {
 	$this->univ_coll_mapping['494']['1147']['153']['tids'] =
 	  $this->univ_uuids_tids['85b490bb-bfae-46e2-9a1f-130057789068'] . ',' . $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
 
+
+    // Rouergue Livres Pratiques - 494 | Cuisine - 519 | Écologie - 287   ===>   Gastronomie > Cuisine - 3ec4f92d-32c1-45c6-a0b7-be9ea50872cc
+    // -------------------------------------------------------------   ===>   Nature & Jardin  > écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
+    $this->univ_coll_mapping['494']['519']['287']['tids'] =
+      $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'] . ',' . $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
+
 	//************************************************** ROUERGUE NUMÉRIQUE JEUNESSE *********************************************************************
 	/*
 	// ROUERGUE NUMÉRIQUE JEUNESSE - 463 | dacodac - 995   ===>   Livres numériques > dacodac - 0af3c4aa-630d-48a0-98ca-51752eba0778
