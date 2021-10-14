@@ -563,7 +563,7 @@ class ArticleMigration extends Migration {
 	  $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'] . ',' . $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
 
     // Rouergue Littérature - 493 | Ecologie - 1149    ===>   Nature & Jardin > Écologie - 80df7f9b-4f8b-47eb-89c7-2da7ff929d20
-  	$this->univ_coll_mapping['493']['1149']['tids'] = $this->univ_uuids_tids['3ec4f92d-32c1-45c6-a0b7-be9ea50872cc'];
+  	$this->univ_coll_mapping['493']['1149']['tids'] = $this->univ_uuids_tids['80df7f9b-4f8b-47eb-89c7-2da7ff929d20'];
 
 
 	// Rouergue Littérature - 493 | La Brune - 509   ===>   Littérature > La brune - aba0e77d-4004-47d1-83aa-0dcc982091ba
