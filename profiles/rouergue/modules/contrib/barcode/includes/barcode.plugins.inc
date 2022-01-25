@@ -76,7 +76,6 @@ function barcode_generate_image($barcode, $variables) {
   if (!file_exists($filename)) {
     $plugin = barcode_load_plugin($variables['encoding']);
 
-    $settings = new stdClass();
     $settings->default_path = drupal_realpath($barcode['default_path']);
     $settings->encode = $variables['encoding'];
     $settings->height = $variables['height'];

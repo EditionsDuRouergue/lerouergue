@@ -21,12 +21,14 @@ function barcode_code39_barcode($barnumber, $settings) {
 
   $total_y = (double)$scale * $settings->height + 10 * $scale;
 
-  $space = array(
-    'top' => 2 * $scale,
-    'bottom' => 2 * $scale,
-    'left' => 2 * $scale,
-    'right' => 2 * $scale,
-  );
+  if (!$space) {
+    $space = array(
+      'top' => 2 * $scale,
+      'bottom' => 2 * $scale,
+      'left' => 2 * $scale,
+      'right' => 2 * $scale,
+    );
+  }
 
   /* count total width */
   $xpos = 0;
@@ -96,7 +98,7 @@ function barcode_code39_barcode($barnumber, $settings) {
  * described above and encoded from the table below. A stop character, which
  * is a second asterisk character.
  */
-function barcode_code39_encode($barnumber, $settings, $checkdigit = FALSE) {
+function barcode_code39_encode($barnumber, $checkdigit = FALSE) {
   $enc_table = array(
           "0" => "NNNWWNWNN",
           "1" => "WNNWNNNNW",
@@ -150,7 +152,6 @@ function barcode_code39_encode($barnumber, $settings, $checkdigit = FALSE) {
 
   if ($checkdigit == TRUE) {
     $arr_key = array_keys($enc_table);
-    $sum = 0;
     for ($i = 0; $i < strlen($barnumber); $i++) {
       $num = $barnumber[$i];
       if (preg_match("/[A-Z]+/", $num)) {

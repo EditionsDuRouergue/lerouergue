@@ -36,12 +36,14 @@ function barcode_code128_barcode($barnumber, $settings) {
 
   $total_y = (double)$scale * $settings->height + 10 * $scale;
 
-  $space = array(
-    'top' => 2 * $scale,
-    'bottom' => 2 * $scale,
-    'left' => 2 * $scale,
-    'right' => 2 * $scale,
-  );
+  if (!$space) {
+    $space = array(
+      'top' => 2 * $scale,
+      'bottom' => 2 * $scale,
+      'left' => 2 * $scale,
+      'right' => 2 * $scale,
+    );
+  }
 
   /* count total width */
   $xpos = 0;
@@ -130,7 +132,7 @@ function barcode_code128_encode($barnumber, $settings, $use_keys) {
         $sum += ($i + 1) * 101;
       }
 
-      $mfc_str .= isset($enc_table[$val]) ? $enc_table[$val] : '';
+      $mfc_str .= $enc_table[$val];
     }
   }
   else {
@@ -153,7 +155,7 @@ function barcode_code128_encode($barnumber, $settings, $use_keys) {
       }
 
       $sum += ($i + 1) * $num;
-      $mfc_str .= isset($enc_table[$num]) ? $enc_table[$num] : '';
+      $mfc_str .= $enc_table[$num];
     }
   }
 

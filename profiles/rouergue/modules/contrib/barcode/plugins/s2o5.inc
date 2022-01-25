@@ -20,12 +20,14 @@ function barcode_s2o5_barcode($barnumber, $settings) {
   }
 
   $total_y = (double)$scale * $settings->height;
-  $space = array(
-    'top' => 2 * $scale,
-    'bottom' => 2 * $scale,
-    'left' => 2 * $scale,
-    'right' => 2 * $scale
-  );
+  if (!$space) {
+    $space = array(
+      'top' => 2 * $scale,
+      'bottom' => 2 * $scale,
+      'left' => 2 * $scale,
+      'right' => 2 * $scale
+    );
+  }
 
   /* count total width */
   $xpos = $scale * strlen($bars);

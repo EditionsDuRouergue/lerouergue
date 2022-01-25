@@ -7,7 +7,7 @@
  */
 
 function barcode_code93_barcode($barnumber, $settings) {
-  $bars = barcode_code93_encode($barnumber, $settings);
+  $bars = barcode_code93_encode($barnumber);
   if (empty($settings->filename_no_format)) {
     header("Content-type: image/". $settings->format);
   }
@@ -19,12 +19,14 @@ function barcode_code93_barcode($barnumber, $settings) {
 
   $total_y = (double)$scale * $settings->height + 10 * $scale;
 
-  $space = array(
-    'top' => 2 * $scale,
-    'bottom' => 2 * $scale,
-    'left' => 2 * $scale,
-    'right' => 2 * $scale,
-  );
+  if (!$space) {
+    $space = array(
+      'top' => 2 * $scale,
+      'bottom' => 2 * $scale,
+      'left' => 2 * $scale,
+      'right' => 2 * $scale,
+    );
+  }
 
   /* count total width */
   $xpos = 0;
@@ -94,7 +96,7 @@ function barcode_code93_barcode($barnumber, $settings) {
  * digits calculated as described above and encoded using the table below. A
  * stop character, which is a second asterisk character.
  */
-function barcode_code93_encode($barnumber, $settings) {
+function barcode_code93_encode($barnumber) {
   $enc_table = array(
     "0" => "100010100",
     "1" => "101001000",

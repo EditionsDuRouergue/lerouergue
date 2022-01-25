@@ -17,7 +17,7 @@ function barcode_upce_barcode($barnumber, $settings) {
     $barnumber = substr($this->barcode_ean13_check_digit($barnumber), 1);
     $encbit = $barnumber[0];
     $checkdigit = $barnumber[11];
-    $barnumber = barcode_convert_upca_to_upce($barnumber, $settings);
+    $barnumber = barcode_convert_upca_to_upce($barnumber);
   }
   else {
     $barnumber = barcode_check_digit($barnumber, 7);
@@ -38,12 +38,14 @@ function barcode_upce_barcode($barnumber, $settings) {
   }
 
   $total_y = (double)$scale * $settings->height;
-  $space = array(
-    'top' => 2 * $scale,
-    'bottom' => 2 * $scale,
-    'left' => 2 * $scale,
-    'right' => 2 * $scale
-  );
+  if (!$space) {
+    $space = array(
+      'top' => 2 * $scale,
+      'bottom' => 2 * $scale,
+      'left' => 2 * $scale,
+      'right' => 2 * $scale
+    );
+  }
 
   /* count total width */
   $xpos=$scale*strlen($bars)+$scale*12;
@@ -153,13 +155,13 @@ function barcode_upce_encode($barnumber, $settings, $encbit, $checkdigit) {
 }
 
 // @todo handle error
-function barcode_convert_upca_to_upce($upca, &$settings) {
+function barcode_convert_upca_to_upce($upca) {
   $upce = "";
 
   // If the source message string is less than 12 characters long, we make it 
   // 12 characters
   if (strlen($upca) < 12) {
-   $upca = str_pad($upca, 12, "0", STR_PAD_LEFT);
+   $barnumber = str_pad($barnumber, 12, "0", STR_PAD_LEFT);
   }
 
   if (substr($upca, 0, 1) != '0' && substr($upca, 0, 1) != '1') {

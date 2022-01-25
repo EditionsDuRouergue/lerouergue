@@ -26,6 +26,9 @@ function dhtml_menu_preprocess_menu_link(&$variables) {
 
   // Saves a lot of code.
   $l = &$variables['element']['#original_link'];
+  if (empty($l)) {
+    return;
+  }
 
   // Determine if the menu is blacklisted or not whitelisted.
   // First check menu blocks.
