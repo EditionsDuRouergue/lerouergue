@@ -48,3 +48,7 @@
     margin-right: 0em;
   }
 }
+
+.field-name-field-embed-media iframe {
+ border:none; 
+}
