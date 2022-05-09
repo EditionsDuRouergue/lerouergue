@@ -101,7 +101,7 @@ class ArticleContributorsMigration extends Migration {
 
     public function postImport() {
     parent::postImport();
-    foreach ($this->map->getRowsNeedingUpdate(10000) as $row) {
+    foreach ($this->map->getRowsNeedingUpdate(80000) as $row) {
       field_collection_item_delete($row->destid1);
       $this->map->deleteDestination(array($row->destid1));
     }
