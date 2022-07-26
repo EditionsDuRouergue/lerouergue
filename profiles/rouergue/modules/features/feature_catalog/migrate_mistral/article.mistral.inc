@@ -234,7 +234,9 @@ class ArticleMigration extends Migration {
 		$this->addFieldMapping('field_price_validated', 'price_validated');
 		$this->addFieldMapping('field_isbn', 'isbn13');
 		$this->addFieldMapping('field_gencod', 'gencod');
-
+		
+		$this->addFieldMapping('field_format', 'format');
+		
 		$this->addFieldMapping('field_gencod_epub', 'gencod_epub');
 		$this->addFieldMapping('field_release_date', 'datepub');
 		$this->addFieldMapping('body', 'backcover');
@@ -820,6 +822,10 @@ double classement non encore développé
   function prepareRow($row) {
 	parent::prepareRow($row);
 
+	
+	// dimentions 
+    $row->format = $row->width . ' x ' . $row->height;
+	
 	// backcover or resume database field choice
 	if (isset($row->backcover) && strlen($row->backcover) > 0) {
 		$text = $row->backcover;
