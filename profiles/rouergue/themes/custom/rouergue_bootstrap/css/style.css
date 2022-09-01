@@ -53,16 +53,18 @@
  border:none; 
 }
 
-.field-name-field-catalogue {
-  text-align: right;
-  font-size: 10pt;
- /**truncat txt**/
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.view-display-id-videos_page  .field-name-field-catalogue {
+ text-align:right;
+ font-size:10pt;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.view-display-id-videos_page  .field-name-field-types-de-vid-o {
+ font-size:12pt;
 }
 
-.field-name-field-types-de-vid-o {
-   
-  font-size: 12pt; 
+
+.view-display-id-videos_page .field-name-field-auteur {
+  margin-top:-0.5em;
 }
