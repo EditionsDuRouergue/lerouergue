@@ -9,9 +9,9 @@
 
 /**
  * Returns default taxonomy term path.
- * 
+ *
  * @param int $tid
- * 
+ *
  * @return string
  */
 function _taxonomy_menu_trails_default_term_path($tid) {
@@ -54,12 +54,12 @@ function _taxonomy_menu_trails_get_paths($tids, $entity, $settings) {
           if (empty($results) || !is_array($results)) {
             continue;
           }
-          
+
           foreach ($results as $tid => $term_paths) {
             if (empty($term_paths)) {
               continue;
             }
-            
+
             if (is_string($term_paths)) {
               $paths[$tid][] = $term_paths;
             }
@@ -125,7 +125,7 @@ function _taxonomy_menu_trails_get_paths($tids, $entity, $settings) {
       }
       // Fallback to default path when Taxonomy Menu module not exists anymore
       // or the function returning term path is not defined.
-      
+
     default:
       foreach ($tids as $tid) {
         $paths[] = _taxonomy_menu_trails_default_term_path($tid);
@@ -149,7 +149,7 @@ function _taxonomy_menu_trails_process($entity, $settings) {
     if (!empty($entity->$field)) {
       foreach ($entity->$field as $lang => $items) {
         foreach ($items as $item) {
-          $tids[] = $item['tid'];
+          $tids[] = isset($item['tid']) ? $item['tid'] : $item['target_id'];
         }
       }
     }
@@ -223,7 +223,7 @@ function _taxonomy_menu_trails_process($entity, $settings) {
       menu_tree_set_path($selected_item['menu_name'], $selected_item['link_path']);
     }
   }
-  
+
   // Save selected item and "set_breadcrumb" setting for
   // taxonomy_menu_trails_menu_breadcrumb_alter().
   if (!empty($settings['set_breadcrumb'])) {
@@ -231,7 +231,7 @@ function _taxonomy_menu_trails_process($entity, $settings) {
     $selected_item['set_breadcrumb'] = $settings['set_breadcrumb'];
     taxonomy_menu_trails_selected_item_for_breadcrumb($selected_item);
   }
-  
+
   // TODO: Remove workaround when Menu Block will remove its
   // _menu_link_get_preferred(). But it's safe to leave it here even after
   // Menu Block update to keep compatibility with old Menu Block releases.
@@ -369,7 +369,7 @@ function _taxonomy_menu_trails_homepage_paths() {
 
 /**
  * Returns TRUE when passed breadcrumb is empty.
- * 
+ *
  * "Empty" here means there are no items between "Home" (or breadcrumb start)
  * and current tab root menu item.
  *
@@ -381,14 +381,14 @@ function _taxonomy_menu_trails_menu_breadcrumb_is_empty($active_trail) {
   if (empty($active_trail)) {
     return TRUE;
   }
-  
+
   // Skip first item if it has homepage href.
   $first_item = reset($active_trail);
   $frontpage_hrefs = _taxonomy_menu_trails_homepage_paths();
   if (in_array($first_item['href'], $frontpage_hrefs)) {
     array_shift($active_trail);
   }
-  
+
   // Look into the next item (if any) and check if it has current tab root href.
   $next_item = reset($active_trail);
   if (empty($next_item)) {
@@ -404,7 +404,7 @@ function _taxonomy_menu_trails_menu_breadcrumb_is_empty($active_trail) {
 
 /**
  * Injects selected item and its parents into the breadcrumb.
- * 
+ *
  * @param array $active_trail
  * @param array $selected_item
  *
@@ -433,7 +433,8 @@ function _taxonomy_menu_trails_menu_breadcrumb_alter(&$active_trail, $selected_i
   // Flatten menu tree into injection array. This part was copied
   // from menu_set_active_trail().
   $injection = array();
-  list($key, $curr) = each($tree);
+  $curr = current($tree);
+  $key = key($tree);
   while ($curr) {
     $link = $curr['link'];
     if ($link['in_active_trail']) {
@@ -456,7 +457,8 @@ function _taxonomy_menu_trails_menu_breadcrumb_alter(&$active_trail, $selected_i
       }
       $tree = $curr['below'] ? $curr['below'] : array();
     }
-    list($key, $curr) = each($tree);
+    $curr = current($tree);
+    $key = key($tree);
   }
 
   // Inject our active trail to the passed active trail right after the "Home"

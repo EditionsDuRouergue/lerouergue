@@ -4,9 +4,8 @@ description    = "Changes the menu trail of a currently viewed entity to its rel
 name           = Taxonomy Menu Trails
 package        = Taxonomy menu
 
-; Information added by drupal.org packaging script on 2012-12-02
-version = "7.x-2.5"
+; Information added by Drupal.org packaging script on 2022-08-22
+version = "7.x-2.6"
 core = "7.x"
 project = "taxonomy_menu_trails"
-datestamp = "1354451644"
-
+datestamp = "1661188162"

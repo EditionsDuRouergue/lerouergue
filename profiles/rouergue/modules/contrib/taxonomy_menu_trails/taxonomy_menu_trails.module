@@ -275,3 +275,42 @@ function taxonomy_menu_trails_module_implements_alter(&$implementations, $hook) 
     $implementations = array('taxonomy_menu_trails' => $group) + $implementations;
   }
 }
+
+/**
+ * Implements hook_preprocess_menu_item().
+ *
+ * Adds class "menu-item-preferred" to the preferred menu item for each menu
+ * (last item in active trail).
+ */
+function taxonomy_menu_trails_preprocess_menu_link(&$vars) {
+  // Fast static cache.
+  static $drupal_static_fast;
+  if (!isset($drupal_static_fast)) {
+    $drupal_static_fast['paths'] =& drupal_static(__FUNCTION__, array());
+  }
+  $preferred_paths =& $drupal_static_fast['paths'];
+
+  // Initialize preferred path for this menu if not yet done.
+  $element =& $vars['element'];
+  $menu_name = $element['#original_link']['menu_name'];
+  if (!isset($preferred_paths[$menu_name])) {
+    $active_path = menu_tree_get_path($menu_name);
+    $preferred_item = menu_link_get_preferred($active_path, $menu_name);
+    if (!$preferred_item) {
+      // No preferred items. Mark menu with FALSE to avoid loading it over and
+      // over again.
+      $preferred_paths[$menu_name] = FALSE;
+      return;
+    }
+    else {
+      $preferred_paths[$menu_name] = $preferred_item['href'];
+    }
+  }
+
+  // Compare preferred path with the current item path and add classes on match.
+  $preferred_path = $preferred_paths[$menu_name];
+  if ($preferred_path !== FALSE && $element['#href'] === $preferred_path) {
+    $vars['element']['#attributes']['class'][] = 'menu-item-preferred';
+    $vars['element']['#localized_options']['attributes']['class'][] = 'menu-item-preferred';
+  }
+}

@@ -27,7 +27,7 @@ function _taxonomy_menu_trails_sort_by_weight_helper($a, $b) {
 function _taxonomy_menu_trails_sort_by_weight(&$instances, $entity_type, $bundle) {
   $static = &drupal_static(__FUNCTION__, array());
   $static = compact('entity_type', 'bundle');
-  // make sure fields info is collated already to workaround warning on 
+  // make sure fields info is collated already to workaround warning on
   // field creation
   _field_info_collate_fields();
   uksort($instances, '_taxonomy_menu_trails_sort_by_weight_helper');
@@ -44,18 +44,18 @@ function _taxonomy_menu_trails_sort_by_weight(&$instances, $entity_type, $bundle
 function _taxonomy_menu_trails_alter_bundle_form(&$form, $entity_type, $bundle) {
   $bundle = field_extract_bundle($entity_type, $bundle);
   list($settings) = _taxonomy_menu_trails_get_settings($entity_type, $bundle);
-  
+
   $type_info = entity_get_info($entity_type);
 
   $all_instances = field_info_instances($entity_type, $bundle);
   $instances_options = array();
   foreach ($all_instances as $instance) {
     $field_info = field_info_field($instance['field_name']);
-    if ($field_info['type'] == 'taxonomy_term_reference') {
+    if ($field_info['type'] == 'taxonomy_term_reference' || ($field_info['type'] == 'entityreference' && $field_info['settings']['target_type'] == 'taxonomy_term')) {
       $instances_options[$instance['field_name']] = $instance['label'];
     }
   }
-  
+
   // Looks like there is no way to get default entity path without actual
   // enity instance, so we use switch here.
   switch ($entity_type) {
@@ -178,7 +178,7 @@ function _taxonomy_menu_trails_alter_bundle_form(&$form, $entity_type, $bundle) 
       ),
     );
   }
-  
+
   $form['taxonomy_menu_trails'] = array(
     '#tree' => TRUE,
     '#type' => 'fieldset',
@@ -212,7 +212,7 @@ function taxonomy_menu_trails_bundle_form_validate($form, &$state) {
       }
     }
   }
-  
+
   // Validate term path patterns if custom path is used.
   if ($values['term_path'] == 'custom') {
     $patterns_ui = $values['term_path_patterns'];
@@ -225,7 +225,7 @@ function taxonomy_menu_trails_bundle_form_validate($form, &$state) {
 
 /**
  * Converts entity path patterns from user input into regular expressions.
- * 
+ *
  * @param string $paths_ui
  * @param string $entity_type
  *
@@ -287,7 +287,7 @@ function taxonomy_menu_trails_bundle_form_submit($form, &$state) {
     default:
       return;
   }
-  
+
   // Process bundle name change and save our settings.
   list($settings, $old_var_name, $var_exists) = _taxonomy_menu_trails_get_settings($entity_type, $old_bundle);
   $values = !empty($state['values']['taxonomy_menu_trails']) ? $state['values']['taxonomy_menu_trails'] : array();
@@ -324,7 +324,7 @@ function taxonomy_menu_trails_bundle_form_submit($form, &$state) {
     // generation. We're using old_bundle because renaming is not done yet
     // (it will be done in original handler).
     _taxonomy_menu_trails_sort_by_weight($settings['instances'], $entity_type, $old_bundle);
-    
+
     $new_var_name = 'taxonomy_menu_trails_' . $entity_type . '_' . $new_bundle;
     variable_set($new_var_name, $settings);
   }
