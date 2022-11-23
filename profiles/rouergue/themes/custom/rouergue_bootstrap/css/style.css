@@ -68,3 +68,10 @@
 .view-display-id-videos_page .field-name-field-auteur {
   margin-top:-0.5em;
 }
+.cke_wysiwyg_frame body {
+	background-color: #fff;
+}
+
+.field-name-field-code-embed-vid-o {
+	margin-bottom: 2em;
+}

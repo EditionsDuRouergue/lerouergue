@@ -1,0 +1,725 @@
+diff --git a/includes/database/mysql/database.inc b/includes/database/mysql/database.inc
+index 356e039f73..af12c57e0d 100644
+--- a/includes/database/mysql/database.inc
++++ b/includes/database/mysql/database.inc
+@@ -5,6 +5,11 @@
+  * Database interface code for MySQL database servers.
+  */
+ 
++/**
++ * The default character for quoting identifiers in MySQL.
++ */
++define('MYSQL_IDENTIFIER_QUOTE_CHARACTER_DEFAULT', '`');
++
+ /**
+  * @addtogroup database
+  * @{
+@@ -19,6 +24,277 @@ class DatabaseConnection_mysql extends DatabaseConnection {
+    */
+   protected $needsCleanup = FALSE;
+ 
++  /**
++   * The list of MySQL reserved key words.
++   *
++   * @link https://dev.mysql.com/doc/refman/8.0/en/keywords.html
++   */
++  private $reservedKeyWords = array(
++    'accessible',
++    'add',
++    'admin',
++    'all',
++    'alter',
++    'analyze',
++    'and',
++    'as',
++    'asc',
++    'asensitive',
++    'before',
++    'between',
++    'bigint',
++    'binary',
++    'blob',
++    'both',
++    'by',
++    'call',
++    'cascade',
++    'case',
++    'change',
++    'char',
++    'character',
++    'check',
++    'collate',
++    'column',
++    'condition',
++    'constraint',
++    'continue',
++    'convert',
++    'create',
++    'cross',
++    'cube',
++    'cume_dist',
++    'current_date',
++    'current_time',
++    'current_timestamp',
++    'current_user',
++    'cursor',
++    'database',
++    'databases',
++    'day_hour',
++    'day_microsecond',
++    'day_minute',
++    'day_second',
++    'dec',
++    'decimal',
++    'declare',
++    'default',
++    'delayed',
++    'delete',
++    'dense_rank',
++    'desc',
++    'describe',
++    'deterministic',
++    'distinct',
++    'distinctrow',
++    'div',
++    'double',
++    'drop',
++    'dual',
++    'each',
++    'else',
++    'elseif',
++    'empty',
++    'enclosed',
++    'escaped',
++    'except',
++    'exists',
++    'exit',
++    'explain',
++    'false',
++    'fetch',
++    'first_value',
++    'float',
++    'float4',
++    'float8',
++    'for',
++    'force',
++    'foreign',
++    'from',
++    'fulltext',
++    'function',
++    'generated',
++    'get',
++    'grant',
++    'group',
++    'grouping',
++    'groups',
++    'having',
++    'high_priority',
++    'hour_microsecond',
++    'hour_minute',
++    'hour_second',
++    'if',
++    'ignore',
++    'in',
++    'index',
++    'infile',
++    'inner',
++    'inout',
++    'insensitive',
++    'insert',
++    'int',
++    'int1',
++    'int2',
++    'int3',
++    'int4',
++    'int8',
++    'integer',
++    'interval',
++    'into',
++    'io_after_gtids',
++    'io_before_gtids',
++    'is',
++    'iterate',
++    'join',
++    'json_table',
++    'key',
++    'keys',
++    'kill',
++    'lag',
++    'last_value',
++    'lead',
++    'leading',
++    'leave',
++    'left',
++    'like',
++    'limit',
++    'linear',
++    'lines',
++    'load',
++    'localtime',
++    'localtimestamp',
++    'lock',
++    'long',
++    'longblob',
++    'longtext',
++    'loop',
++    'low_priority',
++    'master_bind',
++    'master_ssl_verify_server_cert',
++    'match',
++    'maxvalue',
++    'mediumblob',
++    'mediumint',
++    'mediumtext',
++    'middleint',
++    'minute_microsecond',
++    'minute_second',
++    'mod',
++    'modifies',
++    'natural',
++    'not',
++    'no_write_to_binlog',
++    'nth_value',
++    'ntile',
++    'null',
++    'numeric',
++    'of',
++    'on',
++    'optimize',
++    'optimizer_costs',
++    'option',
++    'optionally',
++    'or',
++    'order',
++    'out',
++    'outer',
++    'outfile',
++    'over',
++    'partition',
++    'percent_rank',
++    'persist',
++    'persist_only',
++    'precision',
++    'primary',
++    'procedure',
++    'purge',
++    'range',
++    'rank',
++    'read',
++    'reads',
++    'read_write',
++    'real',
++    'recursive',
++    'references',
++    'regexp',
++    'release',
++    'rename',
++    'repeat',
++    'replace',
++    'require',
++    'resignal',
++    'restrict',
++    'return',
++    'revoke',
++    'right',
++    'rlike',
++    'row',
++    'rows',
++    'row_number',
++    'schema',
++    'schemas',
++    'second_microsecond',
++    'select',
++    'sensitive',
++    'separator',
++    'set',
++    'show',
++    'signal',
++    'smallint',
++    'spatial',
++    'specific',
++    'sql',
++    'sqlexception',
++    'sqlstate',
++    'sqlwarning',
++    'sql_big_result',
++    'sql_calc_found_rows',
++    'sql_small_result',
++    'ssl',
++    'starting',
++    'stored',
++    'straight_join',
++    'system',
++    'table',
++    'terminated',
++    'then',
++    'tinyblob',
++    'tinyint',
++    'tinytext',
++    'to',
++    'trailing',
++    'trigger',
++    'true',
++    'undo',
++    'union',
++    'unique',
++    'unlock',
++    'unsigned',
++    'update',
++    'usage',
++    'use',
++    'using',
++    'utc_date',
++    'utc_time',
++    'utc_timestamp',
++    'values',
++    'varbinary',
++    'varchar',
++    'varcharacter',
++    'varying',
++    'virtual',
++    'when',
++    'where',
++    'while',
++    'window',
++    'with',
++    'write',
++    'xor',
++    'year_month',
++    'zerofill',
++  );
++
+   public function __construct(array $connection_options = array()) {
+     // This driver defaults to transaction support, except if explicitly passed FALSE.
+     $this->transactionSupport = !isset($connection_options['transactions']) || ($connection_options['transactions'] !== FALSE);
+@@ -86,15 +362,92 @@ class DatabaseConnection_mysql extends DatabaseConnection {
+     $connection_options += array(
+       'init_commands' => array(),
+     );
++
++    $sql_mode = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO';
++    // NO_AUTO_CREATE_USER was removed in MySQL 8.0.11
++    // https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-11.html#mysqld-8-0-11-deprecation-removal
++    if (version_compare($this->getAttribute(PDO::ATTR_SERVER_VERSION), '8.0.11', '<')) {
++      $sql_mode .= ',NO_AUTO_CREATE_USER';
++    }
+     $connection_options['init_commands'] += array(
+-      'sql_mode' => "SET sql_mode = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER'",
++      'sql_mode' => "SET sql_mode = '$sql_mode'",
+     );
++
+     // Execute initial commands.
+     foreach ($connection_options['init_commands'] as $sql) {
+       $this->exec($sql);
+     }
+   }
+ 
++  /**
++   * {@inheritdoc}}
++   */
++  protected function setPrefix($prefix) {
++    parent::setPrefix($prefix);
++    // Successive versions of MySQL have become increasingly strict about the
++    // use of reserved keywords as table names. Drupal 7 uses at least one such
++    // table (system). Therefore we surround all table names with quotes.
++    $quote_char = variable_get('mysql_identifier_quote_character', MYSQL_IDENTIFIER_QUOTE_CHARACTER_DEFAULT);
++    foreach ($this->prefixSearch as $i => $prefixSearch) {
++      if (substr($prefixSearch, 0, 1) === '{') {
++        // If the prefix already contains one or more quotes remove them.
++        // This can happen when - for example - DrupalUnitTestCase sets up a
++        // "temporary prefixed database".
++        $this->prefixReplace[$i] = $quote_char . str_replace($quote_char, '', $this->prefixReplace[$i]);
++      }
++      if (substr($prefixSearch, -1) === '}') {
++        $this->prefixReplace[$i] .= $quote_char;
++      }
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function escapeField($field) {
++    $field = parent::escapeField($field);
++    return $this->quoteIdentifier($field);
++  }
++
++  public function escapeFields(array $fields) {
++    foreach ($fields as &$field) {
++      $field = $this->escapeField($field);
++    }
++    return $fields;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function escapeAlias($field) {
++    $field = parent::escapeAlias($field);
++    return $this->quoteIdentifier($field);
++  }
++
++  /**
++   * Quotes an identifier if it matches a MySQL reserved keyword.
++   *
++   * @param string $identifier
++   *   The field to check.
++   *
++   * @return string
++   *   The identifier, quoted if it matches a MySQL reserved keyword.
++   */
++  private function quoteIdentifier($identifier) {
++    // Quote identifiers so that MySQL reserved words like 'function' can be
++    // used as column names. Sometimes the 'table.column_name' format is passed
++    // in. For example, menu_load_links() adds a condition on "ml.menu_name".
++    if (strpos($identifier, '.') !== FALSE) {
++      list($table, $identifier) = explode('.', $identifier, 2);
++    }
++    if (in_array(strtolower($identifier), $this->reservedKeyWords, TRUE)) {
++      // Quote the string for MySQL reserved keywords.
++      $quote_char = variable_get('mysql_identifier_quote_character', MYSQL_IDENTIFIER_QUOTE_CHARACTER_DEFAULT);
++      $identifier = $quote_char . $identifier . $quote_char;
++    }
++    return isset($table) ? $table . '.' . $identifier : $identifier;
++  }
++
+   public function __destruct() {
+     if ($this->needsCleanup) {
+       $this->nextIdDelete();
+diff --git a/includes/database/mysql/query.inc b/includes/database/mysql/query.inc
+index d3d2d9eecf..3f0bcb7968 100644
+--- a/includes/database/mysql/query.inc
++++ b/includes/database/mysql/query.inc
+@@ -48,6 +48,10 @@ class InsertQuery_mysql extends InsertQuery {
+     // Default fields are always placed first for consistency.
+     $insert_fields = array_merge($this->defaultFields, $this->insertFields);
+ 
++    if (method_exists($this->connection, 'escapeFields')) {
++      $insert_fields = $this->connection->escapeFields($insert_fields);
++    }
++
+     // If we're selecting from a SelectQuery, finish building the query and
+     // pass it back, as any remaining options are irrelevant.
+     if (!empty($this->fromQuery)) {
+@@ -89,6 +93,20 @@ class InsertQuery_mysql extends InsertQuery {
+ 
+ class TruncateQuery_mysql extends TruncateQuery { }
+ 
++class UpdateQuery_mysql extends UpdateQuery {
++  public function __toString() {
++    if (method_exists($this->connection, 'escapeField')) {
++      $escapedFields = array();
++      foreach ($this->fields as $field => $data) {
++        $field = $this->connection->escapeField($field);
++        $escapedFields[$field] = $data;
++      }
++      $this->fields = $escapedFields;
++    }
++    return parent::__toString();
++  }
++}
++
+ /**
+  * @} End of "addtogroup database".
+  */
+diff --git a/includes/database/mysql/schema.inc b/includes/database/mysql/schema.inc
+index 9ba1c73397..7d6e333950 100644
+--- a/includes/database/mysql/schema.inc
++++ b/includes/database/mysql/schema.inc
+@@ -57,6 +57,11 @@ class DatabaseSchema_mysql extends DatabaseSchema {
+   protected function buildTableNameCondition($table_name, $operator = '=', $add_prefix = TRUE) {
+     $info = $this->connection->getConnectionOptions();
+ 
++    // Ensure the table name is not surrounded with quotes as that is not
++    // appropriate for schema queries.
++    $quote_char = variable_get('mysql_identifier_quote_character', MYSQL_IDENTIFIER_QUOTE_CHARACTER_DEFAULT);
++    $table_name = str_replace($quote_char, '', $table_name);
++
+     $table_info = $this->getPrefixInfo($table_name, $add_prefix);
+ 
+     $condition = new DatabaseCondition('AND');
+@@ -494,11 +499,11 @@ class DatabaseSchema_mysql extends DatabaseSchema {
+       $condition->condition('column_name', $column);
+       $condition->compile($this->connection, $this);
+       // Don't use {} around information_schema.columns table.
+-      return $this->connection->query("SELECT column_comment FROM information_schema.columns WHERE " . (string) $condition, $condition->arguments())->fetchField();
++      return $this->connection->query("SELECT column_comment AS column_comment FROM information_schema.columns WHERE " . (string) $condition, $condition->arguments())->fetchField();
+     }
+     $condition->compile($this->connection, $this);
+     // Don't use {} around information_schema.tables table.
+-    $comment = $this->connection->query("SELECT table_comment FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments())->fetchField();
++    $comment = $this->connection->query("SELECT table_comment AS table_comment FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments())->fetchField();
+     // Work-around for MySQL 5.0 bug http://bugs.mysql.com/bug.php?id=11379
+     return preg_replace('/; InnoDB free:.*$/', '', $comment);
+   }
+diff --git a/includes/database/schema.inc b/includes/database/schema.inc
+index 25effa8c94..faa5216237 100644
+--- a/includes/database/schema.inc
++++ b/includes/database/schema.inc
+@@ -348,7 +348,7 @@ abstract class DatabaseSchema implements QueryPlaceholderInterface {
+     // couldn't use db_select() here because it would prefix
+     // information_schema.tables and the query would fail.
+     // Don't use {} around information_schema.tables table.
+-    return $this->connection->query("SELECT table_name FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments())->fetchAllKeyed(0, 0);
++    return $this->connection->query("SELECT table_name AS table_name FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments())->fetchAllKeyed(0, 0);
+   }
+ 
+   /**
+@@ -379,7 +379,7 @@ abstract class DatabaseSchema implements QueryPlaceholderInterface {
+     // couldn't use db_select() here because it would prefix
+     // information_schema.tables and the query would fail.
+     // Don't use {} around information_schema.tables table.
+-    $results = $this->connection->query("SELECT table_name FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments());
++    $results = $this->connection->query("SELECT table_name AS table_name FROM information_schema.tables WHERE " . (string) $condition, $condition->arguments());
+     foreach ($results as $table) {
+       // Take into account tables that have an individual prefix.
+       if (isset($individually_prefixed_tables[$table->table_name])) {
+diff --git a/includes/database/select.inc b/includes/database/select.inc
+index 8d84460e83..84098bdf7b 100644
+--- a/includes/database/select.inc
++++ b/includes/database/select.inc
+@@ -1520,13 +1520,16 @@ class SelectQuery extends Query implements SelectQueryInterface {
+     $fields = array();
+     foreach ($this->tables as $alias => $table) {
+       if (!empty($table['all_fields'])) {
+-        $fields[] = $this->connection->escapeTable($alias) . '.*';
++        $fields[] = $this->connection->escapeAlias($alias) . '.*';
+       }
+     }
+     foreach ($this->fields as $alias => $field) {
++      // Note that $field['table'] holds the table alias.
++      // @see \SelectQuery::addField
++      $table = isset($field['table']) ? $this->connection->escapeAlias($field['table']) . '.' : '';
+       // Always use the AS keyword for field aliases, as some
+       // databases require it (e.g., PostgreSQL).
+-      $fields[] = (isset($field['table']) ? $this->connection->escapeTable($field['table']) . '.' : '') . $this->connection->escapeField($field['field']) . ' AS ' . $this->connection->escapeAlias($field['alias']);
++      $fields[] = $table . $this->connection->escapeField($field['field']) . ' AS ' . $this->connection->escapeAlias($field['alias']);
+     }
+     foreach ($this->expressions as $alias => $expression) {
+       $fields[] = $expression['expression'] . ' AS ' . $this->connection->escapeAlias($expression['alias']);
+@@ -1555,7 +1558,7 @@ class SelectQuery extends Query implements SelectQueryInterface {
+ 
+       // Don't use the AS keyword for table aliases, as some
+       // databases don't support it (e.g., Oracle).
+-      $query .=  $table_string . ' ' . $this->connection->escapeTable($table['alias']);
++      $query .=  $table_string . ' ' . $this->connection->escapeAlias($table['alias']);
+ 
+       if (!empty($table['condition'])) {
+         $query .= ' ON ' . $table['condition'];
+diff --git a/modules/simpletest/tests/database_test.install b/modules/simpletest/tests/database_test.install
+index 11361151f9..44ed5ee0a4 100644
+--- a/modules/simpletest/tests/database_test.install
++++ b/modules/simpletest/tests/database_test.install
+@@ -217,5 +217,24 @@ function database_test_schema() {
+     ),
+   );
+ 
++  $schema['virtual'] = array(
++    'description' => 'Basic test table with a reserved name.',
++    'fields' => array(
++      'id' => array(
++        'type' => 'serial',
++        'unsigned' => TRUE,
++        'not null' => TRUE,
++      ),
++      'function' => array(
++        'description' => "A column with a reserved name.",
++        'type' => 'varchar',
++        'length' => 255,
++        'not null' => FALSE,
++        'default' => '',
++      ),
++    ),
++    'primary key' => array('id'),
++  );
++
+   return $schema;
+ }
+diff --git a/modules/simpletest/tests/database_test.test b/modules/simpletest/tests/database_test.test
+index 08e5bf0f11..dca8168f0a 100644
+--- a/modules/simpletest/tests/database_test.test
++++ b/modules/simpletest/tests/database_test.test
+@@ -163,6 +163,12 @@ class DatabaseTestCase extends DrupalWebTestCase {
+         'priority' => 3,
+       ))
+       ->execute();
++
++    db_insert('virtual')
++      ->fields(array(
++        'function' => 'Function value 1',
++      ))
++      ->execute();
+   }
+ }
+ 
+@@ -3457,7 +3463,6 @@ class DatabaseQueryTestCase extends DatabaseTestCase {
+       ->fetchField();
+     $this->assertFalse($result, 'SQL injection attempt did not result in a row being inserted in the database table.');
+   }
+-
+ }
+ 
+ /**
+@@ -4240,5 +4245,133 @@ class ConnectionUnitTest extends DrupalUnitTestCase {
+     // Verify that we are back to the original connection count.
+     $this->assertNoConnection($id);
+   }
++}
++
++  /**
++   * Test reserved keyword handling (introduced for MySQL 8+)
++   */
++class DatabaseReservedKeywordTestCase extends DatabaseTestCase {
++  public static function getInfo() {
++    return array(
++      'name' => 'Reserved Keywords',
++      'description' => 'Test handling of reserved keywords.',
++      'group' => 'Database',
++    );
++  }
++
++  function setUp() {
++    parent::setUp('database_test');
++  }
++
++  public function testTableNameQuoting() {
++    // Test db_query with {table} pattern.
++    $record = db_query('SELECT * FROM {system} LIMIT 1')->fetchObject();
++    $this->assertTrue(isset($record->filename), 'Successfully queried the {system} table.');
++
++    $connection = Database::getConnection()->getConnectionOptions();
++    if ($connection['driver'] === 'sqlite') {
++      // In SQLite simpletest's prefixed db tables exist in their own schema
++      // (e.g. simpletest124904.system), so we cannot test the schema.{table}
++      // syntax here as the table name will have the schema name prepended to it
++      // when prefixes are processed.
++      $this->assert(TRUE, 'Skipping schema.{system} test for SQLite.');
++    }
++    else {
++      $database = $connection['database'];
++      // Test db_query with schema.{table} pattern
++      db_query('SELECT * FROM ' . $database . '.{system} LIMIT 1')->fetchObject();
++      $this->assertTrue(isset($record->filename), 'Successfully queried the schema.{system} table.');
++    }
++  }
++
++  public function testSelectReservedWordTableCount() {
++    $rows = db_select('virtual')
++      ->countQuery()
++      ->execute()
++      ->fetchField();
++    $this->assertEqual($rows, 1, 'Successful count query on a table with a reserved name.');
++  }
++
++  public function testSelectReservedWordTableSpecificField() {
++    $record = db_select('virtual')
++      ->fields('virtual', array('function'))
++      ->execute()
++      ->fetchAssoc();
++    $this->assertEqual($record['function'], 'Function value 1', 'Successfully read a field from a table with a name and column which are reserved words.');
++  }
++
++  public function testSelectReservedWordTableAllFields() {
++    $record = db_select('virtual')
++      ->fields('virtual')
++      ->execute()
++      ->fetchAssoc();
++    $this->assertEqual($record['function'], 'Function value 1', 'Successful all_fields query from a table with a name and column which are reserved words.');
++  }
++
++  public function testSelectReservedWordAliasCount() {
++    $rows = db_select('test', 'character')
++      ->countQuery()
++      ->execute()
++      ->fetchField();
++    $this->assertEqual($rows, 4, 'Successful count query using an alias which is a reserved word.');
++  }
++
++  public function testSelectReservedWordAliasSpecificFields() {
++    $record = db_select('test', 'high_priority')
++      ->fields('high_priority', array('name'))
++      ->condition('age', 27)
++      ->execute()->fetchAssoc();
++    $this->assertEqual($record['name'], 'George', 'Successful query using an alias which is a reserved word.');
++  }
++
++  public function testSelectReservedWordAliasAllFields() {
++    $record = db_select('test', 'high_priority')
++      ->fields('high_priority')
++      ->condition('age', 27)
++      ->execute()->fetchAssoc();
++    $this->assertEqual($record['name'], 'George', 'Successful all_fields query using an alias which is a reserved word.');
++  }
++
++  public function testInsertReservedWordTable() {
++    $num_records_before = db_query('SELECT COUNT(*) FROM {virtual}')->fetchField();
++    db_insert('virtual')
++      ->fields(array(
++        'function' => 'Inserted function',
++      ))
++      ->execute();
++    $num_records_after = db_query('SELECT COUNT(*) FROM {virtual}')->fetchField();
++    $this->assertIdentical($num_records_before + 1, (int) $num_records_after, 'Successful insert into a table with a name and column which are reserved words.');
++  }
++
++  public function testDeleteReservedWordTable() {
++    $delete = db_delete('virtual')
++      ->condition('function', 'Function value 1');
++    $num_deleted = $delete->execute();
++    $this->assertEqual($num_deleted, 1, "Deleted 1 record from a table with a name and column which are reserved words..");
++  }
++
++  function testTruncateReservedWordTable() {
++    db_truncate('virtual')->execute();
++    $num_records_after = db_query("SELECT COUNT(*) FROM {virtual}")->fetchField();
++    $this->assertEqual(0, $num_records_after, 'Truncated a table with a reserved name.');
++  }
++
++  function testUpdateReservedWordTable() {
++    $num_updated = db_update('virtual')
++      ->fields(array('function' => 'Updated function'))
++      ->execute();
++    $this->assertIdentical($num_updated, 1, 'Updated 1 record in a table with a name and column which are reserved words.');
++  }
++
++  function testMergeReservedWordTable() {
++    $key = db_query('SELECT id FROM {virtual} LIMIT 1')->fetchField();
++    $num_records_before = db_query('SELECT COUNT(*) FROM {virtual}')->fetchField();
++    db_merge('virtual')
++      ->key(array('id' => $key))
++      ->fields(array('function' => 'Merged function'))
++      ->execute();
++    $num_records_after = db_query('SELECT COUNT(*) FROM {virtual}')->fetchField();
++    $this->assertIdentical($num_records_before, $num_records_after, 'Successful merge query on a table with a name and column which are reserved words.');
++  }
+ 
+ }
+diff --git a/sites/default/default.settings.php b/sites/default/default.settings.php
+index a34596b172..a749cb12a8 100644
+--- a/sites/default/default.settings.php
++++ b/sites/default/default.settings.php
+@@ -246,6 +246,24 @@
+  */
+ $databases = array();
+ 
++/**
++ * Quoting of identifiers in MySQL.
++ *
++ * To allow compatibility with newer versions of MySQL, Drupal will quote table
++ * names and some other identifiers. The ANSI standard character for identifier
++ * quoting is the double quote (") and that can be used by MySQL along with the
++ * sql_mode setting of ANSI_QUOTES. However, MySQL's own default is to use
++ * backticks (`). Drupal 7 uses backticks for compatibility. If you need to
++ * change this, you can do so with this variable. It's possible to switch off
++ * identifier quoting altogether by setting this variable to an empty string.
++ *
++ * @see https://www.drupal.org/project/drupal/issues/2978575
++ * @see https://dev.mysql.com/doc/refman/8.0/en/identifiers.html
++ * @see \DatabaseConnection_mysql::setPrefix
++ * @see \DatabaseConnection_mysql::quoteIdentifier
++ */
++# $conf['mysql_identifier_quote_character'] = '"';
++
+ /**
+  * Access control for update.php script.
+  *

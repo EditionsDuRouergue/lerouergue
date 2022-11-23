@@ -54,9 +54,10 @@ scripts[] = 'bootstrap/js/modal.js'
 ;scripts[] = 'bootstrap/js/scrollspy.js'
 ;scripts[] = 'bootstrap/js/tab.js'
 scripts[] = 'bootstrap/js/transition.js'
+scripts[] = 'bootstrap/js/bootstrap.js'
 ;
 ; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
-settings[bootstrap_cdn] = ''
+;settings[bootstrap_cdn] = ''
 
 
 ; ;-------------------------
